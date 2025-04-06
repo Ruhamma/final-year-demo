@@ -3,7 +3,7 @@ import React from "react";
 
 const About = () => {
   return (
-    <Container className="mt-10">
+    <Container className="my-20">
       <Flex className="gap-10" align={"center"} justify="center">
         <Box className="w-1/2">
           <Flex direction="column" gap="md" mb="lg">

@@ -3,6 +3,8 @@ import Hero from "./_components/Hero";
 import FeaturedArtists from "./_components/FeaturedArtists";
 import About from "./_components/About";
 import Discover from "./_components/Discover";
+import Testimonials from "./_components/Testimonials";
+import Curated from "./_components/Curated";
 
 const Landing = () => {
   console.log("Landing page loaded");
@@ -12,6 +14,8 @@ const Landing = () => {
       <FeaturedArtists />
       <About />
       <Discover />
+      <Testimonials />
+      <Curated />
     </>
   );
 };

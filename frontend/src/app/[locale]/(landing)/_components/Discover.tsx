@@ -1,4 +1,5 @@
 import {
+  Box,
   Card,
   CardSection,
   Container,
@@ -8,6 +9,7 @@ import {
   Tabs,
   TabsList,
   TabsTab,
+  Text,
 } from "@mantine/core";
 import React from "react";
 import { IconHeart } from "@tabler/icons-react";
@@ -30,7 +32,7 @@ const Discover = () => {
     {
       id: 3,
       artistName: "Pablo Picasso",
-      title: "Les Demoiselles d'Avignon",
+      title: "Les Demoiselles ",
       price: "$750,000",
       src: "/images/Product Image (4).png",
     },
@@ -44,7 +46,7 @@ const Discover = () => {
     {
       id: 5,
       artistName: "Salvador Dalí",
-      title: "The Persistence of Memory",
+      title: "The Persistence",
       price: "$600,000",
       src: "/images/Product Image (6).png",
     },
@@ -55,12 +57,26 @@ const Discover = () => {
       price: "$700,000",
       src: "/images/Product Image.png",
     },
+    {
+      id: 7,
+      artistName: "Vincent van Gogh",
+      title: "Starry Night",
+      price: "$1,000,000",
+      src: "/images/Product Image (2).png",
+    },
+    {
+      id: 8,
+      artistName: "Leonardo da Vinci",
+      title: "Mona Lisa",
+      price: "$850,000",
+      src: "/images/Product Image (3).png",
+    },
   ];
   return (
-    <Container className="py-20 mx-auto">
+    <Container className="py-24 mx-auto">
       <p className="text-2xl font-semibold text-center">Discover Artworks</p>
 
-      <Tabs defaultValue="first" className="py-4">
+      <Tabs defaultValue="first" className="py-6">
         <TabsList grow>
           <TabsTab value="first">Best Seller</TabsTab>
           <TabsTab value="second">Recently Viewed</TabsTab>
@@ -68,21 +84,31 @@ const Discover = () => {
         </TabsList>
       </Tabs>
 
-      <Grid className="grid-cols-3 gap-10">
+      <Box className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
         {mockArtworks.map((item) => (
-          <Card key={item.id} shadow="sm" padding="lg" radius="md" withBorder>
+          <Card
+            key={item.id}
+            shadow="sm"
+            radius="md"
+            withBorder
+            className="bg-red-900"
+          >
             <CardSection>
               <Image alt="Product image" src={item?.src} />
             </CardSection>
-            <Group>
-              <p>{item?.title}</p>
+            <Group className="py-2" justify="space-between" align="center">
+              <p className="text-sm font-semibold">{item?.title}</p>
               <IconHeart />
             </Group>
-            <p>{item?.artistName}</p>
-            <p>{item?.price}</p>
+            <Text c="dimmed" className="text-xs font-semibold" size="xs">
+              {item?.artistName}
+            </Text>
+            <Text className="text-xs font-semibold" size="xs">
+              {item?.price}
+            </Text>
           </Card>
         ))}
-      </Grid>
+      </Box>
     </Container>
   );
 };
