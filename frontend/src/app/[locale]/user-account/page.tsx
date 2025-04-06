@@ -2,17 +2,16 @@ import {
   Box,
   Card,
   CardSection,
-  Container,
+  Divider,
   Group,
   Image,
-  Tabs,
-  TabsList,
-  TabsTab,
+  Stack,
   Text,
 } from "@mantine/core";
-import React from "react";
 import { IconHeart } from "@tabler/icons-react";
-const Discover = () => {
+import React from "react";
+
+const page = () => {
   const mockArtworks = [
     {
       id: 1,
@@ -72,17 +71,15 @@ const Discover = () => {
     },
   ];
   return (
-    <Container className="py-24 mx-auto">
-      <p className="text-2xl font-semibold text-center">Discover Artworks</p>
-
-      <Tabs defaultValue="first" className="py-6">
-        <TabsList grow>
-          <TabsTab value="first">Best Seller</TabsTab>
-          <TabsTab value="second">Recently Viewed</TabsTab>
-          <TabsTab value="third">New works</TabsTab>
-        </TabsList>
-      </Tabs>
-
+    <div>
+      <Stack gap={10}>
+        <p className="text-xl font-bold">Hello User</p>
+        <Text c="dimmed" size="xs">
+          Joined Feb 12,2001
+        </Text>
+        <Divider />
+        <p className="text-lg my-4">Your Favorite Artworks</p>
+      </Stack>
       <Box className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
         {mockArtworks.map((item) => (
           <Card
@@ -108,8 +105,8 @@ const Discover = () => {
           </Card>
         ))}
       </Box>
-    </Container>
+    </div>
   );
 };
 
-export default Discover;
+export default page;

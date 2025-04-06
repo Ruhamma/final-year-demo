@@ -43,9 +43,9 @@ const Curated = () => {
                   ))}
                 </div>
                 <p className="text-sm font-light text-center">
-                  "I had an amazing experience with this art platform. The
+                  I had an amazing experience with this art platform. The
                   curation is top-notch, and I found some incredible pieces that
-                  I never would have discovered otherwise."
+                  I never would have discovered otherwise.
                 </p>
 
                 <p className="mt-4 font-semibold text-center">John Doe</p>
