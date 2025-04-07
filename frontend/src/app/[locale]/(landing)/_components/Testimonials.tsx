@@ -1,7 +1,7 @@
 import React from "react";
 import { Carousel, CarouselSlide } from "@mantine/carousel";
 import { Box, Card, CardSection, Group, Image, Text } from "@mantine/core";
-const Testimonials = () => {
+const Testimonials = ({ title }: { title: string }) => {
   const mockArtworks = [
     {
       id: 1,
@@ -63,7 +63,7 @@ const Testimonials = () => {
   return (
     <div>
       <Box className="p-10 pl-24">
-        <p className="text-2xl font-semibold ">Curators Picks</p>
+        <p className="text-2xl font-semibold ">{title}</p>
         <p className="text-xs font-light">Arts by emerging artists</p>
       </Box>
       <Box className="px-10">

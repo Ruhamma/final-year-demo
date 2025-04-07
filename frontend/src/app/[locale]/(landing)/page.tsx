@@ -13,8 +13,8 @@ const Landing = () => {
       <Hero />
       <FeaturedArtists />
       <About />
-      <Discover />
-      <Testimonials />
+      <Discover title="Discover Artworks" />
+      <Testimonials title="Curators Picks" />
       <Curated />
     </>
   );

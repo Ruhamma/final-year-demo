@@ -39,12 +39,14 @@ export const theme: Partial<MantineThemeOverride> = {
     },
     Button: {
       defaultProps: {
-        size: "xs",
+        size: "sm",
+        backgroundColor: "red",
       },
       styles: {
         section: {
           marginRight: 4,
           marginLeft: 1,
+          padding: 2,
         },
       },
     },

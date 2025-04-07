@@ -12,7 +12,7 @@ import {
 } from "@mantine/core";
 import React from "react";
 import { IconHeart } from "@tabler/icons-react";
-const Discover = () => {
+const Discover = ({ title }: { title: string }) => {
   const mockArtworks = [
     {
       id: 1,
@@ -73,7 +73,7 @@ const Discover = () => {
   ];
   return (
     <Container className="py-24 mx-auto">
-      <p className="text-2xl font-semibold text-center">Discover Artworks</p>
+      <p className="text-2xl font-semibold text-center">{title}</p>
 
       <Tabs defaultValue="first" className="py-6">
         <TabsList grow>
