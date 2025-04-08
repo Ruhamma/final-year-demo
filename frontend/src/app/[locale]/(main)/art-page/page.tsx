@@ -44,7 +44,7 @@ const page = () => {
   const groccery = groceries.map((item) => (
     <AccordionItem key={item.value} value={item.value}>
       <AccordionControl>{item.value}</AccordionControl>
-      <AccordionPanel>{item.description}</AccordionPanel>
+      <AccordionPanel className="text-xs">{item.description}</AccordionPanel>
     </AccordionItem>
   ));
   return (
@@ -96,7 +96,7 @@ const page = () => {
         <Box className="w-1/2">
           <Stack gap="md" mb="lg">
             <p className="text-lg font-bold italic">About Artworks</p>
-            <p>
+            <p className="text-xs">
               This captivating painting depicts a scene of the Grand Canal in
               Venice, Italy. Gondolas filled with tourists navigate the calm
               waters, gliding past majestic buildings that line the canal. The
@@ -130,7 +130,7 @@ const page = () => {
       </Flex>
 
       <Container>
-        <Flex className="my-14 shadow-xl p-10 rounded-md" gap="xl">
+        <Flex className="my-14 shadow-md p-10 rounded-md" gap="xl">
           <Flex gap="md" align={"center"}>
             <Avatar
               className="text-xl text-white rounded-full"
