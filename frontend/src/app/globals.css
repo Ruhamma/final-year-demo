@@ -3,6 +3,7 @@
 @import "@mantine/core/styles.css";
 @import "@mantine/notifications/styles.css";
 @import "@mantine/carousel/styles.css";
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap');
 :root {
   --background: #fffcea;
   --foreground: #171717;
@@ -13,4 +14,7 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+.playfair-display {
+  font-family: 'Playfair Display', serif;
 }

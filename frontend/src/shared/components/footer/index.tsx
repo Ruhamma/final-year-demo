@@ -6,10 +6,10 @@ export function Footer() {
     <Box className="container mx-auto sm:pt-16 py-10">
       <Stack gap={80}>
         <Flex justify="space-between" align="center" py={20} px={24} bg={'#606C38'}>
-          <Text fs="italic" fz={32} c={'white'}>Subscribe to our newsletter</Text>
+          <Text fs="italic" fz={32} c={'white'} className="playfair-display">Subscribe to our newsletter</Text>
           <Flex w={'60%'} align={'center'}>
             <TextInput placeholder="Enter your email" w={'50%'} size={'lg'} radius={0}></TextInput>
-            <Button radius={0} size="lg" bg={'#BC6C25'} className="tracking-[0.3em]">Subscribe</Button>
+            <Button radius={0} size="lg" bg={'#BC6C25'} className="tracking-[0.1em]">Subscribe</Button>
           </Flex>
           </Flex>
           <Flex justify={'space-between'} align={'center'} py={20} px={24}>
