@@ -48,7 +48,7 @@ export function Header() {
          <Flex gap={50}>
            <Link href={"#"} className=" tracking-[0.3em] hover:border-b-[1px]">Home</Link>
            <Link href={"#"}  className=" tracking-[0.3em] hover:border-b-[1px]">About</Link>
-           <Link href={"#"}  className=" tracking-[0.3em] hover:border-b-[1px]">Contact</Link>
+           <Link href={"/contact-us"}  className=" tracking-[0.3em] hover:border-b-[1px]">Contact</Link>
          </Flex>
          <Flex gap={50}>
            <Link href={"#"} className=" tracking-[0.3em] hover:border-b-[1px]">Artworks</Link>
