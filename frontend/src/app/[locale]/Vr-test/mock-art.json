@@ -1,0 +1,34 @@
+[
+  {
+    "id": "1",
+    "title": "Sunset Reverie",
+    "artist": "Elena M.",
+    "price": 2500,
+    "image": "/images/image 2.png",
+    "room": "A"
+  },
+  {
+    "id": "2",
+    "title": "Golden Silence",
+    "artist": "Tariq N.",
+    "price": 3200,
+    "image": "/images/starry-night.jpg",
+    "room": "A"
+  },
+  {
+    "id": "3",
+    "title": "Midnight Shapes",
+    "artist": "Lucille Y.",
+    "price": 2800,
+    "image": "/images/mona-lisa.jpg",
+    "room": "B"
+  },
+  {
+    "id": "4",
+    "title": "Opulence in Blue",
+    "artist": "Ben H.",
+    "price": 4000,
+    "image": "/images/the-scream.jpg",
+    "room": "B"
+  }
+]
