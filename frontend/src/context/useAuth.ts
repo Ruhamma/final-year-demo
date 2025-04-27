@@ -1,3 +1,4 @@
+'use client';
 import { useGetMeQuery, useLogoutMutation } from '../app/services/auth';
 import { useRouter } from 'next/navigation';
 
@@ -14,7 +15,7 @@ export const useAuth = () => {
   const handleLogout = async () => {
     try {
       await logout().unwrap();
-      router.push('/login');
+      router.push('/auth/login');
     } catch (error) {
       console.error('Logout failed:', error);
     }

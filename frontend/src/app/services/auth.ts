@@ -8,6 +8,9 @@ interface User {
     id: number;
     name: string;
   };
+  createdAt?: string;
+  updatedAt?: string;
+
 }
 
 interface LoginRequest {
@@ -29,8 +32,8 @@ interface AuthResponse {
 export const authApi = createApi({
   reducerPath: "authApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:8000/api",
-    credentials: "include", // Important for cookies
+    baseUrl: process.env.NEXT_PUBLIC_API || 'http://localhost:8000/api',
+    credentials: 'include', // Important for cookies
   }),
   tagTypes: ["Auth"],
   endpoints: (builder) => ({

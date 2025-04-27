@@ -1,4 +1,3 @@
-'use client';
 import {
   Box,
   Card,
@@ -11,11 +10,8 @@ import {
 } from "@mantine/core";
 import { IconHeart } from "@tabler/icons-react";
 import React from "react";
-import { useAuth } from "@/context/useAuth";
-import { formatDate } from "@/shared/utils/formatDate";
 
-const Page = () => {
-  const { user } = useAuth();
+const page = () => {
   const mockArtworks = [
     {
       id: 1,
@@ -77,15 +73,14 @@ const Page = () => {
   return (
     <div>
       <Stack gap={10}>
-        <p className="text-xl font-bold">Hello{' '}
-          {user?.username}!
-      </p>
-      <Text c="dimmed" size="xs">
-        Joined {formatDate(user?.createdAt || '')}
-      </Text>
-      <Divider />
-      <p className="text-lg my-4">All Artworks</p>
-    </Stack><Box className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
+        <p className="text-xl font-bold">Hello User</p>
+        <Text c="dimmed" size="xs">
+          Joined Feb 12,2001
+        </Text>
+        <Divider />
+        <p className="text-lg my-4">Your Favorite Artworks</p>
+      </Stack>
+      <Box className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
         {mockArtworks.map((item) => (
           <Card
             key={item.id}
@@ -114,4 +109,4 @@ const Page = () => {
   );
 };
 
-export default Page;
+export default page;

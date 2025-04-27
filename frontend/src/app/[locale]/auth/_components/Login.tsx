@@ -21,7 +21,6 @@ import { useAuth, useLoginMutation } from "@/app/services/auth";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useLogger } from "@mantine/hooks";
 
 const loginSchema = z.object({
   email: z.string()
@@ -45,7 +44,6 @@ const Login = () => {
     register: registerField,
     handleSubmit,
     formState: { errors },
-    setError,
   } = useForm<LoginFormData>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
