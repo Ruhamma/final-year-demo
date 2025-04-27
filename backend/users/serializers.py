@@ -14,7 +14,8 @@ class CustomUserSerializers(ModelSerializer):
     role = RoleSerializer(read_only=True)
     class Meta:
         model=CustomUser
-        fields=("id","email",'username','role')
+        fields=("id","email",'username','role','is_active','createdAt')
+        read_only_fields = ("role",)
         
 
 class UserRegisterSerializer(ModelSerializer):
@@ -41,6 +42,19 @@ class UserRegisterSerializer(ModelSerializer):
 
         return user
 
+class UpdateUserSerializer(ModelSerializer):
+    class Meta:
+        model = CustomUser
+        fields = ("username", "first_name", "last_name", "email", "phone_number", "profile_picture")
+        extra_kwargs = {
+            "email": {"required": False},
+            "first_name": {"required": False},
+            "last_name": {"required": False},
+            "username": {"required": False},
+            "phone_number": {"required": False},
+            "profile_picture": {"required": False},
+        }
+
 class LoginUserSerializer(Serializer):
     email = serializers.EmailField(required=True)
     password = serializers.CharField(write_only=True)
@@ -51,3 +65,9 @@ class LoginUserSerializer(Serializer):
             return user
         raise serializers.ValidationError("Incorrect credentials!")
 
+class ChangePasswordSerializer(serializers.Serializer):
+    old_password = serializers.CharField(required=True)
+    new_password = serializers.CharField(required=True)
+
+   
+    

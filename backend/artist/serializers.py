@@ -5,7 +5,7 @@ from users.serializers import CustomUserSerializers
 class ArtistProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = ArtistProfile
-        fields = ['name', 'bio', 'profile_picture', 'contact_email', 'phone_number', 'website', 'instagram', 'twitter', 'is_active']
+        fields = ['first_name', 'last_name', 'bio', 'profile_picture', 'contact_email', 'phone_number', 'website', 'instagram', 'twitter', 'tiktok', 'facebook', 'youtube', 'is_active', 'location']
 
 class ArtistDashboardSerializer(serializers.Serializer):
     user = CustomUserSerializers()
@@ -19,7 +19,7 @@ class ArtistDashboardSerializer(serializers.Serializer):
 class ArtistProfileUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = ArtistProfile
-        fields = ['name', 'bio', 'profile_picture', 'contact_email', 'phone_number', 'website', 'instagram', 'twitter', 'is_active']
+        fields = ['first_name', 'last_name', 'bio', 'profile_picture', 'contact_email', 'phone_number', 'website', 'instagram', 'twitter', 'tiktok', 'facebook', 'youtube', 'is_active', 'location']
 
 class ChangePasswordSerializer(serializers.Serializer):
     old_password = serializers.CharField(required=True)

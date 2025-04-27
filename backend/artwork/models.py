@@ -1,6 +1,6 @@
 from django.db import models
 from artist.models import ArtistProfile
-
+from django.conf import settings
 class ArtworkCategory(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField()
@@ -56,17 +56,41 @@ class Artwork(models.Model):
     medium = models.ForeignKey(ArtworkMedium, on_delete=models.CASCADE)
     style = models.ForeignKey(ArtworkStyle, on_delete=models.CASCADE)
     tags = models.ManyToManyField(Tag, blank=True)
-    views = models.IntegerField(default=0)
     likes = models.IntegerField(default=0)
     comments = models.IntegerField(default=0)
     shares = models.IntegerField(default=0)
     favorites = models.IntegerField(default=0)
     sales = models.IntegerField(default=0)
-    
+    size = models.JSONField(
+        default=dict,
+        blank=True,
+        help_text="Dimensions in format {'width': 0, 'height': 0, 'unit': 'cm'}"
+    )
+    view_count = models.PositiveIntegerField(default=0)
     
 
     def __str__(self):
         return self.title
 
 
-# Create your models here.
+class FavoriteArtwork(models.Model):
+    user = models.ForeignKey(ArtistProfile, on_delete=models.CASCADE, related_name="favorites")
+    artwork = models.ForeignKey(Artwork, on_delete=models.CASCADE, related_name="favorited_by")
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ('user', 'artwork')  
+
+    def __str__(self):
+        return f"{self.user.email} favorited {self.artwork.title}"
+
+    
+    
+class ArtworkView(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True)
+    session_key = models.CharField(max_length=40, null=True, blank=True)  # for anonymous users
+    artwork = models.ForeignKey('Artwork', on_delete=models.CASCADE, related_name='views')
+    viewed_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ('user', 'artwork')

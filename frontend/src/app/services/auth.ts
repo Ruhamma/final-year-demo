@@ -1,4 +1,4 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 interface User {
   id: number;
@@ -27,46 +27,46 @@ interface AuthResponse {
 }
 
 export const authApi = createApi({
-  reducerPath: 'authApi',
+  reducerPath: "authApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: 'http://localhost:8000/api',
-    credentials: 'include', // Important for cookies
+    baseUrl: "http://localhost:8000/api",
+    credentials: "include", // Important for cookies
   }),
-  tagTypes: ['Auth'],
+  tagTypes: ["Auth"],
   endpoints: (builder) => ({
     login: builder.mutation<AuthResponse, LoginRequest>({
       query: (credentials) => ({
-        url: '/users/login/',
-        method: 'POST',
+        url: "/users/login/",
+        method: "POST",
         body: credentials,
       }),
-      invalidatesTags: ['Auth'],
+      invalidatesTags: ["Auth"],
     }),
     register: builder.mutation<AuthResponse, RegisterRequest>({
       query: (userData) => ({
-        url: '/users/register/',
-        method: 'POST',
+        url: "/users/register/",
+        method: "POST",
         body: userData,
       }),
-      invalidatesTags: ['Auth'],
+      invalidatesTags: ["Auth"],
     }),
     logout: builder.mutation<void, void>({
       query: () => ({
-        url: '/users/logout/',
-        method: 'POST',
+        url: "/users/logout/",
+        method: "POST",
       }),
-      invalidatesTags: ['Auth'],
+      invalidatesTags: ["Auth"],
     }),
     getMe: builder.query<User | null, void>({
-      query: () => '/users/me/',
-      providesTags: ['Auth'],
+      query: () => "/users/me/",
+      providesTags: ["Auth"],
       // Handle unauthorized errors gracefully
       transformErrorResponse: () => null,
     }),
     refreshToken: builder.mutation<void, void>({
       query: () => ({
-        url: '/users/token/refresh/',
-        method: 'POST',
+        url: "/users/token/refresh/",
+        method: "POST",
       }),
     }),
   }),
@@ -80,17 +80,16 @@ export const {
   useRefreshTokenMutation,
 } = authApi;
 
-// Export hooks for auth state
 export const useAuth = () => {
   const { data: user, isLoading } = useGetMeQuery();
-  
+
   return {
     user,
     isLoading,
     isAuthenticated: !!user,
-    isAdmin: user?.role.name === 'ADMIN',
-    isSeller: user?.role.name === 'SELLER',
-    isBuyer: user?.role.name === 'BUYER',
+    isAdmin: user?.role.name === "ADMIN",
+    isSeller: user?.role.name === "SELLER",
+    isBuyer: user?.role.name === "BUYER",
     hasRole: (role: string) => user?.role.name === role,
   };
-}; 
+};

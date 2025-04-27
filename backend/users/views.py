@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework.generics import RetrieveUpdateAPIView, CreateAPIView
 from rest_framework.permissions import IsAuthenticated
-from .serializers import CustomUserSerializers, UserRegisterSerializer, LoginUserSerializer
+from .serializers import UpdateUserSerializer, UserRegisterSerializer, LoginUserSerializer, CustomUserSerializers, ChangePasswordSerializer
 from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.response import Response
@@ -11,10 +11,16 @@ from rest_framework import status
 from rest_framework_simplejwt.views import TokenRefreshView
 from rest_framework_simplejwt.exceptions import InvalidToken
 from .models import CustomUser
+import string
+
 class UserInfoView(RetrieveUpdateAPIView):
     permission_classes = (IsAuthenticated,)
-    serializer_class = CustomUserSerializers
 
+    def get_serializer_class(self):
+        if self.request.method == 'GET':
+            return CustomUserSerializers
+        return UpdateUserSerializer
+    
     def get_object(self):
         return self.request.user
 
@@ -91,4 +97,40 @@ class CookieTokenRefreshView(TokenRefreshView):
         except InvalidToken:
             return Response({"error":"Invalid token"}, status=status.HTTP_401_UNAUTHORIZED)        
     
+class ChangePasswordView(APIView):
+    permission_classes = (IsAuthenticated,)
+
+    def post(self, request, *args, **kwargs):
+        serializer = ChangePasswordSerializer(data=request.data)
+        if serializer.is_valid():
+            user = request.user
+            old_password = serializer.validated_data['old_password']
+            if not user.check_password(old_password):
+                return Response({"old_password": ["Incorrect password."]}, status=status.HTTP_400_BAD_REQUEST)
+            
+            if len(serializer.validated_data['new_password']) < 8:
+                return Response({"new_password": ["Password must be at least 8 characters long."]}, status=status.HTTP_400_BAD_REQUEST)
+            if not any(char.isupper() for char in serializer.validated_data['new_password']):
+                return Response({"new_password": ["Password must contain at least one uppercase letter."]}, status=status.HTTP_400_BAD_REQUEST)
+            if not any(char.islower() for char in serializer.validated_data['new_password']):
+                return Response({"new_password": ["Password must contain at least one lowercase letter."]}, status=status.HTTP_400_BAD_REQUEST)
+            if not any(char in string.punctuation for char in serializer.validated_data['new_password']):
+                return Response({"new_password": ["Password must contain at least one special character."]}, status=status.HTTP_400_BAD_REQUEST)
+            
+            
+            user.set_password(serializer.validated_data['new_password'])
+            user.save()
+            return Response({"detail": "Password updated successfully."}, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
+class DeleteAccountView(APIView):
+    permission_classes = (IsAuthenticated,)
+
+    def post(self, request):
+        user = request.user
+        user.is_active = False
+        user.save()
+        return Response({"message": "Account deactivated successfully. It will be permanently deleted after 10 days."}, status=200)
+    
+
+        

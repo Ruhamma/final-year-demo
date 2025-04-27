@@ -5,6 +5,7 @@ from rest_framework.response import Response
 from .serializers import ArtistDashboardSerializer, ArtistProfileSerializer, ChangePasswordSerializer, ChangeEmailSerializer, ArtistProfileUpdateSerializer
 from .models import ArtistProfile
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.exceptions import NotFound
 from rest_framework import status
 from django.contrib.auth import update_session_auth_hash
 
@@ -14,7 +15,10 @@ class ArtistProfileView(RetrieveAPIView):
 
 
     def get_object(self):
-        return ArtistProfile.objects.get(user=self.request.user)
+        try:
+            return ArtistProfile.objects.get(user=self.request.user)
+        except ArtistProfile.DoesNotExist:
+            raise NotFound("Artist profile not found")
     
 class ArtistDashboardView(APIView):
     permission_classes = (IsAuthenticated,)
@@ -133,7 +137,7 @@ class ChangePasswordView(APIView):
                 return Response({'error': 'Old password is incorrect.'}, status=status.HTTP_400_BAD_REQUEST)
             user.set_password(serializer.validated_data['new_password'])
             user.save()
-            update_session_auth_hash(request, user)  # Keeps user logged in
+            update_session_auth_hash(request, user)  
             return Response({'message': 'Password updated successfully.'}, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
