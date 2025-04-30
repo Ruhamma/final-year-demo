@@ -2,7 +2,10 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from .managers import CustomUserManager
 from django.utils import timezone
+import uuid
+
 class Role(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     ADMIN = 'ADMIN'
     SELLER = 'SELLER'
     BUYER = 'BUYER'
@@ -21,6 +24,7 @@ class Role(models.Model):
     
 
 class CustomUser(AbstractUser):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     USERNAME_FIELD="email"
     email= models.EmailField(unique=True)
     REQUIRED_FIELDS=[]

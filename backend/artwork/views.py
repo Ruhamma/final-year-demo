@@ -23,7 +23,7 @@ class ArtworkListCreateView(ListCreateAPIView):
         return Artwork.objects.filter(artist=self.request.user.artistprofile)
 
     def perform_create(self, serializer):
-        serializer.save(artist=self.request.user.artistprofile)
+        serializer.save()
 
 class ArtworkDeleteView(DestroyAPIView):
     permission_classes = (IsAuthenticated,)
@@ -53,7 +53,6 @@ class PublicArtworkDetailView(RetrieveAPIView):
         instance = self.get_object()
 
         if request.user.is_authenticated:
-            # If user is logged in
             already_viewed = ArtworkView.objects.filter(user=request.user, artwork=instance).exists()
             if not already_viewed:
                 ArtworkView.objects.create(user=request.user, artwork=instance)
@@ -61,7 +60,6 @@ class PublicArtworkDetailView(RetrieveAPIView):
                 instance.save()
 
         else:
-            # If user is anonymous, use session
             session_key = request.session.session_key
             if not session_key:
                 request.session.create()
@@ -126,3 +124,12 @@ class TopViewedArtworksView(ListAPIView):
 
     def get_queryset(self):
         return Artwork.objects.order_by('-view_count')[:10]    
+    
+class RecentlyViewedArtworksView(ListAPIView):
+    permission_classes = [IsAuthenticated]
+    serializer_class = ArtworkSerializer
+
+    def get_queryset(self):
+        user = self.request.user
+        viewed_artwork_ids = ArtworkView.objects.filter(user=user).order_by('-viewed_at').values_list('artwork_id', flat=True)
+        return Artwork.objects.filter(id__in=viewed_artwork_ids).distinct()[:10]    

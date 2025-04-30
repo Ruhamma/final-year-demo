@@ -1,7 +1,10 @@
 from django.db import models
 from artist.models import ArtistProfile
 from django.conf import settings
+import uuid
+
 class ArtworkCategory(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False) 
     name = models.CharField(max_length=255)
     description = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
@@ -11,6 +14,7 @@ class ArtworkCategory(models.Model):
         return self.name
 
 class ArtworkMedium(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False) 
     name = models.CharField(max_length=255)
     description = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
@@ -20,6 +24,7 @@ class ArtworkMedium(models.Model):
         return self.name
 
 class ArtworkStyle(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False) 
     name = models.CharField(max_length=255)
     description = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
@@ -29,6 +34,7 @@ class ArtworkStyle(models.Model):
         return self.name
     
 class Tag(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False) 
     name = models.CharField(max_length=255)
     description = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
@@ -39,11 +45,15 @@ class Tag(models.Model):
     
     
 class Artwork(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     artist = models.ForeignKey(ArtistProfile, on_delete=models.CASCADE)
     title = models.CharField(max_length=255)
     description = models.TextField()
     price = models.DecimalField(max_digits=10, decimal_places=2)
-    image = models.ImageField(upload_to='artwork_images/')
+    image = models.JSONField(
+        default=list,
+        help_text="Array of image objects with url and public_id"
+    )
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     is_sold = models.BooleanField(default=False)
@@ -74,6 +84,7 @@ class Artwork(models.Model):
 
 
 class FavoriteArtwork(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     user = models.ForeignKey(ArtistProfile, on_delete=models.CASCADE, related_name="favorites")
     artwork = models.ForeignKey(Artwork, on_delete=models.CASCADE, related_name="favorited_by")
     created_at = models.DateTimeField(auto_now_add=True)
@@ -87,10 +98,17 @@ class FavoriteArtwork(models.Model):
     
     
 class ArtworkView(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True)
-    session_key = models.CharField(max_length=40, null=True, blank=True)  # for anonymous users
+    session_key = models.CharField(max_length=40, null=True, blank=True) 
     artwork = models.ForeignKey('Artwork', on_delete=models.CASCADE, related_name='views')
     viewed_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
+        ordering = ['-viewed_at']
         unique_together = ('user', 'artwork')
+
+    def __str__(self):
+        return f"{self.user.email} viewed {self.artwork.title}"
+    
+    

@@ -3,9 +3,13 @@ from .models import ArtistProfile
 from users.serializers import CustomUserSerializers
 
 class ArtistProfileSerializer(serializers.ModelSerializer):
+    follower_count = serializers.SerializerMethodField()
     class Meta:
         model = ArtistProfile
-        fields = ['first_name', 'last_name', 'bio', 'profile_picture', 'contact_email', 'phone_number', 'website', 'instagram', 'twitter', 'tiktok', 'facebook', 'youtube', 'is_active', 'location']
+        fields = ['first_name', 'last_name', 'bio', 'profile_picture', 'contact_email', 'phone_number', 'website', 'instagram', 'twitter', 'tiktok', 'facebook', 'youtube', 'is_active', 'location', 'follower_count']
+
+    def get_follower_count(self, obj):
+        return obj.followers.count()
 
 class ArtistDashboardSerializer(serializers.Serializer):
     user = CustomUserSerializers()

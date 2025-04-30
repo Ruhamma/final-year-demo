@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from rest_framework.views import APIView
-from rest_framework.generics import UpdateAPIView, RetrieveAPIView
+from rest_framework.generics import UpdateAPIView, RetrieveAPIView, ListAPIView
 from rest_framework.response import Response
 from .serializers import ArtistDashboardSerializer, ArtistProfileSerializer, ChangePasswordSerializer, ChangeEmailSerializer, ArtistProfileUpdateSerializer
 from .models import ArtistProfile
@@ -8,6 +8,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.exceptions import NotFound
 from rest_framework import status
 from django.contrib.auth import update_session_auth_hash
+from django.db.models import Count
 
 class ArtistProfileView(RetrieveAPIView):
     serializer_class = ArtistProfileSerializer
@@ -152,3 +153,11 @@ class UploadProfilePictureView(APIView):
             profile.save()
             return Response({'message': 'Profile picture updated.'}, status=status.HTTP_200_OK)
         return Response({'error': 'No file uploaded.'}, status=status.HTTP_400_BAD_REQUEST)
+
+class TopFollowedArtistsView(ListAPIView):
+    serializer_class = ArtistProfileSerializer
+
+    def get_queryset(self):
+        return ArtistProfile.objects.annotate(
+            follower_count=Count('followers')
+        ).order_by('-follower_count')[:10]

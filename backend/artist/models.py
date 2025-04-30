@@ -1,7 +1,8 @@
 from django.db import models
 from users.models import CustomUser
-
+import uuid
 class ArtistProfile(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
     first_name = models.CharField(max_length=255,default='')
     last_name = models.CharField(max_length=255,default='')
