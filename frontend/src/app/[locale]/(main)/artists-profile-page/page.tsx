@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import { ButtonHTMLAttributes, ReactNode, useState } from "react";
-import { Heart } from "lucide-react";
+// import { Heart } from "lucide-react";
 
 function Card({
   children,
@@ -141,7 +141,7 @@ export default function ArtistProfile() {
                       {art.price}
                     </p>{" "}
                     <button className="absolute top-2 right-0 text-gray-500 hover:text-red-500">
-                      <Heart size={20} />
+                      {/* <Heart size={20} /> */}
                     </button>
                   </div>
                 </CardContent>
