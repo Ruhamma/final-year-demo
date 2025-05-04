@@ -4,46 +4,44 @@ export const artistProfileApi = createApi({
   reducerPath: 'artistProfileApi',
   baseQuery:fetchBaseQuery({
       baseUrl: process.env.NEXT_PUBLIC_API || 'http://localhost:8000/api',
-      credentials: 'include', // Important for cookies
+      credentials: 'include', 
     }),
   endpoints: (builder) => ({
-    getArtistProfile: builder.query({
-      query: () => 'artist/profile/',
+    getuserProfile: builder.query({
+      query: () => 'user/profile/',
     }),
-    updateArtistProfile: builder.mutation({
-      query: ({...updatedProfile }) => ({
-        url: `artist/profile/update`,
+    updateUserProfile: builder.mutation({
+      query: (formData) => ({
+        url: `user/me/`,
         method: 'PUT',
-        body: updatedProfile,
+        body: formData,
       }),
     }),
     updateEmail: builder.mutation({
       query: ({...updatedProfile }) => ({
-        url: `artist/profile/change-email`,
+        url: `users/profile/change-email`,
         method: 'POST',
         body: updatedProfile,
       }),
     }),
     changePassword: builder.mutation({
       query: ({...updatedProfile }) => ({
-        url: `artist/profile/change-password`,
+        url: `user/change-password`,
         method: 'POST',
         body: updatedProfile,
       }),
     }),
     deactivateAccount: builder.mutation({
-      query: () => ({
-        url: `artist/profile/deactivate`,
+      query: (body) => ({
+        url: `user/delete-account`,
         method: 'POST',
+        body
       }),
     }),
   }),
 });
 
 export const {
-  useGetArtistProfileQuery,
-  useUpdateArtistProfileMutation,
-  useUpdateEmailMutation,
-  useChangePasswordMutation,
-  useDeactivateAccountMutation,
+    useChangePasswordMutation,
+    useDeactivateAccountMutation
 } = artistProfileApi;

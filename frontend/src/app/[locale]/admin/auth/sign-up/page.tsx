@@ -35,7 +35,7 @@ const signUpSchema = z.object({
     .regex(/[a-z]/, 'Password must contain at least one lowercase letter')
     .regex(/[0-9]/, 'Password must contain at least one number'),
   confirmPassword: z.string(),
-  role: z.enum(['SELLER', 'BUYER'], {
+  role: z.enum(['ADMIN'], {
     errorMap: () => ({ message: 'Please select a valid role' }),
   }),
 }).refine((data) => data.password === data.confirmPassword, {
@@ -57,7 +57,7 @@ const Login = () => {
   } = useForm<SignUpFormData>({
     resolver: zodResolver(signUpSchema),
     defaultValues: {
-      role: 'BUYER',
+      role: 'ADMIN',
     },
   });
 
@@ -67,10 +67,9 @@ const Login = () => {
         email: data.email,
         username: data.username,
         password: data.password,
-        confirm_password: data.confirmPassword,
-        role: data.role
+        role: data.role,
       }).unwrap();
-      
+       route.push('/auth/login');
     } catch (error: any) {
       if (error.data) {
         Object.entries(error.data).forEach(([key, value]) => {
@@ -81,6 +80,7 @@ const Login = () => {
         });
       }
     }
+
   };
   return (
     <Container className="h-screen m-auto ">
@@ -90,25 +90,13 @@ const Login = () => {
         gap="20"
         className="mt-20"
       >
-        <Box className="w-1/2">
-          <Image
-            src="/images/Product Image.png"
-            alt="Login Image"
-            radius={20}
-          />
-        </Box>
         <Paper className="w-1/2 p-10">
           <Flex align="center" justify="center">
             <Text fw={600} fz={22}>
               Get started
             </Text>
           </Flex>
-          <Tabs defaultValue="gallery">
-            <TabsList className="my-8" grow>
-              <TabsTab value="gallery">Buyer</TabsTab>
-              <TabsTab value="messages">Seller</TabsTab>
-            </TabsList>
-            <TabsPanel value="gallery">
+              {" "}
               <form onSubmit={handleSubmit(onSubmit)}>
                 <Flex direction="column" gap="md">
                   <TextInput 
@@ -142,31 +130,6 @@ const Login = () => {
                   <Button type="submit" loading={isRegisterLoading}>Sign up</Button>
                 </Flex>
               </form>
-            </TabsPanel>
-            <TabsPanel value="messages">
-              {" "}
-              <form>
-                <Flex direction="column" gap="md">
-                  <TextInput label="Name" placeholder="Enter your Name" />
-
-                  <TextInput label="Email" placeholder="Enter your email" />
-                  <TextInput
-                    label="Art style"
-                    placeholder="Enter your art style"
-                  />
-                  <PasswordInput
-                    label="Password"
-                    placeholder="Enter your password"
-                  />
-                  <PasswordInput
-                    label="Confirm Password"
-                    placeholder="Confirm your password"
-                  />
-                  <Button type="submit">Sign up</Button>
-                </Flex>
-              </form>
-            </TabsPanel>
-          </Tabs>
 
           <Flex direction="column" gap="sm" mt="lg">
             <Flex justify="center" mt="md">
@@ -177,6 +140,7 @@ const Login = () => {
                   c="blue"
                   inherit
                   onClick={() => route.push("/auth")}
+                  className="cursor-pointer"
                 >
                   Login
                 </Text>

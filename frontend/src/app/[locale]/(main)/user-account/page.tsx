@@ -1,3 +1,5 @@
+'use client'
+import { useAuth } from "@/context/useAuth";
 import {
   Box,
   Card,
@@ -12,6 +14,7 @@ import { IconHeart } from "@tabler/icons-react";
 import React from "react";
 
 const page = () => {
+  const {user}=useAuth();
   const mockArtworks = [
     {
       id: 1,
@@ -70,12 +73,24 @@ const page = () => {
       src: "/images/Product Image (3).png",
     },
   ];
+  
+  const formattedDate = user?.created_at
+  ? new Date(user.created_at).toLocaleString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      hour: "numeric",
+      minute: "2-digit",
+      hour12: true,
+    })
+  : "";
+
   return (
     <div>
       <Stack gap={10}>
-        <p className="text-xl font-bold">Hello User</p>
+        <p className="text-xl font-bold">Hello {user?.username}</p>
         <Text c="dimmed" size="xs">
-          Joined Feb 12,2001
+         {formattedDate}
         </Text>
         <Divider />
         <p className="text-lg my-4">Your Favorite Artworks</p>

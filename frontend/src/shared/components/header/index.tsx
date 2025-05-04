@@ -19,10 +19,10 @@ export function Header() {
  const router = useRouter();
   const { user, isAuthenticated, isAdmin , logout , isSeller} = useAuth();
   return (
-    <Card bg={"#fffcea"}>
-      <Box className="container mx-auto">
+    <Card bg={"#fffcea"} >
+      <Box className="container mx-auto px-10">
         <Stack>
-          <Flex justify="space-between" align="center">
+          <Flex justify="space-between" align="center" className="px-5">
             <Flex justify="space-between" align="center" gap={8}>
               <UnstyledButton className="hover:border-b-[1px] tracking-[0.2em]">
                 AM
@@ -32,7 +32,7 @@ export function Header() {
                 EN
               </UnstyledButton>
             </Flex>
-            <Image src={"/logo.png"} alt="Logo" width={72} height={43} />
+            <Image src={"/logo.png"} alt="Logo" width={52} height={23} />
             <Flex justify="space-between" align="center" py={10} gap={20}>
               {!isAuthenticated ? (
                 <>
@@ -124,10 +124,10 @@ export function Header() {
               </ActionIcon>
             </Flex>
           </Flex>
-          <Flex align={"center"} justify={"space-between"}>
+          <Flex align={"center"} justify={"space-between"} className="text-sm">
             <Flex gap={50}>
               <Link
-                href={"#"}
+                href={"/"}
                 className=" tracking-[0.3em] hover:border-b-[1px]"
               >
                 Home

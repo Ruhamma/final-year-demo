@@ -11,6 +11,7 @@ export const useAuth = () => {
   const isAdmin = () => hasRole('ADMIN');
   const isSeller = () => hasRole('SELLER');
   const isBuyer = () => hasRole('BUYER');
+  console.log(isSeller())
 
   const handleLogout = async () => {
     try {

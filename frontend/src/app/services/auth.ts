@@ -7,10 +7,11 @@ interface User {
   role: {
     id: number;
     name: string;
+    permissions:string;
   };
-  createdAt?: string;
-  updatedAt?: string;
-
+  created_at?: string;
+  updated_at?: string;
+  profile_picture?:string;
 }
 
 interface LoginRequest {
@@ -22,6 +23,7 @@ interface RegisterRequest {
   email: string;
   username: string;
   password: string;
+  confirm_password: string;
   role: string;
 }
 
@@ -33,13 +35,13 @@ export const authApi = createApi({
   reducerPath: "authApi",
   baseQuery: fetchBaseQuery({
     baseUrl: process.env.NEXT_PUBLIC_API || 'http://localhost:8000/api',
-    credentials: 'include', // Important for cookies
+    credentials: 'include', 
   }),
-  tagTypes: ["Auth"],
+  tagTypes: ["Auth","profile"],
   endpoints: (builder) => ({
     login: builder.mutation<AuthResponse, LoginRequest>({
       query: (credentials) => ({
-        url: "/users/login/",
+        url: "/user/login/",
         method: "POST",
         body: credentials,
       }),
@@ -47,7 +49,7 @@ export const authApi = createApi({
     }),
     register: builder.mutation<AuthResponse, RegisterRequest>({
       query: (userData) => ({
-        url: "/users/register/",
+        url: "/user/register",
         method: "POST",
         body: userData,
       }),
@@ -55,20 +57,27 @@ export const authApi = createApi({
     }),
     logout: builder.mutation<void, void>({
       query: () => ({
-        url: "/users/logout/",
+        url: "/user/logout/",
         method: "POST",
       }),
       invalidatesTags: ["Auth"],
     }),
     getMe: builder.query<User | null, void>({
-      query: () => "/users/me/",
-      providesTags: ["Auth"],
-      // Handle unauthorized errors gracefully
+      query: () => "/user/me/",
+      providesTags: ["Auth","profile"],
       transformErrorResponse: () => null,
+    }),
+    updateUserProfile: builder.mutation({
+      query: (formData) => ({
+        url: `user/me/`,
+        method: 'PUT',
+        body: formData,
+      }),
+      invalidatesTags: ["profile"],
     }),
     refreshToken: builder.mutation<void, void>({
       query: () => ({
-        url: "/users/token/refresh/",
+        url: "/user/token/refresh/",
         method: "POST",
       }),
     }),
@@ -81,6 +90,8 @@ export const {
   useLogoutMutation,
   useGetMeQuery,
   useRefreshTokenMutation,
+  useUpdateUserProfileMutation,
+
 } = authApi;
 
 export const useAuth = () => {
@@ -90,9 +101,9 @@ export const useAuth = () => {
     user,
     isLoading,
     isAuthenticated: !!user,
-    isAdmin: user?.role.name === "ADMIN",
-    isSeller: user?.role.name === "SELLER",
-    isBuyer: user?.role.name === "BUYER",
-    hasRole: (role: string) => user?.role.name === role,
+    isAdmin: user?.role?.name === "ADMIN",
+    isSeller: user?.role?.name === "SELLER",
+    isBuyer: user?.role?.name === "BUYER",
+    hasRole: (role: string) => user?.role?.name === role,
   };
 };

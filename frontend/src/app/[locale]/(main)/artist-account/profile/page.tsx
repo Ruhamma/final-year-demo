@@ -130,7 +130,7 @@ const ProfileForm = () => {
           <Box>
             <Title order={4}>Hello, {user?.username}</Title>
             <Text c="dimmed" size="sm">
-              Joined in {new Date(user?.createdAt || "").getFullYear()}
+              Joined in {new Date(user?.created_at || "").getFullYear()}
             </Text>
           </Box>
         </Group>

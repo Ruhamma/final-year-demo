@@ -81,7 +81,7 @@ const Page = () => {
           {user?.username}!
       </p>
       <Text c="dimmed" size="xs">
-        Joined {formatDate(user?.createdAt || '')}
+        Joined {formatDate(user?.created_at || '')}
       </Text>
       <Divider />
       <p className="text-lg my-4">All Artworks</p>
