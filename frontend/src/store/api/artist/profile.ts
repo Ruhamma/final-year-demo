@@ -6,16 +6,19 @@ export const artistProfileApi = createApi({
       baseUrl: process.env.NEXT_PUBLIC_API || 'http://localhost:8000/api',
       credentials: 'include', // Important for cookies
     }),
+    tagTypes: ['ArtistProfile'],
   endpoints: (builder) => ({
     getArtistProfile: builder.query({
       query: () => 'artist/profile/',
+      providesTags: ['ArtistProfile'],
     }),
     updateArtistProfile: builder.mutation({
-      query: ({...updatedProfile }) => ({
+      query: (formData) => ({
         url: `artist/profile/update`,
         method: 'PUT',
-        body: updatedProfile,
+        body: formData,
       }),
+      invalidatesTags: ['ArtistProfile'],
     }),
     updateEmail: builder.mutation({
       query: ({...updatedProfile }) => ({
@@ -23,6 +26,7 @@ export const artistProfileApi = createApi({
         method: 'POST',
         body: updatedProfile,
       }),
+      invalidatesTags: ['ArtistProfile'],
     }),
     changePassword: builder.mutation({
       query: ({...updatedProfile }) => ({
@@ -30,12 +34,14 @@ export const artistProfileApi = createApi({
         method: 'POST',
         body: updatedProfile,
       }),
+      invalidatesTags: ['ArtistProfile'],
     }),
     deactivateAccount: builder.mutation({
       query: () => ({
         url: `artist/profile/deactivate`,
         method: 'POST',
       }),
+      invalidatesTags: ['ArtistProfile'],
     }),
   }),
 });

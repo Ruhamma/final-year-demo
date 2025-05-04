@@ -14,7 +14,7 @@ export const artworkApi = createApi({
       query: () => 'artwork/my-artworks',
     }),
     getArtworkMetadata: builder.query({
-      query: () => 'artwork/metadata',
+      query: () => 'artwork/metadata/all',
     }),
     createArtwork: builder.mutation({
       query: (newArtwork) => ({

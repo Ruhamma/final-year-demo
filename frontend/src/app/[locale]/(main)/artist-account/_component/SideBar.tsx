@@ -4,19 +4,22 @@ import Link from "next/link";
 import React from "react";
 import { useAuth } from "@/context/useAuth";
 import { usePathname, useRouter } from "next/navigation";
+import { useGetArtistProfileQuery } from "@/store/api/artist/profile";
 
 const SideBar = () => {
   const { user, logout } = useAuth();
-
+  const {
+    data: profileData,
+  } = useGetArtistProfileQuery({});
   const pathname = usePathname();
   const isActive = (path: string) => pathname === path;
 
   return (
-       <div className="bg-[#606C38] text-white w-1/4 p-4 flex flex-col items-center justify-start h-screen mr-10">
-   <Avatar
+       <div className="bg-[#606C38] text-white w-1/4 p-4 flex flex-col items-center justify-start min-h-screen mr-10">
+      <Avatar
         className="text-xl text-white"
         size="xl"
-        src="/images/Rectangle 20.png"
+        src={profileData?.profile_picture}
       />
       <p className="font-bold text-2xl pb-10">{user?.username}</p>
       <ul className="mt-4 space-y-2 text-gray-300">
@@ -58,6 +61,14 @@ const SideBar = () => {
             className={`text-white hover:bg-white hover:text-black px-4 py-2 rounded transition-all duration-200 ${isActive('/artist-account/settings') ? 'bg-white text-black' : ''}`}
           >
             Account settings
+          </Link>
+        </li>
+        <li>
+          <Link 
+            href="/artist-account/deactivate" 
+            className={`text-white hover:bg-white hover:text-black px-4 py-2 rounded transition-all duration-200 ${isActive('/artist-account/deactivate') ? 'bg-white text-black' : ''}`}
+          >
+            Deactivate account
           </Link>
         </li>
         <li>

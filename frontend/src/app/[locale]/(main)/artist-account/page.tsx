@@ -6,6 +6,7 @@ import {
   Divider,
   Group,
   Image,
+  NumberFormatter,
   Stack,
   Text,
 } from "@mantine/core";
@@ -13,9 +14,12 @@ import { IconHeart } from "@tabler/icons-react";
 import React from "react";
 import { useAuth } from "@/context/useAuth";
 import { formatDate } from "@/shared/utils/formatDate";
+import { useGetMyArtworkQuery } from "@/store/api/artwork/artwork";
 
 const Page = () => {
   const { user } = useAuth();
+  const {data: artworks} = useGetMyArtworkQuery({})
+
   const mockArtworks = [
     {
       id: 1,
@@ -86,7 +90,7 @@ const Page = () => {
       <Divider />
       <p className="text-lg my-4">All Artworks</p>
     </Stack><Box className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
-        {mockArtworks.map((item) => (
+        {artworks?.map((item: any) => (
           <Card
             key={item.id}
             shadow="sm"
@@ -95,17 +99,20 @@ const Page = () => {
             className="bg-red-900"
           >
             <CardSection>
-              <Image alt="Product image" src={item?.src} />
+              <Image alt="Product image" src={item?.images[0]?.url} />
             </CardSection>
             <Group className="py-2" justify="space-between" align="center">
               <p className="text-sm font-semibold">{item?.title}</p>
               <IconHeart />
             </Group>
             <Text c="dimmed" className="text-xs font-semibold" size="xs">
-              {item?.artistName}
+              {item?.description}
             </Text>
             <Text className="text-xs font-semibold" size="xs">
-              {item?.price}
+              <NumberFormatter
+                value={item?.price}
+                thousandSeparator
+              />
             </Text>
           </Card>
         ))}

@@ -16,7 +16,7 @@ import {
   TextInput,
 } from "@mantine/core";
 import { useRouter } from "next/navigation";
-import React from "react";
+import React, { useState } from "react";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -43,17 +43,19 @@ const signUpSchema = z.object({
   path: ["confirmPassword"],
 });
 
+
 type SignUpFormData = z.infer<typeof signUpSchema>;
 
 const Login = () => {
   const route = useRouter();
   const [register, { isLoading: isRegisterLoading }] = useRegisterMutation();
-
+  const [selectedTab, setSelectedTab] = useState("buyer");
   const {
     register: registerField,
     handleSubmit,
     formState: { errors },
     setError,
+    setValue,
   } = useForm<SignUpFormData>({
     resolver: zodResolver(signUpSchema),
     defaultValues: {
@@ -61,6 +63,18 @@ const Login = () => {
     },
   });
 
+   const {
+    register: registerField2,
+    handleSubmit: handleSubmit2,
+    formState: { errors: errors2 },
+    setError: setError2,
+    setValue: setValue2,
+  } = useForm<SignUpFormData>({
+    resolver: zodResolver(signUpSchema),
+    defaultValues: {
+      role: 'BUYER',
+    },
+  });
    const onSubmit = async (data: SignUpFormData) => {
     try {
       await register({
@@ -82,6 +96,27 @@ const Login = () => {
       }
     }
   };
+  const onSubmit2 = async (data: SignUpFormData) => {
+    try {
+      await register({
+        email: data.email,
+        username: data.username,
+        password: data.password,
+        confirm_password: data.confirmPassword,
+        role: data.role
+      }).unwrap();
+    } catch (error: any) {
+      if (error.data) {
+        Object.entries(error.data).forEach(([key, value]) => {
+          setError2(key as keyof SignUpFormData, {
+            type: 'server',
+            message: Array.isArray(value) ? value[0] : value as string,
+          });
+        });
+      }
+    }
+  };
+  
   return (
     <Container className="h-screen m-auto ">
       <Flex
@@ -103,12 +138,16 @@ const Login = () => {
               Get started
             </Text>
           </Flex>
-          <Tabs defaultValue="gallery">
+          <Tabs defaultValue={selectedTab} onChange={(value) => {
+            setSelectedTab(value || "buyer"); }}
+            >
             <TabsList className="my-8" grow>
-              <TabsTab value="gallery">Buyer</TabsTab>
-              <TabsTab value="messages">Seller</TabsTab>
+              <TabsTab value="buyer" onClick={() =>  {setValue("role", "BUYER");
+            setValue2("role", "BUYER");}}>Buyer</TabsTab>
+              <TabsTab value="seller" onClick={() => {setValue("role", "SELLER");
+            setValue2("role", "SELLER");}}>Seller</TabsTab>
             </TabsList>
-            <TabsPanel value="gallery">
+            <TabsPanel value="buyer">
               <form onSubmit={handleSubmit(onSubmit)}>
                 <Flex direction="column" gap="md">
                   <TextInput 
@@ -143,26 +182,39 @@ const Login = () => {
                 </Flex>
               </form>
             </TabsPanel>
-            <TabsPanel value="messages">
+            <TabsPanel value="seller">
               {" "}
-              <form>
+             <form onSubmit={handleSubmit2(onSubmit2)}>
                 <Flex direction="column" gap="md">
-                  <TextInput label="Name" placeholder="Enter your Name" />
-
-                  <TextInput label="Email" placeholder="Enter your email" />
-                  <TextInput
-                    label="Art style"
-                    placeholder="Enter your art style"
+                  <TextInput 
+                  label="Name" 
+                  placeholder="Enter your Name"
+                  {...registerField2('username')}
+                  autoComplete="username"
+                  error={errors2.username?.message}
                   />
-                  <PasswordInput
+                  <TextInput 
+                  label="Email" 
+                  placeholder="Enter your email" 
+                  {...registerField2('email')}
+                  autoComplete="email"
+                  error={errors2.email?.message}
+                  />
+                   <PasswordInput
                     label="Password"
                     placeholder="Enter your password"
+                    {...registerField2('password')}  
+                    autoComplete="password"
+                    error={errors2.password?.message}
                   />
                   <PasswordInput
                     label="Confirm Password"
                     placeholder="Confirm your password"
+                    {...registerField2('confirmPassword')}
+                    autoComplete="confirmPassword"
+                    error={errors2.confirmPassword?.message}
                   />
-                  <Button type="submit">Sign up</Button>
+                  <Button type="submit" loading={isRegisterLoading}>Sign up</Button>
                 </Flex>
               </form>
             </TabsPanel>
@@ -176,7 +228,7 @@ const Login = () => {
                   component="a"
                   c="blue"
                   inherit
-                  onClick={() => route.push("/auth")}
+                  onClick={() => route.push("/auth/login")}
                 >
                   Login
                 </Text>

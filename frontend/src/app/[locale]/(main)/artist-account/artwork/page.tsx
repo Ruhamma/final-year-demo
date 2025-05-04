@@ -25,6 +25,7 @@ import {
 import {
   useCreateArtworkMutation,
   useGetArtworkMetadataQuery,
+  useGetMyArtworkQuery,
 } from "@/store/api/artwork/artwork";
 import { IconUpload, IconX, IconCheck } from "@tabler/icons-react";
 import Image from "next/image";
@@ -49,11 +50,27 @@ interface Tag {
   name: string;
   description: string;
 }
+
+const parseSize = (sizeString: string) => {
+  const regex = /^(\d+(\.\d+)?)x(\d+(\.\d+)?)\s*(in|cm)$/i;
+  const match = sizeString.match(regex);
+
+  if (match) {
+    return {
+      width: parseFloat(match[1]),
+      height: parseFloat(match[3]),
+      unit: match[5].toLowerCase(),
+    };
+  }
+
+  return null;
+};
+
 const artworkSchema = z.object({
   title: z.string().min(1, "Title is required").max(100, "Title too long"),
   description: z.string().max(1000, "Description too long").optional(),
   price: z.number().min(0, "Price must be positive").optional(),
-  image: z
+  images: z
     .instanceof(File)
     .nullable()
     .refine((file) => !file || file.size <= 5_000_000, "Max image size is 5MB"),
@@ -61,14 +78,35 @@ const artworkSchema = z.object({
   medium_id: z.string().min(1, "Medium is required"),
   style_id: z.string().min(1, "Style is required"),
   tags: z.array(z.string()).max(5, "Maximum 5 tags allowed").optional(),
-  size: z.string().optional(),
+  
+  size: z
+    .string()
+    .optional()
+    .refine((sizeString) => {
+      if (!sizeString) return true;
+      const parsedSize = parseSize(sizeString);
+      if (!parsedSize) {
+        return false;
+      }
+      return true;
+    }, "Invalid size format (expected: 'width x height unit)")
+
+    .transform((sizeString) => {
+      if (sizeString) {
+        return parseSize(sizeString);
+      }
+      return null;
+    }),
+    
   is_published: z.boolean().default(false),
 });
+
 
 type ArtworkFormValues = z.infer<typeof artworkSchema>;
 
 const CreateArtworkPage = () => {
   const { data: metadata } = useGetArtworkMetadataQuery({});
+  const {data: artwork} = useGetMyArtworkQuery({})
   const [createArtwork, { isLoading }] = useCreateArtworkMutation();
 
   const {
@@ -88,8 +126,23 @@ const CreateArtworkPage = () => {
   });
 
   const onSubmit = async (data: ArtworkFormValues) => {
+
     try {
-      await createArtwork(data).unwrap();
+      const formData = new FormData();
+      const { images, ...rest } = data;
+      const artworkData = Object.entries(data).reduce((acc, [key, value]) => {
+        if (value !== undefined && value !== null) {
+          acc[key] = value;
+        }
+        return acc;
+      }, {} as Record<string, any>);
+
+      formData.append("artwork", JSON.stringify(artworkData));
+
+      if (images) {
+        formData.append('image', images);
+      }
+      await createArtwork(formData).unwrap();
       reset();
       notify("Success", "Artwork created successfully");
     } catch (error) {
@@ -98,8 +151,7 @@ const CreateArtworkPage = () => {
     }
   };
 
-  const imageFile = watch("image");
-  const currentTags = watch("tags");
+  const imageFile = watch("images");
 
   return (
     <Paper p="xl" bg={'none'} mx="auto" >
@@ -133,11 +185,12 @@ const CreateArtworkPage = () => {
               control={control}
               render={({ field }) => (
                 <NumberInput
-                  label="Price (USD)"
+                  label="Price (ETB)"
                   step={10}
                   value={field.value || undefined}
                   onChange={(value) => field.onChange(value)}
                   error={errors.price?.message}
+                  thousandSeparator
                 />
               )}
             />
@@ -145,19 +198,20 @@ const CreateArtworkPage = () => {
               label="Size (e.g., 24x36 in)"
               {...register("size")}
               error={errors.size?.message}
+            
             />
           </Group>
 
           {/* Image Upload */}
-          <Divider label="Artwork Image" labelPosition="center" />
+         <Divider label="Artwork Image" labelPosition="center" />
           <FileInput
             label="Upload Image"
             withAsterisk
             accept="image/*"
             leftSection={<IconUpload size={16} />}
             placeholder="Select artwork image"
-            onChange={(file) => setValue("image", file || null)}
-            error={errors.image?.message}
+            onChange={(file) => setValue("images", file || null)}
+            error={errors.images?.message}
           />
 
           {imageFile && (
@@ -172,7 +226,6 @@ const CreateArtworkPage = () => {
             </Box>
           )}
 
-          {/* Artwork Details */}
           <Divider label="Artwork Details" labelPosition="center" />
             <Group grow>
             <Controller
@@ -203,7 +256,7 @@ const CreateArtworkPage = () => {
                 label="Medium"
                 withAsterisk
                 data={
-                metadata?.mediums?.map((m: Medium) => ({
+                metadata?.media?.map((m: Medium) => ({
                   value: m.id,
                   label: m.name,
                 })) || []
@@ -260,24 +313,6 @@ const CreateArtworkPage = () => {
               />
             )}
           />
-
-          {/* Display selected tags as pills */}
-          <Flex gap="sm" wrap="wrap">
-            {currentTags?.map((tag) => (
-              <Pill
-                key={tag}
-                withRemoveButton
-                onRemove={() => {
-                  setValue(
-                    "tags",
-                    currentTags?.filter((t) => t !== tag) || []
-                  );
-                }}
-              >
-                {tag}
-              </Pill>
-            ))}
-          </Flex>
 
           {/* Publishing Options */}
           <Divider label="Publishing Options" labelPosition="center" />
