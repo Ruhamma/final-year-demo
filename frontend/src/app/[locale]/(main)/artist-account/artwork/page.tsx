@@ -24,8 +24,7 @@ import {
 } from "@mantine/core";
 import {
   useCreateArtworkMutation,
-  useGetArtworkMetadataQuery,
-  useGetMyArtworkQuery,
+  useGetMetadataQuery,
 } from "@/store/api/artwork/artwork";
 import { IconUpload, IconX, IconCheck } from "@tabler/icons-react";
 import Image from "next/image";
@@ -105,8 +104,7 @@ const artworkSchema = z.object({
 type ArtworkFormValues = z.infer<typeof artworkSchema>;
 
 const CreateArtworkPage = () => {
-  const { data: metadata } = useGetArtworkMetadataQuery({});
-  const {data: artwork} = useGetMyArtworkQuery({})
+  const { data: metadata } = useGetMetadataQuery({});
   const [createArtwork, { isLoading }] = useCreateArtworkMutation();
 
   const {
@@ -202,7 +200,6 @@ const CreateArtworkPage = () => {
             />
           </Group>
 
-          {/* Image Upload */}
          <Divider label="Artwork Image" labelPosition="center" />
           <FileInput
             label="Upload Image"
@@ -289,7 +286,6 @@ const CreateArtworkPage = () => {
             />
             </Group>
 
-          {/* Tags */}
           <Divider label="Tags" labelPosition="center" />
           <Controller
             name="tags"
@@ -314,11 +310,9 @@ const CreateArtworkPage = () => {
             )}
           />
 
-          {/* Publishing Options */}
           <Divider label="Publishing Options" labelPosition="center" />
           <Checkbox label="Publish immediately" {...register("is_published")} />
 
-          {/* Form Actions */}
           <Group justify="flex-end" mt="xl">
             <Button
               variant="default"

@@ -14,10 +14,14 @@ import Link from "next/link";
 import { IconShoppingCart, IconHeart, IconUserCircle , IconChevronDown, IconLogout} from "@tabler/icons-react";
 import { useAuth } from "@/context/useAuth";
 import { useRouter } from "next/navigation";
+import CartDrawer from "@/app/[locale]/(main)/_component/CartDrawer";
+import WishlistDrawer from "@/app/[locale]/(main)/_component/WishlistDrawer";
+import { useGetFavoritesQuery } from "@/store/api/artwork/artwork";
 
 export function Header() {
  const router = useRouter();
   const { user, isAuthenticated, isAdmin , logout , isSeller} = useAuth();
+
   return (
     <Card bg={"#fffcea"} >
       <Box className="container mx-auto px-10">
@@ -109,9 +113,9 @@ export function Header() {
                 size="lg"
                 radius="xl"
                 color="dark"
-                mr={5}
+                mr={2}
               >
-                <IconShoppingCart size={20} stroke={1.5} />
+                <CartDrawer />
               </ActionIcon>
               <ActionIcon
                 variant="transparent"
@@ -120,7 +124,7 @@ export function Header() {
                 color="dark"
                 mr={5}
               >
-                <IconHeart size={20} stroke={1.5} />
+                <WishlistDrawer />
               </ActionIcon>
             </Flex>
           </Flex>

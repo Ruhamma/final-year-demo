@@ -20,6 +20,7 @@ import React from "react";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { notify } from "@/shared/components/notification/notification";
 
 
 const signUpSchema = z.object({
@@ -67,10 +68,13 @@ const Login = () => {
         email: data.email,
         username: data.username,
         password: data.password,
-        role: data.role,
+        confirm_password: data.confirmPassword,
+        role: data.role
       }).unwrap();
        route.push('/auth/login');
+      notify("Success","Registered successfuly")
     } catch (error: any) {
+      notify("Error","Registeration failed")
       if (error.data) {
         Object.entries(error.data).forEach(([key, value]) => {
           setError(key as keyof SignUpFormData, {
