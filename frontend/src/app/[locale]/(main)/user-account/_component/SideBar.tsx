@@ -1,6 +1,8 @@
 "use client";
 import { useGetMeQuery } from "@/app/services/auth";
-import { Avatar, Text } from "@mantine/core";
+import { useAuth } from "@/context/useAuth";
+import { Avatar, Button, Center, Modal, Text } from "@mantine/core";
+import { useDisclosure } from "@mantine/hooks";
 import {
   IconUser,
   IconMessageCircle,
@@ -15,7 +17,8 @@ import React from "react";
 
 const SideBar = () => {
   const { data: profileData } = useGetMeQuery();
-
+  const [opened, { open, close }] = useDisclosure(false);
+  const { logout } = useAuth();
   return (
     <div className="bg-[#606C38] text-white w-1/4 p-4 flex flex-col items-center h-screen mr-10">
       <Avatar
@@ -44,7 +47,7 @@ const SideBar = () => {
         </li>
         <li>
           <Link
-            href="/settings"
+            href="/user-account/favorites"
             className="flex items-center gap-2 text-white hover:bg-white hover:text-[#606c38] px-4 py-2 rounded-md"
           >
             <IconHeart size={18} /> Favorites
@@ -76,12 +79,37 @@ const SideBar = () => {
         </li>
         <li>
           <Link
-            href="/logout"
+            href="#"
+            onClick={() => open()}
             className="flex items-center gap-2 text-white hover:bg-white hover:text-[#606c38] px-4 py-2 rounded-md"
           >
             <IconPower size={18} /> Log Out
           </Link>
         </li>
+        <Modal
+          opened={opened}
+          onClose={close}
+          title="Log out"
+          centered
+          size="md"
+        >
+          <Center mb="md" className="flex flex-col items-center">
+            <Text size="sm" className="font-bold">
+              Are you sure you want to log out?
+            </Text>
+            <Text size="sm" c="dimmed">
+              This action cannot be undone.
+            </Text>
+            <Text size="sm" c="dimmed">
+              If you are sure, please click the button below to proceed.
+            </Text>
+            <div className="flex justify-center mt-4">
+              <Button color="red" onClick={() => logout()}>
+                Log Out
+              </Button>
+            </div>
+          </Center>
+        </Modal>
       </ul>
     </div>
   );

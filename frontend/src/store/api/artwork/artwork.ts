@@ -73,9 +73,10 @@ export const artworkApi = createApi({
       providesTags: ["Artwork"],
     }),
     getFavorites: builder.query({
-      query: () => ({
+      query: (params) => ({
         url: "artwork/wishlist/",
         method: "GET",
+        params,
       }),
       providesTags: ["Favorites"],
     }),
