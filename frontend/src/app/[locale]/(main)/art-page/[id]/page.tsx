@@ -1,3 +1,4 @@
+"use client";
 import { Carousel, CarouselSlide } from "@mantine/carousel";
 import {
   Accordion,
@@ -11,17 +12,47 @@ import {
   Divider,
   Flex,
   Image,
+  LoadingOverlay,
+  NumberFormatter,
   Stack,
 } from "@mantine/core";
 import { Breadcrumbs, Anchor } from "@mantine/core";
 import React from "react";
-import Discover from "../(landing)/_components/Discover";
-import Testimonials from "../(landing)/_components/Testimonials";
+import Discover from "../../(landing)/_components/Discover";
+import Testimonials from "../../(landing)/_components/Testimonials";
+import { useParams, useRouter } from "next/navigation";
+import { useGetArtworkByIdQuery } from "@/store/api/artwork/artwork";
+import { useAddToCartMutation } from "@/app/services/cart";
+import { notify } from "@/shared/components/notification/notification";
 
-const page = () => {
+const Page = () => {
+  const { id } = useParams();
+  const router = useRouter();
+  const { data, isLoading } = useGetArtworkByIdQuery(id);
+  const [addToCart] = useAddToCartMutation();
+
+  const handleAddToCart = async () => {
+    try {
+      await addToCart({ artwork_id: id as string }).unwrap();
+      notify("Success", "Added to cart");
+    } catch (error) {
+      notify("Error", "Failed to add to cart");
+      console.log(error);
+    }
+  };
+  const handlePurchaseOrder = async () => {
+    try {
+      await addToCart({ artwork_id: id as string }).unwrap();
+      notify("Success", "Added to cart");
+    } catch (error) {
+      notify("Error", "Failed to add to cart");
+      console.log(error);
+    }
+    router.push(`/detail-checkout/${id}`);
+  };
   const items = [
-    { title: "Art page", href: "#" },
-    { title: "art-title", href: "#" },
+    { title: "Art page", href: "/artworks" },
+    { title: `${data?.title}`, href: "#" },
   ].map((item, index) => (
     <Anchor href={item.href} key={index}>
       {item.title}
@@ -49,39 +80,45 @@ const page = () => {
   ));
   return (
     <Box className="m-20 ">
+      <LoadingOverlay visible={isLoading} />
       <Flex className="gap-10" align={"center"} justify="center">
         <Box className="w-1/2">
           <Breadcrumbs className="pb-4">{items}</Breadcrumbs>
           <Carousel withIndicators dragFree slideGap="md" align="start" h={500}>
-            <CarouselSlide>
-              <Image src="/images/Rectangle 19.png" alt="Artwork preview" />
-            </CarouselSlide>
-            <CarouselSlide>
-              <Image src="/images/Rectangle 19.png" alt="Artwork preview" />
-            </CarouselSlide>
-            <CarouselSlide>
-              <Image src="/images/Rectangle 19.png" alt="Artwork preview" />
-            </CarouselSlide>
+            {data?.images.map((image, index) => (
+              <CarouselSlide key={index}>
+                <Image
+                  src={image.url}
+                  alt="Artwork preview"
+                  className="rounded-md"
+                />
+              </CarouselSlide>
+            ))}
           </Carousel>
         </Box>
         <Box className="w-1/3 ">
           <Flex direction="column" gap="md" mb="lg">
-            <p className="text-3xl">Grand Canal (2002)</p>
-            <p className="text-sm font-light">Acrylic paintings</p>
-            <p className="text-sm font-light">150 x 120 cm</p>
-            <p className="text-lg font-bold">ETB 5,000</p>
+            <p className="text-3xl">{data?.title}</p>
+            <p className="text-sm font-light">{data?.medium?.name} paintings</p>
             <p className="text-sm font-light">
-              This captivating painting depicts a scene of the Grand Canal in
-              Venice, Italy. Gondolas filled with tourists navigate the calm
-              waters, gliding past majestic buildings that line the canal. The
-              soft light bathes the scene in a warm glow, creating a romantic
-              and inviting atmosphere. This piece is sure to add a touch of
-              Venetian charm to any home.
+              {data?.size?.width} x {data?.size?.height} {data?.size?.unit}
             </p>
+            <p className="text-lg font-bold">
+              <NumberFormatter
+                value={data?.price}
+                thousandSeparator
+                decimalScale={2}
+                fixedDecimalScale
+                prefix={"ETB "}
+              />
+            </p>
+            <p className="text-sm font-light">{data?.description}</p>
           </Flex>
           <Stack>
-            <Button>Add to cart</Button>
-            <Button variant="outline">Purchase Order</Button>
+            <Button onClick={handleAddToCart}>Add to cart</Button>
+            <Button onClick={handlePurchaseOrder} variant="outline">
+              Purchase Order
+            </Button>
           </Stack>
           <Box>
             <Accordion>{groccery}</Accordion>
@@ -96,29 +133,24 @@ const page = () => {
         <Box className="w-1/2">
           <Stack gap="md" mb="lg">
             <p className="text-lg font-bold italic">About Artworks</p>
-            <p className="text-xs">
-              This captivating painting depicts a scene of the Grand Canal in
-              Venice, Italy. Gondolas filled with tourists navigate the calm
-              waters, gliding past majestic buildings that line the canal. The
-              soft light bathes the scene in a warm glow, creating a romantic
-              and inviting atmosphere. This piece is sure to add a touch of
-              Venetian charm to any home.
-            </p>
+            <p className="text-xs">{data?.description}</p>
           </Stack>
           <Stack>
             <p className="text-lg font-bold italic">Details</p>
             <Flex gap="md" className="text-xs">
               <p>
-                <strong>Materials:</strong> Lithograph on paper
+                <strong>Category:</strong>
+                {data?.category?.name}
               </p>
               <p>
-                <strong>Size:</strong> 150 x 120cm
+                <strong>Size:</strong> {data?.size?.width} x{" "}
+                {data?.size?.height} {data?.size?.unit}
               </p>
               <p>
-                <strong>Rarity:</strong> Limited edition
+                <strong>Style:</strong> {data?.style?.name}
               </p>
               <p>
-                <strong>Condition:</strong> Excellent condition
+                <strong>Medium:</strong> {data?.medium?.name}
               </p>
               <p>
                 <strong>Certificate of authenticity:</strong> Included (issued
@@ -138,7 +170,9 @@ const page = () => {
               size="xl"
             />
             <Stack gap="sm" mb="lg" align="center" justify="center">
-              <p className="font-semibold text-sm">Bilen Assefa</p>
+              <p className="font-semibold text-sm">
+                {data?.artist?.user?.username}
+              </p>
               <div className="flex justify-center">
                 {Array.from({ length: 5 }).map((_, index) => (
                   <svg
@@ -158,13 +192,7 @@ const page = () => {
           <Divider my="lg" labelPosition="center" orientation="vertical" />
           <Stack gap="md" mb="lg">
             <p className="text-sm font-bold italic">About </p>
-            <p className="text-xs">
-              Bilen Assefa is a talented artist known for her stunning
-              contemporary paintings. Her work often explores themes of nature,
-              identity, and the human experience. With a unique style that
-              blends vibrant colors and intricate details, Bilen art captivates
-              viewers
-            </p>
+            <p className="text-xs">{data?.artist?.bio}</p>
           </Stack>
         </Flex>
       </Container>
@@ -174,4 +202,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

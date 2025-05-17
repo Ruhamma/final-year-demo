@@ -1,80 +1,83 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const artworkApi = createApi({
-  reducerPath: 'artworkApi',
+  reducerPath: "artworkApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: process.env.NEXT_PUBLIC_API || 'http://localhost:8000/api',
-    credentials: 'include',
+    baseUrl: process.env.NEXT_PUBLIC_API || "http://localhost:8000/api",
+    credentials: "include",
   }),
-  tagTypes: ['Artwork', 'Favorites', 'Metadata'],
+  tagTypes: ["Artwork", "Favorites", "Metadata"],
   endpoints: (builder) => ({
     getPublicArtworks: builder.query({
       query: (params) => ({
-        url: 'artwork/',
+        url: "artwork/",
         params,
       }),
-      providesTags: ['Artwork'],
+      providesTags: ["Artwork"],
     }),
     getArtworkById: builder.query({
       query: (id) => `artwork/${id}`,
-      providesTags: (result, error, id) => [{ type: 'Artwork', id }],
+      providesTags: ["Artwork"],
     }),
     getMyArtworks: builder.query({
-      query: ({ page = 1, page_size = 10 }) => `artwork/my-artworks?page=${page}&page_size=${page_size}`,
-      providesTags: ['Artwork'],
+      query: (params) => ({
+        url: `artwork/my-artworks/`,
+        params,
+      }),
+      providesTags: ["Artwork"],
     }),
     createArtwork: builder.mutation({
       query: (formData) => ({
-        url: 'artwork/my-artworks',
-        method: 'POST',
+        url: "artwork/my-artworks",
+        method: "POST",
         body: formData,
       }),
-      invalidatesTags: ['Artwork'],
+      invalidatesTags: ["Artwork"],
     }),
     getMetadata: builder.query({
-      query: () => 'artwork/metadata/all',
-      providesTags: ['Metadata'],
+      query: () => "artwork/metadata/all",
+      providesTags: ["Metadata"],
     }),
     deleteMyArtwork: builder.mutation({
       query: (id) => ({
         url: `artwork/my-artworks/${id}`,
-        method: 'DELETE',
+        method: "DELETE",
       }),
-      invalidatesTags: ['Artwork'],
+      invalidatesTags: ["Artwork"],
     }),
     addToFavorites: builder.mutation({
       query: (data) => ({
-        url: 'artwork/wishlist/',
-        method: 'POST',
+        url: "artwork/wishlist/",
+        method: "POST",
         body: data,
       }),
-      invalidatesTags: ['Favorites'],
+      invalidatesTags: ["Favorites"],
     }),
     removeFromFavorites: builder.mutation({
       query: (id) => ({
         url: `artwork/wishlist/${id}`,
-        method: 'DELETE',
+        method: "DELETE",
       }),
-      invalidatesTags: ['Favorites'],
+      invalidatesTags: ["Favorites"],
     }),
     getTopFavorited: builder.query({
-      query: () => 'artwork/top-favorited',
-      providesTags: ['Artwork'],
+      query: () => "artwork/top-favorited",
+      providesTags: ["Artwork"],
     }),
     getTopViewed: builder.query({
-      query: () => 'artwork/top-viewed',
-      providesTags: ['Artwork'],
+      query: () => "artwork/top-viewed",
+      providesTags: ["Artwork"],
     }),
     getRecentlyViewed: builder.query({
-      query: () => 'artwork/recently-viewed',
-      providesTags: ['Artwork'],
+      query: () => "artwork/recently-viewed",
+      providesTags: ["Artwork"],
     }),
     getFavorites: builder.query({
-       query: () => ({
-        url:  'artwork/wishlist/',
-        method: 'GET',
+      query: () => ({
+        url: "artwork/wishlist/",
+        method: "GET",
       }),
-      providesTags: ['Favorites'],
+      providesTags: ["Favorites"],
     }),
   }),
 });

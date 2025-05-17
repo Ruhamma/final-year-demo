@@ -77,7 +77,7 @@ const artworkSchema = z.object({
   medium_id: z.string().min(1, "Medium is required"),
   style_id: z.string().min(1, "Style is required"),
   tags: z.array(z.string()).max(5, "Maximum 5 tags allowed").optional(),
-  
+
   size: z
     .string()
     .optional()
@@ -96,10 +96,9 @@ const artworkSchema = z.object({
       }
       return null;
     }),
-    
+
   is_published: z.boolean().default(false),
 });
-
 
 type ArtworkFormValues = z.infer<typeof artworkSchema>;
 
@@ -124,7 +123,6 @@ const CreateArtworkPage = () => {
   });
 
   const onSubmit = async (data: ArtworkFormValues) => {
-
     try {
       const formData = new FormData();
       const { images, ...rest } = data;
@@ -138,7 +136,7 @@ const CreateArtworkPage = () => {
       formData.append("artwork", JSON.stringify(artworkData));
 
       if (images) {
-        formData.append('image', images);
+        formData.append("image", images);
       }
       await createArtwork(formData).unwrap();
       reset();
@@ -152,7 +150,7 @@ const CreateArtworkPage = () => {
   const imageFile = watch("images");
 
   return (
-    <Paper p="xl" bg={'none'} mx="auto" >
+    <Paper p="xl" bg={"none"} mx="auto">
       <LoadingOverlay visible={isLoading} />
       <Title order={2} mb="xl">
         Create New Artwork
@@ -160,7 +158,6 @@ const CreateArtworkPage = () => {
 
       <form onSubmit={handleSubmit(onSubmit)}>
         <Stack gap="lg">
-          {/* Basic Information */}
           <Divider label="Basic Information" labelPosition="center" />
           <TextInput
             label="Title"
@@ -196,11 +193,10 @@ const CreateArtworkPage = () => {
               label="Size (e.g., 24x36 in)"
               {...register("size")}
               error={errors.size?.message}
-            
             />
           </Group>
 
-         <Divider label="Artwork Image" labelPosition="center" />
+          <Divider label="Artwork Image" labelPosition="center" />
           <FileInput
             label="Upload Image"
             withAsterisk
@@ -224,67 +220,67 @@ const CreateArtworkPage = () => {
           )}
 
           <Divider label="Artwork Details" labelPosition="center" />
-            <Group grow>
+          <Group grow>
             <Controller
               name="category_id"
               control={control}
               render={({ field }) => (
-              <Select
-                label="Category"
-                withAsterisk
-                data={
-                metadata?.categories?.map((c: Category) => ({
-                  value: c.id,
-                  label: c.name,
-                })) || []
-                }
-                value={field.value}
-                onChange={field.onChange}
-                error={errors.category_id?.message}
-              />
+                <Select
+                  label="Category"
+                  withAsterisk
+                  data={
+                    metadata?.categories?.map((c: Category) => ({
+                      value: c.id,
+                      label: c.name,
+                    })) || []
+                  }
+                  value={field.value}
+                  onChange={field.onChange}
+                  error={errors.category_id?.message}
+                />
               )}
             />
-            
+
             <Controller
               name="medium_id"
               control={control}
               render={({ field }) => (
-              <Select
-                label="Medium"
-                withAsterisk
-                data={
-                metadata?.media?.map((m: Medium) => ({
-                  value: m.id,
-                  label: m.name,
-                })) || []
-                }
-                value={field.value}
-                onChange={field.onChange}
-                error={errors.medium_id?.message}
-              />
+                <Select
+                  label="Medium"
+                  withAsterisk
+                  data={
+                    metadata?.media?.map((m: Medium) => ({
+                      value: m.id,
+                      label: m.name,
+                    })) || []
+                  }
+                  value={field.value}
+                  onChange={field.onChange}
+                  error={errors.medium_id?.message}
+                />
               )}
             />
-            
+
             <Controller
               name="style_id"
               control={control}
               render={({ field }) => (
-              <Select
-                label="Style"
-                withAsterisk
-                data={
-                metadata?.styles?.map((s: Style) => ({
-                  value: s.id,
-                  label: s.name,
-                })) || []
-                }
-                value={field.value}
-                onChange={field.onChange}
-                error={errors.style_id?.message}
-              />
+                <Select
+                  label="Style"
+                  withAsterisk
+                  data={
+                    metadata?.styles?.map((s: Style) => ({
+                      value: s.id,
+                      label: s.name,
+                    })) || []
+                  }
+                  value={field.value}
+                  onChange={field.onChange}
+                  error={errors.style_id?.message}
+                />
               )}
             />
-            </Group>
+          </Group>
 
           <Divider label="Tags" labelPosition="center" />
           <Controller
@@ -293,10 +289,12 @@ const CreateArtworkPage = () => {
             render={({ field }) => (
               <MultiSelect
                 label="Add tags (max 5)"
-                data={metadata?.tags?.map((t : Tag) => ({ 
-                  value: t.id, 
-                  label: t.name 
-                })) || []}
+                data={
+                  metadata?.tags?.map((t: Tag) => ({
+                    value: t.id,
+                    label: t.name,
+                  })) || []
+                }
                 maxValues={5}
                 value={field.value}
                 onChange={field.onChange}

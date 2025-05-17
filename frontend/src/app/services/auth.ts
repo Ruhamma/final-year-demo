@@ -12,6 +12,10 @@ interface User {
   created_at?: string;
   updated_at?: string;
   profile_picture?:string;
+  first_name?:string;
+  last_name?:string;
+  is_active?:string;
+  phone_number?:string;
 }
 
 interface LoginRequest {

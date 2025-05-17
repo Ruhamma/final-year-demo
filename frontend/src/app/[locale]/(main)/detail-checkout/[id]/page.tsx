@@ -3,7 +3,10 @@
 import { useAuth } from "@/context/useAuth";
 import { notify } from "@/shared/components/notification/notification";
 import { useGetCartQuery } from "@/store/api/artwork/cart";
-import { useCreateOrderMutation } from "@/store/api/order/order";
+import {
+  useCreateDirectOrderMutation,
+  useCreateOrderMutation,
+} from "@/store/api/order/order";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Button,
@@ -14,7 +17,8 @@ import {
   Textarea,
   TextInput,
 } from "@mantine/core";
-import { useRouter } from "next/navigation";
+import { useParams } from "next/navigation";
+// import { useRouter } from "next/navigation";
 import React from "react";
 import { Controller, useForm } from "react-hook-form";
 import { z } from "zod";
@@ -35,9 +39,11 @@ export const checkoutSchema = z.object({
   }),
 });
 export default function CheckoutPage() {
-  const router = useRouter();
+  const { id } = useParams();
+  // const router = useRouter();
   const { user } = useAuth();
   const { data: cart, isLoading } = useGetCartQuery({});
+  const filteredItems = cart?.items?.filter((item) => item.artwork_id === id);
   const {
     control,
     register,
@@ -61,14 +67,27 @@ export default function CheckoutPage() {
       payment_method: "",
     },
   });
-  const [submitOrder, { isLoading: isOrdering }] = useCreateOrderMutation();
+  const [submitOrder, { isLoading: isOrdering }] =
+    useCreateDirectOrderMutation();
 
   const onSubmit = async (data: any) => {
-    console.log("Form submitted", data);
+    if (!filteredItems?.length) {
+      notify("Error", "No items found for this artist in cart");
+      return;
+    }
+
+    const payload = {
+      ...data,
+      items: filteredItems.map((item) => ({
+        artwork_id: item.artwork_id,
+        quantity: item.quantity ?? 1,
+        price_at_addition: item.price_at_addition,
+      })),
+    };
+
     try {
-      await submitOrder(data).unwrap();
+      await submitOrder(payload).unwrap();
       notify("Success", "Order placed successfully");
-      router.push("/orders");
     } catch (err) {
       notify("Error", `Failed to place order`);
     }
@@ -221,7 +240,7 @@ export default function CheckoutPage() {
 
           <div className="p-6">
             <h2 className="text-xl font-semibold mb-4">Product</h2>
-            {cart?.items?.map((item: any) => (
+            {filteredItems?.map((item: any) => (
               <>
                 <div className="flex justify-between mb-2">
                   <span>{item?.artwork?.title} </span>
@@ -242,16 +261,20 @@ export default function CheckoutPage() {
 
             <div className="flex justify-between font-semibold text-[#b06c00]">
               <span>Total</span>
-              <span>
-                <NumberFormatter
-                  value={cart?.total_price}
-                  thousandSeparator
-                  decimalScale={2}
-                  fixedDecimalScale
-                  prefix={"ETB "}
-                  className="text-sm"
-                />
-              </span>
+              {filteredItems?.map((item: any) => (
+                <>
+                  <span>
+                    <NumberFormatter
+                      value={item?.price_at_addition}
+                      thousandSeparator
+                      decimalScale={2}
+                      fixedDecimalScale
+                      prefix={"ETB "}
+                      className="text-sm"
+                    />
+                  </span>
+                </>
+              ))}
             </div>
             <div className="mt-6 space-y-4 text-sm">
               <Controller
