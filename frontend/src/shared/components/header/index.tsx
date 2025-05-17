@@ -13,26 +13,52 @@ import {
 import Link from "next/link";
 import { IconShoppingCart, IconHeart, IconUserCircle , IconChevronDown, IconLogout} from "@tabler/icons-react";
 import { useAuth } from "@/context/useAuth";
-import { useRouter } from "next/navigation";
+import { useParams } from "next/navigation";
 import CartDrawer from "@/app/[locale]/(main)/_component/CartDrawer";
 import WishlistDrawer from "@/app/[locale]/(main)/_component/WishlistDrawer";
 import { useGetFavoritesQuery } from "@/store/api/artwork/artwork";
+import { usePathname, useRouter } from "@/i18n/routing";
+import { useState, useTransition } from "react";
+import { useLocale, useTranslations } from "next-intl";
 
 export function Header() {
- const router = useRouter();
   const { user, isAuthenticated, isAdmin , logout , isSeller} = useAuth();
-
+const locale = useLocale();
+  console.log(locale);
+  const router = useRouter();
+  const [isPending, startTransition] = useTransition();
+  const pathname = usePathname();
+  const params = useParams();
+  const [selected, setSelected] = useState(locale); 
+   const changeLanguage = (nextLocale: any) => {
+    console.log({ nextLocale });
+    startTransition(() => {
+      router.replace(
+        // @ts-expect-error -- TypeScript will validate that only known `params`
+        // are used in combination with a given `pathname`. Since the two will
+        // always match for the current route, we can skip runtime checks.
+        { pathname, params },
+        { locale: nextLocale },
+      );
+      setSelected(nextLocale);
+    });
+  };
+  const t = useTranslations('common.NavBar');
   return (
     <Card bg={"#fffcea"} >
       <Box className="container mx-auto px-10">
         <Stack>
           <Flex justify="space-between" align="center" className="px-5">
             <Flex justify="space-between" align="center" gap={8}>
-              <UnstyledButton className="hover:border-b-[1px] tracking-[0.2em]">
-                AM
+              <UnstyledButton
+                className={`hover:border-b-[1px] tracking-[0.2em] ${selected === "am" ? "border-b-[1px]" : ""}`}
+                     onClick={() => changeLanguage('am')}
+>
+                አማ
               </UnstyledButton>
               {"/"}
-              <UnstyledButton className="hover:border-b-[1px] tracking-[0.2em]">
+              <UnstyledButton className={`hover:border-b-[1px] tracking-[0.2em] ${selected === "en" ? "border-b-[1px]" : ""}`}      onClick={() => changeLanguage('en')}
+>
                 EN
               </UnstyledButton>
             </Flex>
@@ -45,14 +71,14 @@ export function Header() {
                     href={"/auth/sign-up"}
                     className="tracking-[0.3em] hover:border-b-[1px]"
                   >
-                    Sign Up
+                   {t('SignUp')}
                   </Link>
                   {"/"}
                   <Link
                     href={"/auth/login"}
                     className="tracking-[0.3em] hover:border-b-[1px]"
                   >
-                    Login
+                    {t('Login')}
                   </Link>
                 </>
               ) : (
@@ -67,7 +93,7 @@ export function Header() {
                     <Flex className="items-center gap-1">
                       <IconUserCircle size={19} stroke={1.2} />
                       <Text fz={14}>
-                        Hi, {user?.username}
+                        {t('Hi')}, {user?.username}
                       </Text>
                       <IconChevronDown size={16} stroke={1.6} />
                     </Flex>
@@ -87,7 +113,7 @@ export function Header() {
                       }
                     }}
                   >
-                    Account
+                    {t('Account')}
                   </Menu.Item>
                   <Menu.Item
                     leftSection={<IconLogout />}
@@ -95,7 +121,7 @@ export function Header() {
                       logout()
                     }}
                   >
-                    Log out
+                   {t('Logout')}
                   </Menu.Item>
                 </Menu.Dropdown>
               </Menu>
@@ -105,7 +131,7 @@ export function Header() {
                   href={"/admin"}
                   className="tracking-[0.3em] hover:border-b-[1px]"
                 >
-                  Admin
+                 {t('Admin')}
                 </Link>
               )}
               <ActionIcon
@@ -134,19 +160,19 @@ export function Header() {
                 href={"/"}
                 className=" tracking-[0.3em] hover:border-b-[1px]"
               >
-                Home
+                {t('Home')}
               </Link>
               <Link
                 href={"/about-us"}
                 className=" tracking-[0.3em] hover:border-b-[1px]"
               >
-                About
+                {t('About')}
               </Link>
               <Link
                 href={"/contact-us"}
                 className=" tracking-[0.3em] hover:border-b-[1px]"
               >
-                Contact
+                {t('Contact')}
               </Link>
             </Flex>
             <Flex gap={50}>
@@ -154,13 +180,13 @@ export function Header() {
                 href={"/artworks"}
                 className=" tracking-[0.3em] hover:border-b-[1px]"
               >
-                Artworks
+                {t('Artworks')}
               </Link>
               <Link
                 href={"/artists"}
                 className=" tracking-[0.3em] hover:border-b-[1px]"
               >
-                Artist
+                {t('Artists')}
               </Link>
             </Flex>
           </Flex>

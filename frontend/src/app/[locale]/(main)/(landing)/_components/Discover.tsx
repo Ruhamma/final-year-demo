@@ -18,21 +18,22 @@ import { useGetPublicArtworksQuery } from "@/store/api/artwork/artwork";
 import CartDrawer from "../../_component/CartDrawer";
 import AddtoCart from "../../_component/AddtoCart";
 import AddtoWishlist from "../../_component/AddtoWishlist";
+import { useTranslations } from "next-intl";
 const Discover = ({ title }: { title: string }) => {
   const {data: artworks, isLoading} = useGetPublicArtworksQuery({
     skip:0,
     limit:12
   })
-
+const t = useTranslations('common.Landing');
   return (
     <Container className="py-24 mx-auto">
       <p className="text-2xl font-semibold text-center">{title}</p>
 
       <Tabs defaultValue="first" className="py-6">
         <TabsList grow>
-          <TabsTab value="first">Best Seller</TabsTab>
-          <TabsTab value="second">Recently Viewed</TabsTab>
-          <TabsTab value="third">New works</TabsTab>
+          <TabsTab value="first">{t('BestSellers')}</TabsTab>
+          <TabsTab value="second">{t('RecentlyViewed')}</TabsTab>
+          <TabsTab value="third">{t('NewWorks')}</TabsTab>
         </TabsList>
       </Tabs>
 

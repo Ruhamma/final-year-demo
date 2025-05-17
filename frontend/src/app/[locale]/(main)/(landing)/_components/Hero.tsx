@@ -1,26 +1,25 @@
 import { Box, Button, Container, Flex, Image } from "@mantine/core";
 import React from "react";
+import { useTranslations } from "next-intl";
 
 const Hero = () => {
+   const t = useTranslations('common.Landing.Hero');
   return (
     <Container className="mt-10">
       <Flex className="gap-10" align={"center"} justify="center">
         <Box className="w-1/2">
           <Flex direction="column" gap="md" mb="lg">
             <p className="text-xs opacity-50 font-light ">
-              Discover the world of art
+             {t('Title')}
             </p>
-            <p className="text-4xl font-bold">Change the way art is valued</p>
+            <p className="text-4xl font-bold">
+              {t('Subtitle')}
+            </p>
             <p className="text-sm font-light">
-              Paint your world with a vibrant collection of original paintings.
-              Explore captivating landscapes, intimate portraits, and everything
-              in between. Support talented artists and own a piece of their
-              story. Whether you seek a specific style, a captivating color
-              palette, or a theme that resonates with you, the perfect painting
-              awaits to be discovered.
+             {t('Description')}
             </p>
           </Flex>
-          <Button>View artworks</Button>
+          <Button>{t('ViewArtwork')}</Button>
         </Box>
         <Box className="w-1/2">
           <Flex gap="md" mb="lg">
