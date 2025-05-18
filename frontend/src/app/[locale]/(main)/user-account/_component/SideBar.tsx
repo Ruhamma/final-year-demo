@@ -27,7 +27,10 @@ const SideBar = () => {
         src={profileData?.profile_picture}
         alt="Profile"
       />
-      <Text className="font-bold text-2xl mt-2">{"User"}</Text>
+      <p className="font-bold text-lg mt-2">
+        {profileData?.first_name} {profileData?.last_name}
+      </p>
+      <p className="text-sm mt-1">{"User"}</p>
       <ul className="mt-6 space-y-4 w-fit px-2 mx-auto font-semibold">
         <li>
           <Link

@@ -39,6 +39,18 @@ export const orderApi = createApi({
       query: (orderId) => `orders/${orderId}`,
       providesTags: ["order"],
     }),
+    getArtistOrders: builder.query({
+      query: () => "orders/artist-orders",
+      providesTags: ["order"],
+    }),
+    updateOrderStatus: builder.mutation({
+      query: ({ id, status }) => ({
+        url: `/orders/${id}/status`,
+        method: "PATCH",
+        body: { status },
+      }),
+      invalidatesTags: ["order"],
+    }),
   }),
 });
 
@@ -48,4 +60,6 @@ export const {
   useGetUserOrdersQuery,
   useCreatePaymentMutation,
   useGetOrderByIdQuery,
+  useGetArtistOrdersQuery,
+  useUpdateOrderStatusMutation,
 } = orderApi;

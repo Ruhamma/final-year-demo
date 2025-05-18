@@ -68,7 +68,7 @@ export default function CheckoutPage() {
     try {
       await submitOrder(data).unwrap();
       notify("Success", "Order placed successfully");
-      router.push("/orders");
+      router.push("/user-account/orders");
     } catch (err) {
       notify("Error", `Failed to place order`);
     }
