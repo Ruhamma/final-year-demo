@@ -12,6 +12,8 @@ import {
 } from "@mantine/core";
 import React from "react";
 import { IconHeart } from "@tabler/icons-react";
+import Link from "next/link";
+
 const Discover = ({ title }: { title: string }) => {
   const mockArtworks = [
     {
@@ -85,27 +87,29 @@ const Discover = ({ title }: { title: string }) => {
 
       <Box className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
         {mockArtworks.map((item) => (
-          <Card
-            key={item.id}
-            shadow="sm"
-            radius="md"
-            withBorder
-            className="bg-red-900"
-          >
-            <CardSection>
-              <Image alt="Product image" src={item?.src} />
-            </CardSection>
-            <Group className="py-2" justify="space-between" align="center">
-              <p className="text-sm font-semibold">{item?.title}</p>
-              <IconHeart />
-            </Group>
-            <Text c="dimmed" className="text-xs font-semibold" size="xs">
-              {item?.artistName}
-            </Text>
-            <Text className="text-xs font-semibold" size="xs">
-              {item?.price}
-            </Text>
-          </Card>
+          <Link key={item.id} href={`/art-page/${item.id}`}>
+            <Card
+              key={item.id}
+              shadow="sm"
+              radius="md"
+              withBorder
+              className="bg-red-900"
+            >
+              <CardSection>
+                <Image alt="Product image" src={item?.src} />
+              </CardSection>
+              <Group className="py-2" justify="space-between" align="center">
+                <p className="text-sm font-semibold">{item?.title}</p>
+                <IconHeart />
+              </Group>
+              <Text c="dimmed" className="text-xs font-semibold" size="xs">
+                {item?.artistName}
+              </Text>
+              <Text className="text-xs font-semibold" size="xs">
+                {item?.price}
+              </Text>
+            </Card>
+          </Link>
         ))}
       </Box>
     </Container>
