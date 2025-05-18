@@ -1,47 +1,59 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const artistProfileApi = createApi({
-  reducerPath: 'artistProfileApi',
-  baseQuery:fetchBaseQuery({
-      baseUrl: process.env.NEXT_PUBLIC_API || 'http://localhost:8000/api',
-      credentials: 'include', // Important for cookies
-    }),
-    tagTypes: ['ArtistProfile'],
+  reducerPath: "artistProfileApi",
+  baseQuery: fetchBaseQuery({
+    baseUrl: process.env.NEXT_PUBLIC_API || "http://localhost:8000/api",
+    credentials: "include",
+  }),
+  tagTypes: ["ArtistProfile", "dashboard"],
   endpoints: (builder) => ({
     getArtistProfile: builder.query({
-      query: () => 'artist/profile/',
-      providesTags: ['ArtistProfile'],
+      query: () => "artist/profile/",
+      providesTags: ["ArtistProfile"],
     }),
     updateArtistProfile: builder.mutation({
       query: (formData) => ({
         url: `artist/profile/update`,
-        method: 'PUT',
+        method: "PUT",
         body: formData,
       }),
-      invalidatesTags: ['ArtistProfile'],
+      invalidatesTags: ["ArtistProfile"],
     }),
     updateEmail: builder.mutation({
-      query: ({...updatedProfile }) => ({
+      query: ({ ...updatedProfile }) => ({
         url: `artist/profile/change-email`,
-        method: 'POST',
+        method: "POST",
         body: updatedProfile,
       }),
-      invalidatesTags: ['ArtistProfile'],
+      invalidatesTags: ["ArtistProfile"],
     }),
     changePassword: builder.mutation({
-      query: ({...updatedProfile }) => ({
+      query: ({ ...updatedProfile }) => ({
         url: `artist/profile/change-password`,
-        method: 'POST',
+        method: "POST",
         body: updatedProfile,
       }),
-      invalidatesTags: ['ArtistProfile'],
+      invalidatesTags: ["ArtistProfile"],
     }),
     deactivateAccount: builder.mutation({
       query: () => ({
         url: `artist/profile/deactivate`,
-        method: 'POST',
+        method: "POST",
       }),
-      invalidatesTags: ['ArtistProfile'],
+      invalidatesTags: ["ArtistProfile"],
+    }),
+    getDashboardMetrics: builder.query({
+      query: () => "artist/dashboard-metrics/",
+      providesTags: ["dashboard"],
+    }),
+    getDashBoardHistory: builder.query({
+      query: () => "artist/dashboard-revenue-history",
+      providesTags: ["dashboard"],
+    }),
+    getDashboardTopFavorited: builder.query({
+      query: () => "artist/dashboard-top-favorited-artworks",
+      providesTags: ["dashboard"],
     }),
   }),
 });
@@ -52,4 +64,7 @@ export const {
   useUpdateEmailMutation,
   useChangePasswordMutation,
   useDeactivateAccountMutation,
+  useGetDashboardMetricsQuery,
+  useGetDashBoardHistoryQuery,
+  useGetDashboardTopFavoritedQuery,
 } = artistProfileApi;

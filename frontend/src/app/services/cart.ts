@@ -9,13 +9,11 @@ interface CartItem {
 }
 
 interface AddToCartRequest {
-  productId: number;
-  quantity: number;
+  artwork_id: string;
 }
 
 interface UpdateCartRequest {
-  productId: number;
-  quantity: number;
+  artwork_id: string;
 }
 
 interface CartResponse {
@@ -27,7 +25,7 @@ export const cartApi = createApi({
   reducerPath: "cartApi",
   baseQuery: fetchBaseQuery({
     baseUrl: process.env.NEXT_PUBLIC_API || "http://localhost:8000/api",
-    credentials: "include", // Important for cookies
+    credentials: "include", 
   }),
   tagTypes: ["Cart"],
   endpoints: (builder) => ({
@@ -37,7 +35,7 @@ export const cartApi = createApi({
     }),
     addToCart: builder.mutation<CartResponse, AddToCartRequest>({
       query: (newItem) => ({
-        url: "/cart/add/",
+        url: "/cart/items/",
         method: "POST",
         body: newItem,
       }),
@@ -45,22 +43,22 @@ export const cartApi = createApi({
     }),
     updateCart: builder.mutation<CartResponse, UpdateCartRequest>({
       query: (updatedItem) => ({
-        url: `/cart/update/${updatedItem.productId}`,
+        url: `/cart/update/${updatedItem.artwork_id}`,
         method: "PUT",
         body: updatedItem,
       }),
       invalidatesTags: ["Cart"],
     }),
-    removeFromCart: builder.mutation<CartResponse, { productId: number }>({
-      query: ({ productId }) => ({
-        url: `/cart/remove/${productId}`,
+    removeFromCart: builder.mutation<CartResponse, { artwork_id: string }>({
+      query: ({ artwork_id }) => ({
+        url: `/cart/remove/${artwork_id}`,
         method: "DELETE",
       }),
       invalidatesTags: ["Cart"],
     }),
     clearCart: builder.mutation<void, void>({
       query: () => ({
-        url: "/cart/clear/",
+        url: "/cart/",
         method: "DELETE",
       }),
       invalidatesTags: ["Cart"],

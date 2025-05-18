@@ -21,6 +21,7 @@ import { useAuth, useLoginMutation } from "@/app/services/auth";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { notify } from "@/shared/components/notification/notification";
 
 const loginSchema = z.object({
   email: z.string()
@@ -55,8 +56,9 @@ const Login = () => {
   const onSubmit = async (data: LoginFormData) => {
     try {
       await login(data).unwrap();
-    //   route.push('/');
+      notify("Success","Logged in successfuly")
     } catch (error) {
+      notify("Error","Failed to login")
       console.error('Login failed:', error);
     }
   };

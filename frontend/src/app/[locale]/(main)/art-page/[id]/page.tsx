@@ -1,5 +1,5 @@
+"use client";
 import { Carousel, CarouselSlide } from "@mantine/carousel";
-import { notFound } from "next/navigation";
 import {
   Accordion,
   AccordionControl,
@@ -12,40 +12,61 @@ import {
   Divider,
   Flex,
   Image,
+  LoadingOverlay,
+  NumberFormatter,
   Stack,
 } from "@mantine/core";
 import { Breadcrumbs, Anchor } from "@mantine/core";
-import React from "react";
+import React, { useMemo } from "react";
 import Discover from "../../(landing)/_components/Discover";
 import Testimonials from "../../(landing)/_components/Testimonials";
+import { useParams, useRouter } from "next/navigation";
+import { useGetArtworkByIdQuery } from "@/store/api/artwork/artwork";
+import { useAddToCartMutation } from "@/app/services/cart";
+import { notify } from "@/shared/components/notification/notification";
+import { v4 as uuidv4 } from "uuid";
 
-const artworks = [
-  {
-    id: 1,
-    artistName: "Vincent van Gogh",
-    title: "Starry Night",
-    price: "$1,000,000",
-    src: "/images/Product Image (2).png",
-    description:
-      "This captivating painting depicts a starry sky over a quiet town. The swirling patterns convey deep emotion and movement.",
-  },
-  {
-    id: 2,
-    artistName: "Leonardo da Vinci",
-    title: "Mona Lisa",
-    price: "$850,000",
-    src: "/images/Product Image (3).png",
-    description:
-      "An iconic portrait of a woman with a mysterious smile, painted by the legendary da Vinci.",
-  },
-];
-export default function ArtDetailPage({ params }: { params: { id: string } }) {
-  const artwork = artworks.find((a) => a.id === parseInt(params.id));
-  if (!artwork) return notFound();
+const Page = () => {
+  const { id } = useParams();
+  const router = useRouter();
+  const sessionKey = useMemo(() => {
+    if (typeof window === "undefined") return "";
+    let key = localStorage.getItem("session_key");
+    if (!key) {
+      key = uuidv4();
+      localStorage.setItem("session_key", key);
+    }
+    return key;
+  }, []);
 
-  const breadcrumbs = [
-    { title: "Art page", href: "#" },
-    { title: artwork.title, href: "#" },
+  const { data, isLoading } = useGetArtworkByIdQuery({
+    id: id as string,
+    sessionKey,
+  });
+  const [addToCart] = useAddToCartMutation();
+
+  const handleAddToCart = async () => {
+    try {
+      await addToCart({ artwork_id: id as string }).unwrap();
+      notify("Success", "Added to cart");
+    } catch (error) {
+      notify("Error", "Failed to add to cart");
+      console.log(error);
+    }
+  };
+  const handlePurchaseOrder = async () => {
+    try {
+      await addToCart({ artwork_id: id as string }).unwrap();
+      notify("Success", "Added to cart");
+    } catch (error) {
+      notify("Error", "Failed to add to cart");
+      console.log(error);
+    }
+    router.push(`/detail-checkout/${id}`);
+  };
+  const items = [
+    { title: "Art page", href: "/artworks" },
+    { title: `${data?.title}`, href: "#" },
   ].map((item, index) => (
     <Anchor href={item.href} key={index}>
       {item.title}
@@ -73,31 +94,45 @@ export default function ArtDetailPage({ params }: { params: { id: string } }) {
   ));
   return (
     <Box className="m-20 ">
+      <LoadingOverlay visible={isLoading} />
       <Flex className="gap-10" align={"center"} justify="center">
         <Box className="w-1/2">
-          <Breadcrumbs className="pb-4">{breadcrumbs}</Breadcrumbs>
+          <Breadcrumbs className="pb-4">{items}</Breadcrumbs>
           <Carousel withIndicators dragFree slideGap="md" align="start" h={500}>
-            <CarouselSlide>
-              <Image src={artwork.src} alt={artwork.title} />
-            </CarouselSlide>
-            <CarouselSlide>
-              <Image src={artwork.src} alt={artwork.title} />
-            </CarouselSlide>
-            <CarouselSlide>
-              <Image src={artwork.src} alt={artwork.title} />
-            </CarouselSlide>
+            {data?.images.map((image, index) => (
+              <CarouselSlide key={index}>
+                <Image
+                  src={image.url}
+                  alt="Artwork preview"
+                  className="rounded-md"
+                />
+              </CarouselSlide>
+            ))}
           </Carousel>
         </Box>
         <Box className="w-1/3 ">
           <Flex direction="column" gap="md" mb="lg">
-            <p className="text-3xl">{artwork.title}</p>
-            <p className="text-sm font-light">By {artwork.artistName}</p>
-            <p className="text-lg font-bold">{artwork.price}</p>
-            <p className="text-sm font-light">{artwork.description}</p>
+            <p className="text-3xl">{data?.title}</p>
+            <p className="text-sm font-light">{data?.medium?.name} paintings</p>
+            <p className="text-sm font-light">
+              {data?.size?.width} x {data?.size?.height} {data?.size?.unit}
+            </p>
+            <p className="text-lg font-bold">
+              <NumberFormatter
+                value={data?.price}
+                thousandSeparator
+                decimalScale={2}
+                fixedDecimalScale
+                prefix={"ETB "}
+              />
+            </p>
+            <p className="text-sm font-light">{data?.description}</p>
           </Flex>
           <Stack>
-            <Button>Add to cart</Button>
-            <Button variant="outline">Purchase Order</Button>
+            <Button onClick={handleAddToCart}>Add to cart</Button>
+            <Button onClick={handlePurchaseOrder} variant="outline">
+              Purchase Order
+            </Button>
           </Stack>
           <Box>
             <Accordion>{groccery}</Accordion>
@@ -112,29 +147,24 @@ export default function ArtDetailPage({ params }: { params: { id: string } }) {
         <Box className="w-1/2">
           <Stack gap="md" mb="lg">
             <p className="text-lg font-bold italic">About Artworks</p>
-            <p className="text-xs">
-              This captivating painting depicts a scene of the Grand Canal in
-              Venice, Italy. Gondolas filled with tourists navigate the calm
-              waters, gliding past majestic buildings that line the canal. The
-              soft light bathes the scene in a warm glow, creating a romantic
-              and inviting atmosphere. This piece is sure to add a touch of
-              Venetian charm to any home.
-            </p>
+            <p className="text-xs">{data?.description}</p>
           </Stack>
           <Stack>
             <p className="text-lg font-bold italic">Details</p>
             <Flex gap="md" className="text-xs">
               <p>
-                <strong>Materials:</strong> Lithograph on paper
+                <strong>Category:</strong>
+                {data?.category?.name}
               </p>
               <p>
-                <strong>Size:</strong> 150 x 120cm
+                <strong>Size:</strong> {data?.size?.width} x{" "}
+                {data?.size?.height} {data?.size?.unit}
               </p>
               <p>
-                <strong>Rarity:</strong> Limited edition
+                <strong>Style:</strong> {data?.style?.name}
               </p>
               <p>
-                <strong>Condition:</strong> Excellent condition
+                <strong>Medium:</strong> {data?.medium?.name}
               </p>
               <p>
                 <strong>Certificate of authenticity:</strong> Included (issued
@@ -154,7 +184,9 @@ export default function ArtDetailPage({ params }: { params: { id: string } }) {
               size="xl"
             />
             <Stack gap="sm" mb="lg" align="center" justify="center">
-              <p className="font-semibold text-sm">Bilen Assefa</p>
+              <p className="font-semibold text-sm">
+                {data?.artist?.user?.username}
+              </p>
               <div className="flex justify-center">
                 {Array.from({ length: 5 }).map((_, index) => (
                   <svg
@@ -174,13 +206,7 @@ export default function ArtDetailPage({ params }: { params: { id: string } }) {
           <Divider my="lg" labelPosition="center" orientation="vertical" />
           <Stack gap="md" mb="lg">
             <p className="text-sm font-bold italic">About </p>
-            <p className="text-xs">
-              Bilen Assefa is a talented artist known for her stunning
-              contemporary paintings. Her work often explores themes of nature,
-              identity, and the human experience. With a unique style that
-              blends vibrant colors and intricate details, Bilen art captivates
-              viewers
-            </p>
+            <p className="text-xs">{data?.artist?.bio}</p>
           </Stack>
         </Flex>
       </Container>
@@ -188,4 +214,6 @@ export default function ArtDetailPage({ params }: { params: { id: string } }) {
       <Testimonials title="Related Works" />
     </Box>
   );
-}
+};
+
+export default Page;

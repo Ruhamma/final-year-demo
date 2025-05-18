@@ -20,29 +20,33 @@ import React, { useState } from "react";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { notify } from "@/shared/components/notification/notification";
 
-
-const signUpSchema = z.object({
-  email: z.string()
-    .email('Invalid email address')
-    .min(1, 'Email is required'),
-  username: z.string()
-    .min(3, 'Username must be at least 3 characters')
-    .max(20, 'Username must be less than 20 characters'),
-  password: z.string()
-    .min(8, 'Password must be at least 8 characters')
-    .regex(/[A-Z]/, 'Password must contain at least one uppercase letter')
-    .regex(/[a-z]/, 'Password must contain at least one lowercase letter')
-    .regex(/[0-9]/, 'Password must contain at least one number'),
-  confirmPassword: z.string(),
-  role: z.enum(['SELLER', 'BUYER'], {
-    errorMap: () => ({ message: 'Please select a valid role' }),
-  }),
-}).refine((data) => data.password === data.confirmPassword, {
-  message: "Passwords don't match",
-  path: ["confirmPassword"],
-});
-
+const signUpSchema = z
+  .object({
+    email: z
+      .string()
+      .email("Invalid email address")
+      .min(1, "Email is required"),
+    username: z
+      .string()
+      .min(3, "Username must be at least 3 characters")
+      .max(20, "Username must be less than 20 characters"),
+    password: z
+      .string()
+      .min(8, "Password must be at least 8 characters")
+      .regex(/[A-Z]/, "Password must contain at least one uppercase letter")
+      .regex(/[a-z]/, "Password must contain at least one lowercase letter")
+      .regex(/[0-9]/, "Password must contain at least one number"),
+    confirmPassword: z.string(),
+    role: z.enum(["SELLER", "BUYER"], {
+      errorMap: () => ({ message: "Please select a valid role" }),
+    }),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "Passwords don't match",
+    path: ["confirmPassword"],
+  });
 
 type SignUpFormData = z.infer<typeof signUpSchema>;
 
@@ -59,11 +63,11 @@ const Login = () => {
   } = useForm<SignUpFormData>({
     resolver: zodResolver(signUpSchema),
     defaultValues: {
-      role: 'BUYER',
+      role: "BUYER",
     },
   });
 
-   const {
+  const {
     register: registerField2,
     handleSubmit: handleSubmit2,
     formState: { errors: errors2 },
@@ -72,28 +76,26 @@ const Login = () => {
   } = useForm<SignUpFormData>({
     resolver: zodResolver(signUpSchema),
     defaultValues: {
-      role: 'BUYER',
+      role: "BUYER",
     },
   });
-   const onSubmit = async (data: SignUpFormData) => {
+  const onSubmit = async (data: SignUpFormData) => {
     try {
       await register({
         email: data.email,
         username: data.username,
         password: data.password,
         confirm_password: data.confirmPassword,
-        role: data.role
+        role: data.role,
       }).unwrap();
-      
-    } catch (error: any) {
-      if (error.data) {
-        Object.entries(error.data).forEach(([key, value]) => {
-          setError(key as keyof SignUpFormData, {
-            type: 'server',
-            message: Array.isArray(value) ? value[0] : value as string,
-          });
-        });
-      }
+      notify("Success", `Registered successfully`);
+      route.push("/");
+    } catch (error) {
+      const errorMessage =
+        typeof error === "object" && error !== null && "detail" in error
+          ? (error as any).detail
+          : "";
+      notify("Error", `Failed to register ${errorMessage}`);
     }
   };
   const onSubmit2 = async (data: SignUpFormData) => {
@@ -103,20 +105,15 @@ const Login = () => {
         username: data.username,
         password: data.password,
         confirm_password: data.confirmPassword,
-        role: data.role
+        role: data.role,
       }).unwrap();
+      notify("Success", "Registered successfully");
+      route.push("/");
     } catch (error: any) {
-      if (error.data) {
-        Object.entries(error.data).forEach(([key, value]) => {
-          setError2(key as keyof SignUpFormData, {
-            type: 'server',
-            message: Array.isArray(value) ? value[0] : value as string,
-          });
-        });
-      }
+      notify("Error", "Failed to register");
     }
   };
-  
+
   return (
     <Container className="h-screen m-auto ">
       <Flex
@@ -138,83 +135,104 @@ const Login = () => {
               Get started
             </Text>
           </Flex>
-          <Tabs defaultValue={selectedTab} onChange={(value) => {
-            setSelectedTab(value || "buyer"); }}
-            >
+          <Tabs
+            defaultValue={selectedTab}
+            onChange={(value) => {
+              setSelectedTab(value || "buyer");
+            }}
+          >
             <TabsList className="my-8" grow>
-              <TabsTab value="buyer" onClick={() =>  {setValue("role", "BUYER");
-            setValue2("role", "BUYER");}}>Buyer</TabsTab>
-              <TabsTab value="seller" onClick={() => {setValue("role", "SELLER");
-            setValue2("role", "SELLER");}}>Seller</TabsTab>
+              <TabsTab
+                value="buyer"
+                onClick={() => {
+                  setValue("role", "BUYER");
+                  setValue2("role", "BUYER");
+                }}
+              >
+                Buyer
+              </TabsTab>
+              <TabsTab
+                value="seller"
+                onClick={() => {
+                  setValue("role", "SELLER");
+                  setValue2("role", "SELLER");
+                }}
+              >
+                Seller
+              </TabsTab>
             </TabsList>
             <TabsPanel value="buyer">
               <form onSubmit={handleSubmit(onSubmit)}>
                 <Flex direction="column" gap="md">
-                  <TextInput 
-                  label="Name" 
-                  placeholder="Enter your Name"
-                  {...registerField('username')}
-                  autoComplete="username"
-                  error={errors.username?.message}
+                  <TextInput
+                    label="Name"
+                    placeholder="Enter your Name"
+                    {...registerField("username")}
+                    autoComplete="username"
+                    error={errors.username?.message}
                   />
-                  <TextInput 
-                  label="Email" 
-                  placeholder="Enter your email" 
-                  {...registerField('email')}
-                  autoComplete="email"
-                  error={errors.email?.message}
+                  <TextInput
+                    label="Email"
+                    placeholder="Enter your email"
+                    {...registerField("email")}
+                    autoComplete="email"
+                    error={errors.email?.message}
                   />
-                   <PasswordInput
+                  <PasswordInput
                     label="Password"
                     placeholder="Enter your password"
-                    {...registerField('password')}  
+                    {...registerField("password")}
                     autoComplete="password"
                     error={errors.password?.message}
                   />
                   <PasswordInput
                     label="Confirm Password"
                     placeholder="Confirm your password"
-                    {...registerField('confirmPassword')}
+                    {...registerField("confirmPassword")}
                     autoComplete="confirmPassword"
                     error={errors.confirmPassword?.message}
                   />
-                  <Button type="submit" loading={isRegisterLoading}>Sign up</Button>
+                  <Button type="submit" loading={isRegisterLoading}>
+                    Sign up
+                  </Button>
                 </Flex>
               </form>
             </TabsPanel>
             <TabsPanel value="seller">
               {" "}
-             <form onSubmit={handleSubmit2(onSubmit2)}>
+              <form onSubmit={handleSubmit2(onSubmit2)}>
                 <Flex direction="column" gap="md">
-                  <TextInput 
-                  label="Name" 
-                  placeholder="Enter your Name"
-                  {...registerField2('username')}
-                  autoComplete="username"
-                  error={errors2.username?.message}
+                  <TextInput
+                    label="Name"
+                    placeholder="Enter your Name"
+                    {...registerField2("username")}
+                    autoComplete="username"
+                    error={errors2.username?.message}
                   />
-                  <TextInput 
-                  label="Email" 
-                  placeholder="Enter your email" 
-                  {...registerField2('email')}
-                  autoComplete="email"
-                  error={errors2.email?.message}
+                  <TextInput
+                    label="Email"
+                    placeholder="Enter your email"
+                    {...registerField2("email")}
+                    autoComplete="email"
+                    error={errors2.email?.message}
                   />
-                   <PasswordInput
+                  <PasswordInput
                     label="Password"
                     placeholder="Enter your password"
-                    {...registerField2('password')}  
+                    {...registerField2("password")}
                     autoComplete="password"
                     error={errors2.password?.message}
                   />
                   <PasswordInput
                     label="Confirm Password"
                     placeholder="Confirm your password"
-                    {...registerField2('confirmPassword')}
+                    {...registerField2("confirmPassword")}
                     autoComplete="confirmPassword"
                     error={errors2.confirmPassword?.message}
                   />
-                  <Button type="submit" loading={isRegisterLoading}>Sign up</Button>
+                  <Button type="submit" loading={isRegisterLoading}>
+                    Sign up
+                  </Button>
                 </Flex>
               </form>
             </TabsPanel>

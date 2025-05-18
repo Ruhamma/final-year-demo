@@ -4,6 +4,10 @@ import "./globals.css";
 import RootStyleRegistry from "./mantine";
 import { AuthProvider } from "@/context/AuthProvider";
 import { Providers } from "@/store/provider";
+import { routing } from "@/i18n/routing";
+import { getMessages, setRequestLocale } from "next-intl/server";
+import { notFound } from "next/navigation";
+import { NextIntlClientProvider } from "next-intl";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -20,16 +24,36 @@ export const metadata: Metadata = {
   description: "Kuru - A local artist online marketplace",
 };
 
-export default function RootLayout({
+export function generateStaticParams() {
+  return routing.locales.map((locale) => ({ locale }));
+}
+
+export default async function RootLayout({
   children,
+  params: { locale },
 }: Readonly<{
   children: React.ReactNode;
+ params: { locale: string };
 }>) {
+   // Ensure that the incoming `locale` is valid
+  if (!routing.locales.includes(locale as any)) {
+    notFound();
+  }
+
+  // Enable static rendering
+  setRequestLocale(locale);
+
+  const messages = await getMessages({ locale });
   return (
-    <html lang="en">
+    <html lang={locale}>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+          <NextIntlClientProvider
+          messages={messages}
+          timeZone="Africa/Addis_Ababa"
+          locale={locale}
+        >
         <Providers>
         <RootStyleRegistry>
           <AuthProvider>
@@ -37,6 +61,7 @@ export default function RootLayout({
           </AuthProvider>
         </RootStyleRegistry>
         </Providers>
+        </NextIntlClientProvider>
       </body>
     </html>
   );

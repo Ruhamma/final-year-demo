@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import { theme as baseTheme } from "@/utils/theme";
 import { MantineProvider, MantineThemeOverride } from "@mantine/core";
 import { ModalsProvider } from "@mantine/modals";

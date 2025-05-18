@@ -5,16 +5,18 @@ import About from "./_components/About";
 import Discover from "./_components/Discover";
 import Testimonials from "./_components/Testimonials";
 import Curated from "./_components/Curated";
+import { useTranslations } from "next-intl";
 
 const Landing = () => {
   console.log("Landing page loaded");
+  const t = useTranslations("common.Landing");
   return (
     <>
       <Hero />
       <FeaturedArtists />
       <About />
-      <Discover title="Discover Artworks" />
-      <Testimonials title="Curators Picks" />
+      <Discover title={t('DiscoverArtworks')}/>
+      <Testimonials title={t('CuratorsPicks')} />
       <Curated />
     </>
   );
