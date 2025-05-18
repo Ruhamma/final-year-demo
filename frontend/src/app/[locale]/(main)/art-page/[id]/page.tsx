@@ -17,18 +17,32 @@ import {
   Stack,
 } from "@mantine/core";
 import { Breadcrumbs, Anchor } from "@mantine/core";
-import React from "react";
+import React, { useMemo } from "react";
 import Discover from "../../(landing)/_components/Discover";
 import Testimonials from "../../(landing)/_components/Testimonials";
 import { useParams, useRouter } from "next/navigation";
 import { useGetArtworkByIdQuery } from "@/store/api/artwork/artwork";
 import { useAddToCartMutation } from "@/app/services/cart";
 import { notify } from "@/shared/components/notification/notification";
+import { v4 as uuidv4 } from "uuid";
 
 const Page = () => {
   const { id } = useParams();
   const router = useRouter();
-  const { data, isLoading } = useGetArtworkByIdQuery(id);
+  const sessionKey = useMemo(() => {
+    if (typeof window === "undefined") return "";
+    let key = localStorage.getItem("session_key");
+    if (!key) {
+      key = uuidv4();
+      localStorage.setItem("session_key", key);
+    }
+    return key;
+  }, []);
+
+  const { data, isLoading } = useGetArtworkByIdQuery({
+    id: id as string,
+    sessionKey,
+  });
   const [addToCart] = useAddToCartMutation();
 
   const handleAddToCart = async () => {

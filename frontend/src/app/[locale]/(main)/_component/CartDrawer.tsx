@@ -58,7 +58,7 @@ const CartDrawer = () => {
           size={20}
           stroke={1.5}
         />
-        <Box className="absolute top-[-4px] right-[-4px] bg-red-500 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">
+        <Box className="absolute top-[-4px] right-[-4px] bg-green-500 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">
           {cartCount}
         </Box>
       </Box>

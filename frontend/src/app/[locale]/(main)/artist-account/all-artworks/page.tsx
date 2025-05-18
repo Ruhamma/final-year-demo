@@ -16,17 +16,28 @@ import {
   Text,
   TextInput,
 } from "@mantine/core";
-import { IconFilter, IconHeart, IconSearch } from "@tabler/icons-react";
+import {
+  IconEdit,
+  IconEye,
+  IconFilter,
+  IconHeart,
+  IconSearch,
+  IconTrash,
+} from "@tabler/icons-react";
 import React, { useState } from "react";
 import { useAuth } from "@/context/useAuth";
 import { formatDate } from "@/shared/utils/formatDate";
 import {
+  useDeleteMyArtworkMutation,
   useGetMetadataQuery,
   useGetMyArtworksQuery,
 } from "@/store/api/artwork/artwork";
 import { useDebouncedValue } from "@mantine/hooks";
+import { notify } from "@/shared/components/notification/notification";
+import { useRouter } from "next/navigation";
 
 const Page = () => {
+  const router = useRouter();
   const [page, setPage] = useState(1);
   const limit = 12;
   const skip = (page - 1) * limit;
@@ -49,11 +60,20 @@ const Page = () => {
     medium: selectedFilters.medium,
     style: selectedFilters.style,
   });
+  const [removeArtwork] = useDeleteMyArtworkMutation();
   const artworks = data?.artworks || [];
   const total = data?.total || 0;
   const totalPages = Math.ceil(total / limit);
   const handleClear = () => {
     setSelectedFilters({ price: "", medium: "", style: "", category: "" });
+  };
+  const handleRemove = async (id: string) => {
+    try {
+      await removeArtwork(id).unwrap();
+      notify("Success", "Artwork removed successfully");
+    } catch (error) {
+      console.error("Failed to remove artwork:", error);
+    }
   };
   return (
     <div>
@@ -149,15 +169,39 @@ const Page = () => {
               <CardSection>
                 <Image alt="Product image" src={item?.images[0]?.url} />
               </CardSection>
+
               <Group className="py-2" justify="space-between" align="center">
                 <p className="text-sm font-semibold">{item?.title}</p>
-                <IconHeart />
+                <Group gap="xs">
+                  <IconEye size={18} />
+                  <Text size="xs" c="dimmed">
+                    {item?.view_count ?? 0}
+                  </Text>
+                  <IconEdit
+                    size={18}
+                    className="cursor-pointer hover:text-yellow-400"
+                    onClick={() =>
+                      router.push(`/artist-account/edit-artwork/${item?.id}`)
+                    }
+                  />
+                  <IconTrash
+                    size={18}
+                    className="cursor-pointer hover:text-red-500"
+                    onClick={() => handleRemove(item.id)}
+                  />
+                </Group>
               </Group>
+
               <Text c="dimmed" className="text-xs font-semibold" size="xs">
                 {item?.description}
               </Text>
+
               <Text className="text-xs font-semibold" size="xs">
-                <NumberFormatter value={item?.price} thousandSeparator />
+                <NumberFormatter
+                  value={item?.price}
+                  thousandSeparator
+                  prefix="ETB "
+                />
               </Text>
             </Card>
           ))}

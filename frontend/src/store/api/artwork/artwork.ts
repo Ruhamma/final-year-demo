@@ -16,7 +16,13 @@ export const artworkApi = createApi({
       providesTags: ["Artwork"],
     }),
     getArtworkById: builder.query({
-      query: (id) => `artwork/${id}`,
+      query: ({ id, sessionKey }) => ({
+        url: `artwork/${id}`,
+        method: "GET",
+        headers: {
+          "X-Session-Key": sessionKey,
+        },
+      }),
       providesTags: ["Artwork"],
     }),
     getMyArtworks: builder.query({
@@ -26,10 +32,25 @@ export const artworkApi = createApi({
       }),
       providesTags: ["Artwork"],
     }),
+    getMyArtworksDetail: builder.query({
+      query: (id) => ({
+        url: `artwork/my-artworks/${id}`,
+        method: "GET",
+      }),
+      providesTags: ["Artwork"],
+    }),
     createArtwork: builder.mutation({
       query: (formData) => ({
         url: "artwork/my-artworks",
         method: "POST",
+        body: formData,
+      }),
+      invalidatesTags: ["Artwork"],
+    }),
+    updateArtwork: builder.mutation({
+      query: ({ id, formData }) => ({
+        url: `artwork/my-artworks/${id}`,
+        method: "PUT",
         body: formData,
       }),
       invalidatesTags: ["Artwork"],
@@ -96,4 +117,6 @@ export const {
   useGetTopViewedQuery,
   useGetRecentlyViewedQuery,
   useGetFavoritesQuery,
+  useGetMyArtworksDetailQuery,
+  useUpdateArtworkMutation,
 } = artworkApi;

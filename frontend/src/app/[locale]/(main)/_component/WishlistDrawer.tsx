@@ -34,13 +34,12 @@ const WishlistDrawer = () => {
       notify("Error", "Failed to remove item from favorites");
     }
   };
-  const favoriteCount = favorites?.length || 0;
   return (
     <>
       <Box className="relative" onClick={open}>
         <IconHeart className="text-sm" size={20} stroke={1.5} />
-        <Box className="absolute top-[-4px] right-[-4px] bg-red-500 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">
-          {favoriteCount}
+        <Box className="absolute top-[-4px] right-[-4px] bg-green-500 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">
+          {favorites?.total}
         </Box>
       </Box>
 

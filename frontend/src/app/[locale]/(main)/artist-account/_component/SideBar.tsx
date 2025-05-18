@@ -14,6 +14,7 @@ import {
   IconBan,
   IconLogout,
   IconShoppingCart,
+  IconDashboard,
 } from "@tabler/icons-react";
 
 const SideBar = () => {
@@ -25,7 +26,7 @@ const SideBar = () => {
   const menuItems = [
     {
       label: "Dashboard",
-      icon: <IconBrush size={18} />,
+      icon: <IconDashboard size={18} />,
       href: "/artist-account",
     },
     {

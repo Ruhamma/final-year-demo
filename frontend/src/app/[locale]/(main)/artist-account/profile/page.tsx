@@ -48,7 +48,12 @@ import { notify } from "@/shared/components/notification/notification";
 import { useDisclosure } from "@mantine/hooks";
 import { closeAllModals, openConfirmModal } from "@mantine/modals";
 
-const urlOrEmpty = z.string().url("Invalid URL").or(z.literal("")).transform((val) => (val === "" ? null : val)).nullable();
+const urlOrEmpty = z
+  .string()
+  .url("Invalid URL")
+  .or(z.literal(""))
+  .transform((val) => (val === "" ? null : val))
+  .nullable();
 const profileSchema = z.object({
   first_name: z.string().optional(),
   last_name: z.string().optional(),
@@ -66,31 +71,46 @@ const profileSchema = z.object({
 
 const changeEmailSchema = z.object({
   new_email: z.string().email("Invalid email").nullable(),
- current_password: z.string().min(8, 'Password must be at least 8 characters')
-    .regex(/[A-Z]/, 'Password must contain at least one uppercase letter')
-    .regex(/[a-z]/, 'Password must contain at least one lowercase letter')
-    .regex(/[0-9]/, 'Password must contain at least one number').nullable(),
-}); 
-const changePasswordSchema = z.object({
-  current_password: z.string().min(8, 'Password must be at least 8 characters')
-    .regex(/[A-Z]/, 'Password must contain at least one uppercase letter')
-    .regex(/[a-z]/, 'Password must contain at least one lowercase letter')
-    .regex(/[0-9]/, 'Password must contain at least one number').nullable(),
-  new_password: z.string().min(8, 'Password must be at least 8 characters')
-    .regex(/[A-Z]/, 'Password must contain at least one uppercase letter')
-    .regex(/[a-z]/, 'Password must contain at least one lowercase letter')
-    .regex(/[0-9]/, 'Password must contain at least one number').nullable(),
-  confirm_new_password: z.string().min(8, 'Password must be at least 8 characters')
-    .regex(/[A-Z]/, 'Password must contain at least one uppercase letter')
-    .regex(/[a-z]/, 'Password must contain at least one lowercase letter')
-    .regex(/[0-9]/, 'Password must contain at least one number').nullable(),
-}).refine((data) => data.new_password === data.confirm_new_password, {
-  message: "Passwords don't match",
-  path: ["confirm_new_password"],
-}).refine((data) => data.current_password !== data.new_password, {
-  message: "New password cannot be the same as the old password",
-  path: ["new_password"],
+  current_password: z
+    .string()
+    .min(8, "Password must be at least 8 characters")
+    .regex(/[A-Z]/, "Password must contain at least one uppercase letter")
+    .regex(/[a-z]/, "Password must contain at least one lowercase letter")
+    .regex(/[0-9]/, "Password must contain at least one number")
+    .nullable(),
 });
+const changePasswordSchema = z
+  .object({
+    current_password: z
+      .string()
+      .min(8, "Password must be at least 8 characters")
+      .regex(/[A-Z]/, "Password must contain at least one uppercase letter")
+      .regex(/[a-z]/, "Password must contain at least one lowercase letter")
+      .regex(/[0-9]/, "Password must contain at least one number")
+      .nullable(),
+    new_password: z
+      .string()
+      .min(8, "Password must be at least 8 characters")
+      .regex(/[A-Z]/, "Password must contain at least one uppercase letter")
+      .regex(/[a-z]/, "Password must contain at least one lowercase letter")
+      .regex(/[0-9]/, "Password must contain at least one number")
+      .nullable(),
+    confirm_new_password: z
+      .string()
+      .min(8, "Password must be at least 8 characters")
+      .regex(/[A-Z]/, "Password must contain at least one uppercase letter")
+      .regex(/[a-z]/, "Password must contain at least one lowercase letter")
+      .regex(/[0-9]/, "Password must contain at least one number")
+      .nullable(),
+  })
+  .refine((data) => data.new_password === data.confirm_new_password, {
+    message: "Passwords don't match",
+    path: ["confirm_new_password"],
+  })
+  .refine((data) => data.current_password !== data.new_password, {
+    message: "New password cannot be the same as the old password",
+    path: ["new_password"],
+  });
 
 type ProfileFormValues = z.infer<typeof profileSchema>;
 type ChangeEmailFormValues = z.infer<typeof changeEmailSchema>;
@@ -135,13 +155,13 @@ const ProfileForm = () => {
       location: "",
     },
   });
-const {
+  const {
     register: registerChangeEmail,
     handleSubmit: handleSubmitChangeEmail,
     formState: { errors: errorsChangeEmail, isDirty: isDirtyChangeEmail },
     reset: resetChangeEmail,
   } = useForm<ChangeEmailFormValues>({
-    resolver: zodResolver(changeEmailSchema)
+    resolver: zodResolver(changeEmailSchema),
   });
 
   const {
@@ -149,14 +169,14 @@ const {
     handleSubmit: handleSubmitChangePassword,
     formState: { errors: errorsChangePassword, isDirty: isDirtyChangePassword },
   } = useForm<ChangePasswordFormValues>({
-    resolver: zodResolver(changePasswordSchema)
+    resolver: zodResolver(changePasswordSchema),
   });
 
   React.useEffect(() => {
     if (profileData) {
       reset(profileData);
       setPreviewUrl(profileData?.profile_picture || null);
-      resetChangeEmail(profileData)
+      resetChangeEmail(profileData);
     }
   }, [profileData, reset]);
 
@@ -165,7 +185,7 @@ const {
       const objectUrl = URL.createObjectURL(selectedFile);
       setPreviewUrl(objectUrl);
 
-      return () => URL.revokeObjectURL(objectUrl); 
+      return () => URL.revokeObjectURL(objectUrl);
     }
   }, [selectedFile]);
 
@@ -183,67 +203,73 @@ const {
     if (selectedFile) {
       formData.append("file", selectedFile);
     }
-    
+
     try {
       await updateProfile(formData).unwrap();
-      notify("Success", 'Profile updated successfully');
+      notify("Success", "Profile updated successfully");
     } catch (error) {
       notify("Error", "Failed to update profile");
       console.error("Failed to update profile:", error);
     }
   };
 
-    const onSubmitChangeEmail= (data: ChangeEmailFormValues) => {
+  const onSubmitChangeEmail = (data: ChangeEmailFormValues) => {
     openConfirmModal({
-      title: 'Confirm',
-      children:  <Alert
-        icon={<IconAlertCircle size={18} />}
-        title="Confirm Email update"
-        color="red"
-      >
-        Are you sure you want to update your email?
-      </Alert>,
+      title: "Confirm",
+      children: (
+        <Alert
+          icon={<IconAlertCircle size={18} />}
+          title="Confirm Email update"
+          color="red"
+        >
+          Are you sure you want to update your email?
+        </Alert>
+      ),
       labels: {
-        confirm: 'Confirm',
-        cancel: 'Cancel',
+        confirm: "Confirm",
+        cancel: "Cancel",
       },
       onConfirm: async () => {
         try {
           await updateEmail(data).unwrap();
-          notify("Success", 'Email updated successfully');
+          notify("Success", "Email updated successfully");
           closeAllModals();
-    } catch (error) {
-      notify("Error", "Failed to update email");
-      console.error("Failed to update email:", error);
-    }}})
-  }; 
+        } catch (error) {
+          notify("Error", "Failed to update email");
+          console.error("Failed to update email:", error);
+        }
+      },
+    });
+  };
 
-   const onSubmitChangePassword = async (data: ChangePasswordFormValues) => {
+  const onSubmitChangePassword = async (data: ChangePasswordFormValues) => {
     openConfirmModal({
-        title:"Confirm",
-        children: <Alert
-        icon={<IconAlertCircle size={18} />}
-        title="Confirm Password update"
-        color="red"
-      >
-        Are you sure you want to update your password?
-      </Alert>,
+      title: "Confirm",
+      children: (
+        <Alert
+          icon={<IconAlertCircle size={18} />}
+          title="Confirm Password update"
+          color="red"
+        >
+          Are you sure you want to update your password?
+        </Alert>
+      ),
       labels: {
-        confirm: 'Confirm',
-        cancel: 'Cancel',
+        confirm: "Confirm",
+        cancel: "Cancel",
       },
       onConfirm: async () => {
         try {
           await updatePassword(data).unwrap();
-          notify("Success", 'Password updated successfully');
+          notify("Success", "Password updated successfully");
           closeAllModals();
         } catch (error) {
           notify("Error", "Failed to update password");
           console.error("Failed to update password:", error);
         }
-      } 
-    })
-};  
+      },
+    });
+  };
 
   const handleCancel = () => {
     if (profileData) {
@@ -264,11 +290,15 @@ const {
     );
   }
   return (
-    <Paper  bg="none" className="py-6 px-32" >
+    <Paper bg="none" className="py-6 px-32">
       <LoadingOverlay visible={isUpdating} />
       <Stack gap="lg">
         <Group>
-          <Avatar size="lg" radius="xl" src={profileData?.profile_picture||previewUrl} />
+          <Avatar
+            size="lg"
+            radius="xl"
+            src={profileData?.profile_picture || previewUrl}
+          />
           <Box>
             <Title order={4}>Hello, {user?.username}</Title>
             <Text c="dimmed" size="sm">
@@ -281,22 +311,22 @@ const {
 
         <form onSubmit={handleSubmit(onSubmit)}>
           <Stack gap="md">
-          <Flex gap="md" wrap="wrap" className="w-full">
-            <TextInput
-              label="First Name"
-              {...register("first_name")}
-              error={errors.first_name?.message}
-              className="flex-grow"
-            />
-             <TextInput
-              label="Last Name"
-              {...register("last_name")}
-              error={errors.last_name?.message}
-              className="flex-grow"
-            />
-</Flex>
-<Flex gap="md" className="w-full flex-grow" >
-            <Box className="flex-grow">
+            <Flex gap="md" wrap="wrap" className="w-full">
+              <TextInput
+                label="First Name"
+                {...register("first_name")}
+                error={errors.first_name?.message}
+                className="flex-grow"
+              />
+              <TextInput
+                label="Last Name"
+                {...register("last_name")}
+                error={errors.last_name?.message}
+                className="flex-grow"
+              />
+            </Flex>
+            <Flex gap="md" className="w-full flex-grow">
+              <Box className="flex-grow">
                 <FileInput
                   label="Profile Picture"
                   placeholder="Upload image"
@@ -305,35 +335,30 @@ const {
                   accept="image/*"
                   clearable
                   radius="md"
-                  leftSection={<IconEye
-                onClick={open}
-                size={20}
-                className="cursor-pointer flex-grow"
-                />}
-                className="flex-grow"
+                  leftSection={
+                    <IconEye
+                      onClick={open}
+                      size={20}
+                      className="cursor-pointer flex-grow"
+                    />
+                  }
+                  className="flex-grow"
                 />
-                
 
-<Modal opened={opened} onClose={close}>{previewUrl && (
-                  <Image
-                    radius="md"
-                    src={previewUrl}
-                    alt="Preview"
-                    
-                  />
-                )}</Modal>
-                
-            </Box>
-             <TextInput
-              label="Contact Email"
-              type="email"
-              {...register("contact_email")}
-              error={errors.contact_email?.message}
-              className="flex-grow"
-
-            />
-          </Flex>
-           
+                <Modal opened={opened} onClose={close}>
+                  {previewUrl && (
+                    <Image radius="md" src={previewUrl} alt="Preview" />
+                  )}
+                </Modal>
+              </Box>
+              <TextInput
+                label="Contact Email"
+                type="email"
+                {...register("contact_email")}
+                error={errors.contact_email?.message}
+                className="flex-grow"
+              />
+            </Flex>
 
             <TextInput
               label="Location"
@@ -406,7 +431,7 @@ const {
                 {...register("youtube")}
                 style={{ flex: 1 }}
                 error={errors.youtube?.message}
-                />
+              />
             </Flex>
 
             <TextInput
@@ -438,104 +463,112 @@ const {
             </Group>
           </Stack>
         </form>
-         <Divider  
-        my="sm"
-              label="Account Settings"
-              labelPosition="center"/>
+        <Divider my="sm" label="Account Settings" labelPosition="center" />
 
         <Accordion variant="contained">
-        <Accordion.Item value="photos">
-        <Accordion.Control icon={<IconMessage size={20} color="var(--mantine-color-red-6)" />}>
-          Change Email 
-        </Accordion.Control>
-        <Accordion.Panel>
-         <form onSubmit={handleSubmitChangeEmail(onSubmitChangeEmail)}>
-          <Stack gap="md">
-            <TextInput
-              label="New Email"
-              type="email"
-              {...registerChangeEmail("new_email")}
-              error={errorsChangeEmail.new_email?.message}
-            />
-            <TextInput
-              label="Current Password"
-              type="password"
-              {...registerChangeEmail("current_password")}
-              error={errorsChangeEmail.current_password?.message}
-            />
-            <Group justify="flex-end" mt="md">
-              <Button
-                variant="subtle"
-                type="button"
-                leftSection={<IconX size={16} />}
-                onClick={handleCancel}
-                disabled={!isDirtyChangeEmail}
+          <Accordion.Item value="photos">
+            <Accordion.Control
+              icon={
+                <IconMessage size={20} color="var(--mantine-color-red-6)" />
+              }
+            >
+              Change Email
+            </Accordion.Control>
+            <Accordion.Panel>
+              <form onSubmit={handleSubmitChangeEmail(onSubmitChangeEmail)}>
+                <Stack gap="md">
+                  <TextInput
+                    label="New Email"
+                    type="email"
+                    {...registerChangeEmail("new_email")}
+                    error={errorsChangeEmail.new_email?.message}
+                  />
+                  <TextInput
+                    label="Current Password"
+                    type="password"
+                    {...registerChangeEmail("current_password")}
+                    error={errorsChangeEmail.current_password?.message}
+                  />
+                  <Group justify="flex-end" mt="md">
+                    <Button
+                      variant="subtle"
+                      type="button"
+                      leftSection={<IconX size={16} />}
+                      onClick={handleCancel}
+                      disabled={!isDirtyChangeEmail}
+                    >
+                      Cancel
+                    </Button>
+                    <Button
+                      type="submit"
+                      disabled={!isDirtyChangeEmail || isUpdating}
+                    >
+                      Save Changes
+                    </Button>
+                  </Group>
+                </Stack>
+              </form>
+            </Accordion.Panel>
+          </Accordion.Item>
+        </Accordion>
+
+        <Accordion variant="contained">
+          <Accordion.Item value="photos">
+            <Accordion.Control
+              icon={
+                <IconPassword size={20} color="var(--mantine-color-red-6)" />
+              }
+            >
+              Change Password
+            </Accordion.Control>
+            <Accordion.Panel>
+              <form
+                onSubmit={handleSubmitChangePassword(onSubmitChangePassword)}
               >
-                Cancel
-              </Button>
-              <Button type="submit" disabled={!isDirtyChangeEmail || isUpdating}>
-                Save Changes
-               </Button>
-            </Group>
-            </Stack>
-            </form>
-
-
-        </Accordion.Panel>
-      </Accordion.Item>
-
-      
-         </Accordion>
-
-      <Accordion variant="contained">
-      <Accordion.Item value="photos">
-        <Accordion.Control icon={<IconPassword size={20} color="var(--mantine-color-red-6)" />}>
-          Change Password
-        </Accordion.Control>
-        <Accordion.Panel>
-          <form onSubmit={handleSubmitChangePassword(onSubmitChangePassword)}>
-            <Stack gap="md">
-               <PasswordInput
-                label="Old Password"
-                type="password"
-                {...registerChangePassword("current_password")}
-                error={errorsChangePassword.current_password?.message}
-                autoComplete="current-password"
-              />    
-              <PasswordInput
-                label="New Password"
-                type="password"
-                {...registerChangePassword("new_password")}
-                error={errorsChangePassword.new_password?.message}
-                autoComplete="new-password"
-              />
-              <PasswordInput
-              label="Confirm New Password"  
-              type="password"
-              {...registerChangePassword("confirm_new_password")}
-              error={errorsChangePassword.confirm_new_password?.message}
-              autoComplete="new-password"
-              />
-              <Group justify="flex-end" mt="md">
-                <Button
-                variant="subtle"
-                type="button"
-                leftSection={<IconX size={16} />}
-                onClick={handleCancel}
-                disabled={!isDirtyChangePassword}
-              >
-                Cancel
-              </Button>
-              <Button type="submit" disabled={!isDirtyChangePassword || isUpdatingPassword}>
-                Save Changes
-                </Button>
-                </Group>
-
-</Stack>  
-</form>
-        </Accordion.Panel>
-      </Accordion.Item>
-      </Accordion>
+                <Stack gap="md">
+                  <PasswordInput
+                    label="Old Password"
+                    type="password"
+                    {...registerChangePassword("current_password")}
+                    error={errorsChangePassword.current_password?.message}
+                    autoComplete="current-password"
+                  />
+                  <PasswordInput
+                    label="New Password"
+                    type="password"
+                    {...registerChangePassword("new_password")}
+                    error={errorsChangePassword.new_password?.message}
+                    autoComplete="new-password"
+                  />
+                  <PasswordInput
+                    label="Confirm New Password"
+                    type="password"
+                    {...registerChangePassword("confirm_new_password")}
+                    error={errorsChangePassword.confirm_new_password?.message}
+                    autoComplete="new-password"
+                  />
+                  <Group justify="flex-end" mt="md">
+                    <Button
+                      variant="subtle"
+                      type="button"
+                      leftSection={<IconX size={16} />}
+                      onClick={handleCancel}
+                      disabled={!isDirtyChangePassword}
+                    >
+                      Cancel
+                    </Button>
+                    <Button
+                      type="submit"
+                      disabled={!isDirtyChangePassword || isUpdatingPassword}
+                    >
+                      Save Changes
+                    </Button>
+                  </Group>
+                </Stack>
+              </form>
+            </Accordion.Panel>
+          </Accordion.Item>
+        </Accordion>
       </Stack>
     </Paper>
   );
