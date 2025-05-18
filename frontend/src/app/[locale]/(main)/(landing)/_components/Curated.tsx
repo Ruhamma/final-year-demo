@@ -1,14 +1,16 @@
 import { Carousel, CarouselSlide } from "@mantine/carousel";
 import { Box, Container, Flex, Image } from "@mantine/core";
+import { useTranslations } from "next-intl";
 import React from "react";
 
 const Curated = () => {
+  const t = useTranslations('common.Landing');
   return (
     <div className="py-20">
       <Box className="p-10 pl-24">
-        <p className="text-4xl font-semibold text-center ">Testimonials</p>
+        <p className="text-4xl font-semibold text-center ">{t('Testimonials')}</p>
         <p className="text-sm text-gray-500 font-light text-center">
-          Hear what our clients say about us
+         {t('Hear what our clients say about us')}
         </p>
       </Box>
       <Container>
@@ -43,12 +45,10 @@ const Curated = () => {
                   ))}
                 </div>
                 <p className="text-sm font-light text-center">
-                  I had an amazing experience with this art platform. The
-                  curation is top-notch, and I found some incredible pieces that
-                  I never would have discovered otherwise.
+                 {t('testDescription')}
                 </p>
 
-                <p className="mt-4 font-semibold text-center">John Doe</p>
+                <p className="mt-4 font-semibold text-center">{t('johnDoe')}</p>
               </div>
             </div>
           </CarouselSlide>

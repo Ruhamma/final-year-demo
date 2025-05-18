@@ -10,7 +10,7 @@ const Layout = ({
   return (
     <div className="w-full h-full  ">
       <Header />
-      <main className="container min-h-screen mt-6">{children}</main>
+      <main className="container min-h-screen mt-6 mx-auto">{children}</main>
       <Footer />
     </div>
   );

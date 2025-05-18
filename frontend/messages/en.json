@@ -1,5 +1,50 @@
 {
   "common":{
-    
+    "NavBar":{
+      "Home":"Home",
+      "About":"About",
+      "Contact":"Contact",
+      "Login":"Login",
+      "Logout":"Logout",
+      "SignUp":"Sign Up",
+      "Hi": "Hi",
+      "Account":"Account",
+      "Admin":"Admin",
+      "Artworks":"Artworks",
+      "Artists":"Artists"
+     
+    },
+    "Footer":{
+      
+      "Terms":"Terms of Service",
+      "Subscribe to our newsletter":"Subscribe to our newsletter",
+      "Subscribe":"Subscribe",
+      "Copyright All rights reserved":"Copyright All rights reserved KURU",
+            "Enter your email":"Enter your email"
+
+      
+    },
+    "Landing":{
+      "Hero":{
+        "Title":"Discover the world of art",
+        "Subtitle":"Change the way art is valued",
+        "Description": "Paint your world with a vibrant collection of original paintings. Explore captivating landscapes, intimate portraits, and everything in between. Support talented artists and own a piece of their story. Whether you seek a specific style, a captivating color palette, or a theme that resonates with you, the perfect painting awaits to be discovered.",
+        "ViewArtwork":"View Artwork"
+      },      
+"BestSellers":"Best Sellers",
+"RecentlyViewed":"Recently Viewed",
+"NewWorks":"New works",
+   "FeaturedArtworks": "Featured Artworks",
+   "Testimonials":"Testimonials",
+   "Hear what our clients say about us": "Hear what our clients say about us",
+      "testDescription": "I had an amazing experience with this art platform. The curation is top-notch, and I found some incredible pieces that I never would have discovered otherwise.",
+      "johnDoe":"John Doe",
+       "about": " Paint your world with a vibrant collection of original paintings. Explore captivating landscapes, intimate portraits, and everything in between. Support talented artists and own a piece of their story. Whether you seek a specific style, a captivating color palette, or a theme that resonates with you, the perfect painting awaits to be discovered.",
+      "AboutUs": "About Us",
+      "ReadMore": "Read more",
+      "Arts by emerging artists": "Arts by emerging artists",
+      "DiscoverArtworks":"Discover Artworks",
+      "CuratorsPicks":"Curators Picks"
+    }
   }
 }
