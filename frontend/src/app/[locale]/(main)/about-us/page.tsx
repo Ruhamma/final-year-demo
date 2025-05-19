@@ -17,10 +17,12 @@ import {
   IconSearch,
   IconShieldLock,
 } from "@tabler/icons-react";
+import { useTranslations } from "next-intl";
 import Link from "next/link";
 // import bg from "@/public/images/about-us-header.png";
 
 export default function Page() {
+  const t = useTranslations("common.About");
   return (
     <Box className=" sm:pt-16 py-10 overflow-hidden">
       <Box className="container mx-auto bg-blue-500">
@@ -29,24 +31,15 @@ export default function Page() {
           className="sm:w-[60%] text-white py-10 rounded-lg  z-10 px-4 sm:px-10 relative"
         >
           <Text className="" fz={32} fw={700} mb={20}>
-            Who are we?
+            {t("Title")}
           </Text>
           <Text mb={24} lh={1.8} fz={18}>
-            Passionate about connecting art enthusiasts with exceptional works,
-            we built Kuru as a curated online marketplace. Here, talented
-            artists can showcase their creations and find dedicated collectors
-            who appreciate their work. We take pride in offering a secure
-            platform for transactions, ensuring peace of mind for both buyers
-            and sellers. More than just a marketplace, we foster a vibrant
-            community where artists and collectors can connect directly. So,
-            whether you&apos;re searching for that perfect piece to add to your
-            collection or eager to share your artistic vision with the world,
-            KURU is your gateway to a world of artistic discovery.
+            {t("Description")}
           </Text>
           <Group className="flex-wrap">
-            <Button bg={"#BC6C25"}>Buy Products</Button>
+            <Button bg={"#BC6C25"}>{t("Buy Products")}</Button>
             <Button variant="outline" c={"white"}>
-              Contact Us
+              {t("Contact Us")}
             </Button>
           </Group>
 
@@ -62,7 +55,7 @@ export default function Page() {
             className="text-center text-2xl sm:text-3xl font-semibold"
             mt={90}
           >
-            We connect artists with buyers
+            {t("We connect artists with buyers")}
           </Text>
           <Flex
             align="center"
@@ -82,15 +75,10 @@ export default function Page() {
               </Box>
               <Flex direction="column" align="center" gap={16}>
                 <Text fz={24} fw={700}>
-                  For Artists
+                  {t("For Artists")}
                 </Text>
-                <Text className="text-center">
-                  When you join kuru, you join our entire community for a
-                  friendlier, fairer world for artists. As well as reaching a
-                  global audience, you receive dedicated support at every step
-                  of the way.
-                </Text>
-                <Button bg={"#BC6C25"}>Become a Seller</Button>
+                <Text className="text-center">{t("ForArtistDescription")}</Text>
+                <Button bg={"#BC6C25"}> {t("Become a Seller")}</Button>
               </Flex>
             </Stack>
             <Divider orientation="vertical" className="hidden md:block" />
@@ -115,15 +103,10 @@ export default function Page() {
                 gap={32}
               >
                 <Text fz={24} fw={700}>
-                  For Buyers
+                  {t("For Buyers")}
                 </Text>
-                <Text className="text-center">
-                  We match you with original artwork we know you’ll love – and
-                  help you support artists at the same time. Directly connect
-                  with artists and find the perfect piece for you, no matter
-                  your taste or budget.
-                </Text>
-                <Button bg={"#BC6C25"}>Shop Now</Button>
+                <Text className="text-center">{t("ForBuyerDescription")}</Text>
+                <Button bg={"#BC6C25"}> {t("Shop Now")}</Button>
               </Flex>
             </Stack>
           </Flex>
@@ -159,10 +142,10 @@ export default function Page() {
             spacing="md"
           >
             <Text fz={{ base: 24, md: 32 }} className="font-semibold">
-              Where Artists Meet Collectors: Discover Your Perfect Piece
+              {t("Where Artists Meet Collectors: Discover Your Perfect Piece")}{" "}
             </Text>
             <Button w="fit-content" variant="outline" color="white">
-              <Link href="/artworks">Explore</Link>
+              <Link href="/artworks"> {t('Explore')}</Link>
             </Button>
           </Stack>
 
@@ -174,7 +157,7 @@ export default function Page() {
               w={"25%"}
             >
               <IconSearch size={50} color="white" />
-              <Text fz={20}>Curated Selection</Text>
+              <Text fz={20}> {t('Curated Selection')}</Text>
             </Stack>
             <Stack
               className="border px-3 py-9 text-center"
@@ -183,7 +166,7 @@ export default function Page() {
               w={"25%"}
             >
               <IconBrandHipchat size={50} color="white" />
-              <Text fz={20}>Direct Connection</Text>
+              <Text fz={20}> {t('Direct Connection')}</Text>
             </Stack>
             <Stack
               className="border px-3 py-9 text-center"
@@ -192,7 +175,7 @@ export default function Page() {
               w={"25%"}
             >
               <IconShieldLock size={50} color="white" />
-              <Text fz={20}>Secure Transactions</Text>
+              <Text fz={20}> {t('Secure Transactions')}</Text>
             </Stack>
           </Flex>
         </Flex>
@@ -265,40 +248,37 @@ export default function Page() {
             <Avatar bg="#EED7B7">
               <IconMessageReport color="#BC6C25" />
             </Avatar>
-            <Text>FAQ Question</Text>
+            <Text> {t('FAQ.FAQ Questions')}</Text>
           </Flex>
           <Text fz={{ base: 28, md: 40 }} className="mb-6">
-            Frequently asked questions
+             {t('FAQ.Title')}
           </Text>
 
           <Accordion variant="separated" multiple bg="#fffcea" w="100%" mt={20}>
             <Accordion.Item value="customization" bg="#fffcea">
               <Accordion.Control>
-                How do I know the art on Kuru is authentic?
+                 {t('FAQ.question1')}
               </Accordion.Control>
               <Accordion.Panel className="text-left">
-                At Kuru, we prioritize authenticity. Every artwork listed
-                undergoes a verification process to ensure it is genuine...
+                 {t('FAQ.answer1')}
               </Accordion.Panel>
             </Accordion.Item>
 
             <Accordion.Item value="shipping" bg="#fffcea">
               <Accordion.Control>
-                Is it safe to buy and sell art through Kuru?
+                 {t('FAQ.question2')}
               </Accordion.Control>
               <Accordion.Panel className="text-left">
-                Yes! Kuru provides a secure platform for both buyers and
-                sellers...
+                 {t('FAQ.answer2')}
               </Accordion.Panel>
             </Accordion.Item>
 
             <Accordion.Item value="returns" bg="#fffcea">
               <Accordion.Control>
-                Can I connect with the artist directly?
+                 {t('FAQ.question3')}
               </Accordion.Control>
               <Accordion.Panel className="text-left">
-                Absolutely! Kuru encourages direct communication between artists
-                and collectors...
+                 {t('FAQ.answer3')}
               </Accordion.Panel>
             </Accordion.Item>
           </Accordion>

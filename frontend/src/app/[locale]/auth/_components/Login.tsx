@@ -22,6 +22,7 @@ import { useAuth, useLoginMutation } from "@/app/services/auth";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useTranslations } from "next-intl";
 
 const loginSchema = z.object({
   email: z.string().email("Invalid email address").min(1, "Email is required"),
@@ -36,6 +37,7 @@ const loginSchema = z.object({
 type LoginFormData = z.infer<typeof loginSchema>;
 
 const Login = () => {
+  const t = useTranslations("common.Auth");
   const route = useRouter();
   const [login, { isLoading: isLoginLoading }] = useLoginMutation();
   const { isAuthenticated, user } = useAuth();
@@ -75,22 +77,22 @@ const Login = () => {
           <form onSubmit={handleSubmit(onSubmit)}>
             <Flex direction="column" gap="md">
               <Text fw={600} fz={24} ta="center">
-                Welcome Back!
+                { t('Welcome Back')}
               </Text>
               <TextInput
-                label="Email"
-                placeholder="Enter your email"
+                label={t('Email')}
+                placeholder={t('EmailPlaceholder')}
                 {...registerField("email")}
                 error={errors.email?.message}
               />
               <PasswordInput
-                label="Password"
-                placeholder="Enter your password"
+                label={t('Password')}
+                placeholder={t('PasswordPlaceholder')}
                 {...registerField("password")}
                 error={errors.password?.message}
               />
               <Button type="submit" loading={isLoginLoading} fullWidth>
-                Login
+                {t('Login')}
               </Button>
             </Flex>
           </form>
@@ -102,28 +104,28 @@ const Login = () => {
               leftSection={<IconBrandGoogle size={16} />}
               fullWidth
             >
-              Continue with Google
+              {t('Continue with Google')}
             </Button>
             <Button
               variant="outline"
               leftSection={<IconBrandFacebook size={16} />}
               fullWidth
             >
-              Continue with Facebook
+              {t('Continue with Facebook')}
             </Button>
             <Button
               variant="outline"
               leftSection={<IconApple size={16} />}
               fullWidth
             >
-              Continue with Apple
+              {t('Continue with Apple')}
             </Button>
           </Flex>
 
           {/* Sign Up Link */}
           <Flex justify="center" mt="md">
             <Text fz={14}>
-              Don’t have an account?{" "}
+              {t('Don’t have an account?')}{" "}
               <Text
                 component="a"
                 href="/auth/sign-up"
@@ -134,7 +136,7 @@ const Login = () => {
                   route.push("/auth/sign-up");
                 }}
               >
-                Sign up
+                {t('SignUp')}
               </Text>
             </Text>
           </Flex>
