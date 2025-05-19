@@ -122,14 +122,14 @@ const Login = () => {
         gap="20"
         className="mt-20"
       >
-        <Box className="w-1/2">
+        <Box className="w-1/2 h-[400px] hidden md:flex">
           <Image
             src="/images/Product Image.png"
             alt="Login Image"
             radius={20}
           />
         </Box>
-        <Paper className="w-1/2 p-10">
+        <Paper className="w-full md:w-1/2 p-10">
           <Flex align="center" justify="center">
             <Text fw={600} fz={22}>
               Get started
