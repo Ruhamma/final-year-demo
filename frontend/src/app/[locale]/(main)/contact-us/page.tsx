@@ -16,114 +16,124 @@ import {
 
 export default function Page() {
   return (
-    <Box className="container mx-auto sm:pt-16 py-10">
+    <Box className="container mx-auto sm:pt-16 py-10 px-4">
+      {/* Header Image */}
       <Image
         src={"/images/contact.png"}
         alt="Contact Us"
         width={"100%"}
         height={500}
-        className="mx-auto"
+        className="mx-auto object-cover rounded-md"
       />
-      <Box className="container mx-auto py-30">
-        <Stack>
-          <Text fz={38} className="font-semibold playfair-display text-center">
+
+      {/* Text Section */}
+      <Box className="container mx-auto py-16">
+        <Stack spacing="md">
+          <Text
+            fz={30}
+            className="font-semibold playfair-display text-center sm:text-4xl text-2xl"
+          >
             Get In Touch With Us
           </Text>
-          <Text c={"dimmed"} className="text-center">
-            For More Information About Our Product & Services. Please Feel Free
-            To Drop Us An Email. <br /> Our Staff Always Be There To Help You
-            Out. Do Not Hesitate!
+          <Text c={"dimmed"} className="text-center text-sm sm:text-base">
+            For more information about our product & services, feel free to drop
+            us an email.
+            <br />
+            Our staff will always be there to help you out. Don’t hesitate!
           </Text>
         </Stack>
 
+        {/* Main Content Section */}
         <Flex
-          align={"baseline"}
-          justify={"space-evenly"}
-          w={"100%"}
-          gap={50}
-          p={80}
+          className="flex-col lg:flex-row gap-10 mt-10"
+          align="start"
+          justify="space-between"
+          p={20}
         >
-          <Stack w={"30%"} gap={"xl"}>
-            <Flex gap={20} align={"baseline"}>
-              <IconMapPinFilled />
+          {/* Contact Info */}
+          <Stack className="w-full lg:w-1/3 gap-8">
+            <Flex gap={20} align="flex-start">
+              <IconMapPinFilled size={24} />
               <Stack gap={5}>
-                <Text fz={24} fw={600}>
+                <Text fz={20} fw={600}>
                   Address
                 </Text>
-                <Text>
-                  236 5th SE Avenue, New York <br /> NY10000, United States
+                <Text className="text-sm">
+                  236 5th SE Avenue, New York
+                  <br />
+                  NY10000, United States
                 </Text>
               </Stack>
             </Flex>
-            <Flex gap={20} align={"baseline"}>
-              <IconPhoneFilled />
-              <Stack gap={5} p={0}>
-                <Text fz={24} fw={600} p={0}>
+
+            <Flex gap={20} align="flex-start">
+              <IconPhoneFilled size={24} />
+              <Stack gap={5}>
+                <Text fz={20} fw={600}>
                   Phone
                 </Text>
-                <Text>
+                <Text className="text-sm">
                   Mobile: +(84) 546-6789
-                  <br /> Hotline: +(84) 456-6789
+                  <br />
+                  Hotline: +(84) 456-6789
                 </Text>
               </Stack>
             </Flex>
-            <Flex gap={20} align={"baseline"}>
-              <IconClockFilled />
+
+            <Flex gap={20} align="flex-start">
+              <IconClockFilled size={24} />
               <Stack gap={5}>
-                <Text fz={24} fw={600}>
+                <Text fz={20} fw={600}>
                   Working Time
                 </Text>
-                <Text>
-                  Monday-Friday: 9:00 - 22:00
-                  <br /> Saturday-Sunday: 9:00 - 21:00
+                <Text className="text-sm">
+                  Monday–Friday: 9:00 – 22:00
+                  <br />
+                  Saturday–Sunday: 9:00 – 21:00
                 </Text>
               </Stack>
             </Flex>
           </Stack>
-          <Stack w={"50%"} gap={"xl"}>
+
+          {/* Contact Form */}
+          <Stack className="w-full lg:w-2/3 gap-6">
             <TextInput
               placeholder="Jane"
               label="First Name"
-              size={"lg"}
+              size="lg"
               radius={8}
-              className="tracking-[0.1em] w-[100%]"
-             styles={{
-               label: {
-                 marginBottom: "18px",
-               },
-             }} 
-            ></TextInput>
+              className="w-full tracking-wide"
+              styles={{
+                label: { marginBottom: "12px" },
+              }}
+            />
             <TextInput
               placeholder="example@gmail.com"
-              label="Email address"
-              size={"lg"}
+              label="Email Address"
+              size="lg"
               radius={8}
-              className="tracking-[0.1em] w-[100%]"
+              className="w-full tracking-wide"
               styles={{
-                label: {
-                  marginBottom: "18px",
-                },
+                label: { marginBottom: "12px" },
               }}
-            ></TextInput>
+            />
             <Textarea
-              placeholder="write your message here..."
+              placeholder="Write your message here..."
               label="Subject"
-              size={"lg"}
+              size="lg"
               radius={8}
-              className="tracking-[0.1em] w-[100%]"
+              className="w-full tracking-wide"
+              minRows={5}
               styles={{
-                label: {
-                  marginBottom: "18px",
-                },
+                label: { marginBottom: "12px" },
               }}
-            ></Textarea>
+            />
             <Button
               radius={8}
-              size={"lg"}
-              bg={"#BC6C25"}
-              color={"#fff"}
-              w={"20%"}
-              className=" self-end"
+              size="lg"
+              bg="#BC6C25"
+              color="#fff"
+              className="self-end w-full sm:w-[40%] md:w-[30%] lg:w-[20%]"
             >
               Submit
             </Button>

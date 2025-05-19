@@ -65,18 +65,50 @@ const Testimonials = ({ title }: { title: string }) => {
   const t = useTranslations("common.Landing");
   return (
     <div>
-      <Box className="p-10 pl-24">
-        <p className="text-2xl font-semibold ">{title}</p>
-        <p className="text-xs font-light">{t('Arts by emerging artists')}</p>
+      <Box className="px-4 sm:px-10 md:px-24 py-10">
+        <p className="text-lg sm:text-xl md:text-2xl font-semibold">{title}</p>
+        <p className="text-xs sm:text-sm font-light">{t('Arts by emerging artists')}</p>
       </Box>
-      <Box className="px-10">
+      <Box className="px-4 sm:px-10">
         <Carousel
           withIndicators
-          slideSize="20%"
+          slideSize="50%"
+          slideGap="md"
+          loop
+          align="start"
+          slidesToScroll={2}
+          className="flex md:hidden"
+        >
+          {mockArtworks.map((item) => (
+            <CarouselSlide key={item.id}>
+              <Card
+                key={item.id}
+                shadow="sm"
+                radius="md"
+                withBorder
+                className="bg-red-900"
+              >
+                <CardSection>
+                  <Image alt="Product image" src={item?.src} />
+                </CardSection>
+                <Group className="py-2" justify="space-between" align="center">
+                  <p className="text-sm font-semibold">{item?.title}</p>
+                </Group>
+                <Text c="dimmed" className="text-xs font-semibold" size="xs">
+                  {item?.artistName}
+                </Text>
+              </Card>
+            </CarouselSlide>
+          ))}
+        </Carousel>
+         <Carousel
+          withIndicators
+          slideSize="25%"
           slideGap="md"
           loop
           align="start"
           slidesToScroll={4}
+          className="hidden md:flex"
         >
           {mockArtworks.map((item) => (
             <CarouselSlide key={item.id}>

@@ -4,27 +4,38 @@ import { useTranslations } from "next-intl";
 import React from "react";
 
 const Curated = () => {
-  const t = useTranslations('common.Landing');
+  const t = useTranslations("common.Landing");
   return (
     <div className="py-20">
-      <Box className="p-10 pl-24">
-        <p className="text-4xl font-semibold text-center ">{t('Testimonials')}</p>
+      <Box className="p-6 md:p-10 md:pl-24">
+        <p className="text-2xl md:text-4xl font-semibold text-center">
+          {t("Testimonials")}
+        </p>
         <p className="text-sm text-gray-500 font-light text-center">
-         {t('Hear what our clients say about us')}
+          {t("Hear what our clients say about us")}
         </p>
       </Box>
       <Container>
-        <Flex justify={"center"} align="center" gap="10" className="mb-10">
+        <Flex
+          justify={"center"}
+          align="center"
+          gap="4 md:gap-10"
+          className="mb-10 flex-col md:flex-row"
+        >
           <Image
             alt="Curated Image"
             src="/images/Rectangle 20.png"
-            className="mt-20"
+            className="mt-6 md:mt-20 w-4/5 md:w-full h-[100px] md:h-auto"
           />
-          <Image alt="Curated Image" src="/images/Rectangle 20.png" />
           <Image
             alt="Curated Image"
             src="/images/Rectangle 20.png"
-            className="mt-20"
+            className="w-4/5 md:w-full md:h-auto"
+          />
+          <Image
+            alt="Curated Image"
+            src="/images/Rectangle 20.png"
+            className="mt-6 md:mt-20 w-4/5 md:w-full md:h-auto"
           />
         </Flex>
         <Carousel slideSize="100%" slideGap="md" loop withIndicators>
@@ -45,10 +56,10 @@ const Curated = () => {
                   ))}
                 </div>
                 <p className="text-sm font-light text-center">
-                 {t('testDescription')}
+                  {t("testDescription")}
                 </p>
 
-                <p className="mt-4 font-semibold text-center">{t('johnDoe')}</p>
+                <p className="mt-4 font-semibold text-center">{t("johnDoe")}</p>
               </div>
             </div>
           </CarouselSlide>

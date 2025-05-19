@@ -87,7 +87,7 @@ const SideBar = () => {
               }`}
             >
               {item.icon}
-              {item.label}
+              <span className="hidden sm:inline">{item.label}</span>
             </Link>
           </li>
         ))}
@@ -99,7 +99,7 @@ const SideBar = () => {
             variant="transparent"
             color="white"
           >
-            Log out
+            <span className="hidden sm:inline">Log out</span>
           </Button>
         </li>
       </ul>

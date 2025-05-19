@@ -6,13 +6,13 @@ const Hero = () => {
    const t = useTranslations('common.Landing.Hero');
   return (
     <Container className="mt-10">
-      <Flex className="gap-10" align={"center"} justify="center">
-        <Box className="w-1/2">
+      <Flex className="gap-10 flex-col lg:flex-row" align={"center"} justify="center">
+        <Box className="w-full lg:w-1/2">
           <Flex direction="column" gap="md" mb="lg">
             <p className="text-xs opacity-50 font-light ">
              {t('Title')}
             </p>
-            <p className="text-4xl font-bold">
+            <p className="text-2xl sm:text-3xl md:text-4xl font-bold">
               {t('Subtitle')}
             </p>
             <p className="text-sm font-light">
@@ -21,7 +21,7 @@ const Hero = () => {
           </Flex>
           <Button>{t('ViewArtwork')}</Button>
         </Box>
-        <Box className="w-1/2">
+        <Box className="w-full lg:w-1/2">
           <Flex gap="md" mb="lg">
             <Flex direction="column" gap="md" mb="lg" mt="xl">
               <Image
