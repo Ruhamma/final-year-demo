@@ -101,6 +101,13 @@ export const artworkApi = createApi({
       }),
       providesTags: ["Favorites"],
     }),
+      reviewArtwork: builder.mutation({
+      query: ({ id, body }) => ({
+        url: `artwork/${id}/rate`,
+        method: "POST",
+        body: body,
+      }),
+    }),
   }),
 });
 
@@ -119,4 +126,5 @@ export const {
   useGetFavoritesQuery,
   useGetMyArtworksDetailQuery,
   useUpdateArtworkMutation,
+  useReviewArtworkMutation,
 } = artworkApi;

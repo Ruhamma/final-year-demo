@@ -116,7 +116,112 @@
       "Continue with Google":"Continue with Google",
       "Continue with Facebook":"Continue with Facebook",
       "Continue with Apple":"Continue with Apple",
-      "Don’t have an account?":"Don’t have an account?"
+      "Don’t have an account?":"Don’t have an account?",
+      "KURU":"KURU"
+    },
+    "UserAccount":{
+      "Title":"User Account",
+      "Description":"Manage your account settings and preferences.",
+      "ProfileSummary":"Profile Summary",
+      "Messages":"Messages",
+      "Notifications":"Notifications",
+      "Orders":"Orders",
+      "Favorites":"Favorites",
+      "Logout":"Logout",
+      "Artists You Follow":"Artists You Follow",
+      "Deactivate Account":"Deactivate Account",
+      "Are you sure you want to log out?":"Are you sure you want to log out?",
+      "This action cannot be undone":"This action cannot be undone.",
+      "If you are sure, please click the button below to proceed":"If you are sure, please click the button below to proceed.",
+      "Change Password":"Change Password"
+
+    },
+      "ArtistAccount":{
+       "Deactivate Account":"Deactivate Account",
+       "Followers":"Followers",
+       "AddArtPiece":"Add Art Piece",
+       "Orders":"Orders",
+       "Messages":"Messages",
+       "EditProfile":"Edit Profile",
+       "AllArtworks":"All Artworks",
+       "Dashboard":"Dashboard",
+       "Logout":"Logout",
+       "Notifications":"Notifications"
+    },
+    "Notifications":{
+      "title":"Notifications",
+      "Description":"Stay updated with your latest orders and updates.",
+      "Error":"Failed to mark all notifications as read:",
+      "Error2":"Error loading notifications",
+      "markAsReadError":"Failed to mark notification as read:",
+      "new":"New",
+      "markAllAsRead":"Mark all as read",
+      "noNotifications":"No notifications",
+      "markAsRead":"Mark as read"
+    },
+  "review": {
+    "pageTitle": "Write a Review",
+    "backButton": "Back to Order",
+    "tabs": {
+      "artwork": "Rate Artwork",
+      "artist": "Rate Artist"
+    },
+    "artworkForm": {
+      "selectLabel": "Select Artwork",
+      "selectPlaceholder": "Choose artwork to review",
+      "ratingLabel": "Your Rating",
+      "reviewLabel": "Your Review",
+      "reviewPlaceholder": "Share your thoughts about this artwork (max 350 characters)",
+      "submitButton": "Submit Review"
+    },
+    "artistForm": {
+      "selectLabel": "Select Artist",
+      "selectPlaceholder": "Choose artist to review",
+      "ratingLabel": "Your Rating",
+      "reviewLabel": "Your Review",
+      "reviewPlaceholder": "Share your experience with this artist (max 350 characters)",
+      "submitButton": "Submit Review"
+    },
+    "validation": {
+      "artworkRequired": "Please select an artwork",
+      "artistRequired": "Please select an artist",
+      "ratingRequired": "Rating must be between 1 and 5",
+      "reviewRequired": "Review is required",
+      "reviewMaxLength": "Review must be 350 characters or less",
+      "characters": "characters"
+    },
+    "notifications": {
+      "artworkSuccess": "Artwork review submitted successfully",
+      "artworkError": "Failed to submit artwork review",
+      "artistSuccess": "Artist review submitted successfully",
+      "artistError": "Failed to submit artist review"
+    },
+    "loading": {
+      "text": "Loading..."
+    },
+    "errors": {
+      "orderNotFound": "Order not found"
     }
+},
+  "accountDeactivation": {
+    "pageTitle": "Delete Your Account",
+    "immediateEffects": "This will immediately:",
+    "effectsList": [
+      "Deactivate your account",
+      "Remove your profile from public view",
+      "Prevent you from logging in"
+    ],
+    "dataDeletion": "Your data will be permanently deleted after 10 days.",
+    "deleteButton": "Delete My Account",
+    "confirmation": {
+      "title": "Are you absolutely sure?",
+      "confirmButton": "Yes, Delete Account",
+      "cancelButton": "Cancel"
+    },
+    "notifications": {
+      "success": "Account deactivated, Your account will be permanently deleted after 10 days.",
+      "error": "Deactivation failed, Could not deactivate your account."
+    }
+  }
   }
 }

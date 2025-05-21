@@ -7,15 +7,15 @@ interface User {
   role: {
     id: number;
     name: string;
-    permissions:string;
+    permissions: string;
   };
   created_at?: string;
   updated_at?: string;
-  profile_picture?:string;
-  first_name?:string;
-  last_name?:string;
-  is_active?:string;
-  phone_number?:string;
+  profile_picture?: string;
+  first_name?: string;
+  last_name?: string;
+  is_active?: string;
+  phone_number?: string;
 }
 
 interface LoginRequest {
@@ -38,10 +38,10 @@ interface AuthResponse {
 export const authApi = createApi({
   reducerPath: "authApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: process.env.NEXT_PUBLIC_API || 'http://localhost:8000/api',
-    credentials: 'include', 
+    baseUrl: process.env.NEXT_PUBLIC_API || "http://localhost:8000/api",
+    credentials: "include",
   }),
-  tagTypes: ["Auth","profile"],
+  tagTypes: ["Auth", "profile"],
   endpoints: (builder) => ({
     login: builder.mutation<AuthResponse, LoginRequest>({
       query: (credentials) => ({
@@ -53,7 +53,7 @@ export const authApi = createApi({
     }),
     register: builder.mutation<AuthResponse, RegisterRequest>({
       query: (userData) => ({
-        url: "/user/register",
+        url: "/user/register/",
         method: "POST",
         body: userData,
       }),
@@ -68,13 +68,13 @@ export const authApi = createApi({
     }),
     getMe: builder.query<User | null, void>({
       query: () => "/user/me/",
-      providesTags: ["Auth","profile"],
+      providesTags: ["Auth", "profile"],
       transformErrorResponse: () => null,
     }),
     updateUserProfile: builder.mutation({
       query: (formData) => ({
         url: `user/me/`,
-        method: 'PUT',
+        method: "PUT",
         body: formData,
       }),
       invalidatesTags: ["profile"],
@@ -95,7 +95,6 @@ export const {
   useGetMeQuery,
   useRefreshTokenMutation,
   useUpdateUserProfileMutation,
-
 } = authApi;
 
 export const useAuth = () => {

@@ -246,9 +246,9 @@ const Login = () => {
                 {t('AlreadyHaveAnAccount')}{" "}
                 <Text
                   component="a"
+                   href="/auth/login"
                   c="blue"
                   inherit
-                  onClick={() => route.push("/auth/login")}
                 >
                   {t('Login')}
                 </Text>

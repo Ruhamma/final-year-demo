@@ -40,7 +40,7 @@ const Page = () => {
     );
   }
 
-  if (!data || data.length === 0) {
+  if (!data || data.total === 0) {
     return (
       <Center h="100vh">
         <Stack align="center" gap="xs">
@@ -86,7 +86,7 @@ const Page = () => {
 
         <Table.Tbody>
           {data &&
-            data?.orders?.map((order) => (
+            data?.orders.map((order) => (
               <Fragment key={order.id}>
                 <Table.Tr>
                   <Table.Td>{order.id.slice(0, 8)}</Table.Td>
@@ -131,7 +131,14 @@ const Page = () => {
                       >
                         View
                       </Button>
-                    </Group>
+                      {order.status === 'PAID' && <Button
+                      size="xs"
+                      variant="light"
+                      onClick={() => router.push(`orders/${order.id}/review`)}
+                    >
+                      Review
+                    </Button>}
+                  </Group>
                   </Table.Td>
                 </Table.Tr>
 

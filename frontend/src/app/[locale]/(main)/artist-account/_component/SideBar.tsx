@@ -3,7 +3,7 @@ import { Avatar, Button } from "@mantine/core";
 import Link from "next/link";
 import React from "react";
 import { useAuth } from "@/context/useAuth";
-import { usePathname } from "next/navigation";
+import { usePathname } from "@/i18n/routing";
 import { useGetArtistProfileQuery } from "@/store/api/artist/profile";
 import {
   IconBrush,
@@ -15,52 +15,60 @@ import {
   IconLogout,
   IconShoppingCart,
   IconDashboard,
+  IconBellRinging,
 } from "@tabler/icons-react";
+import { useTranslations } from "next-intl";
 
 const SideBar = () => {
   const { user, logout } = useAuth();
   const { data: profileData } = useGetArtistProfileQuery({});
   const pathname = usePathname();
   const isActive = (path: string) => pathname === path;
+  const t = useTranslations("common.ArtistAccount");
 
   const menuItems = [
     {
-      label: "Dashboard",
+      label: t("Dashboard"),
       icon: <IconDashboard size={18} />,
       href: "/artist-account",
     },
     {
-      label: "All artworks",
+      label: t("AllArtworks"),
       icon: <IconBrush size={18} />,
       href: "/artist-account/all-artworks",
     },
     {
-      label: "Edit profile",
+      label: t("EditProfile"),
       icon: <IconUserEdit size={18} />,
       href: "/artist-account/profile",
     },
     {
-      label: "Messages",
+      label: t("Messages"),
       icon: <IconMail size={18} />,
       href: "/artist-account/orders",
     },
     {
-      label: "Orders",
+      href: "/artist-account/notifications",
+      icon: <IconBellRinging size={18} />,
+      label: t("Notifications"),
+    },
+    {
+      label: t("Orders"),
       icon: <IconShoppingCart size={18} />,
       href: "/artist-account/orders",
     },
     {
-      label: "Add art piece",
+      label: t("AddArtPiece"),
       icon: <IconPlus size={18} />,
       href: "/artist-account/artwork",
     },
     {
-      label: "Followers",
+      label: t("Followers"),
       icon: <IconUsers size={18} />,
       href: "/artist-account/Followers",
     },
     {
-      label: "Deactivate account",
+      label: t("Deactivate Account"),
       icon: <IconBan size={18} />,
       href: "/artist-account/deactivate",
     },
@@ -99,7 +107,7 @@ const SideBar = () => {
             variant="transparent"
             color="white"
           >
-            <span className="hidden sm:inline">Log out</span>
+            <span className="hidden sm:inline">{t("Logout")}</span>
           </Button>
         </li>
       </ul>
