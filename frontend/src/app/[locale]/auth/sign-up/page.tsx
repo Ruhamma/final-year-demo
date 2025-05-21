@@ -21,6 +21,7 @@ import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { notify } from "@/shared/components/notification/notification";
+import { useTranslations } from "next-intl";
 
 const signUpSchema = z
   .object({
@@ -51,6 +52,7 @@ const signUpSchema = z
 type SignUpFormData = z.infer<typeof signUpSchema>;
 
 const Login = () => {
+  const t = useTranslations("common.Auth");
   const route = useRouter();
   const [register, { isLoading: isRegisterLoading }] = useRegisterMutation();
   const [selectedTab, setSelectedTab] = useState("buyer");
@@ -88,7 +90,7 @@ const Login = () => {
         confirm_password: data.confirmPassword,
         role: data.role,
       }).unwrap();
-      notify("Success", `Registered successfully`);
+      notify("Success", t('RegisteredSuccessfully'));
       route.push("/");
     } catch (error) {
       const errorMessage =
@@ -107,10 +109,10 @@ const Login = () => {
         confirm_password: data.confirmPassword,
         role: data.role,
       }).unwrap();
-      notify("Success", "Registered successfully");
+      notify("Success", t('RegisteredSuccessfully'));
       route.push("/");
     } catch (error: any) {
-      notify("Error", "Failed to register");
+      notify("Error",t('Failed'));
     }
   };
 
@@ -122,17 +124,17 @@ const Login = () => {
         gap="20"
         className="mt-20"
       >
-        <Box className="w-1/2">
+        <Box className="w-1/2 h-[400px] hidden md:flex">
           <Image
             src="/images/Product Image.png"
             alt="Login Image"
             radius={20}
           />
         </Box>
-        <Paper className="w-1/2 p-10">
+        <Paper className="w-full md:w-1/2 p-10">
           <Flex align="center" justify="center">
             <Text fw={600} fz={22}>
-              Get started
+             { t('Get started')}
             </Text>
           </Flex>
           <Tabs
@@ -149,7 +151,7 @@ const Login = () => {
                   setValue2("role", "BUYER");
                 }}
               >
-                Buyer
+                {t('Buyer')}
               </TabsTab>
               <TabsTab
                 value="seller"
@@ -158,42 +160,42 @@ const Login = () => {
                   setValue2("role", "SELLER");
                 }}
               >
-                Seller
+                {t('Seller')}
               </TabsTab>
             </TabsList>
             <TabsPanel value="buyer">
               <form onSubmit={handleSubmit(onSubmit)}>
                 <Flex direction="column" gap="md">
                   <TextInput
-                    label="Name"
-                    placeholder="Enter your Name"
+                    label={t('Name')}
+                    placeholder={t('NamePlaceholder')}
                     {...registerField("username")}
                     autoComplete="username"
                     error={errors.username?.message}
                   />
                   <TextInput
-                    label="Email"
-                    placeholder="Enter your email"
+                    label={t('Email')}
+                    placeholder={t('EmailPlaceholder')}
                     {...registerField("email")}
                     autoComplete="email"
                     error={errors.email?.message}
                   />
                   <PasswordInput
-                    label="Password"
-                    placeholder="Enter your password"
+                    label={t('Password')}
+                    placeholder={t('PasswordPlaceholder')}
                     {...registerField("password")}
                     autoComplete="password"
                     error={errors.password?.message}
                   />
                   <PasswordInput
-                    label="Confirm Password"
-                    placeholder="Confirm your password"
+                    label={t('ConfirmPassword')}
+                    placeholder={t('ConfirmPasswordPlaceholder')}
                     {...registerField("confirmPassword")}
                     autoComplete="confirmPassword"
                     error={errors.confirmPassword?.message}
                   />
                   <Button type="submit" loading={isRegisterLoading}>
-                    Sign up
+                    {t('SignUp')}
                   </Button>
                 </Flex>
               </form>
@@ -203,35 +205,35 @@ const Login = () => {
               <form onSubmit={handleSubmit2(onSubmit2)}>
                 <Flex direction="column" gap="md">
                   <TextInput
-                    label="Name"
-                    placeholder="Enter your Name"
+                    label={t('Name')}
+                    placeholder={t('NamePlaceholder')}
                     {...registerField2("username")}
                     autoComplete="username"
                     error={errors2.username?.message}
                   />
                   <TextInput
-                    label="Email"
-                    placeholder="Enter your email"
+                    label={t('Email')}
+                    placeholder={t('EmailPlaceholder')}
                     {...registerField2("email")}
                     autoComplete="email"
                     error={errors2.email?.message}
                   />
                   <PasswordInput
-                    label="Password"
-                    placeholder="Enter your password"
+                    label={t('Password')}
+                    placeholder={t('PasswordPlaceholder')}
                     {...registerField2("password")}
                     autoComplete="password"
                     error={errors2.password?.message}
                   />
                   <PasswordInput
-                    label="Confirm Password"
-                    placeholder="Confirm your password"
+                    label={t('ConfirmPassword')}
+                    placeholder={t('ConfirmPasswordPlaceholder')}
                     {...registerField2("confirmPassword")}
                     autoComplete="confirmPassword"
                     error={errors2.confirmPassword?.message}
                   />
                   <Button type="submit" loading={isRegisterLoading}>
-                    Sign up
+                    {t('SignUp')}
                   </Button>
                 </Flex>
               </form>
@@ -241,14 +243,14 @@ const Login = () => {
           <Flex direction="column" gap="sm" mt="lg">
             <Flex justify="center" mt="md">
               <Text>
-                Already have an account?{" "}
+                {t('AlreadyHaveAnAccount')}{" "}
                 <Text
                   component="a"
                   c="blue"
                   inherit
                   onClick={() => route.push("/auth/login")}
                 >
-                  Login
+                  {t('Login')}
                 </Text>
               </Text>
             </Flex>

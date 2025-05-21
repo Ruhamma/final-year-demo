@@ -18,8 +18,8 @@ import {
 } from "@mantine/core";
 import { Breadcrumbs, Anchor } from "@mantine/core";
 import React, { useMemo } from "react";
-import Discover from "../../(landing)/_components/Discover";
-import Testimonials from "../../(landing)/_components/Testimonials";
+import Discover from "../(landing)/_components/Discover";
+import Testimonials from "../(landing)/_components/Testimonials";
 import { useParams, useRouter } from "next/navigation";
 import { useGetArtworkByIdQuery } from "@/store/api/artwork/artwork";
 import { useAddToCartMutation } from "@/app/services/cart";
@@ -93,26 +93,31 @@ const Page = () => {
     </AccordionItem>
   ));
   return (
-    <Box className="m-20 ">
+    <Box className="">
       <LoadingOverlay visible={isLoading} />
-      <Flex className="gap-10" align={"center"} justify="center">
-        <Box className="w-1/2">
+      <Flex
+        className="gap-10 flex-col md:flex-row px-4 md:px-20"
+        align="center"
+        justify="center"
+      >
+        <Box className="w-full md:w-1/2">
           <Breadcrumbs className="pb-4">{items}</Breadcrumbs>
-          <Carousel withIndicators dragFree slideGap="md" align="start" h={500}>
+          <Carousel withIndicators dragFree slideGap="md" align="start" h={400}>
             {data?.images.map((image, index) => (
               <CarouselSlide key={index}>
                 <Image
                   src={image.url}
                   alt="Artwork preview"
-                  className="rounded-md"
+                  className="rounded-md w-full object-cover"
                 />
               </CarouselSlide>
             ))}
           </Carousel>
         </Box>
-        <Box className="w-1/3 ">
+
+        <Box className="w-full md:w-1/3 mt-6 md:mt-0">
           <Flex direction="column" gap="md" mb="lg">
-            <p className="text-3xl">{data?.title}</p>
+            <p className="text-2xl md:text-3xl">{data?.title}</p>
             <p className="text-sm font-light">{data?.medium?.name} paintings</p>
             <p className="text-sm font-light">
               {data?.size?.width} x {data?.size?.height} {data?.size?.unit}
@@ -134,27 +139,27 @@ const Page = () => {
               Purchase Order
             </Button>
           </Stack>
-          <Box>
+          <Box className="mt-4">
             <Accordion>{groccery}</Accordion>
           </Box>
         </Box>
       </Flex>
+
       <Flex
-        className="gap-10 my-10 mt-20 mx-32"
-        align={"center"}
+        className="flex-col lg:flex-row gap-10 my-10 mt-20 px-4 md:px-32"
+        align="center"
         justify="start"
       >
-        <Box className="w-1/2">
+        <Box className="w-full">
           <Stack gap="md" mb="lg">
             <p className="text-lg font-bold italic">About Artworks</p>
             <p className="text-xs">{data?.description}</p>
           </Stack>
           <Stack>
             <p className="text-lg font-bold italic">Details</p>
-            <Flex gap="md" className="text-xs">
+            <Flex gap="md" wrap="wrap" className="text-xs">
               <p>
-                <strong>Category:</strong>
-                {data?.category?.name}
+                <strong>Category:</strong> {data?.category?.name}
               </p>
               <p>
                 <strong>Size:</strong> {data?.size?.width} x{" "}
@@ -175,15 +180,15 @@ const Page = () => {
         </Box>
       </Flex>
 
-      <Container>
-        <Flex className="my-14 shadow-md p-10 rounded-md" gap="xl">
-          <Flex gap="md" align={"center"}>
+      <Container className="px-4">
+        <Flex className="flex-col md:flex-row gap-10 my-14 shadow-md p-6 md:p-10 rounded-md">
+          <Flex gap="md" align="center">
             <Avatar
               className="text-xl text-white rounded-full"
               src="/images/Rectangle 20.png"
               size="xl"
             />
-            <Stack gap="sm" mb="lg" align="center" justify="center">
+            <Stack gap="sm" align="center" justify="center">
               <p className="font-semibold text-sm">
                 {data?.artist?.user?.username}
               </p>
@@ -200,12 +205,17 @@ const Page = () => {
                   </svg>
                 ))}
               </div>
-              <Button>View Profile</Button>
+              <Button size="xs">View Profile</Button>
             </Stack>
           </Flex>
-          <Divider my="lg" labelPosition="center" orientation="vertical" />
-          <Stack gap="md" mb="lg">
-            <p className="text-sm font-bold italic">About </p>
+          <Divider
+            my="lg"
+            labelPosition="center"
+            orientation="vertical"
+            className="hidden md:block"
+          />
+          <Stack gap="md">
+            <p className="text-sm font-bold italic">About</p>
             <p className="text-xs">{data?.artist?.bio}</p>
           </Stack>
         </Flex>

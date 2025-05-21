@@ -19,7 +19,7 @@ export default function CartPage() {
     }
   }
   return (
-    <div className="min-h-screen bg-[#fdf8e6] p-8 text-[#2a2a2a] font-sans">
+    <div className="h-auto bg-[#fdf8e6] p-8 text-[#2a2a2a] font-sans">
       <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8">
    
         <div>
@@ -75,11 +75,11 @@ export default function CartPage() {
 
           <div className="flex justify-between text-sm mb-2">
             <span>Subtotal</span>
-            <span>ETB {item?.total_price}</span>
+            {/* <span>ETB {item?.total_price}</span> */}
           </div>
           <div className="flex justify-between text-sm mb-2 border-b">
             <span>Total</span>
-            <span>ETB {item?.total_price}</span>
+            {/* <span>ETB {item?.total_price}</span> */}
           </div>
           <div className="flex justify-between text-sm mb-4">
             <span>Shipping</span>

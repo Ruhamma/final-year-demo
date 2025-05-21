@@ -72,9 +72,9 @@ const Page = () => {
   };
 
   return (
-    <Box>
-      <Flex className="flex flex-col sm:flex-row justify-between items-start sm:items-center p-6">
-        <Stack className="ml-20 mt-10" gap={2}>
+    <Box w-full>
+      <Flex className="flex items-start p-6  w-full">
+        <Stack className=" mt-10 flex items-start" gap={2}>
           <p className="text-4xl font-bold font-serif">Browse by Category</p>
           <p className="text-grey-100 font-serif">
             Explore variety of art piece in all categories of your liking{" "}
@@ -96,10 +96,11 @@ const Page = () => {
           </div>
         ))}
       </div>
+
       <div className="bg-[#fefae0] p-6">
         {/* Filter bar */}
-        <div className="flex flex-wrap items-center justify-between gap-3 mt-4">
-          <Group gap="xs">
+        <div className="flex flex-col gap-4 mt-4 md:flex-row md:items-center md:justify-between">
+          <Group gap="xs" className="flex flex-wrap gap-3">
             <Button variant="outline" leftSection={<IconFilter size={16} />}>
               All filters
             </Button>
@@ -161,16 +162,16 @@ const Page = () => {
               onChange={(e) => setSearch(e.currentTarget.value)}
               placeholder="Search"
               leftSection={<IconSearch size={16} />}
-              className="mr-10"
               classNames={{
                 input:
                   "bg-transparent border-b border-gray-400 rounded-none focus:border-black focus:ring-0",
               }}
+              className="w-full"
             />
           </Group>
         </div>
       </div>
-      <Center className="py-10 px-40 mx-auto flex flex-col gap-6">
+      <Center className="p-10  md:px-40 mx-auto flex flex-col gap-6">
         <Box className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
           <LoadingOverlay visible={isLoading} />
           {artworks?.map((item: any) => (
@@ -179,29 +180,37 @@ const Page = () => {
               shadow="sm"
               radius="md"
               withBorder
-              className="bg-red-900"
+              className="bg-red-900 w-full max-w-sm mx-auto"
             >
               <CardSection>
-                <Image alt="Product image" src={item?.images[0]?.url} />
+                <Image
+                  alt="Product image"
+                  src={item?.images[0]?.url}
+                  className="w-full h-48 object-cover"
+                />
               </CardSection>
-              <Group className="py-2" justify="space-between" align="center">
-                <p
-                  className="text-sm font-semibold"
-                  onClick={() => router.push(`/art-page/${item.id}`)}
-                >
-                  {item?.title}
-                </p>
-                <Group>
-                  <AddtoWishlist id={item?.id} />
-                  <AddtoCart id={item?.id} />
-                </Group>
-              </Group>
-              <Text c="dimmed" className="text-xs font-semibold" size="xs">
-                {item?.artist?.first_name} {item?.artist?.last_name}
-              </Text>
-              <Text className="text-xs font-semibold" size="xs">
-                {item?.price}
-              </Text>
+
+              <div className="md:p-4 space-y-2">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+                  <p
+                    className="text-sm font-semibold cursor-pointer hover:underline"
+                    onClick={() => router.push(`/art-page/${item.id}`)}
+                  >
+                    {item?.title}
+                  </p>
+
+                  <div className="flex gap-2 mt-2 sm:mt-0">
+                    <AddtoWishlist id={item?.id} />
+                    <AddtoCart id={item?.id} />
+                  </div>
+                </div>
+
+                <Text c="dimmed" className="text-xs font-semibold">
+                  {item?.artist?.first_name} {item?.artist?.last_name}
+                </Text>
+
+                <Text className="text-xs font-semibold">{item?.price}</Text>
+              </div>
             </Card>
           ))}
         </Box>

@@ -6,18 +6,24 @@ const About = () => {
   const t = useTranslations("common.Landing");
   return (
     <Container className="my-20">
-      <Flex className="gap-10" align={"center"} justify="center">
-        <Box className="w-1/2">
+      <Flex
+        className="gap-10 flex-col lg:flex-row"
+        align="center"
+        justify="center"
+      >
+        <Box className="w-full lg:w-1/2 px-4">
           <Flex direction="column" gap="md" mb="lg">
-            <p className="text-3xl">{t('AboutUs')}</p>
-            <p className="text-sm font-light">
-             {t('about')}
-            </p>
+            <p className="text-2xl sm:text-3xl">{t("AboutUs")}</p>
+            <p className="text-sm font-light">{t("about")}</p>
           </Flex>
-          <Button>{t('ReadMore')}</Button>
+          <Button>{t("ReadMore")}</Button>
         </Box>
-        <Box className="w-1/2">
-          <Image src="/images/Rectangle 19.png" alt="Artwork preview" />
+        <Box className="w-full lg:w-1/2 px-4">
+          <Image
+            src="/images/Rectangle 19.png"
+            alt="Artwork preview"
+            className="w-full h-auto object-cover rounded"
+          />
         </Box>
       </Flex>
     </Container>

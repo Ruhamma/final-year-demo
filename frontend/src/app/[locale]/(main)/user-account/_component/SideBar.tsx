@@ -19,101 +19,93 @@ const SideBar = () => {
   const { data: profileData } = useGetMeQuery();
   const [opened, { open, close }] = useDisclosure(false);
   const { logout } = useAuth();
+
   return (
-    <div className="bg-[#606C38] text-white w-1/4 p-4 flex flex-col items-center h-screen mr-10">
+    <div className="bg-[#606C38] text-white  sm:w-1/4 sm:p-4 flex flex-col items-center sm:h-screen h-auto">
       <Avatar
         className="text-xl text-white"
         size="xl"
         src={profileData?.profile_picture}
         alt="Profile"
       />
-      <p className="font-bold text-lg mt-2">
+      <p className="font-bold text-lg mt-2 hidden sm:block">
         {profileData?.first_name} {profileData?.last_name}
       </p>
-      <p className="text-sm mt-1">{"User"}</p>
+      <p className="text-sm mt-1 hidden sm:block">{"User"}</p>
+
       <ul className="mt-6 space-y-4 w-fit px-2 mx-auto font-semibold">
+        {[
+          {
+            href: "/user-account/profile-summary",
+            icon: <IconUser size={18} />,
+            label: "Profile Summary",
+          },
+          {
+            href: "/orders",
+            icon: <IconMessageCircle size={18} />,
+            label: "Messages",
+          },
+          {
+            href: "/user-account/favorites",
+            icon: <IconHeart size={18} />,
+            label: "Favorites",
+          },
+          {
+            href: "/user-account/orders",
+            icon: <IconShoppingBag size={18} />,
+            label: "Orders",
+          },
+          {
+            href: "/logout",
+            icon: <IconUsers size={18} />,
+            label: "Artists You Follow",
+          },
+          {
+            href: "/user-account/deactivate",
+            icon: <IconUserX size={18} />,
+            label: "Deactivate Account",
+          },
+        ].map((item, idx) => (
+          <li key={idx}>
+            <Link
+              href={item.href}
+              className="flex items-center gap-2 text-white hover:bg-white hover:text-[#606c38] px-4 py-2 rounded-md"
+            >
+              {item.icon}
+              <span className="hidden sm:inline">{item.label}</span>
+            </Link>
+          </li>
+        ))}
+
         <li>
-          <Link
-            href="/user-account/profile-summary"
-            className="flex items-center gap-2 text-white hover:bg-white hover:text-[#606c38] px-4 py-2 rounded-md"
-          >
-            <IconUser size={18} /> Profile Summary
-          </Link>
-        </li>
-        <li>
-          <Link
-            href="/orders"
-            className="flex items-center gap-2 text-white hover:bg-white hover:text-[#606c38] px-4 py-2 rounded-md"
-          >
-            <IconMessageCircle size={18} /> Messages
-          </Link>
-        </li>
-        <li>
-          <Link
-            href="/user-account/favorites"
-            className="flex items-center gap-2 text-white hover:bg-white hover:text-[#606c38] px-4 py-2 rounded-md"
-          >
-            <IconHeart size={18} /> Favorites
-          </Link>
-        </li>
-        <li>
-          <Link
-            href="/user-account/orders"
-            className="flex items-center gap-2 text-white hover:bg-white hover:text-[#606c38] px-4 py-2 rounded-md"
-          >
-            <IconShoppingBag size={18} /> Orders
-          </Link>
-        </li>
-        <li>
-          <Link
-            href="/logout"
-            className="flex items-center gap-2 text-white hover:bg-white hover:text-[#606c38] px-4 py-2 rounded-md"
-          >
-            <IconUsers size={18} /> Artists You Follow
-          </Link>
-        </li>
-        <li>
-          <Link
-            href="/user-account/deactivate"
-            className="flex items-center gap-2 text-white hover:bg-white hover:text-[#606c38] px-4 py-2 rounded-md"
-          >
-            <IconUserX size={18} /> Deactivate Account
-          </Link>
-        </li>
-        <li>
-          <Link
-            href="#"
+          <button
             onClick={() => open()}
-            className="flex items-center gap-2 text-white hover:bg-white hover:text-[#606c38] px-4 py-2 rounded-md"
+            className="flex items-center gap-2 text-white hover:bg-white hover:text-[#606c38] px-4 py-2 rounded-md w-full text-left"
           >
-            <IconPower size={18} /> Log Out
-          </Link>
+            <IconPower size={18} />
+            <span className="hidden sm:inline">Log Out</span>
+          </button>
         </li>
-        <Modal
-          opened={opened}
-          onClose={close}
-          title="Log out"
-          centered
-          size="md"
-        >
-          <Center mb="md" className="flex flex-col items-center">
-            <Text size="sm" className="font-bold">
-              Are you sure you want to log out?
-            </Text>
-            <Text size="sm" c="dimmed">
-              This action cannot be undone.
-            </Text>
-            <Text size="sm" c="dimmed">
-              If you are sure, please click the button below to proceed.
-            </Text>
-            <div className="flex justify-center mt-4">
-              <Button color="red" onClick={() => logout()}>
-                Log Out
-              </Button>
-            </div>
-          </Center>
-        </Modal>
       </ul>
+
+      <Modal opened={opened} onClose={close} title="Log out" centered size="md">
+        <Center mb="md" className="flex flex-col items-center">
+          <Text size="sm" className="font-bold">
+            Are you sure you want to log out?
+          </Text>
+          <Text size="sm" c="dimmed">
+            This action cannot be undone.
+          </Text>
+          <Text size="sm" c="dimmed">
+            If you are sure, please click the button below to proceed.
+          </Text>
+          <div className="flex justify-center mt-4">
+            <Button color="red" onClick={() => logout()}>
+              Log Out
+            </Button>
+          </div>
+        </Center>
+      </Modal>
     </div>
   );
 };

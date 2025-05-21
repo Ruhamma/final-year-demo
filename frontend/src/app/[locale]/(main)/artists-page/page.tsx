@@ -25,7 +25,9 @@ export default function ArtistsPage() {
         style={{ backgroundImage: `url('/images/Product Image (2).png')` }}
       >
         <div className="absolute inset-0 bg-[#283618]/60 flex flex-col justify-center items-left text-white text-center px-4">
-          <h1 className="text-4xl font-bold font-serif text-left">Discover Artist</h1>
+          <h1 className="text-4xl font-bold font-serif text-left">
+            Discover Artist
+          </h1>
           <p className="mt-4 max-w-2xl text-left">
             Immerse yourself in a world of artistic brilliance! Explore our
             curated selection of talented artists, each with a unique voice and
@@ -135,96 +137,104 @@ export default function ArtistsPage() {
         </div>
       </section> */}
 
-<section className="w-full py-12 bg-[#fffaf0] flex flex-col items-center">
-  {/* Heading */}
-  <div className="text-center mb-20">
-    <h2 className="text-3xl font-semibold text-black">Rising Artist</h2>
-    <p className="text-gray-500 mt-2">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-    </p>
-  </div>
+      <section className="w-full py-12 bg-[#fffaf0] flex flex-col items-center">
+        {/* Heading */}
+        <div className="text-center mb-10 px-4">
+          <h2 className="text-3xl font-semibold text-black">Rising Artist</h2>
+          <p className="text-gray-500 mt-2">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          </p>
+        </div>
 
-  <div className="flex gap-6">
-    
-    <div className="flex flex-col gap-6">
-      {[...Array(2)].map((_, i) => (
-        <div key={i} className="relative w-[250px] h-[350px]">
-          <Image
-            src="/images/port1.jpg"
-            alt="artist"
-            fill
-            className="object-cover rounded-md"
-          />
-          <Image
-            src="/images/Overlay.png"
-            alt="overlay"
-            width={400}
-            height={100}
-            className="absolute bottom-0 left-0 w-full h-[100px] object-cover"
-          />
-          <div className="absolute bottom-3 right-4 text-white z-10">
-            <h3 className="font-semibold text-sm">Bilen Assefa</h3>
-            <p className="text-xs text-[#facc15]">My Art</p>
-            <p className="text-xs">New York</p>
+        <div className="flex flex-col md:flex-row md:gap-6 items-center md:items-start">
+          {/* Column 1 */}
+          <div className="flex flex-col gap-6 mb-6 md:mb-0">
+            {[...Array(2)].map((_, i) => (
+              <div
+                key={i}
+                className="relative w-[90vw] max-w-[250px] h-[350px]"
+              >
+                <Image
+                  src="/images/port1.jpg"
+                  alt="artist"
+                  fill
+                  className="object-cover rounded-md"
+                />
+                <Image
+                  src="/images/Overlay.png"
+                  alt="overlay"
+                  width={400}
+                  height={100}
+                  className="absolute bottom-0 left-0 w-full h-[100px] object-cover"
+                />
+                <div className="absolute bottom-3 right-4 text-white z-10">
+                  <h3 className="font-semibold text-sm">Bilen Assefa</h3>
+                  <p className="text-xs text-[#facc15]">My Art</p>
+                  <p className="text-xs">New York</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Column 2 */}
+          <div className="flex flex-col gap-6 mb-6 md:mb-0 md:-mt-10">
+            {[...Array(2)].map((_, i) => (
+              <div
+                key={i}
+                className="relative w-[90vw] max-w-[250px] h-[350px]"
+              >
+                <Image
+                  src="/images/port1.jpg"
+                  alt="artist"
+                  fill
+                  className="object-cover rounded-md"
+                />
+                <Image
+                  src="/images/Overlay.png"
+                  alt="overlay"
+                  width={400}
+                  height={100}
+                  className="absolute bottom-0 left-0 w-full h-[100px] object-cover"
+                />
+                <div className="absolute bottom-3 right-4 text-white z-10">
+                  <h3 className="font-semibold text-sm">Bilen Assefa</h3>
+                  <p className="text-xs text-[#facc15]">My Art</p>
+                  <p className="text-xs">New York</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Column 3 */}
+          <div className="flex flex-col gap-6">
+            {[...Array(2)].map((_, i) => (
+              <div
+                key={i}
+                className="relative w-[90vw] max-w-[250px] h-[350px]"
+              >
+                <Image
+                  src="/images/port1.jpg"
+                  alt="artist"
+                  fill
+                  className="object-cover rounded-md"
+                />
+                <Image
+                  src="/images/Overlay.png"
+                  alt="overlay"
+                  width={400}
+                  height={100}
+                  className="absolute bottom-0 left-0 w-full h-[100px] object-cover"
+                />
+                <div className="absolute bottom-3 right-4 text-white z-10">
+                  <h3 className="font-semibold text-sm">Bilen Assefa</h3>
+                  <p className="text-xs text-[#facc15]">My Art</p>
+                  <p className="text-xs">New York</p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
-      ))}
-    </div>
-
-  
-    <div className="flex flex-col gap-6 -mt-10">
-      {[...Array(2)].map((_, i) => (
-        <div key={i} className="relative w-[250px] h-[350px]">
-          <Image
-            src="/images/port1.jpg"
-            alt="artist"
-            fill
-            className="object-cover rounded-md"
-          />
-          <Image
-            src="/images/Overlay.png"
-            alt="overlay"
-            width={400}
-            height={100}
-            className="absolute bottom-0 left-0 w-full h-[100px] object-cover"
-          />
-          <div className="absolute bottom-3 right-4 text-white z-10">
-            <h3 className="font-semibold text-sm">Bilen Assefa</h3>
-            <p className="text-xs text-[#facc15]">My Art</p>
-            <p className="text-xs">New York</p>
-          </div>
-        </div>
-      ))}
-    </div>
-
-    {/* Right Column */}
-    <div className="flex flex-col gap-6">
-      {[...Array(2)].map((_, i) => (
-        <div key={i} className="relative w-[250px] h-[350px]">
-          <Image
-            src="/images/port1.jpg"
-            alt="artist"
-            fill
-            className="object-cover rounded-md"
-          />
-          <Image
-            src="/images/Overlay.png"
-            alt="overlay"
-            width={400}
-            height={100}
-            className="absolute bottom-0 left-0 w-full h-[100px] object-cover"
-          />
-          <div className="absolute bottom-3 right-4 text-white z-10">
-            <h3 className="font-semibold text-sm">Bilen Assefa</h3>
-            <p className="text-xs text-[#facc15]">My Art</p>
-            <p className="text-xs">New York</p>
-          </div>
-        </div>
-      ))}
-    </div>
-  </div>
-</section>
-
+      </section>
 
       <section className="container mx-auto px-6 py-12 text-center text-sm text-gray-600">
         <p>

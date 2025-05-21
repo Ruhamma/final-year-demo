@@ -122,7 +122,7 @@ export default function ArtistProfile() {
             <Button variant="ghost">Clear All</Button>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
             {artworks.map((art, idx) => (
               <Card key={idx} className="relative">
                 <CardContent className="">
@@ -131,7 +131,7 @@ export default function ArtistProfile() {
                     alt={art.title}
                     width={300}
                     height={300}
-                    className=" h-[300px] w-full "
+                    className="h-[300px] w-full"
                   />
                   <div className="relative h-auto flex flex-col w-full">
                     <h3 className="mt-2 font-semibold italic">{art.title}</h3>
@@ -139,7 +139,7 @@ export default function ArtistProfile() {
                     <p className="text-sm italic">{art.dimensions}</p>
                     <p className="text-sm font-medium text-black">
                       {art.price}
-                    </p>{" "}
+                    </p>
                     <button className="absolute top-2 right-0 text-gray-500 hover:text-red-500">
                       {/* <Heart size={20} /> */}
                     </button>
