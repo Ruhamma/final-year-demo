@@ -70,9 +70,12 @@ const artworkSchema = z.object({
   description: z.string().max(1000, "Description too long").optional(),
   price: z.number().min(0, "Price must be positive").optional(),
   images: z
-    .instanceof(File)
-    .nullable()
-    .refine((file) => !file || file.size <= 5_000_000, "Max image size is 5MB"),
+    .array(z.instanceof(File))
+    .max(5, "Maximum 5 images allowed")
+    .refine(
+      (files) => files.every((file) => file.size <= 5_000_000),
+      "Each image must be less than 5MB"
+    ),
   category_id: z.string().min(1, "Category is required"),
   medium_id: z.string().min(1, "Medium is required"),
   style_id: z.string().min(1, "Style is required"),
@@ -126,7 +129,9 @@ const CreateArtworkPage = () => {
     try {
       const formData = new FormData();
       const { images, ...rest } = data;
-      const artworkData = Object.entries(data).reduce((acc, [key, value]) => {
+
+      // Clean the rest of the artwork data
+      const artworkData = Object.entries(rest).reduce((acc, [key, value]) => {
         if (value !== undefined && value !== null) {
           acc[key] = value;
         }
@@ -135,9 +140,13 @@ const CreateArtworkPage = () => {
 
       formData.append("artwork", JSON.stringify(artworkData));
 
-      if (images) {
-        formData.append("image", images);
+      if (images && images.length > 0) {
+        images.forEach((image) => {
+          formData.append("images", image);
+        });
       }
+      console.log("FormData:", formData);
+
       await createArtwork(formData).unwrap();
       reset();
       notify("Success", "Artwork created successfully");
@@ -203,21 +212,24 @@ const CreateArtworkPage = () => {
             accept="image/*"
             leftSection={<IconUpload size={16} />}
             placeholder="Select artwork image"
-            onChange={(file) => setValue("images", file || null)}
+            onChange={(files) => setValue("images", files || [])}
             error={errors.images?.message}
+            multiple
           />
 
-          {imageFile && (
-            <Box mt="sm">
-              <Image
-                src={URL.createObjectURL(imageFile)}
-                alt="Preview"
-                width={300}
-                height={300}
-                style={{ objectFit: "contain" }}
-              />
-            </Box>
-          )}
+          <Flex gap={"sm"} wrap="wrap">
+            {imageFile?.map((file, index) => (
+              <Box key={index} mt="sm">
+                <Image
+                  src={URL.createObjectURL(file)}
+                  alt={`Preview ${index + 1}`}
+                  width={200}
+                  height={200}
+                  style={{ objectFit: "contain" }}
+                />
+              </Box>
+            ))}
+          </Flex>
 
           <Divider label="Artwork Details" labelPosition="center" />
           <Group grow>

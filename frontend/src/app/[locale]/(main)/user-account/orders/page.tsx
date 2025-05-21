@@ -85,101 +85,102 @@ const Page = () => {
         </Table.Thead>
 
         <Table.Tbody>
-          {data.map((order) => (
-            <Fragment key={order.id}>
-              <Table.Tr>
-                <Table.Td>{order.id.slice(0, 8)}</Table.Td>
-                <Table.Td>
-                  {new Date(order.created_at).toLocaleDateString()}
-                </Table.Td>
-                <Table.Td>ETB {order.total_amount.toFixed(2)}</Table.Td>
-                <Table.Td>{order.payment_method.toUpperCase()}</Table.Td>
-                <Table.Td>
-                  <Badge
-                    color={
-                      order.status === "PENDING"
-                        ? "yellow"
-                        : order.status === "PAID"
-                        ? "green"
-                        : "gray"
-                    }
-                  >
-                    {order.status}
-                  </Badge>
-                </Table.Td>
-                <Table.Td>
-                  <Group gap={4}>
-                    <Button
-                      size="xs"
-                      variant="subtle"
-                      onClick={() => toggleRow(order.id)}
-                      leftSection={
-                        openedOrderId === order.id ? (
-                          <IconChevronUp size={16} />
-                        ) : (
-                          <IconChevronDown size={16} />
-                        )
+          {data &&
+            data?.orders?.map((order) => (
+              <Fragment key={order.id}>
+                <Table.Tr>
+                  <Table.Td>{order.id.slice(0, 8)}</Table.Td>
+                  <Table.Td>
+                    {new Date(order.created_at).toLocaleDateString()}
+                  </Table.Td>
+                  <Table.Td>ETB {order.total_amount.toFixed(2)}</Table.Td>
+                  <Table.Td>{order.payment_method.toUpperCase()}</Table.Td>
+                  <Table.Td>
+                    <Badge
+                      color={
+                        order.status === "PENDING"
+                          ? "yellow"
+                          : order.status === "PAID"
+                          ? "green"
+                          : "gray"
                       }
                     >
-                      Items
-                    </Button>
-                    <Button
-                      size="xs"
-                      variant="light"
-                      onClick={() => router.push(`orders/${order.id}`)}
-                    >
-                      View
-                    </Button>
-                  </Group>
-                </Table.Td>
-              </Table.Tr>
-
-              <Table.Tr>
-                <Table.Td colSpan={6} style={{ padding: 0, border: "none" }}>
-                  <Collapse in={openedOrderId === order.id}>
-                    <Box p="md">
-                      <Text fw={500} mb="sm">
-                        Order Items
-                      </Text>
-                      <Table
-                        withColumnBorders
-                        striped
-                        verticalSpacing="sm"
-                        highlightOnHover
-                        withTableBorder
+                      {order.status}
+                    </Badge>
+                  </Table.Td>
+                  <Table.Td>
+                    <Group gap={4}>
+                      <Button
+                        size="xs"
+                        variant="subtle"
+                        onClick={() => toggleRow(order.id)}
+                        leftSection={
+                          openedOrderId === order.id ? (
+                            <IconChevronUp size={16} />
+                          ) : (
+                            <IconChevronDown size={16} />
+                          )
+                        }
                       >
-                        <Table.Thead>
-                          <Table.Tr>
-                            <Table.Th>Title</Table.Th>
-                            <Table.Th>Price</Table.Th>
-                            <Table.Th>Quantity</Table.Th>
-                            <Table.Th>Subtotal</Table.Th>
-                          </Table.Tr>
-                        </Table.Thead>
-                        <Table.Tbody>
-                          {order.items.map((item) => (
-                            <Table.Tr key={item.id}>
-                              <Table.Td>{item.artwork_title}</Table.Td>
-                              <Table.Td>
-                                ETB {item.price_at_purchase.toFixed(2)}
-                              </Table.Td>
-                              <Table.Td>{item.quantity}</Table.Td>
-                              <Table.Td>
-                                ETB{" "}
-                                {(
-                                  item.price_at_purchase * item.quantity
-                                ).toFixed(2)}
-                              </Table.Td>
+                        Items
+                      </Button>
+                      <Button
+                        size="xs"
+                        variant="light"
+                        onClick={() => router.push(`orders/${order.id}`)}
+                      >
+                        View
+                      </Button>
+                    </Group>
+                  </Table.Td>
+                </Table.Tr>
+
+                <Table.Tr>
+                  <Table.Td colSpan={6} style={{ padding: 0, border: "none" }}>
+                    <Collapse in={openedOrderId === order.id}>
+                      <Box p="md">
+                        <Text fw={500} mb="sm">
+                          Order Items
+                        </Text>
+                        <Table
+                          withColumnBorders
+                          striped
+                          verticalSpacing="sm"
+                          highlightOnHover
+                          withTableBorder
+                        >
+                          <Table.Thead>
+                            <Table.Tr>
+                              <Table.Th>Title</Table.Th>
+                              <Table.Th>Price</Table.Th>
+                              <Table.Th>Quantity</Table.Th>
+                              <Table.Th>Subtotal</Table.Th>
                             </Table.Tr>
-                          ))}
-                        </Table.Tbody>
-                      </Table>
-                    </Box>
-                  </Collapse>
-                </Table.Td>
-              </Table.Tr>
-            </Fragment>
-          ))}
+                          </Table.Thead>
+                          <Table.Tbody>
+                            {order.items.map((item) => (
+                              <Table.Tr key={item.id}>
+                                <Table.Td>{item.artwork_title}</Table.Td>
+                                <Table.Td>
+                                  ETB {item.price_at_purchase.toFixed(2)}
+                                </Table.Td>
+                                <Table.Td>{item.quantity}</Table.Td>
+                                <Table.Td>
+                                  ETB{" "}
+                                  {(
+                                    item.price_at_purchase * item.quantity
+                                  ).toFixed(2)}
+                                </Table.Td>
+                              </Table.Tr>
+                            ))}
+                          </Table.Tbody>
+                        </Table>
+                      </Box>
+                    </Collapse>
+                  </Table.Td>
+                </Table.Tr>
+              </Fragment>
+            ))}
         </Table.Tbody>
       </Table>
     </Box>

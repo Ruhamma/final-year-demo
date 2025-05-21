@@ -176,7 +176,7 @@ const Page = () => {
         </Table.Thead>
 
         <Table.Tbody>
-          {filteredOrders.map((order) => (
+          {filteredOrders?.map((order) => (
             <Fragment key={order.id}>
               <Table.Tr>
                 <Table.Td>{order.id.slice(0, 8)}</Table.Td>

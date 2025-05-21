@@ -35,12 +35,10 @@ export default async function RootLayout({
   children: React.ReactNode;
  params: { locale: string };
 }>) {
-   // Ensure that the incoming `locale` is valid
   if (!routing.locales.includes(locale as any)) {
     notFound();
   }
 
-  // Enable static rendering
   setRequestLocale(locale);
 
   const messages = await getMessages({ locale });
