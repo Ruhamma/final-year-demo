@@ -48,7 +48,7 @@ import {
 } from "@/store/api/admin/admin";
 import { notify } from "@/shared/components/notification/notification";
 
-const AdminArtworksPage = () => {
+const Page = () => {
   const limit = 12;
   const [page, setPage] = useState(1);
   const skip = (page - 1) * limit;
@@ -447,4 +447,4 @@ const AdminArtworksPage = () => {
   );
 };
 
-export default AdminArtworksPage;
+export default Page;

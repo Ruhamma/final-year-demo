@@ -10,77 +10,112 @@ import {
   IconChartBar,
 } from "@tabler/icons-react";
 import { usePathname } from "next/navigation";
+
 const SideBar = () => {
   const pathname = usePathname();
-  console.log(pathname);
+
+  const isActive = (path) => {
+    return pathname?.endsWith(path);
+  };
+
   return (
-    <div className="bg-[#606C38]/40 text-black  text-white w-1/5 p-4 flex flex-col items-center justify-start mr-10">
-      <ul className="mt-4 space-y-4 text-gray-300">
-        <li
-          className={`flex items-center gap-2 hover:bg-[#606C38] hover:text-white rounded-md p-2 ${
-            pathname === "/dashboard" ? "bg-[#606C38] text-white" : ""
-          }`}
-        >
-          <IconHome size={20} color="black" className="hover:text-white" />
-          <Link href="/admin/dashboard" className="text-black ">
-            Dashboard
+    <div className="bg-gradient-to-b from-[#606C38] to-[#283618] text-white w-64 min-h-[60vh] p-6 flex flex-col shadow-xl">
+      <ul className="space-y-2 mt-10">
+        <li>
+          <Link
+            href="/admin/dashboard"
+            className={`flex items-center gap-3 p-3 rounded-lg transition-all duration-200 hover:bg-[#FEFAE0] hover:text-[#283618] ${
+              isActive("/dashboard")
+                ? "bg-[#FEFAE0] text-[#283618] font-medium"
+                : ""
+            }`}
+          >
+            <IconHome size={22} className="flex-shrink-0" />
+            <span>Dashboard</span>
           </Link>
         </li>
-        <li
-          className={`flex items-center gap-2 hover:bg-[#606C38]  hover:text-white rounded-md p-2 ${
-            pathname === "/users" ? "bg-[#606C38] text-white" : ""
-          }`}
-        >
-          <IconUser size={20} color="black" className="hover:text-white" />
-          <Link href="/admin/users" className="text-black">
-            Users
+
+        <li>
+          <Link
+            href="/admin/dashboard/users"
+            className={`flex items-center gap-3 p-3 rounded-lg transition-all duration-200 hover:bg-[#FEFAE0] hover:text-[#283618] ${
+              isActive("/users")
+                ? "bg-[#FEFAE0] text-[#283618] font-medium"
+                : ""
+            }`}
+          >
+            <IconUser size={22} className="flex-shrink-0" />
+            <span>Users</span>
           </Link>
         </li>
-        <li
-          className={`flex items-center gap-2 hover:bg-[#606C38]  hover:text-white rounded-md p-2 ${
-            pathname === "/artists" ? "bg-[#606C38] text-white" : ""
-          }`}
-        >
-          <IconPaint size={20} color="black" className="hover:text-white" />
-          <Link href="/artists" className="text-black">
-            Artists
+
+        <li>
+          <Link
+            href="/admin/dashboard/artists"
+            className={`flex items-center gap-3 p-3 rounded-lg transition-all duration-200 hover:bg-[#FEFAE0] hover:text-[#283618] ${
+              isActive("/artists")
+                ? "bg-[#FEFAE0] text-[#283618] font-medium"
+                : ""
+            }`}
+          >
+            <IconUser size={22} className="flex-shrink-0" />
+            <span>Artists</span>
           </Link>
         </li>
-        <li
-          className={`flex items-center gap-2 hover:bg-[#606C38]  hover:text-white rounded-md p-2 ${
-            pathname === "/artworks" ? "bg-[#606C38] text-white" : ""
-          }`}
-        >
-          <IconPaint size={20} color="black" className="hover:text-white" />
-          <Link href="/artworks" className="text-black">
-            Artworks
+
+        <li>
+          <Link
+            href="/admin/dashboard/artworks"
+            className={`flex items-center gap-3 p-3 rounded-lg transition-all duration-200 hover:bg-[#FEFAE0] hover:text-[#283618] ${
+              isActive("/artworks")
+                ? "bg-[#FEFAE0] text-[#283618] font-medium"
+                : ""
+            }`}
+          >
+            <IconPaint size={22} className="flex-shrink-0" />
+            <span>Artworks</span>
           </Link>
         </li>
-        <li
-          className={`flex items-center gap-2 hover:bg-[#606C38]  hover:text-white rounded-md p-2 ${
-            pathname === "/orders" ? "bg-[#606C38] text-white" : ""
-          }`}
-        >
-          <IconShoppingCart
-            size={20}
-            color="black"
-            className="hover:text-white"
-          />
-          <Link href="/orders" className="text-black">
-            Orders
+
+        <li>
+          <Link
+            href="/admin/dashboard/orders"
+            className={`flex items-center gap-3 p-3 rounded-lg transition-all duration-200 hover:bg-[#FEFAE0] hover:text-[#283618] ${
+              isActive("/orders")
+                ? "bg-[#FEFAE0] text-[#283618] font-medium"
+                : ""
+            }`}
+          >
+            <IconShoppingCart size={22} className="flex-shrink-0" />
+            <span>Orders</span>
           </Link>
         </li>
-        <li
-          className={`flex items-center gap-2 hover:bg-[#606C38]  hover:text-white rounded-md p-2 ${
-            pathname === "/reports" ? "bg-[#606C38] text-white" : ""
-          }`}
-        >
-          <IconChartBar size={20} color="black" className="hover:text-white" />
-          <Link href="/reports" className="text-black">
-            Metadata
+
+        <li>
+          <Link
+            href="/admin/dashboard/metadata"
+            className={`flex items-center gap-3 p-3 rounded-lg transition-all duration-200 hover:bg-[#FEFAE0] hover:text-[#283618] ${
+              isActive("/metadata")
+                ? "bg-[#FEFAE0] text-[#283618] font-medium"
+                : ""
+            }`}
+          >
+            <IconChartBar size={22} className="flex-shrink-0" />
+            <span>Metadata</span>
           </Link>
         </li>
       </ul>
+
+      <div className="flex-grow"></div>
+
+      <div className="pb-4">
+        <div className="border-t border-[#FEFAE0]/20 pt-4">
+          <div className="flex items-center gap-3 p-2 text-white/80 hover:text-white cursor-pointer">
+            <IconUser size={20} />
+            <span>Admin Account</span>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

@@ -2,17 +2,17 @@ import React from "react";
 import { Box } from "@mantine/core";
 import Sidebar from "./components/Sidebar";
 import Header from "./components/Header";
-const layout = ({ children }: { children: React.ReactNode }) => {
 
+const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <>
+    <div className="flex flex-col h-screen">
       <Header />
-      <Box className="flex h-screen">
+      <div className="flex flex-1 overflow-hidden">
         <Sidebar />
-        {children}
-      </Box>
-    </>
+        <main className="flex-1 overflow-y-auto p-10">{children}</main>
+      </div>
+    </div>
   );
 };
 
-export default layout;
+export default Layout;

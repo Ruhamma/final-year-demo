@@ -22,7 +22,7 @@ import {
 } from "@tabler/icons-react";
 import { useRouter } from "next/navigation";
 
-export default function MetadataDashboard() {
+const Page = () => {
   const router = useRouter();
   const { data, error, isLoading } = useGetMetadataCountsQuery({});
 
@@ -76,7 +76,7 @@ export default function MetadataDashboard() {
 
   return (
     <div className="px-10 py-8">
-      <Stack align="start" spacing="xs" mb="xl">
+      <Stack align="start" gap="xs" mb="xl">
         <Group gap="xs">
           <IconDatabase size={32} />
           <Title order={2}>Metadata Management</Title>
@@ -99,8 +99,8 @@ export default function MetadataDashboard() {
             withBorder
             className="hover:shadow-xl transition-all"
           >
-            <Stack spacing="sm">
-              <Group position="apart">
+            <Stack gap="sm">
+              <Group ps="apart">
                 <Group>
                   {icon}
                   <Text size="xl" fw={600}>
@@ -128,4 +128,5 @@ export default function MetadataDashboard() {
       </SimpleGrid>
     </div>
   );
-}
+};
+export default Page;

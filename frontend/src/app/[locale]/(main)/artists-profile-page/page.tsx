@@ -34,7 +34,7 @@ function Button({
   className = "",
   ...props
 }: ButtonProps) {
-  let baseStyle = "px-4 py-2 rounded-2xl font-medium";
+  const baseStyle = "px-4 py-2 rounded-2xl font-medium";
   let variantStyle = "";
 
   switch (variant) {
