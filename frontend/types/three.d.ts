@@ -1,20 +1,33 @@
 import * as THREE from "three";
-
-declare module "three" {
-  interface Object3DEventMap {
-    select: { target: THREE.Object3D };
-    squeeze: { target: THREE.Object3D };
-    end: { target: THREE.Object3D };
-  }
-}
+import { JSX } from "react";
 
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      ambientLight: JSX.IntrinsicElements["group"] &
-        THREE.AmbientLightParameters;
-      pointLight: JSX.IntrinsicElements["group"] & THREE.PointLightParameters;
-      mesh: JSX.IntrinsicElements["group"] & THREE.MeshParameters;
+      // Three.js elements
+      mesh: ReactThreeFiber.Object3DNode<THREE.Mesh, typeof THREE.Mesh>;
+      meshStandardMaterial: ReactThreeFiber.MaterialNode<
+        THREE.MeshStandardMaterial,
+        typeof THREE.MeshStandardMaterial
+      >;
+      planeGeometry: ReactThreeFiber.BufferGeometryNode<
+        THREE.PlaneGeometry,
+        typeof THREE.PlaneGeometry
+      >;
+      ambientLight: ReactThreeFiber.Object3DNode<
+        THREE.AmbientLight,
+        typeof THREE.AmbientLight
+      >;
+      pointLight: ReactThreeFiber.Object3DNode<
+        THREE.PointLight,
+        typeof THREE.PointLight
+      >;
+      perspectiveCamera: ReactThreeFiber.Object3DNode<
+        THREE.PerspectiveCamera,
+        typeof THREE.PerspectiveCamera
+      >;
+
+      // Add any other Three.js elements you use
     }
   }
 }

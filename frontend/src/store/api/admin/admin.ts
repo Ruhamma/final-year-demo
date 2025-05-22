@@ -8,18 +8,20 @@ export const adminApi = createApi({
   }),
   tagTypes: ["Users", "Artists", "Artworks", "Metadata", "Orders", "Analytics"],
   endpoints: (build) => ({
-    listUsers: build.query<any, { skip?: number; limit?: number }>({
-      query: ({ skip = 0, limit = 20 }) =>
-        `/users/?skip=${skip}&limit=${limit}`,
+    listUsers: build.query<any, any>({
+      query: (params) => ({
+        url: `/admin/users/`,
+        params,
+      }),
       providesTags: ["Users"],
     }),
     getUser: build.query<any, string>({
-      query: (userId) => `/users/${userId}`,
+      query: (userId) => `/admin/users/${userId}`,
       providesTags: (result, error, id) => [{ type: "Users", id }],
     }),
     updateUser: build.mutation<any, { userId: string; updates: any }>({
       query: ({ userId, updates }) => ({
-        url: `/users/${userId}`,
+        url: `/admin/users/${userId}`,
         method: "PUT",
         body: updates,
       }),
@@ -29,7 +31,7 @@ export const adminApi = createApi({
     }),
     deactivateUser: build.mutation<void, string>({
       query: (userId) => ({
-        url: `/users/${userId}`,
+        url: `/admin/users/${userId}`,
         method: "DELETE",
       }),
       invalidatesTags: ["Users"],
@@ -42,9 +44,10 @@ export const adminApi = createApi({
         is_active?: boolean;
         limit?: number;
         offset?: number;
+        search?: string;
       }
     >({
-      query: ({ is_verified, is_active, limit = 10, offset = 0 }) => {
+      query: ({ is_verified, is_active, limit = 10, offset = 0, search }) => {
         const params = new URLSearchParams();
         if (is_verified !== undefined)
           params.append("is_verified", String(is_verified));
@@ -52,133 +55,127 @@ export const adminApi = createApi({
           params.append("is_active", String(is_active));
         params.append("limit", String(limit));
         params.append("offset", String(offset));
-        return `/artists/?${params.toString()}`;
+        if (search) params.append("search", search);
+        return `/admin/artists/?${params.toString()}`;
       },
       providesTags: ["Artists"],
     }),
+
     getArtist: build.query<any, string>({
-      query: (artistId) => `/artists/${artistId}`,
-      providesTags: (result, error, id) => [{ type: "Artists", id }],
+      query: (artistId) => `/admin/artists/${artistId}`,
+      providesTags: ["Artists"],
     }),
+
     verifyArtist: build.mutation<any, string>({
       query: (artistId) => ({
-        url: `/artists/${artistId}/verify`,
+        url: `/admin/artists/${artistId}/verify`,
         method: "PUT",
       }),
-      invalidatesTags: (result, error, id) => [{ type: "Artists", id }],
+      invalidatesTags: ["Artists"],
     }),
+
     deactivateArtist: build.mutation<any, string>({
       query: (artistId) => ({
-        url: `/artists/${artistId}/deactivate`,
+        url: `/admin/artists/${artistId}/deactivate`,
         method: "PUT",
       }),
-      invalidatesTags: (result, error, id) => [{ type: "Artists", id }],
+      invalidatesTags: ["Artists"],
     }),
 
     // Artworks
-    listArtworks: build.query<
-      any,
-      {
-        skip?: number;
-        limit?: number;
-        category_id?: string;
-        medium_id?: string;
-        style_id?: string;
-        artist_id?: string;
-        is_featured?: boolean;
-        is_active?: boolean;
-        price_min?: number;
-        price_max?: number;
-      }
-    >({
-      query: (params) => {
-        const searchParams = new URLSearchParams();
-        Object.entries(params).forEach(([key, value]) => {
-          if (value !== undefined) searchParams.append(key, String(value));
-        });
-        return `/artworks?${searchParams.toString()}`;
-      },
+    listArtworks: build.query<any, any>({
+      query: (params) => ({
+        url: `/admin/artworks`,
+        params,
+      }),
       providesTags: ["Artworks"],
     }),
+
     getArtwork: build.query<any, string>({
-      query: (artworkId) => `/artworks/${artworkId}`,
-      providesTags: (result, error, id) => [{ type: "Artworks", id }],
+      query: (artworkId) => `/admin/artworks/${artworkId}`,
+      providesTags: ["Artworks"],
     }),
+
     toggleFeatureArtwork: build.mutation<
       any,
       { artworkId: string; feature: boolean }
     >({
       query: ({ artworkId, feature }) => ({
-        url: `/artworks/${artworkId}/feature?feature=${feature}`,
+        url: `/admin/artworks/${artworkId}/feature?feature=${feature}`,
         method: "PUT",
       }),
-      invalidatesTags: (result, error, { artworkId }) => [
-        { type: "Artworks", id: artworkId },
-      ],
+      invalidatesTags: ["Artworks"],
     }),
     toggleActivateArtwork: build.mutation<
       any,
       { artworkId: string; is_active: boolean }
     >({
       query: ({ artworkId, is_active }) => ({
-        url: `/artworks/${artworkId}/activateStatus?is_active=${is_active}`,
+        url: `/admin/artworks/${artworkId}/activateStatus?is_active=${is_active}`,
         method: "PUT",
       }),
-      invalidatesTags: (result, error, { artworkId }) => [
-        { type: "Artworks", id: artworkId },
-      ],
+      invalidatesTags: ["Artworks"],
     }),
 
     // Metadata
     createMetadata: build.mutation<any, { model_name: string; data: any }>({
       query: ({ model_name, data }) => ({
-        url: `/metadata/${model_name}/`,
+        url: `/admin/metadata/${model_name}/`,
         method: "POST",
         body: data,
       }),
       invalidatesTags: ["Metadata"],
     }),
-    listMetadata: build.query<any[], { model_name: string; search?: string }>({
-      query: ({ model_name, search }) =>
-        `/metadata/${model_name}/` +
-        (search ? `?search=${encodeURIComponent(search)}` : ""),
+    listMetadata: build.query({
+      query: ({ model_name, search, skip = 0, limit = 10 }) =>
+        `admin/metadata/${model_name}/?skip=${skip}&limit=${limit}` +
+        (search ? `&search=${encodeURIComponent(search)}` : ""),
       providesTags: ["Metadata"],
     }),
     getMetadata: build.query<any, { model_name: string; entry_id: string }>({
       query: ({ model_name, entry_id }) =>
-        `/metadata/${model_name}/${entry_id}`,
-      providesTags: (result, error, { entry_id }) => [
-        { type: "Metadata", id: entry_id },
-      ],
+        `/admin/metadata/${model_name}/${entry_id}`,
+      providesTags: ["Metadata"],
     }),
     updateMetadata: build.mutation<
       any,
       { model_name: string; entry_id: string; data: any }
     >({
       query: ({ model_name, entry_id, data }) => ({
-        url: `/metadata/${model_name}/${entry_id}`,
+        url: `/admin/metadata/${model_name}/${entry_id}`,
         method: "PUT",
         body: data,
       }),
-      invalidatesTags: (result, error, { entry_id }) => [
-        { type: "Metadata", id: entry_id },
-      ],
+      invalidatesTags: ["Metadata"],
     }),
     deleteMetadata: build.mutation<
       any,
       { model_name: string; entry_id: string }
     >({
       query: ({ model_name, entry_id }) => ({
-        url: `/metadata/${model_name}/${entry_id}`,
+        url: `/admin/metadata/${model_name}/${entry_id}`,
         method: "DELETE",
       }),
       invalidatesTags: ["Metadata"],
     }),
     getMetadataUsageCounts: build.query<any[], string>({
-      query: (model_name) => `/metadata/${model_name}/usage`,
+      query: (model_name) => `/admin/metadata/${model_name}/usage`,
       providesTags: ["Metadata"],
     }),
-
+    getMetadataCounts: build.query({
+      query: () => `/admin/metadata/counts`,
+      providesTags: ["Metadata"],
+    }),
+    exportMetadataUsageCSV: build.mutation<Blob, string>({
+      query: (model_name) => ({
+        url: `/admin/metadata/${model_name}/usage/export`,
+        method: "GET",
+        responseHandler: (response) => response.blob(),
+        headers: {
+          Accept: "text/csv",
+        },
+      }),
+    }),
     listOrders: build.query<
       any[],
       {
@@ -211,12 +208,16 @@ export const adminApi = createApi({
         if (search) params.append("search", search);
         params.append("skip", skip.toString());
         params.append("limit", limit.toString());
-        return `/orders?${params.toString()}`;
+        return `/admin/orders?${params.toString()}`;
       },
       providesTags: ["Orders"],
     }),
+    getOrderById: build.query<any, string>({
+      query: (orderId) => `/admin/orders/${orderId}`,
+      providesTags: ["Orders"],
+    }),
     getOrderSummary: build.query<any, void>({
-      query: () => "/orders/summary",
+      query: () => "/admin/orders/summary",
       providesTags: ["Orders"],
     }),
 
@@ -249,9 +250,12 @@ export const {
   useUpdateMetadataMutation,
   useDeleteMetadataMutation,
   useGetMetadataUsageCountsQuery,
+  useGetMetadataCountsQuery,
+  useExportMetadataUsageCSVMutation,
 
   useListOrdersQuery,
   useGetOrderSummaryQuery,
+  useGetOrderByIdQuery,
 
   useGetAdminAnalyticsQuery,
 } = adminApi;

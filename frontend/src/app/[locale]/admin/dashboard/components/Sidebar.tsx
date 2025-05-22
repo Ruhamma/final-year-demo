@@ -14,7 +14,7 @@ const SideBar = () => {
   const pathname = usePathname();
   console.log(pathname);
   return (
-    <div className="bg-[#606C38]/30 text-black  text-white w-1/6 p-4 flex flex-col items-center justify-start h-screen mr-10">
+    <div className="bg-[#606C38]/40 text-black  text-white w-1/5 p-4 flex flex-col items-center justify-start mr-10">
       <ul className="mt-4 space-y-4 text-gray-300">
         <li
           className={`flex items-center gap-2 hover:bg-[#606C38] hover:text-white rounded-md p-2 ${
@@ -22,7 +22,7 @@ const SideBar = () => {
           }`}
         >
           <IconHome size={20} color="black" className="hover:text-white" />
-          <Link href="/dashboard" className="text-black ">
+          <Link href="/admin/dashboard" className="text-black ">
             Dashboard
           </Link>
         </li>
@@ -32,7 +32,7 @@ const SideBar = () => {
           }`}
         >
           <IconUser size={20} color="black" className="hover:text-white" />
-          <Link href="/users" className="text-black">
+          <Link href="/admin/users" className="text-black">
             Users
           </Link>
         </li>

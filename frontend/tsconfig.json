@@ -26,5 +26,7 @@
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
   "exclude": ["node_modules"],
-  "jsxImportSource": "react"
+  "jsxImportSource": "react",
+  "jsx": "react-jsx",
+  "types": ["@types/three", "@react-three/fiber"]
 }
