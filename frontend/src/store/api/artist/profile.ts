@@ -1,10 +1,11 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { AnyARecord } from "dns";
 
 export const artistProfileApi = createApi({
   reducerPath: "artistProfileApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: process.env.NEXT_PUBLIC_API || "http://localhost:8000/api",
-    credentials: "include",
+    baseUrl: 'https://online-marketplace-for-local-artists.onrender.com/', //removed /api
+    // credentials: "include",  //removed for test
   }),
   tagTypes: ["ArtistProfile", "dashboard"],
   endpoints: (builder) => ({
@@ -12,6 +13,28 @@ export const artistProfileApi = createApi({
       query: () => "artist/profile/",
       providesTags: ["ArtistProfile"],
     }),
+
+    // test artists query
+    //   getArtists: builder.query<any, void>({
+    //   query: () => "/artists", 
+    // }),
+
+   getArtists: builder.query<any, void>({
+      query: () => ({
+        url: `/artist`,
+        method: "GET",
+      }),
+    providesTags: ["ArtistProfile"],
+    }),
+
+    getArtistsById: builder.query<any, string>({
+      query: (id) => ({
+        url: `/artist/${id}`,
+        method: "GET",
+      }),
+    providesTags: ["ArtistProfile"],
+    }),
+
     updateArtistProfile: builder.mutation({
       query: (formData) => ({
         url: `artist/profile/update`,
@@ -67,4 +90,10 @@ export const {
   useGetDashboardMetricsQuery,
   useGetDashBoardHistoryQuery,
   useGetDashboardTopFavoritedQuery,
+  useGetArtistsQuery,
+  useGetArtistsByIdQuery,
 } = artistProfileApi;
+
+
+
+

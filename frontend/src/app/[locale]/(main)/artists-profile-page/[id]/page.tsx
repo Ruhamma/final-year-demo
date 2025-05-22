@@ -1,0 +1,291 @@
+"use client";
+import Image from "next/image";
+import { ButtonHTMLAttributes, ReactNode, useEffect, useState } from "react";
+import { useGetArtistsByIdQuery } from "@/store/api/artist/profile";
+import {
+  useGetArtworksByArtistIdQuery,
+  useGetMetadataQuery,
+} from "@/store/api/artwork/artwork";
+import { usePathname } from "next/navigation";
+import { Group, Rating, Select, TextInput } from "@mantine/core";
+import { useDebouncedValue } from "@mantine/hooks";
+import { IconFilter, IconSearch } from "@tabler/icons-react";
+
+// Utility components
+function Card({
+  children,
+  className = "",
+}: {
+  children: ReactNode;
+  className?: string;
+}) {
+  return <div className={`bg-none p-4 ${className}`}>{children}</div>;
+}
+
+function CardContent({
+  children,
+  className = "",
+}: {
+  children: ReactNode;
+  className?: string;
+}) {
+  return <div className={`flex flex-col ${className}`}>{children}</div>;
+}
+
+type ButtonProps = {
+  children: ReactNode;
+  variant?: "solid" | "outline" | "ghost" | "subtle";
+  className?: string;
+} & ButtonHTMLAttributes<HTMLButtonElement>;
+
+function Button({
+  children,
+  variant = "solid",
+  className = "",
+  ...props
+}: ButtonProps) {
+  const baseStyle = "px-4 py-2 rounded-2xl font-medium";
+  let variantStyle = "";
+
+  switch (variant) {
+    case "outline":
+      variantStyle =
+        "border border-gray-300 bg-transparent text-black hover:bg-gray-100";
+      break;
+    case "ghost":
+      variantStyle = "bg-transparent text-gray-500 hover:text-black";
+      break;
+    case "subtle":
+      variantStyle = "bg-transparent text-black hover:underline";
+      break;
+    default:
+      variantStyle = "bg-black text-white hover:bg-gray-800";
+      break;
+  }
+
+  return (
+    <button className={`${baseStyle} ${variantStyle} ${className}`} {...props}>
+      {children}
+    </button>
+  );
+}
+
+// Main Component
+export default function ArtistProfile() {
+  const pathname = usePathname();
+    const [page, setPage] = useState(1);
+  const limit = 12;
+  const skip = (page - 1) * limit;
+  const artistId = pathname ? pathname.split("/").pop() : "";
+  const { data: metadata } = useGetMetadataQuery({});
+  const [search, setSearch] = useState("");
+  const [debounced] = useDebouncedValue(search, 300);
+  const [selectedFilters, setSelectedFilters] = useState({
+    price: "",
+    medium: "",
+    style: "",
+    category: "",
+  });
+
+
+  const { data: artistData, isLoading: isArtistLoading } =
+    useGetArtistsByIdQuery(artistId || "");
+
+  useEffect(() => {
+    console.log("Filters changed:", {
+      search: debounced,
+      ...selectedFilters,
+    });
+
+  
+  }, [debounced, selectedFilters]);
+  const { data: artworksData, isLoading: isArtworksLoading } =
+    useGetArtworksByArtistIdQuery({
+      artistId,
+      skip,
+      limit,
+      search: debounced,
+      price: selectedFilters.price,
+      category: selectedFilters.category,
+      medium: selectedFilters.medium,
+      style: selectedFilters.style,
+    });
+
+  const artist = artistData || {};
+  const artworks = artworksData?.artworks || [];
+  const total = artworksData?.total || 0;
+  const totalPages = Math.ceil(total / limit);
+
+  const handleClear = () => {
+    setSelectedFilters({ price: "", medium: "", style: "", category: "" });
+    setSearch("");
+  };
+
+  return (
+    <div className="bg-cream min-h-screen text-gray-800 bg-[#FFFCEA]">
+      <div
+        className="relative w-full h-[300px] bg-cover bg-center z-0"
+        style={{ backgroundImage: `url(${artist.thumbnail})` }}
+      ></div>
+
+      <div className="container mx-auto px-4 py-10 grid md:grid-cols-4 gap-10">
+        {/* Left Column - Artist Info */}
+        <div className="md:col-span-1 flex flex-col items-center text-center mt-[-150px] z-10">
+          <Image
+            src={artist.profile_picture || "/images/placeholder.jpg"}
+            alt={artist.first_name || "Artist"}
+            width={200}
+            height={200}
+            className="rounded-full h-[170px] w-[170px] object-cover"
+          />
+          <h2 className="mt-4 text-xl font-semibold">{artist.first_name}</h2>
+          <div className="text-yellow-500 flex items-center">
+            <Rating value={artist.rating || 0} fractions={2} readOnly />
+            <span className="ml-2 text-gray-600 text-sm">
+              ({artist.rating || 0})
+            </span>
+          </div>
+          <p className="mt-2 text-sm text-gray-600">Joined May 2016</p>
+          <p className="mt-4 text-sm">{artist.bio}</p>
+        </div>
+
+        {/* Right Column - Filters + Artworks */}
+        <div className="md:col-span-3">
+          {/* Filters */}
+          <div className="bg-[#fefae0] p-6 mb-6">
+            <div className="flex flex-col gap-4 mt-4 md:flex-row md:items-center md:justify-between">
+              <Group gap="xs" className="flex flex-wrap gap-3">
+                <Button
+                  variant="outline"
+                  leftSection={<IconFilter size={16} />}
+                >
+                  All filters
+                </Button>
+
+                <Select
+                  placeholder="Price"
+                  data={["Low to High", "High to Low"]}
+                  value={selectedFilters.price}
+                  onChange={(val) =>
+                    setSelectedFilters((prev) => ({
+                      ...prev,
+                      price: val || "",
+                    }))
+                  }
+                  className="w-32"
+                />
+                <Select
+                  placeholder="Categories"
+                  data={metadata?.categories?.map((cat: any) => ({
+                    value: cat.id,
+                    label: cat.name,
+                  }))}
+                  value={selectedFilters.category}
+                  onChange={(val) =>
+                    setSelectedFilters((prev) => ({
+                      ...prev,
+                      category: val || "",
+                    }))
+                  }
+                  className="w-32"
+                />
+                <Select
+                  placeholder="Medium"
+                  data={metadata?.media?.map((medium: any) => ({
+                    value: medium.id,
+                    label: medium.name,
+                  }))}
+                  value={selectedFilters.medium}
+                  onChange={(val) =>
+                    setSelectedFilters((prev) => ({
+                      ...prev,
+                      medium: val || "",
+                    }))
+                  }
+                  className="w-32"
+                />
+                <Select
+                  placeholder="Style"
+                  data={metadata?.styles?.map((style: any) => ({
+                    value: style.id,
+                    label: style.name,
+                  }))}
+                  value={selectedFilters.style}
+                  onChange={(val) =>
+                    setSelectedFilters((prev) => ({
+                      ...prev,
+                      style: val || "",
+                    }))
+                  }
+                  className="w-32"
+                />
+
+                <Button variant="subtle" onClick={handleClear}>
+                  Clear all
+                </Button>
+              </Group>
+
+              <Group gap="xs">
+                <TextInput
+                  value={search}
+                  onChange={(e) => setSearch(e.currentTarget.value)}
+                  placeholder="Search"
+                  leftSection={<IconSearch size={16} />}
+                  classNames={{
+                    input:
+                      "bg-transparent border-b border-gray-400 rounded-none focus:border-black focus:ring-0",
+                  }}
+                  className="w-full"
+                />
+              </Group>
+            </div>
+          </div>
+
+          {/* Artworks Grid */}
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
+            {artworks.map((art: any, idx: number) => (
+              <Card key={idx} className="relative">
+                <CardContent>
+                  <Image
+                    src={art.images?.[0]?.url || "/images/placeholder.jpg"}
+                    alt={art.title}
+                    width={300}
+                    height={300}
+                    className="h-[300px] w-full object-cover"
+                  />
+                  <div className="relative flex flex-col mt-2">
+                    <h3 className="font-semibold italic">{art.title}</h3>
+                    <p className="text-sm">
+                      {art.artist?.first_name} {art.artist?.last_name}
+                    </p>
+                    <p className="text-sm italic">
+                      {art.size?.width} x {art.size?.height} {art.size?.unit}
+                    </p>
+                    <p className="text-sm font-medium text-black">
+                      ETB {art.price}
+                    </p>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+
+          {/* Pagination */}
+          <div className="flex justify-center mt-8 space-x-2">
+            {Array.from({ length: totalPages }, (_, i) => i + 1).map((pg) => (
+              <button
+                key={pg}
+                onClick={() => setPage(pg)}
+                className={`w-8 h-8 rounded-full border ${
+                  page === pg ? "bg-black text-white" : "bg-white text-black"
+                }`}
+              >
+                {pg}
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}

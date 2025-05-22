@@ -1,0 +1,83 @@
+{
+  "total": 3,
+  "artists": [
+    {
+      "id": "c084e0b5-e512-420c-a8fe-3d49f2ac6bf4",
+      "first_name": "artist 1",
+      "last_name": "artist-N",
+      "bio": "I’m Bilen, a surrealist artist creating mixed-media paintings and digital collages. Inspired by dreams and the works of Salvador Dali, I aim to challenge societal norms and spark conversations about the subconscious mind through my art.",
+      "profile_picture": "https://res.cloudinary.com/dk4gxgooc/image/upload/v1692117728/cld-sample.jpg",
+      "contact_email": "artist@gmail.com",
+      "phone_number": null,
+      "location": "addis ababa",
+      "website": null,
+      "instagram": null,
+      "tiktok": null,
+      "facebook": null,
+      "twitter": null,
+      "youtube": null,
+      "rating": 5,
+      "review": "excellent artist",
+      "is_active": true,
+      "user": {
+        "id": "349c8009-8057-4d18-a565-7d52705da918",
+        "email": "artist@gmail.com",
+        "username": null
+      },
+      "is_verified": false,
+      "thumbnail": "https://res.cloudinary.com/dk4gxgooc/image/upload/v1746393150/pexels-curtis-adams-1694007-4469186_g2t3ww.jpg"
+    },
+    {
+      "id": "cfa509c8-db7b-4715-ba4c-e7cc5958f3a2",
+      "first_name": "artist 2",
+      "last_name": "",
+      "bio": "",
+      "profile_picture": "https://res.cloudinary.com/dk4gxgooc/image/upload/v1692117728/cld-sample.jpg",
+      "contact_email": "artist2@gmail.com",
+      "phone_number": null,
+      "location": "addis ababa",
+      "website": null,
+      "instagram": null,
+      "tiktok": null,
+      "facebook": null,
+      "twitter": null,
+      "youtube": null,
+      "is_active": true,
+      "rating": 4,
+      "review": "excellent artist",
+      "user": {
+        "id": "92d9df14-dc9f-4a0f-b670-5433090c3f26",
+        "email": "artist2@gmail.com",
+        "username": null
+      },
+      "is_verified": false,
+      "thumbnail": "https://res.cloudinary.com/dk4gxgooc/image/upload/v1746393150/pexels-curtis-adams-1694007-4469186_g2t3ww.jpg"
+    },
+    {
+      "id": "82a799c5-8531-4c06-94c7-814d18056ce6",
+      "first_name": "artist 3",
+      "last_name": "",
+      "bio": "",
+      "profile_picture": "https://res.cloudinary.com/dk4gxgooc/image/upload/v1692117728/cld-sample.jpg",
+      "contact_email": "seller4@gmail.com",
+      "phone_number": null,
+      "location": "addis ababa",
+      "website": null,
+      "instagram": null,
+      "tiktok": null,
+      "facebook": null,
+      "twitter": null,
+      "youtube": null,
+      "is_active": true,
+      "rating": 3,
+      "review": "excellent artist",
+      "user": {
+        "id": "7568ab98-cca3-49aa-822f-81edc28df2b4",
+        "email": "seller4@gmail.com",
+        "username": "Seller 2"
+      },
+      "is_verified": false,
+      "thumbnail": "https://res.cloudinary.com/dk4gxgooc/image/upload/v1746393150/pexels-curtis-adams-1694007-4469186_g2t3ww.jpg"
+    }
+  ]
+}

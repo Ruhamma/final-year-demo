@@ -1,22 +1,26 @@
 "use client";
 import Image from "next/image";
-import { useState } from "react";
+import {
+  Key,
+  JSXElementConstructor,
+  ReactElement,
+  ReactNode,
+  ReactPortal,
+  useState,
+} from "react";
+import { useGetArtistsQuery } from "@/store/api/artist/profile";
+import { Button } from "@mantine/core";
+import Link from "next/link";
 
 export default function ArtistsPage() {
   const [page, setPage] = useState(1);
-  const artists = new Array(12).fill({
-    name: "Bilen Assefa",
-    location: "Addis Ababa, Ethiopia",
-    image: "/artist.jpg",
-    tag: "Fine Art",
-  });
+  const { data, isLoading, error } = useGetArtistsQuery();
 
-  const artworks = new Array(8).fill({
-    name: "Bilen Assefa",
-    location: "Addis Ababa, Ethiopia",
-    image: "/artwork.jpg",
-    tag: "Style",
-  });
+  const artists = data?.artists || []; // Adjust this according to your API response structure
+  console.log("artists hello", data);
+
+  if (isLoading) return <p>Loading...</p>;
+  if (error) return <p>Error: {JSON.stringify(error)}</p>;
 
   return (
     <div className="bg-[#fffbea] text-gray-800">
@@ -44,23 +48,28 @@ export default function ArtistsPage() {
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do.
         </p>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-          {Array(4)
-            .fill(0)
-            .map((_, idx) => (
-              <div key={idx} className="shadow overflow-hidden">
-                <Image
-                  src="/images/pain13.jpg"
-                  alt="Artwork"
-                  width={400}
-                  height={300}
-                  className="w-full h-48 object-cover"
-                />
-                <div className="p-4">
-                  <h3 className="font-semibold">Bilen Assefa</h3>
-                  <p className="text-xs text-gray-500">Addis Ababa, Ethiopia</p>
+          {artists.map((artist: any) => (
+            <div key={artist.id} className="shadow overflow-hidden">
+              <Image
+                src={artist.thumbnail}
+                alt="Artwork"
+                width={400}
+                height={300}
+                className="w-full h-48 object-cover"
+              />
+              <div className="flex flex-row justify-between items-center p-3">
+                <div className="">
+                  <h3 className="font-semibold">{artist.first_name}</h3>
+                  <p className="text-xs text-gray-500">{artist.location}</p>
                 </div>
+                <Button>
+                  <Link href={`/artists-profile-page/${artist.id}`} passHref>
+                    Profile
+                  </Link>
+                </Button>
               </div>
-            ))}
+            </div>
+          ))}
         </div>
       </section>
 
@@ -81,19 +90,26 @@ export default function ArtistsPage() {
           <button className="underline text-sm">Clear all</button>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-          {artworks.map((artist, idx) => (
-            <div key={idx} className="shadow overflow-hidden">
+          {artists.map((artist: any) => (
+            <div key={artist.id} className="shadow overflow-hidden">
               <Image
-                src="/images/paint2.jpg"
+                src={artist.thumbnail}
                 alt={artist.name}
                 width={400}
                 height={300}
                 className="w-full h-48 object-cover"
               />
-              <div className="p-4">
-                <h3 className="font-semibold">{artist.name}</h3>
+              <div className="flex flex-row justify-between items-center p-3">
+              <div>
+                <h3 className="font-semibold">{artist.first_name}</h3>
                 <p className="text-xs text-gray-500">{artist.location}</p>
               </div>
+              <Button>
+                  <Link href={`/artists-profile-page/${artist.id}`} passHref>
+                    Profile
+                  </Link>
+                </Button>
+                </div>
             </div>
           ))}
         </div>
@@ -148,15 +164,16 @@ export default function ArtistsPage() {
 
         <div className="flex flex-col md:flex-row md:gap-6 items-center md:items-start">
           {/* Column 1 */}
+
           <div className="flex flex-col gap-6 mb-6 md:mb-0">
-            {[...Array(2)].map((_, i) => (
+            {artists.slice(0, 2).map((artist : any) => (
               <div
-                key={i}
+                key={artist.id}
                 className="relative w-[90vw] max-w-[250px] h-[350px]"
               >
                 <Image
-                  src="/images/port1.jpg"
-                  alt="artist"
+                  src={artist.thumbnail}
+                  alt={artist.first_name}
                   fill
                   className="object-cover rounded-md"
                 />
@@ -168,24 +185,28 @@ export default function ArtistsPage() {
                   className="absolute bottom-0 left-0 w-full h-[100px] object-cover"
                 />
                 <div className="absolute bottom-3 right-4 text-white z-10">
-                  <h3 className="font-semibold text-sm">Bilen Assefa</h3>
-                  <p className="text-xs text-[#facc15]">My Art</p>
-                  <p className="text-xs">New York</p>
+                  <h3 className="font-semibold text-sm">{artist.first_name}</h3>
+                  <p className="text-xs text-[#facc15]">{artist.artStyle}</p>
+                  <p className="text-xs">{artist.location}</p>
+                  <div className="text-yellow-400 text-sm mt-1">
+                    {Array.from({ length: 5 }, (_, j) => (
+                      <span key={j}>{j < artist.rating ? "★" : "☆"}</span>
+                    ))}
+                  </div>
                 </div>
               </div>
             ))}
           </div>
-
           {/* Column 2 */}
           <div className="flex flex-col gap-6 mb-6 md:mb-0 md:-mt-10">
-            {[...Array(2)].map((_, i) => (
+            {artists.slice(0, 2).map((artist : any) => (
               <div
-                key={i}
+                key={artist.id}
                 className="relative w-[90vw] max-w-[250px] h-[350px]"
               >
                 <Image
-                  src="/images/port1.jpg"
-                  alt="artist"
+                  src={artist.thumbnail}
+                  alt={artist.first_name}
                   fill
                   className="object-cover rounded-md"
                 />
@@ -197,9 +218,14 @@ export default function ArtistsPage() {
                   className="absolute bottom-0 left-0 w-full h-[100px] object-cover"
                 />
                 <div className="absolute bottom-3 right-4 text-white z-10">
-                  <h3 className="font-semibold text-sm">Bilen Assefa</h3>
-                  <p className="text-xs text-[#facc15]">My Art</p>
-                  <p className="text-xs">New York</p>
+                  <h3 className="font-semibold text-sm">{artist.first_name}</h3>
+                  <p className="text-xs text-[#facc15]">{artist.artStyle}</p>
+                  <p className="text-xs">{artist.location}</p>
+                  <div className="text-yellow-400 text-sm mt-1">
+                    {Array.from({ length: 5 }, (_, j) => (
+                      <span key={j}>{j < artist.rating ? "★" : "☆"}</span>
+                    ))}
+                  </div>
                 </div>
               </div>
             ))}
@@ -207,14 +233,14 @@ export default function ArtistsPage() {
 
           {/* Column 3 */}
           <div className="flex flex-col gap-6">
-            {[...Array(2)].map((_, i) => (
+            {artists.slice(0, 2).map((artist : any) => (
               <div
-                key={i}
+                key={artist.id}
                 className="relative w-[90vw] max-w-[250px] h-[350px]"
               >
                 <Image
-                  src="/images/port1.jpg"
-                  alt="artist"
+                  src={artist.thumbnail}
+                  alt={artist.first_name}
                   fill
                   className="object-cover rounded-md"
                 />
@@ -226,9 +252,14 @@ export default function ArtistsPage() {
                   className="absolute bottom-0 left-0 w-full h-[100px] object-cover"
                 />
                 <div className="absolute bottom-3 right-4 text-white z-10">
-                  <h3 className="font-semibold text-sm">Bilen Assefa</h3>
-                  <p className="text-xs text-[#facc15]">My Art</p>
-                  <p className="text-xs">New York</p>
+                  <h3 className="font-semibold text-sm">{artist.first_name}</h3>
+                  <p className="text-xs text-[#facc15]">{artist.artStyle}</p>
+                  <p className="text-xs">{artist.location}</p>
+                  <div className="text-yellow-400 text-sm mt-1">
+                    {Array.from({ length: 5 }, (_, j) => (
+                      <span key={j}>{j < artist.rating ? "★" : "☆"}</span>
+                    ))}
+                  </div>
                 </div>
               </div>
             ))}

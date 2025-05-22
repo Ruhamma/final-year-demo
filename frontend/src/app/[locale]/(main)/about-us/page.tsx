@@ -24,33 +24,26 @@ import Link from "next/link";
 export default function Page() {
   const t = useTranslations("common.About");
   return (
-    <Box className=" sm:pt-16 py-10 overflow-hidden">
-      <Box className="container mx-auto bg-blue-500">
-        <Box
-          //style={{ backgroundImage: `url(${bg.src})` }}
-          className="sm:w-[60%] text-white py-10 rounded-lg  z-10 px-4 sm:px-10 relative"
+    <Box className="pb-10 overflow-hidden">
+      <Box className="container">
+        <div
+          className="relative w-full h-[600px] bg-cover bg-center z-0"
+          style={{ backgroundImage: `url('/images/background.png')` }}
         >
-          <Text className="" fz={32} fw={700} mb={20}>
-            {t("Title")}
-          </Text>
-          <Text mb={24} lh={1.8} fz={18}>
-            {t("Description")}
-          </Text>
-          <Group className="flex-wrap">
-            <Button bg={"#BC6C25"}>{t("Buy Products")}</Button>
-            <Button variant="outline" c={"white"}>
-              {t("Contact Us")}
-            </Button>
-          </Group>
-
-          {/* <Image
-        src={"/images/about-us-header.png"}
-        alt="About Us"
-        width={"100%"}
-        className="mx-auto h-full object-cover absolute top-0 left-0"
-      /> */}
-        </Box>
-        <Box mt={280}>
+          <div className="absolute top-0 left-0 w-full h-full bg-[#262D0D]/80 flex flex-col justify-center text-white p-8">
+            <div className="w-2/3 flex flex-col">
+              <p className="text-[50px]"> {t("Title")}</p>
+              <p>{t("Description")}</p>
+            </div>
+            <Group className="flex-wrap">
+              <Button bg={"#BC6C25"}>{t("Buy Products")}</Button>
+              <Button variant="outline" c={"white"}>
+                {t("Contact Us")}
+              </Button>
+            </Group>
+          </div>
+        </div>
+        <Box>
           <Text
             className="text-center text-2xl sm:text-3xl font-semibold"
             mt={90}
@@ -139,13 +132,13 @@ export default function Page() {
             className="text-center"
             align="center"
             justify="center"
-            spacing="md"
+            // spacing="md"
           >
             <Text fz={{ base: 24, md: 32 }} className="font-semibold">
               {t("Where Artists Meet Collectors: Discover Your Perfect Piece")}{" "}
             </Text>
             <Button w="fit-content" variant="outline" color="white">
-              <Link href="/artworks"> {t('Explore')}</Link>
+              <Link href="/artworks"> {t("Explore")}</Link>
             </Button>
           </Stack>
 
@@ -157,7 +150,7 @@ export default function Page() {
               w={"25%"}
             >
               <IconSearch size={50} color="white" />
-              <Text fz={20}> {t('Curated Selection')}</Text>
+              <Text fz={20}> {t("Curated Selection")}</Text>
             </Stack>
             <Stack
               className="border px-3 py-9 text-center"
@@ -166,7 +159,7 @@ export default function Page() {
               w={"25%"}
             >
               <IconBrandHipchat size={50} color="white" />
-              <Text fz={20}> {t('Direct Connection')}</Text>
+              <Text fz={20}> {t("Direct Connection")}</Text>
             </Stack>
             <Stack
               className="border px-3 py-9 text-center"
@@ -175,7 +168,7 @@ export default function Page() {
               w={"25%"}
             >
               <IconShieldLock size={50} color="white" />
-              <Text fz={20}> {t('Secure Transactions')}</Text>
+              <Text fz={20}> {t("Secure Transactions")}</Text>
             </Stack>
           </Flex>
         </Flex>
@@ -248,37 +241,31 @@ export default function Page() {
             <Avatar bg="#EED7B7">
               <IconMessageReport color="#BC6C25" />
             </Avatar>
-            <Text> {t('FAQ.FAQ Questions')}</Text>
+            <Text> {t("FAQ.FAQ Questions")}</Text>
           </Flex>
           <Text fz={{ base: 28, md: 40 }} className="mb-6">
-             {t('FAQ.Title')}
+            {t("FAQ.Title")}
           </Text>
 
           <Accordion variant="separated" multiple bg="#fffcea" w="100%" mt={20}>
             <Accordion.Item value="customization" bg="#fffcea">
-              <Accordion.Control>
-                 {t('FAQ.question1')}
-              </Accordion.Control>
+              <Accordion.Control>{t("FAQ.question1")}</Accordion.Control>
               <Accordion.Panel className="text-left">
-                 {t('FAQ.answer1')}
+                {t("FAQ.answer1")}
               </Accordion.Panel>
             </Accordion.Item>
 
             <Accordion.Item value="shipping" bg="#fffcea">
-              <Accordion.Control>
-                 {t('FAQ.question2')}
-              </Accordion.Control>
+              <Accordion.Control>{t("FAQ.question2")}</Accordion.Control>
               <Accordion.Panel className="text-left">
-                 {t('FAQ.answer2')}
+                {t("FAQ.answer2")}
               </Accordion.Panel>
             </Accordion.Item>
 
             <Accordion.Item value="returns" bg="#fffcea">
-              <Accordion.Control>
-                 {t('FAQ.question3')}
-              </Accordion.Control>
+              <Accordion.Control>{t("FAQ.question3")}</Accordion.Control>
               <Accordion.Panel className="text-left">
-                 {t('FAQ.answer3')}
+                {t("FAQ.answer3")}
               </Accordion.Panel>
             </Accordion.Item>
           </Accordion>

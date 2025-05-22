@@ -56,8 +56,8 @@ export function Footer() {
             <Button
               radius={0}
               size="md"
-              bg={"#BC6C25"}
-              className="tracking-[0.1em] w-full sm:w-auto"
+              className="tracking-[0.1em] w-full sm:w-auto bg-[#bc6c25]"
+              bg={"#bc6c25"}
             >
               {t("Subscribe")}
             </Button>

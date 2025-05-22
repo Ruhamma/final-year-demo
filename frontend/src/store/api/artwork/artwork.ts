@@ -15,6 +15,14 @@ export const artworkApi = createApi({
       }),
       providesTags: ["Artwork"],
     }),
+    getArtworksByArtistId: builder.query({
+      query: ({ artistId, ...params }) => ({
+        url: `artist/${artistId}/artworks`,
+        method: "GET",
+        params,
+      }),
+      providesTags: ["Artwork"],
+    }),
     getArtworkById: builder.query({
       query: ({ id, sessionKey }) => ({
         url: `artwork/${id}`,
@@ -119,4 +127,5 @@ export const {
   useGetFavoritesQuery,
   useGetMyArtworksDetailQuery,
   useUpdateArtworkMutation,
+  useGetArtworksByArtistIdQuery,
 } = artworkApi;
