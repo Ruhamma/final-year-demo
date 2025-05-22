@@ -1,7 +1,6 @@
 "use client";
 import Image from "next/image";
 import { ButtonHTMLAttributes, ReactNode, useState } from "react";
-// import { Heart } from "lucide-react";
 
 function Card({
   children,
