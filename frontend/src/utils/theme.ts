@@ -40,7 +40,7 @@ export const theme: Partial<MantineThemeOverride> = {
     Button: {
       defaultProps: {
         size: "sm",
-        backgroundColor: "red",
+        backgroundcolor: "red",
       },
       styles: {
         section: {
@@ -86,7 +86,7 @@ export const theme: Partial<MantineThemeOverride> = {
     AppShell: {
       styles: {
         main: {
-          backgroundColor: "#F3F4F6",
+          backgroundcolor: "#F3F4F6",
         },
         header: {
           height: 40,

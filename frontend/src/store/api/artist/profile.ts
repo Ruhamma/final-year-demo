@@ -10,7 +10,7 @@ export const artistProfileApi = createApi({
   tagTypes: ["ArtistProfile", "dashboard"],
   endpoints: (builder) => ({
     getArtistProfile: builder.query({
-      query: () => "artist/profile/",
+      query: () => "artist/profile",
       providesTags: ["ArtistProfile"],
     }),
 
@@ -67,7 +67,7 @@ export const artistProfileApi = createApi({
       invalidatesTags: ["ArtistProfile"],
     }),
     getDashboardMetrics: builder.query({
-      query: () => "artist/dashboard-metrics/",
+      query: () => "artist/dashboard-metrics",
       providesTags: ["dashboard"],
     }),
     getDashBoardHistory: builder.query({
@@ -77,6 +77,13 @@ export const artistProfileApi = createApi({
     getDashboardTopFavorited: builder.query({
       query: () => "artist/dashboard-top-favorited-artworks",
       providesTags: ["dashboard"],
+    }),
+    reviewArtist: builder.mutation({
+      query: ({ id, reviewData }) => ({
+        url: `artist/${id}/rate`,
+        method: "POST",
+        body: reviewData,
+      }),
     }),
   }),
 });
@@ -92,6 +99,7 @@ export const {
   useGetDashboardTopFavoritedQuery,
   useGetArtistsQuery,
   useGetArtistsByIdQuery,
+  useReviewArtistMutation,
 } = artistProfileApi;
 
 

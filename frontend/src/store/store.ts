@@ -5,6 +5,7 @@ import { artworkApi } from "@/store/api/artwork/artwork";
 import { cartApi } from "@/store/api/artwork/cart";
 import { orderApi } from "./api/order/order";
 import { adminApi } from "@/store/api/admin/admin";
+import { notificationApi } from "@/store/api/notification/notificationApi";
 export const store = configureStore({
   reducer: {
     [authApi.reducerPath]: authApi.reducer,
@@ -13,6 +14,7 @@ export const store = configureStore({
     [cartApi.reducerPath]: cartApi.reducer,
     [orderApi.reducerPath]: orderApi.reducer,
     [adminApi.reducerPath]: adminApi.reducer,
+    [notificationApi.reducerPath]: notificationApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(
@@ -21,7 +23,8 @@ export const store = configureStore({
       artworkApi.middleware,
       cartApi.middleware,
       orderApi.middleware,
-      adminApi.middleware
+      adminApi.middleware,
+      notificationApi.middleware
     ),
 });
 

@@ -2,7 +2,7 @@
 import { theme as baseTheme } from "@/utils/theme";
 import { MantineProvider, MantineThemeOverride } from "@mantine/core";
 import { ModalsProvider } from "@mantine/modals";
-// import { Notifications } from "@mantine/notifications";
+import { Notifications } from "@mantine/notifications";
 import React from "react";
 
 export default function RootStyleRegistry({
@@ -14,9 +14,8 @@ export default function RootStyleRegistry({
   return (
     <MantineProvider theme={theme}>
       <ModalsProvider>
-        {/* <Notifications> */}
+        <Notifications />
         {children}
-        {/* </Notifications> */}
       </ModalsProvider>
     </MantineProvider>
   );

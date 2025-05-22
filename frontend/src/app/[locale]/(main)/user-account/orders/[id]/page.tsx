@@ -64,7 +64,7 @@ const OrderDetailPage = () => {
           maw="700px"
           style={{
             fontFamily: "monospace",
-            backgroundColor: "#fff",
+            backgroundcolor: "#fff",
             borderStyle: "dashed",
             borderColor: "#ccc",
           }}

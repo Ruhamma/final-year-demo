@@ -13,11 +13,12 @@ import {
   Flex,
   Image,
   LoadingOverlay,
+  Modal,
   NumberFormatter,
   Stack,
 } from "@mantine/core";
 import { Breadcrumbs, Anchor } from "@mantine/core";
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import Discover from "../../(landing)/_components/Discover";
 import Testimonials from "../../(landing)/_components/Testimonials";
 import { useParams, useRouter } from "next/navigation";
@@ -25,10 +26,16 @@ import { useGetArtworkByIdQuery } from "@/store/api/artwork/artwork";
 import { useAddToCartMutation } from "@/app/services/cart";
 import { notify } from "@/shared/components/notification/notification";
 import { v4 as uuidv4 } from "uuid";
+import dynamic from "next/dynamic";
+
+const ARViewer = dynamic(() => import("../_components/_components/ARviewer"), {
+  ssr: false,
+});
 
 const Page = () => {
   const { id } = useParams();
   const router = useRouter();
+  const [arOpened, setArOpened] = useState(false);
   const sessionKey = useMemo(() => {
     if (typeof window === "undefined") return "";
     let key = localStorage.getItem("session_key");
@@ -133,6 +140,9 @@ const Page = () => {
             <Button onClick={handlePurchaseOrder} variant="outline">
               Purchase Order
             </Button>
+            <Button onClick={() => setArOpened(true)} variant="light">
+              View in Your Room (AR)
+            </Button>
           </Stack>
           <Box>
             <Accordion>{groccery}</Accordion>
@@ -212,6 +222,21 @@ const Page = () => {
       </Container>
       <Discover title="Other works by Bilen" />
       <Testimonials title="Related Works" />
+      <Modal
+        opened={arOpened}
+        onClose={() => setArOpened(false)}
+        size="xl"
+        fullScreen
+        withCloseButton={false}
+        padding={0}
+      >
+        {data?.images[0]?.url && <ARViewer imageUrl={data.images[0].url} />}
+        <Box pos="absolute" bottom={20} left={0} right={0} ta="center">
+          <Button onClick={() => setArOpened(false)} color="red" size="md">
+            Exit AR View
+          </Button>
+        </Box>
+      </Modal>
     </Box>
   );
 };

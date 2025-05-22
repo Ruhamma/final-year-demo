@@ -11,6 +11,8 @@ import {
   Text,
   Collapse,
   Burger,
+  Indicator,
+  Tooltip,
 } from "@mantine/core";
 import Link from "next/link";
 import {
@@ -19,6 +21,7 @@ import {
   IconUserCircle,
   IconChevronDown,
   IconLogout,
+  IconBell,
 } from "@tabler/icons-react";
 import { useAuth } from "@/context/useAuth";
 import { useParams } from "next/navigation";
@@ -29,6 +32,8 @@ import { usePathname, useRouter } from "@/i18n/routing";
 import { useEffect, useState, useTransition } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { useDisclosure } from "@mantine/hooks";
+import { useGetNotificationQuery } from "@/store/api/notification/notificationApi";
+import Notification  from "@/app/[locale]/(main)/_component/Notification";
 
 export function Header() {
   const { user, isAuthenticated, isAdmin, logout, isSeller } = useAuth();
@@ -73,6 +78,12 @@ export function Header() {
       document.body.style.overflow = "auto"; // Cleanup on unmount
     };
   }, [opened]);
+  const { data: notifi } = useGetNotificationQuery();
+  const notifications = Array.isArray(notifi)
+    ? notifi.filter((notification) => notification.is_read === false)
+    : notifi && !notifi.is_read
+    ? [notifi]
+    : [];
   return (
     <Card bg={"#fffcea"}>
       <Box className="hidden md:block w-full container mx-auto px-10">
@@ -117,49 +128,74 @@ export function Header() {
                   </Link>
                 </>
               ) : (
-                <Menu shadow="md" width={200}>
-                  <Menu.Target>
-                    <Flex
-                      align={"center"}
-                      justify={"center"}
-                      columnGap={4}
-                      className="cursor-pointer"
-                    >
-                      <Flex className="items-center gap-1">
-                        <IconUserCircle size={19} stroke={1.2} />
-                        <Text fz={14}>
-                          {t("Hi")}, {user?.username}
-                        </Text>
-                        <IconChevronDown size={16} stroke={1.6} />
+                <Flex gap={20} align="center">
+                  <Menu shadow="md" width={200}>
+                    <Menu.Target>
+                      <Flex
+                        align={"center"}
+                        justify={"center"}
+                        columnGap={4}
+                        className="cursor-pointer"
+                      >
+                        <Flex className="items-center gap-1">
+                          <IconUserCircle size={19} stroke={1.2} />
+                          <Text fz={14}>
+                            {t("Hi")}, {user?.username}
+                          </Text>
+                          <IconChevronDown size={16} stroke={1.6} />
+                        </Flex>
                       </Flex>
-                    </Flex>
-                  </Menu.Target>
+                    </Menu.Target>
 
-                  <Menu.Dropdown>
-                    <Menu.Item
-                      leftSection={<IconUserCircle />}
-                      onClick={() => {
-                        if (isAdmin) {
-                          router.push("/admin-account");
-                        } else if (isSeller) {
-                          router.push("/artist-account");
-                        } else {
-                          router.push("/user-account");
-                        }
-                      }}
-                    >
-                      {t("Account")}
-                    </Menu.Item>
-                    <Menu.Item
-                      leftSection={<IconLogout />}
-                      onClick={() => {
-                        logout();
-                      }}
-                    >
-                      {t("Logout")}
-                    </Menu.Item>
-                  </Menu.Dropdown>
-                </Menu>
+                    <Menu.Dropdown>
+                      <Menu.Item
+                        leftSection={<IconUserCircle />}
+                        onClick={() => {
+                          if (isAdmin) {
+                            router.push("/admin-account");
+                          } else if (isSeller) {
+                            router.push("/artist-account");
+                          } else {
+                            router.push("/user-account");
+                          }
+                        }}
+                      >
+                        {t("Account")}
+                      </Menu.Item>
+                      <Menu.Item
+                        leftSection={<IconLogout />}
+                        onClick={() => {
+                          logout();
+                        }}
+                      >
+                        {t("Logout")}
+                      </Menu.Item>
+                    </Menu.Dropdown>
+                  </Menu>
+                  {/* notification */}
+                  <Menu shadow="md" width={320}>
+                    <Menu.Target>
+                      {notifications && notifications.length > 0 ? (
+                        <Indicator
+                          size={16}
+                          radius={"xl"}
+                          label={notifications?.length}
+                          className="rounded-full"
+                          color="green"
+                        >
+                          <Tooltip label="Notifications">
+                            <IconBell size={18} stroke={1.5} />
+                          </Tooltip>
+                        </Indicator>
+                      ) : (
+                        <IconBell size={18} stroke={1.5} />
+                      )}
+                    </Menu.Target>
+                    <Menu.Dropdown>
+                      <Notification notifications={notifications} />
+                    </Menu.Dropdown>
+                  </Menu>
+                </Flex>
               )}
               {isAdmin && (
                 <Link
@@ -279,49 +315,74 @@ export function Header() {
                   </Link>
                 </>
               ) : (
-                <Menu shadow="md" width={200}>
-                  <Menu.Target>
-                    <Flex
-                      align={"center"}
-                      justify={"center"}
-                      columnGap={4}
-                      className="cursor-pointer"
-                    >
-                      <Flex className="items-center gap-1">
-                        <IconUserCircle size={19} stroke={1.2} />
-                        <Text fz={14}>
-                          {t("Hi")}, {user?.username}
-                        </Text>
-                        <IconChevronDown size={16} stroke={1.6} />
+                <Flex gap={20}>
+                  <Menu shadow="md" width={200}>
+                    <Menu.Target>
+                      <Flex
+                        align={"center"}
+                        justify={"center"}
+                        columnGap={4}
+                        className="cursor-pointer"
+                      >
+                        <Flex className="items-center gap-1">
+                          <IconUserCircle size={19} stroke={1.2} />
+                          <Text fz={14}>
+                            {t("Hi")}, {user?.username}
+                          </Text>
+                          <IconChevronDown size={16} stroke={1.6} />
+                        </Flex>
                       </Flex>
-                    </Flex>
-                  </Menu.Target>
+                    </Menu.Target>
 
-                  <Menu.Dropdown>
-                    <Menu.Item
-                      leftSection={<IconUserCircle />}
-                      onClick={() => {
-                        if (isAdmin) {
-                          router.push("/admin-account");
-                        } else if (isSeller) {
-                          router.push("/artist-account");
-                        } else {
-                          router.push("/user-account");
-                        }
-                      }}
-                    >
-                      {t("Account")}
-                    </Menu.Item>
-                    <Menu.Item
-                      leftSection={<IconLogout />}
-                      onClick={() => {
-                        logout();
-                      }}
-                    >
-                      {t("Logout")}
-                    </Menu.Item>
-                  </Menu.Dropdown>
-                </Menu>
+                    <Menu.Dropdown>
+                      <Menu.Item
+                        leftSection={<IconUserCircle />}
+                        onClick={() => {
+                          if (isAdmin) {
+                            router.push("/admin-account");
+                          } else if (isSeller) {
+                            router.push("/artist-account");
+                          } else {
+                            router.push("/user-account");
+                          }
+                        }}
+                      >
+                        {t("Account")}
+                      </Menu.Item>
+                      <Menu.Item
+                        leftSection={<IconLogout />}
+                        onClick={() => {
+                          logout();
+                        }}
+                      >
+                        {t("Logout")}
+                      </Menu.Item>
+                    </Menu.Dropdown>
+                  </Menu>
+                  {/* notification */}
+                  <Menu shadow="lg" width={320}>
+                    <Menu.Target>
+                      {notifications && notifications.length > 0 ? (
+                        <Indicator
+                          size={18}
+                          radius={"xl"}
+                          label={notifications?.length}
+                          className="rounded-full"
+                          color="green"
+                        >
+                          <Tooltip label="Notifications">
+                            <IconBell size={24} stroke={1.5} />
+                          </Tooltip>
+                        </Indicator>
+                      ) : (
+                        <IconBell size={24} stroke={1.5} />
+                      )}
+                    </Menu.Target>
+                    <Menu.Dropdown>
+                      <Notification notifications={notifications} />
+                    </Menu.Dropdown>
+                  </Menu>
+                </Flex>
               )}
               {isAdmin && (
                 <Link
@@ -351,23 +412,23 @@ export function Header() {
               </ActionIcon>
             </Flex>
             <Link href="/" onClick={() => handleLinkClick("/")}>
-              Home
+              {t("Home")}
             </Link>
             <Link href="/about-us" onClick={() => handleLinkClick("/about-us")}>
-              About
+              {t("About")}
             </Link>
             <Link href="/artworks" onClick={() => handleLinkClick("/artworks")}>
-              Artworks
+              {t("Artworks")}
             </Link>
             <Link
               href="/artists-page"
               onClick={() => handleLinkClick("/artists-page")}
             >
-              Artists
+              {t("Artists")}
             </Link>
 
             <Link href="/contact" onClick={() => handleLinkClick("/contact")}>
-              Contact
+              {t("Contact")}
             </Link>
             {/* <Link
                   href="/graduatestudents"

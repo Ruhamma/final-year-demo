@@ -213,7 +213,7 @@ export default function Page() {
               position: "absolute",
               bottom: -45,
               right: -30,
-              backgroundColor: "white",
+              backgroundcolor: "white",
               borderRadius: 12,
               padding: 6,
             }}
