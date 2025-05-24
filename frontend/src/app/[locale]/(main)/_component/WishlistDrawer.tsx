@@ -13,6 +13,7 @@ import {
   NumberFormatter,
   Stack,
   Tooltip,
+  Loader,
 } from "@mantine/core";
 import { IconHeart, IconTrash } from "@tabler/icons-react";
 import { useDisclosure } from "@mantine/hooks";
@@ -26,7 +27,11 @@ const WishlistDrawer = () => {
   const [opened, { open, close }] = useDisclosure(false);
   const { data: favorites, isLoading } = useGetFavoritesQuery({});
   const [removeFromFavorites] = useRemoveFromFavoritesMutation();
+  const [removingItemId, setRemovingItemId] = React.useState<string | null>(
+    null
+  );
   const handleRemoveFromFavorites = (id: string) => {
+    setRemovingItemId(id);
     try {
       removeFromFavorites(id).unwrap();
       notify("Success", "Item removed from favorites");
@@ -87,9 +92,14 @@ const WishlistDrawer = () => {
                   variant="transparent"
                   color="dark"
                   onClick={() => handleRemoveFromFavorites(item?.id)}
+                  loading={removingItemId === item?.id}
                 >
-                  <Tooltip label="Remove from favorites">
-                    <IconTrash color="red" size={16} />
+                  <Tooltip label="Remove from cart">
+                    {removingItemId === item?.id ? (
+                      <Loader size="xs" />
+                    ) : (
+                      <IconTrash color="red" size={16} />
+                    )}
                   </Tooltip>
                 </Button>
               </Group>

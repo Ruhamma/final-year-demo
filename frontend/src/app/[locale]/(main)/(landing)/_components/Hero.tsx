@@ -1,8 +1,11 @@
+'use client'
 import { Box, Button, Container, Flex, Image } from "@mantine/core";
 import React from "react";
 import { useTranslations } from "next-intl";
+import { useRouter } from "next/navigation";
 
 const Hero = () => {
+  const router = useRouter();
    const t = useTranslations('common.Landing.Hero');
   return (
     <Container className="mt-10">
@@ -19,7 +22,7 @@ const Hero = () => {
              {t('Description')}
             </p>
           </Flex>
-          <Button>{t('ViewArtwork')}</Button>
+          <Button onClick={() => router.push('/artworks')}>{t('ViewArtwork')}</Button>
         </Box>
         <Box className="w-full lg:w-1/2">
           <Flex gap="md" mb="lg">

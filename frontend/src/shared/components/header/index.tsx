@@ -199,7 +199,7 @@ export function Header() {
               )}
               {isAdmin && (
                 <Link
-                  href={"/admin"}
+                  href={"/admin/dashboard"}
                   className="tracking-[0.3em] hover:border-b-[1px]"
                 >
                   {t("Admin")}

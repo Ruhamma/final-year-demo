@@ -46,7 +46,7 @@ const SideBar = () => {
             label: t("ProfileSummary"),
           },
           {
-            href: "/orders",
+            href: "/user-account/messages",
             icon: <IconMessageCircle size={18} />,
             label: t("Messages"),
           },         

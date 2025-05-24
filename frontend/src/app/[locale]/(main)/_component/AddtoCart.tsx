@@ -3,14 +3,15 @@
 import { IconShoppingCart } from "@tabler/icons-react";
 import { useDisclosure } from "@mantine/hooks";
 import React, { useState } from "react";
-import { useAddToCartMutation } from "@/app/services/cart";
+import { useAddCartItemMutation } from "@/store/api/artwork/cart";
 import { notify } from "@/shared/components/notification/notification";
 const AddtoCart = ({ id }: { id: string }) => {
-  const [addToCart] = useAddToCartMutation();
+  const [addToCart] = useAddCartItemMutation();
   const [isInCart, setIsInCart] = useState(false);
   const handleAddToCart = async () => {
     try {
       await addToCart({ artwork_id: id }).unwrap();
+      setIsInCart(true)
       notify("Success", "Added to cart");
     } catch (error) {
       notify("Error", "Failed to add to cart");

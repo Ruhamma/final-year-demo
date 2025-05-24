@@ -19,7 +19,9 @@ import CartDrawer from "../../_component/CartDrawer";
 import AddtoCart from "../../_component/AddtoCart";
 import AddtoWishlist from "../../_component/AddtoWishlist";
 import { useTranslations } from "next-intl";
+import { useRouter } from "next/navigation";
 const Discover = ({ title }: { title: string }) => {
+  const router = useRouter();
   const {data: artworks, isLoading} = useGetPublicArtworksQuery({
     skip:0,
     limit:12
@@ -38,7 +40,9 @@ const t = useTranslations('common.Landing');
       </Tabs>
 
       <Box className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
-        <LoadingOverlay visible={isLoading} />
+            {isLoading && (
+          <p>loading....</p>
+        )}
         {artworks?.artworks?.map((item:any) => (
           <Card
             key={item.id}
@@ -47,7 +51,7 @@ const t = useTranslations('common.Landing');
             withBorder
             className="bg-red-900"
           >
-            <CardSection>
+            <CardSection  onClick={() => router.push(`/art-page/${item?.id}`)}>
               <Image alt="Product image" src={item?.images[0]?.url} />
             </CardSection>
             <Group className="py-2" justify="space-between" align="center">

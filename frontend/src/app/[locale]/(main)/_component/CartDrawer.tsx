@@ -1,5 +1,4 @@
 "use client";
-
 import {
   Drawer,
   Button,
@@ -17,7 +16,7 @@ import {
 } from "@mantine/core";
 import { IconShoppingCart, IconTrash } from "@tabler/icons-react";
 import { useDisclosure } from "@mantine/hooks";
-import React from "react";
+import React, { useState } from "react";
 import {
   useGetCartQuery,
   useRemoveCartItemMutation,
@@ -25,22 +24,29 @@ import {
 import { notify } from "@/shared/components/notification/notification";
 import { useClearCartMutation } from "@/app/services/cart";
 import { useRouter } from "next/navigation";
+
 const CartDrawer = () => {
   const router = useRouter();
   const [opened, { open, close }] = useDisclosure(false);
   const { data: cart, isLoading } = useGetCartQuery({});
-  const [removeFromCat, { isLoading: isRemoving }] =
-    useRemoveCartItemMutation();
+  const [removeFromCart] = useRemoveCartItemMutation();
   const [clearCart, { isLoading: isClearing }] = useClearCartMutation();
+  const [removingItemId, setRemovingItemId] = useState<string | null>(null);
+  
   const cartCount = cart?.items?.length || 0;
+
   const handleRemoveFromCart = async (id: string) => {
+    setRemovingItemId(id);
     try {
-      await removeFromCat(id).unwrap();
+      await removeFromCart(id).unwrap();
       notify("Success", "Item removed from cart");
     } catch (error) {
       notify("Error", "Failed to remove item from cart");
+    } finally {
+      setRemovingItemId(null);
     }
   };
+
   const handleClearCart = async () => {
     try {
       await clearCart().unwrap();
@@ -49,6 +55,7 @@ const CartDrawer = () => {
       notify("Error", "Failed to clear cart");
     }
   };
+
   return (
     <>
       <Box className="relative" onClick={open}>
@@ -111,10 +118,14 @@ const CartDrawer = () => {
                   variant="transparent"
                   color="dark"
                   onClick={() => handleRemoveFromCart(item?.id)}
-                  loading={isRemoving}
+                  loading={removingItemId === item?.id}
                 >
                   <Tooltip label="Remove from cart">
-                    <IconTrash color="red" size={16} />
+                    {removingItemId === item?.id ? (
+                      <Loader size="xs" />
+                    ) : (
+                      <IconTrash color="red" size={16} />
+                    )}
                   </Tooltip>
                 </Button>
               </Group>
