@@ -70,6 +70,8 @@ function Button({
   );
 }
 
+
+
 // Main Component
 export default function ArtistProfile() {
   const pathname = usePathname();
@@ -87,6 +89,43 @@ export default function ArtistProfile() {
     category: "",
   });
 
+ const [isFollowing, setIsFollowing] = useState(false);
+const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    const checkFollowStatus = async () => {
+      try {
+        const response = await fetch(`/api/artwork/${artistId}/is-following`);
+        const data = await response.json();
+        setIsFollowing(data.isFollowing);
+      } catch (error) {
+        console.error('Error checking follow status:', error);
+      }
+    };
+    
+    checkFollowStatus();
+  }, [artistId]);
+
+   const toggleFollow = async () => {
+    setIsLoading(true);
+    try {
+      const response = await fetch('{NEXT_PUBLIC_API}artist/follow', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ artistId }),
+      });
+      
+      if (response.ok) {
+        setIsFollowing(!isFollowing);
+      }
+    } catch (error) {
+      console.error('Error toggling follow:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const { data: artistData, isLoading: isArtistLoading } =
     useGetArtistsByIdQuery(artistId || "");
@@ -115,6 +154,7 @@ export default function ArtistProfile() {
   const artworks = artworksData?.artworks || [];
   const total = artworksData?.total || 0;
   const totalPages = Math.ceil(total / limit);
+  const followers = 1
 
   const handleClear = () => {
     setSelectedFilters({ price: "", medium: "", style: "", category: "" });
@@ -140,11 +180,20 @@ export default function ArtistProfile() {
           />
           <h2 className="mt-4 text-xl font-semibold">{artist.first_name}</h2>
           <div className="text-yellow-500 flex items-center">
+            
             <Rating value={artist.rating || 0} fractions={2} readOnly />
             <span className="ml-2 text-gray-600 text-sm">
               ({artist.rating || 0})
             </span>
           </div>
+          <div>Followers:{followers}</div>
+           <button 
+      onClick={toggleFollow} 
+      disabled={isLoading}
+      className={`follow-button ${isFollowing ? 'following' : ''}`}
+    >
+      {isLoading ? 'Processing...' : isFollowing ? 'Following' : 'Follow'}
+    </button>
           <p className="mt-2 text-sm text-gray-600">Joined May 2016</p>
           <p className="mt-4 text-sm">{artist.bio}</p>
         </div>

@@ -23,6 +23,13 @@ export const artworkApi = createApi({
       }),
       providesTags: ["Artwork"],
     }),
+    getRecommendation: builder.query({
+      query: ({ artworkId }) => ({
+        url: `artwork/${artworkId}/recommendations`,
+        method: "GET",
+      }),
+      providesTags: ["Artwork"],
+    }),
     getArtworkById: builder.query({
       query: ({ id, sessionKey }) => ({
         url: `artwork/${id}`,
@@ -109,7 +116,7 @@ export const artworkApi = createApi({
       }),
       providesTags: ["Favorites"],
     }),
-      reviewArtwork: builder.mutation({
+    reviewArtwork: builder.mutation({
       query: ({ id, body }) => ({
         url: `artwork/${id}/rate`,
         method: "POST",
@@ -136,4 +143,5 @@ export const {
   useUpdateArtworkMutation,
   useGetArtworksByArtistIdQuery,
   useReviewArtworkMutation,
+  useGetRecommendationQuery,
 } = artworkApi;

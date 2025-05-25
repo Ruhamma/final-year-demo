@@ -25,6 +25,7 @@ import { useGetArtworkByIdQuery } from "@/store/api/artwork/artwork";
 import { useAddToCartMutation } from "@/app/services/cart";
 import { notify } from "@/shared/components/notification/notification";
 import { v4 as uuidv4 } from "uuid";
+import { RecommendedArtworks } from "./recommendation";
 
 const Page = () => {
   const { id } = useParams();
@@ -222,6 +223,8 @@ const Page = () => {
       </Container>
       <Discover title="Other works by Bilen" />
       <Testimonials title="Related Works" />
+      <div>hey</div>
+      <RecommendedArtworks artworkId={id} />
     </Box>
   );
 };
