@@ -55,31 +55,36 @@ const allStatuses = [
   "CANCELLED",
 ];
 
-const OrderSummaryCards = ({ orders }) => {
-  const statusCounts = allStatuses.reduce((acc, status) => {
-    acc[status] = 0;
-    return acc;
-  }, {});
+type Status = "PENDING" | "PROCESSING" | "SHIPPED" | "COMPLETED" | "CANCELLED";
 
-  orders.forEach((order) => {
+const OrderSummaryCards = ({ orders }: { orders: any }) => {
+  const statusCounts = allStatuses.reduce<Record<Status, number>>(
+    (acc, status) => {
+      acc[status as Status] = 0;
+      return acc;
+    },
+    {} as Record<Status, number>
+  );
+
+  orders.forEach((order: any) => {
     if (statusCounts.hasOwnProperty(order.status)) {
-      statusCounts[order.status]++;
+      statusCounts[order.status as Status]++;
     }
   });
 
   return (
     <SimpleGrid cols={{ base: 2, sm: 3, md: 5 }} mb="md">
       {allStatuses.map((status) => {
-        const Icon = statusIcons[status];
+        const Icon = statusIcons[status as Status];
         return (
           <Card shadow="sm" p="md" radius="md" withBorder key={status}>
             <Group>
-              <Icon size={24} color={statusColors[status]} />
+              <Icon size={24} color={statusColors[status as Status]} />
               <Stack gap={0}>
                 <Text size="sm" c="dimmed">
                   {status}
                 </Text>
-                <Text fw={600}>{statusCounts[status]} orders</Text>
+                <Text fw={600}>{statusCounts[status as Status]} orders</Text>
               </Stack>
             </Group>
           </Card>
@@ -99,7 +104,7 @@ const Page = () => {
   const [statusFilter, setStatusFilter] = useState<string | null>(null);
   const [paymentFilter, setPaymentFilter] = useState<string | null>(null);
 
-  const filteredOrders = data?.orders?.filter((order) => {
+  const filteredOrders = data?.orders?.filter((order: any) => {
     const matchesStatus = !statusFilter || order.status === statusFilter;
     const matchesPayment =
       !paymentFilter || order.payment_method === paymentFilter;
@@ -176,7 +181,7 @@ const Page = () => {
         </Table.Thead>
 
         <Table.Tbody>
-          {filteredOrders?.map((order) => (
+          {filteredOrders?.map((order: any) => (
             <Fragment key={order.id}>
               <Table.Tr>
                 <Table.Td>{order.id.slice(0, 8)}</Table.Td>
@@ -190,7 +195,7 @@ const Page = () => {
                 </Table.Td>
                 <Table.Td>ETB {order.total_amount.toFixed(2)}</Table.Td>
                 <Table.Td>
-                  <Badge color={statusColors[order.status]}>
+                  <Badge color={statusColors[order.status as Status]}>
                     {order.status}
                   </Badge>
                 </Table.Td>

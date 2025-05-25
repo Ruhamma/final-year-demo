@@ -222,6 +222,200 @@
       "success": "Account deactivated, Your account will be permanently deleted after 10 days.",
       "error": "Deactivation failed, Could not deactivate your account."
     }
-  }
+  }, 
+  "Cart":{
+    "notifications":{
+      "itemAdded": "Item added to cart",
+      "itemAddError": "Failed to add item to cart",
+      "itemRemoved": "Item removed from cart",
+      "itemRemoveError": "Failed to remove item from cart",
+      "cartUpdated": "Cart updated successfully",
+      "cartCleared": "Cart cleared successfully",
+      "cartClearError": "Failed to clear cart"
+      
+    },
+    "ManageCart": "Manage Your Cart",
+    "removeItem": "Remove from cart",
+    "Total": "Total: ETB",
+    "Checkout": "Checkout",
+    "ClearCart": "Clear Cart",
+    "YourCart": "Your Cart",
+    "NotReadyToCheckout": "Not ready to checkout?",
+    "ContinueShopping": "Continue Shopping",
+    "Remove": "Remove",
+    "OrderSummary": "Order Summary",
+    "Subtotal": "Subtotal",
+    "Shipping": "Shipping",
+    "TotalAmount": "Total Amount",
+    "Calculated at the next step": "Calculated at the next step",
+    "Continue to checkout": "Continue to Checkout"
+  },
+   "Checkout": {
+    "billingDetails": "Billing details",
+    "firstName": "First Name",
+    "firstNamePlaceholder": "Enter your first name",
+    "lastName": "Last Name",
+    "lastNamePlaceholder": "Enter your last name",
+    "countryRegion": "Country / Region",
+    "countryPlaceholder": "Select your country",
+    "streetAddress": "Street Address",
+    "streetPlaceholder": "Enter your street address",
+    "townCity": "Town/City",
+    "townPlaceholder": "Enter your town or city",
+    "province": "Province",
+    "provincePlaceholder": "Enter your province",
+    "zipCode": "Zip code",
+    "zipPlaceholder": "Enter your zip code",
+    "phoneNumber": "Phone number",
+    "phonePlaceholder": "Enter your phone number",
+    "email": "Email",
+    "emailPlaceholder": "Enter your email",
+    "additionalInfo": "Additional Information",
+    "additionalInfoPlaceholder": "Write any additional information if there are any...",
+    "product": "Product",
+    "total": "Total",
+    "paymentMethod": "Select Payment Method",
+    "chapa": "Chapa",
+    "cashOnDelivery": "Cash on Delivery",
+    "privacyPolicy": "Your personal data will be used to support your experience throughout the website. Read our {privacyPolicy}.",
+    "privacyPolicyLink": "privacy policy",
+    "placeOrder": "Place Order",
+    "notifications": {
+      "orderPlaced": "Order placed successfully",
+      "orderFailed": "Failed to place order"
+    }
+  },
+  "Privacy": {
+    "meta": {
+      "title": "Privacy Policy | Kuru - Online Art Marketplace",
+      "description": "Read our privacy policy to understand how we collect, use, and protect your data on our online art marketplace."
+    },
+    "title": "Privacy Policy",
+    "lastUpdated": "Last updated: May 2025",
+    "introduction": {
+      "title": "Introduction",
+      "content1": "Welcome to Kuru, the online marketplace for Ethiopian artists. We are committed to protecting your privacy and ensuring the security of your personal information. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our platform.",
+      "content2": "By accessing or using our service, you agree to the collection and use of information in accordance with this policy."
+    },
+    "informationWeCollect": {
+      "title": "Information We Collect",
+      "personalInfo": {
+        "title": "Personal Information",
+        "description": "When you register an account, we may collect:",
+        "items": [
+          "Name, email address, and contact information",
+          "Profile information (bio, artist statement, etc.)",
+          "Payment and billing information (processed securely through our payment processor)"
+        ]
+      },
+      "artworkData": {
+        "title": "Artwork and Transaction Data",
+        "description": "When you use our platform as an artist or buyer, we collect:",
+        "items": [
+          "Artwork details (images, descriptions, pricing)",
+          "Purchase history and transaction records",
+          "Communication between buyers and artists"
+        ]
+      },
+      "technicalData": {
+        "title": "Technical Data",
+        "description": "We automatically collect certain information when you visit our platform:",
+        "items": [
+          "IP address, browser type, and device information",
+          "Usage data (pages visited, time spent, etc.)",
+          "Cookies and similar tracking technologies"
+        ]
+      }
+    },
+    "howWeUseInfo": {
+      "title": "How We Use Your Information",
+      "platformOperation": {
+        "title": "Platform Operation",
+        "description": "To provide, maintain, and improve our services, process transactions, and communicate with you about your account."
+      },
+      "securityCompliance": {
+        "title": "Security & Compliance",
+        "description": "To protect against fraud, comply with legal obligations, and enforce our terms of service."
+      },
+      "personalization": {
+        "title": "Personalization",
+        "description": "To personalize your experience, recommend artworks, and improve our platform's functionality."
+      },
+      "marketing": {
+        "title": "Marketing",
+        "description": "With your consent, to send promotional communications about new features or artworks."
+      }
+    },
+    "dataSharing": {
+      "title": "Data Sharing and Disclosure",
+      "description": "We may share your information in the following circumstances:",
+      "items": [
+        {
+          "label": "With artists/buyers",
+          "detail": "Necessary information to complete transactions (e.g., shipping details)"
+        },
+        {
+          "label": "Service providers",
+          "detail": "Trusted third parties who assist in platform operation (payment processors, hosting services)"
+        },
+        {
+          "label": "Legal requirements",
+          "detail": "When required by law or to protect our rights and safety"
+        },
+        {
+          "label": "Business transfers",
+          "detail": "In connection with a merger, acquisition, or sale of assets"
+        }
+      ],
+      "noSelling": "We never sell your personal information to third parties for marketing purposes."
+    },
+    "dataSecurity": {
+      "title": "Data Security",
+      "description": "We implement appropriate technical and organizational measures to protect your personal data:",
+      "measures": [
+        "Secure servers and encryption technologies",
+        "Regular security assessments",
+        "Access controls and authentication procedures",
+        "Secure payment processing through Chapa"
+      ],
+      "disclaimer": "While we strive to protect your data, no method of transmission over the Internet is 100% secure."
+    },
+    "yourRights": {
+      "title": "Your Rights and Choices",
+      "description": "You have certain rights regarding your personal information:",
+      "items": [
+        "Access and request a copy of your data",
+        "Correct or update inaccurate information",
+        "Request deletion of your data (subject to legal requirements)",
+        "Opt-out of marketing communications",
+        "Withdraw consent where processing is based on consent"
+      ],
+      "contact": "To exercise these rights, please contact us at privacy@kuru-art.com."
+    },
+    "policyChanges": {
+      "title": "Changes to This Policy",
+      "description1": "We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new policy on this page and updating the \"Last updated\" date.",
+      "description2": "Your continued use of our platform after any modification constitutes acceptance of the updated policy."
+    },
+    "contact": {
+      "title": "Contact Us",
+      "description": "If you have any questions about this Privacy Policy, please contact us at:",
+      "email": "privacy@kuru-art.com"
+    }
+  },
+"Artworks": {
+  "Browse by Category": "Browse by Category",
+  "Explore": "Explore variety of art piece in all categories of your liking",
+  "All filters": "All filters",
+  "Price": "Price",
+  "Low to High": "Low to High",
+  "High to Low": "High to Low",
+  "categories": "Categories",
+  "Medium": "Medium",
+  "Style": "Style",
+  "ClearAll": "Clear All",
+  "Search": "Search"
+}
+
   }
 }

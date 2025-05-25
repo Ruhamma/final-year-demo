@@ -55,7 +55,10 @@ export default function OrderAnalyticsPage() {
     setPage(1);
   });
 
-  const statusColors = {
+  const statusColors: Record<
+    "PENDING" | "COMPLETED" | "CANCELLED" | "SHIPPED",
+    string
+  > = {
     PENDING: "yellow",
     COMPLETED: "green",
     CANCELLED: "red",
@@ -165,7 +168,11 @@ export default function OrderAnalyticsPage() {
                       <Table.Td>
                         <Badge
                           variant="light"
-                          color={statusColors[order.status] || "gray"}
+                          color={
+                            statusColors[
+                              order.status as keyof typeof statusColors
+                            ] || "gray"
+                          }
                         >
                           {order.status}
                         </Badge>

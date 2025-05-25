@@ -39,6 +39,13 @@ import {
 import { useGetMyArtworksQuery } from "@/store/api/artwork/artwork";
 import { useGetArtistOrdersQuery } from "@/store/api/order/order";
 import { useRouter } from "next/navigation";
+import {
+  Key,
+  ReactElement,
+  JSXElementConstructor,
+  ReactNode,
+  ReactPortal,
+} from "react";
 
 export default function ArtistDashboard() {
   const router = useRouter();
@@ -68,15 +75,17 @@ export default function ArtistDashboard() {
   const recentOrders = (orders?.orders || [])
     .slice()
     .sort(
-      (a, b) =>
-        new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+      (
+        a: { created_at: string | number | Date },
+        b: { created_at: string | number | Date }
+      ) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
     )
     .slice(0, 6);
   const statusHistory = recentOrders[0]?.status_history || [];
   const orderStatusData = Object.entries(metrics?.orders_by_status || {}).map(
     ([name, value]) => ({
       name,
-      value,
+      value: Number(value),
       color:
         name === "PENDING"
           ? "yellow.6"
@@ -97,7 +106,7 @@ export default function ArtistDashboard() {
     CANCELLED: "red",
   };
 
-  const statusIcons = {
+  const statusIcons: { [key: string]: React.ReactNode } = {
     PENDING: <IconClock size={16} />,
     PROCESSING: <IconPackage size={16} />,
     SHIPPED: <IconTruckDelivery size={16} />,
@@ -105,7 +114,7 @@ export default function ArtistDashboard() {
     CANCELLED: <IconX size={16} />,
   };
 
-  function formatNumber(value) {
+  function formatNumber(value: number) {
     if (value >= 1000) return (value / 1000).toFixed(1) + "K";
     return value;
   }
@@ -142,16 +151,21 @@ export default function ArtistDashboard() {
         <SummaryCard
           title="Top Favorited"
           value={
-            topArtworks?.reduce((acc, a) => acc + (a.favorite_count || 0), 0) ??
-            0
+            topArtworks?.reduce(
+              (acc: any, a: { favorite_count: any }) =>
+                acc + (a.favorite_count || 0),
+              0
+            ) ?? 0
           }
           icon={<IconHeart />}
         />
         <SummaryCard
           title="Total Views"
           value={formatNumber(
-            data?.artworks?.reduce((acc, a) => acc + (a.view_count || 0), 0) ??
+            data?.artworks?.reduce(
+              (acc: any, a: { view_count: any }) => acc + (a.view_count || 0),
               0
+            ) ?? 0
           )}
           icon={<IconEye />}
         />
@@ -187,25 +201,39 @@ export default function ArtistDashboard() {
         </Text>
         <ScrollArea>
           <Group wrap="nowrap">
-            {topArtworks?.map((artwork) => (
-              <Card key={artwork.id} w={220} shadow="sm" radius="md" withBorder>
-                <Image
-                  src={
-                    artwork.images?.[0]?.url || "https://placehold.co/300x200"
-                  }
-                  alt={artwork.title}
+            {topArtworks?.map(
+              (artwork: {
+                id: Key | null | undefined;
+                images: { url: any }[];
+                title: string | number | null | undefined;
+                favorite_count: any;
+                view_count: any;
+              }) => (
+                <Card
+                  key={artwork.id}
+                  w={220}
+                  shadow="sm"
                   radius="md"
-                  className="h-[120px] w-[150px]"
-                />
-                <Text mt="xs" fw={600}>
-                  {artwork.title}
-                </Text>
-                <Text size="sm" c="dimmed">
-                  {artwork?.favorite_count || 0} favorites •{" "}
-                  {artwork?.view_count || "?"} views
-                </Text>
-              </Card>
-            ))}
+                  withBorder
+                >
+                  <Image
+                    src={
+                      artwork.images?.[0]?.url || "https://placehold.co/300x200"
+                    }
+                    alt={"Artwork"}
+                    radius="md"
+                    className="h-[120px] w-[150px]"
+                  />
+                  <Text mt="xs" fw={600}>
+                    {artwork.title}
+                  </Text>
+                  <Text size="sm" c="dimmed">
+                    {artwork?.favorite_count || 0} favorites •{" "}
+                    {artwork?.view_count || "?"} views
+                  </Text>
+                </Card>
+              )
+            )}
           </Group>
         </ScrollArea>
       </Card>
@@ -220,7 +248,7 @@ export default function ArtistDashboard() {
           lineWidth={2}
           mb="xl"
         >
-          {statusHistory?.map((entry, index) => (
+          {statusHistory?.map((entry: any, index: number) => (
             <Timeline.Item
               bullet={statusIcons[entry.status]}
               title={entry.status}
@@ -264,36 +292,47 @@ export default function ArtistDashboard() {
             </Table.Tr>
           </Table.Thead>
           <Table.Tbody>
-            {recentOrders.map((order) => (
-              <Table.Tr key={order.id}>
-                <Table.Td>{order.id.slice(0, 8)}</Table.Td>
-                <Table.Td>
-                  {new Date(order.created_at).toLocaleDateString()}
-                </Table.Td>
-                <Table.Td>
-                  {order.payment_method === "chapa"
-                    ? "Chapa"
-                    : "Cash on delivery"}
-                </Table.Td>
-                <Table.Td>ETB {order.total_amount.toFixed(2)}</Table.Td>
-                <Table.Td>
-                  <Badge color={statusColors[order.status]}>
-                    {order.status}
-                  </Badge>
-                </Table.Td>
-                <Table.Td>
-                  <Button
-                    size="xs"
-                    variant="light"
-                    onClick={() =>
-                      router.push(`/artist-account/orders/${order.id}`)
-                    }
-                  >
-                    View
-                  </Button>
-                </Table.Td>
-              </Table.Tr>
-            ))}
+            {recentOrders.map(
+              (
+                order: {
+                  id: string;
+                  created_at: string;
+                  payment_method: string;
+                  total_amount: number;
+                  status: keyof typeof statusColors;
+                },
+                index: number
+              ) => (
+                <Table.Tr key={index}>
+                  <Table.Td>{order.id.slice(0, 8)}</Table.Td>
+                  <Table.Td>
+                    {new Date(order.created_at).toLocaleDateString()}
+                  </Table.Td>
+                  <Table.Td>
+                    {order.payment_method === "chapa"
+                      ? "Chapa"
+                      : "Cash on delivery"}
+                  </Table.Td>
+                  <Table.Td>ETB {order.total_amount.toFixed(2)}</Table.Td>
+                  <Table.Td>
+                    <Badge color={statusColors[order.status]}>
+                      {order.status}
+                    </Badge>
+                  </Table.Td>
+                  <Table.Td>
+                    <Button
+                      size="xs"
+                      variant="light"
+                      onClick={() =>
+                        router.push(`/artist-account/orders/${order.id}`)
+                      }
+                    >
+                      View
+                    </Button>
+                  </Table.Td>
+                </Table.Tr>
+              )
+            )}
           </Table.Tbody>
         </Table>
       </Box>
@@ -301,7 +340,15 @@ export default function ArtistDashboard() {
   );
 }
 
-function SummaryCard({ title, value, icon }) {
+function SummaryCard({
+  title,
+  value,
+  icon,
+}: {
+  title: string;
+  value: any;
+  icon: React.ReactNode;
+}) {
   return (
     <Card withBorder radius="md" p="md">
       <Group>

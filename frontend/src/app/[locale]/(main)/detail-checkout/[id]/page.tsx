@@ -23,7 +23,7 @@ import React from "react";
 import { Controller, useForm } from "react-hook-form";
 import { z } from "zod";
 
-export const checkoutSchema = z.object({
+const checkoutSchema = z.object({
   payment_method: z.string().min(1, "Payment method is required"),
   shipping_address: z.object({
     street: z.string().min(1, "Street address is required"),
@@ -43,7 +43,9 @@ export default function CheckoutPage() {
   // const router = useRouter();
   const { user } = useAuth();
   const { data: cart, isLoading } = useGetCartQuery({});
-  const filteredItems = cart?.items?.filter((item) => item.artwork_id === id);
+  const filteredItems = cart?.items?.filter(
+    (item: any) => item.artwork_id === id
+  );
   const {
     control,
     register,
@@ -78,7 +80,7 @@ export default function CheckoutPage() {
 
     const payload = {
       ...data,
-      items: filteredItems.map((item) => ({
+      items: filteredItems.map((item: any) => ({
         artwork_id: item.artwork_id,
         quantity: item.quantity ?? 1,
         price_at_addition: item.price_at_addition,

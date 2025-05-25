@@ -132,7 +132,7 @@ export default function Page() {
             className="text-center"
             align="center"
             justify="center"
-            // spacing="md"
+            gap="md"
           >
             <Text fz={{ base: 24, md: 32 }} className="font-semibold">
               {t("Where Artists Meet Collectors: Discover Your Perfect Piece")}{" "}

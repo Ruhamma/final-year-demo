@@ -112,7 +112,7 @@ export default function UserManagement() {
   if (isLoading) return <Loader size="xl" variant="dots" />;
   if (isError) return <Text c="red">Error loading artists</Text>;
 
-  const rows = data?.artists?.map((artist) => (
+  const rows = data?.artists?.map((artist: any) => (
     <Table.Tr key={artist.id}>
       <Table.Td>
         <Flex align="center" gap="sm">

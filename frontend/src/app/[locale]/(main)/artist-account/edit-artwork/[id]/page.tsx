@@ -141,7 +141,7 @@ const UpdateArtworkPage = () => {
         title: artworkData.title,
         description: artworkData.description,
         price: artworkData.price,
-        size: formattedSize,
+        size: formattedSize ? parseSize(formattedSize) : null,
         category_id: artworkData.category?.id,
         medium_id: artworkData.medium?.id,
         style_id: artworkData.style?.id,

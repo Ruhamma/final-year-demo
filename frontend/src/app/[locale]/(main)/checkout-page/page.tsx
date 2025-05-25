@@ -14,12 +14,13 @@ import {
   Textarea,
   TextInput,
 } from "@mantine/core";
+import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import React from "react";
 import { Controller, useForm } from "react-hook-form";
 import { z } from "zod";
 
-export const checkoutSchema = z.object({
+const checkoutSchema = z.object({
   payment_method: z.string().min(1, "Payment method is required"),
   shipping_address: z.object({
     street: z.string().min(1, "Street address is required"),
@@ -34,7 +35,9 @@ export const checkoutSchema = z.object({
     last_name: z.string().optional().nullable(),
   }),
 });
+
 export default function CheckoutPage() {
+  const t = useTranslations("common.Checkout");
   const router = useRouter();
   const { user } = useAuth();
   const { data: cart, isLoading } = useGetCartQuery({});
@@ -67,10 +70,10 @@ export default function CheckoutPage() {
     console.log("Form submitted", data);
     try {
       await submitOrder(data).unwrap();
-      notify("Success", "Order placed successfully");
+      notify("Success", t("notifications.orderPlaced"));
       router.push("/user-account/orders");
     } catch (err) {
-      notify("Error", `Failed to place order`);
+      notify("Error", t("notifications.orderFailed"));
     }
   };
 
@@ -79,14 +82,15 @@ export default function CheckoutPage() {
       <LoadingOverlay visible={isLoading} />
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10">
+          {/* Billing Details Section */}
           <div>
-            <h2 className="text-2xl font-semibold mb-6">Billing details</h2>
+            <h2 className="text-2xl font-semibold mb-6">{t("billingDetails")}</h2>
             <div className="space-y-4 text-[#858585]">
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <TextInput
-                    label="First Name"
-                    placeholder="Enter your first name"
+                    label={t("firstName")}
+                    placeholder={t("firstNamePlaceholder")}
                     disabled={user?.first_name !== null}
                     className="border border-[#D5D8DE] bg-amber-50 rounded px-3 py-2 w-full"
                     value={user?.first_name}
@@ -96,8 +100,8 @@ export default function CheckoutPage() {
                 </div>
                 <div>
                   <TextInput
-                    label="Last Name"
-                    placeholder="Enter your last name"
+                    label={t("lastName")}
+                    placeholder={t("lastNamePlaceholder")}
                     disabled={user?.last_name !== null}
                     className="border border-[#D5D8DE] bg-amber-50 rounded px-3 py-2 w-full"
                     value={user?.last_name}
@@ -113,8 +117,8 @@ export default function CheckoutPage() {
                   control={control}
                   render={({ field }) => (
                     <Select
-                      label="Country / Region"
-                      placeholder="Select your country"
+                      label={t("countryRegion")}
+                      placeholder={t("countryPlaceholder")}
                       {...field}
                       error={errors.shipping_address?.country?.message}
                       disabled
@@ -131,8 +135,8 @@ export default function CheckoutPage() {
                   control={control}
                   render={({ field }) => (
                     <TextInput
-                      label="Street Address"
-                      placeholder="Enter your street address"
+                      label={t("streetAddress")}
+                      placeholder={t("streetPlaceholder")}
                       {...field}
                       error={errors.shipping_address?.street?.message}
                     />
@@ -146,8 +150,8 @@ export default function CheckoutPage() {
                   control={control}
                   render={({ field }) => (
                     <TextInput
-                      label="Town/City"
-                      placeholder="Enter your town or city"
+                      label={t("townCity")}
+                      placeholder={t("townPlaceholder")}
                       {...field}
                       error={errors.shipping_address?.city?.message}
                     />
@@ -161,8 +165,8 @@ export default function CheckoutPage() {
                   control={control}
                   render={({ field }) => (
                     <TextInput
-                      label="Province"
-                      placeholder="Enter your province"
+                      label={t("province")}
+                      placeholder={t("provincePlaceholder")}
                       {...field}
                       error={errors.shipping_address?.province?.message}
                     />
@@ -176,18 +180,19 @@ export default function CheckoutPage() {
                   control={control}
                   render={({ field }) => (
                     <TextInput
-                      label="Zip code"
-                      placeholder="Enter your zip code"
+                      label={t("zipCode")}
+                      placeholder={t("zipPlaceholder")}
                       {...field}
                       error={errors.shipping_address?.zip_code?.message}
                     />
                   )}
                 />
               </div>
+
               <div>
                 <TextInput
-                  label="Phone number"
-                  placeholder="Enter your phone number"
+                  label={t("phoneNumber")}
+                  placeholder={t("phonePlaceholder")}
                   value={user?.phone_number}
                   disabled={user?.phone_number !== null}
                   {...register("shipping_address.phone_number")}
@@ -197,8 +202,8 @@ export default function CheckoutPage() {
 
               <div>
                 <TextInput
-                  label="Email"
-                  placeholder="Enter your email"
+                  label={t("email")}
+                  placeholder={t("emailPlaceholder")}
                   className="border border-[#D5D8DE] bg-amber-50 rounded px-3 py-2 w-full"
                   type="email"
                   value={user?.email}
@@ -210,8 +215,8 @@ export default function CheckoutPage() {
 
               <div>
                 <Textarea
-                  label="Additional Information"
-                  placeholder="Write any additional information if there are any..."
+                  label={t("additionalInfo")}
+                  placeholder={t("additionalInfoPlaceholder")}
                   {...register("shipping_address.additional_info")}
                   error={errors.shipping_address?.additional_info?.message}
                 />
@@ -219,12 +224,13 @@ export default function CheckoutPage() {
             </div>
           </div>
 
+          {/* Order Summary Section */}
           <div className="p-6">
-            <h2 className="text-xl font-semibold mb-4">Product</h2>
+            <h2 className="text-xl font-semibold mb-4">{t("product")}</h2>
             {cart?.items?.map((item: any) => (
-              <>
+              <React.Fragment key={item.id}>
                 <div className="flex justify-between mb-2">
-                  <span>{item?.artwork?.title} </span>
+                  <span>{item?.artwork?.title}</span>
                   <span>
                     <NumberFormatter
                       value={item?.price_at_addition}
@@ -233,15 +239,15 @@ export default function CheckoutPage() {
                       fixedDecimalScale
                       prefix={"ETB "}
                       className="text-sm"
-                    />{" "}
+                    />
                   </span>
                 </div>
                 <hr className="my-2" />
-              </>
+              </React.Fragment>
             ))}
 
             <div className="flex justify-between font-semibold text-[#b06c00]">
-              <span>Total</span>
+              <span>{t("total")}</span>
               <span>
                 <NumberFormatter
                   value={cart?.total_price}
@@ -253,30 +259,32 @@ export default function CheckoutPage() {
                 />
               </span>
             </div>
+
             <div className="mt-6 space-y-4 text-sm">
               <Controller
                 name="payment_method"
                 control={control}
                 render={({ field }) => (
                   <Radio.Group
-                    label="Select Payment Method"
+                    label={t("paymentMethod")}
                     value={field.value}
                     onChange={field.onChange}
                     error={errors.payment_method?.message}
                   >
-                    <Radio value="chapa" label="Chapa" className="pb-2" />
-                    <Radio value="cash_on_delivery" label="Cash on Delivery" />
+                    <Radio value="chapa" label={t("chapa")} className="pb-2" />
+                    <Radio value="cash_on_delivery" label={t("cashOnDelivery")} />
                   </Radio.Group>
                 )}
               />
 
               <p className="text-xs text-gray-600">
-                Your personal data will be used to support your experience
-                throughout the website. Read our{" "}
-                <a href="#" className="underline">
-                  privacy policy
-                </a>
-                .
+                {t.rich("privacyPolicy", {
+                  privacyPolicy: (chunks) => (
+                    <a href="#" className="underline">
+                      {chunks}
+                    </a>
+                  ),
+                })}
               </p>
             </div>
 
@@ -285,7 +293,7 @@ export default function CheckoutPage() {
               className="mt-6 w-full bg-[#b06c00] text-white py-2 rounded"
               loading={isOrdering}
             >
-              Place Order
+              {t("placeOrder")}
             </Button>
           </div>
         </div>

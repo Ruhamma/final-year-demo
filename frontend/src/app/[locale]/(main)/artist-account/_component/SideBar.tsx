@@ -45,7 +45,7 @@ const SideBar = () => {
     {
       label: t("Messages"),
       icon: <IconMail size={18} />,
-      href: "/artist-account/orders",
+      href: "/artist-account/messages",
     },
     {
       href: "/artist-account/notifications",

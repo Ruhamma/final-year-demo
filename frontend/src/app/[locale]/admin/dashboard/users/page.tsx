@@ -100,7 +100,7 @@ export default function UserManagement() {
   if (isLoading) return <Loader size="xl" variant="dots" />;
   if (isError) return <Text c="red">Error loading users</Text>;
 
-  const rows = data?.users?.map((user) => (
+  const rows = data?.users?.map((user: any) => (
     <Table.Tr key={user.id}>
       <Table.Td>
         <Flex align="center" gap="sm">

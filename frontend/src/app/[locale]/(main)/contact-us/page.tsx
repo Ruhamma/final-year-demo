@@ -30,7 +30,7 @@ export default function Page() {
 
       {/* Text Section */}
       <Box className="container mx-auto py-16">
-        <Stack spacing="md">
+        <Stack gap="md">
           <Text
             fz={30}
             className="font-semibold playfair-display text-center sm:text-4xl text-2xl"

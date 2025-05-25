@@ -6,5 +6,5 @@ const ARViewer = dynamic(() => import("./_components/ARviewer"), {
 });
 
 export default function ARPage() {
-  return <ARViewer />;
+  return <ARViewer imageUrl={""} />;
 }

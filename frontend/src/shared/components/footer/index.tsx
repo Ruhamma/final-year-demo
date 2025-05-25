@@ -99,7 +99,7 @@ export function Footer() {
           </Flex>
 
           {/* Terms */}
-          <Link href={"#"}>
+          <Link href={"/privacy-policy"} className="hover:underline">
             <Text c={"dimmed"} fz={{ base: 12, sm: 14 }}>
               {t("Terms")}
             </Text>

@@ -14,7 +14,7 @@ import { usePathname } from "next/navigation";
 const SideBar = () => {
   const pathname = usePathname();
 
-  const isActive = (path) => {
+  const isActive = (path: any) => {
     return pathname?.endsWith(path);
   };
 
