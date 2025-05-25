@@ -29,7 +29,9 @@ import AddtoCart from "../_component/AddtoCart";
 import AddtoWishlist from "../_component/AddtoWishlist";
 import { Pagination } from "@mantine/core";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 const Page = () => {
+  const t = useTranslations("common.Artworks");
   const router = useRouter();
   const [page, setPage] = useState(1);
   const limit = 12;
@@ -75,9 +77,9 @@ const Page = () => {
     <Box w-full>
       <Flex className="flex items-start p-6  w-full">
         <Stack className=" mt-10 flex items-start" gap={2}>
-          <p className="text-4xl font-bold font-serif">Browse by Category</p>
+          <p className="text-4xl font-bold font-serif">{t('Browse by Category')}</p>
           <p className="text-grey-100 font-serif">
-            Explore variety of art piece in all categories of your liking{" "}
+            {t('Explore')}{" "}
           </p>
         </Stack>
       </Flex>
@@ -102,11 +104,11 @@ const Page = () => {
         <div className="flex flex-col gap-4 mt-4 md:flex-row md:items-center md:justify-between">
           <Group gap="xs" className="flex flex-wrap gap-3">
             <Button variant="outline" leftSection={<IconFilter size={16} />}>
-              All filters
+              {t('All filters')}
             </Button>
 
             <Select
-              placeholder="Price"
+              placeholder={t('Price')}
               data={["Low to High", "High to Low"]}
               value={selectedFilters.price}
               onChange={(val) =>
@@ -115,7 +117,7 @@ const Page = () => {
               className="w-32"
             />
             <Select
-              placeholder="Categories"
+              placeholder={t('categories')}
               data={metadata?.categories.map((cat: any) => ({
                 value: cat.id,
                 label: cat.name,
@@ -127,7 +129,7 @@ const Page = () => {
               className="w-32"
             />
             <Select
-              placeholder="Medium"
+              placeholder={t('Medium')}
               data={metadata?.media.map((medium: any) => ({
                 value: medium.id,
                 label: medium.name,
@@ -139,7 +141,7 @@ const Page = () => {
               className="w-32"
             />
             <Select
-              placeholder="Style"
+              placeholder={t('Style')}
               data={metadata?.styles.map((style: any) => ({
                 value: style.id,
                 label: style.name,
@@ -152,7 +154,7 @@ const Page = () => {
             />
 
             <Button variant="subtle" onClick={handleClear}>
-              Clear all
+              {t('ClearAll')}
             </Button>
           </Group>
 
@@ -160,7 +162,7 @@ const Page = () => {
             <TextInput
               value={search}
               onChange={(e) => setSearch(e.currentTarget.value)}
-              placeholder="Search"
+              placeholder={t('Search')}
               leftSection={<IconSearch size={16} />}
               classNames={{
                 input:

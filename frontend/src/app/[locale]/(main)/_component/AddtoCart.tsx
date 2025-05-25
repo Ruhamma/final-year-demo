@@ -5,16 +5,18 @@ import { useDisclosure } from "@mantine/hooks";
 import React, { useState } from "react";
 import { useAddCartItemMutation } from "@/store/api/artwork/cart";
 import { notify } from "@/shared/components/notification/notification";
+import { useTranslations } from "next-intl";
 const AddtoCart = ({ id }: { id: string }) => {
+  const t = useTranslations("common.Cart"); 
   const [addToCart] = useAddCartItemMutation();
   const [isInCart, setIsInCart] = useState(false);
   const handleAddToCart = async () => {
     try {
       await addToCart({ artwork_id: id }).unwrap();
       setIsInCart(true)
-      notify("Success", "Added to cart");
+      notify("Success", t("itemAdded"));
     } catch (error) {
-      notify("Error", "Failed to add to cart");
+      notify("Error", t("itemAddError"));
       console.log(error);
     }
   };

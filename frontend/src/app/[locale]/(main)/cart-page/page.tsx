@@ -4,8 +4,10 @@ import { useGetCartQuery, useRemoveCartItemMutation } from "@/store/api/artwork/
 import { Image, LoadingOverlay, NumberFormatter } from "@mantine/core";
 import { notify } from "@/shared/components/notification/notification";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 export default function CartPage() {
+  const t = useTranslations("common.Cart");
   const route= useRouter();
   const {data: cart, isLoading} = useGetCartQuery({});
   const [removeFromCat]=useRemoveCartItemMutation();
@@ -13,9 +15,9 @@ export default function CartPage() {
   const handleRemoveFromCart =async (id: string) => {
     try {
       await removeFromCat(id).unwrap();;
-      notify('Success', 'Item removed from cart');
+      notify('Success', t("itemRemoved"));
     } catch (error) {
-      notify('Error', 'Failed to remove item from cart');
+      notify('Error', t("itemRemoveError"));
     }
   }
   return (
@@ -23,10 +25,10 @@ export default function CartPage() {
       <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8">
    
         <div>
-          <h1 className="text-3xl font-bold mb-2">Your cart</h1>
+          <h1 className="text-3xl font-bold mb-2">{t('YourCart')}</h1>
           <p className="mb-6 text-sm">
-            Not ready to checkout?{" "}
-            <span className="underline cursor-pointer" onClick={()=>route.push("/")}>Continue Shopping</span>
+            {t('NotReadyToCheckout')}{" "}
+            <span className="underline cursor-pointer" onClick={()=>route.push("/")}>{t('ContinueShopping')}</span>
           </p>
           <div className="flex flex-col gap-8">
             <LoadingOverlay visible={isLoading} />
@@ -55,7 +57,7 @@ export default function CartPage() {
                 <p className="text-xs text-right">
                   by Bilen Assefa{" "}
                   <span className="ml-2 text-blue-500 cursor-pointer" onClick={() => handleRemoveFromCart(item?.id)}>
-                    Remove
+                    {t('Remove')}
                   </span>
                 </p>
               </div>
@@ -65,7 +67,7 @@ export default function CartPage() {
 
      
         <div className=" p-6 rounded-md h-fit">
-          <h3 className="text-lg font-bold mb-4">Order Summary</h3>
+          <h3 className="text-lg font-bold mb-4">{t('OrderSummary')}</h3>
 
           <input
             type="text"
@@ -74,20 +76,20 @@ export default function CartPage() {
           />
 
           <div className="flex justify-between text-sm mb-2">
-            <span>Subtotal</span>
+            <span>{t('Subtotal')}</span>
             {/* <span>ETB {item?.total_price}</span> */}
           </div>
           <div className="flex justify-between text-sm mb-2 border-b">
-            <span>Total</span>
+            <span>{t('TotalAmount')}</span>
             {/* <span>ETB {item?.total_price}</span> */}
           </div>
           <div className="flex justify-between text-sm mb-4">
-            <span>Shipping</span>
-            <span className="text-gray-600">Calculated at the next step</span>
+            <span>{t('Shipping')}</span>
+            <span className="text-gray-600">{t('Calculated at the next step')}</span>
           </div>
 
           <button className="w-full bg-[#b5641b] hover:bg-[#9e5211] text-white font-semibold py-2 px-4 cursor-pointer" onClick={()=>route.push("/checkout-page")}>
-            Continue to checkout
+            {t('Continue to checkout')}
           </button>
         </div>
       </div>
