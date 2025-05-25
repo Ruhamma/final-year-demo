@@ -19,7 +19,7 @@ import React from "react";
 import { Controller, useForm } from "react-hook-form";
 import { z } from "zod";
 
-export const checkoutSchema = z.object({
+const checkoutSchema = z.object({
   payment_method: z.string().min(1, "Payment method is required"),
   shipping_address: z.object({
     street: z.string().min(1, "Street address is required"),

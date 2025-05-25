@@ -216,7 +216,7 @@ const Page = () => {
             />
             <Select
               placeholder="Category"
-              data={metadata?.categories.map((cat) => ({
+              data={metadata?.categories.map((cat: any) => ({
                 value: cat.id,
                 label: cat.name,
               }))}
@@ -227,7 +227,7 @@ const Page = () => {
             />
             <Select
               placeholder="Medium"
-              data={metadata?.media.map((m) => ({
+              data={metadata?.media.map((m: any) => ({
                 value: m.id,
                 label: m.name,
               }))}
@@ -238,7 +238,7 @@ const Page = () => {
             />
             <Select
               placeholder="Style"
-              data={metadata?.styles.map((s) => ({
+              data={metadata?.styles.map((s: any) => ({
                 value: s.id,
                 label: s.name,
               }))}
@@ -259,7 +259,7 @@ const Page = () => {
 
         <Center>
           <Box className="grid grid-cols-2 mt-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            {artworks.map((art) => (
+            {artworks.map((art: any) => (
               <Card key={art.id} withBorder radius="md">
                 <CardSection>
                   <Image

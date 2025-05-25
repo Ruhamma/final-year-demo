@@ -130,7 +130,7 @@ const OrderDetailPage = () => {
               </Table.Tr>
             </Table.Thead>
             <Table.Tbody>
-              {order.items.map((item) => (
+              {order.items.map((item: any) => (
                 <Table.Tr key={item.id}>
                   <Table.Td>
                     {item.artwork_image ? (

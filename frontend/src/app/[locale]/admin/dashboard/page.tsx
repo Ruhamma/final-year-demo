@@ -240,7 +240,7 @@ export default function AnalyticsDashboard() {
             </Group>
             {data?.revenue_by_category?.length > 0 ? (
               <DonutChart
-                data={data.revenue_by_category.map((item) => ({
+                data={data.revenue_by_category.map((item: any) => ({
                   name: item.category,
                   value: item.revenue,
                   color: "blue.6",
@@ -297,7 +297,7 @@ export default function AnalyticsDashboard() {
             </Group>
             {data?.revenue_by_style?.length > 0 ? (
               <DonutChart
-                data={data.revenue_by_style.map((item) => ({
+                data={data.revenue_by_style.map((item: any) => ({
                   name: item.style,
                   value: item.revenue,
                   color: "violet.6",
@@ -331,7 +331,7 @@ export default function AnalyticsDashboard() {
               </Badge>
             </Group>
             <Stack gap="sm">
-              {data?.top_artworks?.map((artwork, index) => (
+              {data?.top_artworks?.map((artwork: any, index: any) => (
                 <Paper
                   key={artwork.id}
                   withBorder

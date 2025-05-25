@@ -270,7 +270,7 @@ export default function MetadataManagementPage() {
                       </Table.Tr>
                     </Table.Thead>
                     <Table.Tbody>
-                      {entries.map((entry) => (
+                      {entries.map((entry: any) => (
                         <Table.Tr key={entry.id}>
                           <Table.Td>
                             <Text fw={500}>{entry.name}</Text>

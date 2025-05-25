@@ -68,7 +68,7 @@ export default function OrderDetailPage() {
   const { data: order, isLoading } = useGetOrderByIdQuery(id);
   const [updateStatus, { isLoading: isUpdating }] =
     useUpdateOrderStatusMutation();
-  const [newStatus, setNewStatus] = useState(null);
+  const [newStatus, setNewStatus] = useState<string | null>(null);
 
   if (isLoading) {
     return (
@@ -91,14 +91,18 @@ export default function OrderDetailPage() {
           <Group>
             <Title order={3}>Order #{order?.id.slice(0, 8)}</Title>
           </Group>
-          <Badge color={statusColors[order?.status]}>{order?.status}</Badge>
+          <Badge
+            color={statusColors[order?.status as keyof typeof statusColors]}
+          >
+            {order?.status}
+          </Badge>
         </Stack>
         <Group>
           <Select
             placeholder="Update Status"
             data={statusOptions}
             value={newStatus}
-            onChange={setNewStatus}
+            onChange={(value) => setNewStatus(value)}
             allowDeselect={false}
             disabled={isUpdating}
           />
@@ -205,7 +209,7 @@ export default function OrderDetailPage() {
         Artworks
       </Text>
       <Stack gap="md">
-        {order?.items?.map((item) => (
+        {order?.items?.map((item: any) => (
           <Card key={item?.artwork_id} withBorder shadow="xs">
             <Group align="flex-start">
               <Image src={item?.artwork_image} w={80} h={80} radius="md" />
@@ -249,17 +253,25 @@ export default function OrderDetailPage() {
               lineWidth={2}
               mb="xl"
             >
-              {order?.status_history?.map((entry, index) => (
-                <Timeline.Item
-                  bullet={statusIcons[entry.status]}
-                  title={entry.status}
-                  key={index}
-                >
-                  <Text size="sm" c="dimmed">
-                    {new Date(entry.timestamp).toLocaleString()}
-                  </Text>
-                </Timeline.Item>
-              ))}
+              {order?.status_history?.map(
+                (
+                  entry: {
+                    status: keyof typeof statusIcons;
+                    timestamp: string;
+                  },
+                  index: number
+                ) => (
+                  <Timeline.Item
+                    bullet={statusIcons[entry.status]}
+                    title={entry.status}
+                    key={index}
+                  >
+                    <Text size="sm" c="dimmed">
+                      {new Date(entry.timestamp).toLocaleString()}
+                    </Text>
+                  </Timeline.Item>
+                )
+              )}
             </Timeline>
           </div>
         )}

@@ -149,11 +149,17 @@ export default function AdminOrderDetailPage() {
               <Group justify="space-between">
                 <Text c="dimmed">Order Status</Text>
                 <Badge
-                  color={statusColorMap[order.status] || "gray"}
+                  color={
+                    statusColorMap[
+                      order.status as keyof typeof statusColorMap
+                    ] || "gray"
+                  }
                   variant="light"
                   size="lg"
                   leftSection={
-                    statusIconMap[order.status] || <IconBox size={14} />
+                    statusIconMap[
+                      order.status as keyof typeof statusIconMap
+                    ] || <IconBox size={14} />
                   }
                 >
                   {order.status}
@@ -237,7 +243,9 @@ export default function AdminOrderDetailPage() {
                     key={index}
                     title={entry.status}
                     bullet={
-                      statusIconMap[entry.status] || <IconBox size={16} />
+                      statusIconMap[
+                        entry.status as keyof typeof statusIconMap
+                      ] || <IconBox size={16} />
                     }
                   >
                     <Text size="sm" c="dimmed">

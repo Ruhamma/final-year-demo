@@ -86,7 +86,7 @@ const Page = () => {
 
         <Table.Tbody>
           {data &&
-            data?.orders.map((order) => (
+            data?.orders.map((order: any) => (
               <Fragment key={order.id}>
                 <Table.Tr>
                   <Table.Td>{order.id.slice(0, 8)}</Table.Td>
@@ -131,14 +131,18 @@ const Page = () => {
                       >
                         View
                       </Button>
-                      {order.status === 'PAID' && <Button
-                      size="xs"
-                      variant="light"
-                      onClick={() => router.push(`orders/${order.id}/review`)}
-                    >
-                      Review
-                    </Button>}
-                  </Group>
+                      {order.status === "PAID" && (
+                        <Button
+                          size="xs"
+                          variant="light"
+                          onClick={() =>
+                            router.push(`orders/${order.id}/review`)
+                          }
+                        >
+                          Review
+                        </Button>
+                      )}
+                    </Group>
                   </Table.Td>
                 </Table.Tr>
 
@@ -165,7 +169,7 @@ const Page = () => {
                             </Table.Tr>
                           </Table.Thead>
                           <Table.Tbody>
-                            {order.items.map((item) => (
+                            {order.items.map((item: any) => (
                               <Table.Tr key={item.id}>
                                 <Table.Td>{item.artwork_title}</Table.Td>
                                 <Table.Td>

@@ -202,7 +202,7 @@ const Page = () => {
 
       <Center className="py-10 mx-auto flex flex-col gap-6">
         <Box className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
-          {artworks.map((item) => (
+          {artworks.map((item: any) => (
             <Card
               key={item.id}
               shadow="sm"
