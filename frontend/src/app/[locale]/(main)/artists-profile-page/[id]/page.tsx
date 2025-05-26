@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { ButtonHTMLAttributes, ReactNode, useEffect, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import { useGetArtistsByIdQuery } from "@/store/api/artist/profile";
 import {
   useGetArtworksByArtistIdQuery,
@@ -30,44 +30,6 @@ function CardContent({
   className?: string;
 }) {
   return <div className={`flex flex-col ${className}`}>{children}</div>;
-}
-
-type ButtonProps = {
-  children: ReactNode;
-  variant?: "solid" | "outline" | "ghost" | "subtle";
-  className?: string;
-} & ButtonHTMLAttributes<HTMLButtonElement>;
-
-function Button({
-  children,
-  variant = "solid",
-  className = "",
-  ...props
-}: ButtonProps) {
-  const baseStyle = "px-4 py-2 rounded-2xl font-medium";
-  let variantStyle = "";
-
-  switch (variant) {
-    case "outline":
-      variantStyle =
-        "border border-gray-300 bg-transparent text-black hover:bg-gray-100";
-      break;
-    case "ghost":
-      variantStyle = "bg-transparent text-gray-500 hover:text-black";
-      break;
-    case "subtle":
-      variantStyle = "bg-transparent text-black hover:underline";
-      break;
-    default:
-      variantStyle = "bg-black text-white hover:bg-gray-800";
-      break;
-  }
-
-  return (
-    <button className={`${baseStyle} ${variantStyle} ${className}`} {...props}>
-      {children}
-    </button>
-  );
 }
 
 // Main Component
