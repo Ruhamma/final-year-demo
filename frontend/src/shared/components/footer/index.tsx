@@ -99,14 +99,15 @@ export function Footer() {
               </ActionIcon>
             </Flex>
 
-          {/* Terms */}
-          <Link href={"/privacy-policy"} className="hover:underline">
-            <Text c={"dimmed"} fz={{ base: 12, sm: 14 }}>
-              {t("Terms")}
-            </Text>
-          </Link>
-        </Flex>
-      </Stack>
-    </Box>
+            {/* Terms */}
+            <Link href={"/privacy-policy"} className="hover:underline">
+              <Text c={"dimmed"} fz={{ base: 12, sm: 14 }}>
+                {t("Terms")}
+              </Text>
+            </Link>
+          </Flex>
+        </Stack>
+      </Box>
+    </footer>
   );
 }
