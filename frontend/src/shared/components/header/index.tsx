@@ -259,7 +259,7 @@ export function Header() {
                   {t("Artworks")}
                 </Link>
                 <Link
-                  href={"/artists"}
+                  href={"/artists-page"}
                   className=" tracking-[0.3em] hover:border-b-[1px]"
                 >
                   {t("Artists")}

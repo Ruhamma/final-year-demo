@@ -21,7 +21,7 @@ export const artistProfileApi = createApi({
 
    getArtists: builder.query<any, void>({
       query: () => ({
-        url: `/artist`,
+        url: `/artist/`,
         method: "GET",
       }),
     providesTags: ["ArtistProfile"],

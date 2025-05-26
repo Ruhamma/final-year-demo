@@ -1,22 +1,19 @@
 "use client";
 import Image from "next/image";
 import {
-  Key,
-  JSXElementConstructor,
-  ReactElement,
-  ReactNode,
-  ReactPortal,
   useState,
 } from "react";
 import { useGetArtistsQuery } from "@/store/api/artist/profile";
 import { Button } from "@mantine/core";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 export default function ArtistsPage() {
+  const t = useTranslations("common.Artist");
   const [page, setPage] = useState(1);
   const { data, isLoading, error } = useGetArtistsQuery();
 
-  const artists = data?.artists || []; // Adjust this according to your API response structure
+  const artists = data?.artists || [];
   console.log("artists hello", data);
 
   if (isLoading) return <p>Loading...</p>;
@@ -30,28 +27,26 @@ export default function ArtistsPage() {
       >
         <div className="absolute inset-0 bg-[#283618]/60 flex flex-col justify-center items-left text-white text-center px-4">
           <h1 className="text-4xl font-bold font-serif text-left">
-            Discover Artist
+            {t("Discover Artist")}
           </h1>
           <p className="mt-4 max-w-2xl text-left">
-            Immerse yourself in a world of artistic brilliance! Explore our
-            curated selection of talented artists, each with a unique voice and
-            style.
+           {t('description')}
           </p>
         </div>
       </section>
 
       <section className="py-12 container mx-auto px-6">
         <h2 className="text-2xl font-bold font-serif mb-2">
-          Bestselling Artist
+          {t("Bestselling Artists")}
         </h2>
         <p className="text-sm text-gray-600 mb-6">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do.
+         {t("BestsellingArtistsDesc")}
         </p>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
           {artists.map((artist: any) => (
             <div key={artist.id} className="shadow overflow-hidden">
               <Image
-                src={artist.thumbnail}
+                src={artist?.thumbnail || '/images/placeholder.png'}
                 alt="Artwork"
                 width={400}
                 height={300}
@@ -64,7 +59,7 @@ export default function ArtistsPage() {
                 </div>
                 <Button>
                   <Link href={`/artists-profile-page/${artist.id}`} passHref>
-                    Profile
+                    {t("Profile")}
                   </Link>
                 </Button>
               </div>
@@ -75,7 +70,7 @@ export default function ArtistsPage() {
 
       <section className="py-12 container mx-auto px-6">
         <div className="flex justify-between items-center mb-4">
-          <h2 className="text-2xl font-bold font-serif">Discover Artist</h2>
+          <h2 className="text-2xl font-bold font-serif">{t("Discover Artist")}</h2>
           <input
             type="text"
             placeholder="Search"
@@ -83,17 +78,17 @@ export default function ArtistsPage() {
           />
         </div>
         <div className="flex flex-wrap gap-3 mb-6">
-          <button className="border px-4 py-1 rounded-full">All Filters</button>
-          <button className="border px-4 py-1 rounded-full">Style</button>
-          <button className="border px-4 py-1 rounded-full">Medium</button>
-          <button className="border px-4 py-1 rounded-full">Subject</button>
-          <button className="underline text-sm">Clear all</button>
+          <button className="border px-4 py-1 rounded-full">{t('All filters')}</button>
+          <button className="border px-4 py-1 rounded-full">{t("Style")}</button>
+          <button className="border px-4 py-1 rounded-full">{t("Medium")}</button>
+          <button className="border px-4 py-1 rounded-full">{t("Subject")}</button>
+          <button className="underline text-sm">{t("ClearAll")}</button>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
           {artists.map((artist: any) => (
             <div key={artist.id} className="shadow overflow-hidden">
               <Image
-                src={artist.thumbnail}
+                src={artist?.thumbnail || '/images/placeholder.png'}
                 alt={artist.name}
                 width={400}
                 height={300}
@@ -106,7 +101,7 @@ export default function ArtistsPage() {
               </div>
               <Button>
                   <Link href={`/artists-profile-page/${artist.id}`} passHref>
-                    Profile
+                    {t("Profile")}
                   </Link>
                 </Button>
                 </div>
@@ -156,9 +151,9 @@ export default function ArtistsPage() {
       <section className="w-full py-12 bg-[#fffaf0] flex flex-col items-center">
         {/* Heading */}
         <div className="text-center mb-10 px-4">
-          <h2 className="text-3xl font-semibold text-black">Rising Artist</h2>
-          <p className="text-gray-500 mt-2">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          <h2 className="text-3xl font-semibold text-black">{t("Rising Artists")}</h2>
+          <p className="text-gray-500 mt-2 mb-4">
+            {t("RisingArtistsDesc")}
           </p>
         </div>
 
@@ -173,7 +168,7 @@ export default function ArtistsPage() {
               >
                 <Image
                   src={artist.thumbnail}
-                  alt={artist.first_name}
+                  alt={artist?.first_name || "artist thumbnail" }
                   fill
                   className="object-cover rounded-md"
                 />
@@ -267,18 +262,6 @@ export default function ArtistsPage() {
         </div>
       </section>
 
-      <section className="container mx-auto px-6 py-12 text-center text-sm text-gray-600">
-        <p>
-          At vero eos et accusamus et iusto odio dignissimos ducimus qui
-          blanditiis praesentium voluptatum deleniti atque corrupti quos dolores
-          et quas molestias.
-        </p>
-        <p className="mt-4">
-          At vero eos et accusamus et iusto odio dignissimos ducimus qui
-          blanditiis praesentium voluptatum deleniti atque corrupti quos dolores
-          et quas molestias.
-        </p>
-      </section>
     </div>
   );
 }

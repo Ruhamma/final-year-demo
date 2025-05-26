@@ -74,7 +74,7 @@ const CartDrawer = () => {
       <Drawer
         opened={opened}
         onClose={close}
-        title="Your Cart"
+        title={t("YourCart")}
         position="right"
         size="md"
         padding="md"

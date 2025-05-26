@@ -10,6 +10,7 @@ import { usePathname } from "next/navigation";
 import { Button, Group, Rating, Select, TextInput } from "@mantine/core";
 import { useDebouncedValue } from "@mantine/hooks";
 import { IconFilter, IconSearch } from "@tabler/icons-react";
+import { useTranslations } from "next-intl";
 
 // Utility components
 function Card({
@@ -34,6 +35,7 @@ function CardContent({
 
 // Main Component
 export default function ArtistProfile() {
+    const t = useTranslations("common.Artworks");
   const pathname = usePathname();
   const [page, setPage] = useState(1);
   const limit = 12;
@@ -123,20 +125,20 @@ export default function ArtistProfile() {
     <div className="bg-cream min-h-screen text-gray-800 bg-[#FFFCEA]">
       <div
         className="relative w-full h-[300px] bg-cover bg-center z-0"
-        style={{ backgroundImage: `url(${artist.thumbnail})` }}
+        style={{ backgroundImage: `url(${artist?.thumbnail})` }}
       ></div>
 
       <div className="container mx-auto px-4 py-10 grid md:grid-cols-4 gap-10">
         {/* Left Column - Artist Info */}
         <div className="md:col-span-1 flex flex-col items-center text-center mt-[-150px] z-10">
           <Image
-            src={artist.profile_picture || "/images/placeholder.jpg"}
-            alt={artist.first_name || "Artist"}
+            src={artist?.profile_picture || "/images/placeholder.png"}
+            alt={artist?.first_name || "Artist"}
             width={200}
             height={200}
             className="rounded-full h-[170px] w-[170px] object-cover"
           />
-          <h2 className="mt-4 text-xl font-semibold">{artist.first_name}</h2>
+          <h2 className="mt-4 text-xl font-semibold">{artist?.first_name}</h2>
           <div className="text-yellow-500 flex items-center">
             <Rating value={artist.rating || 0} fractions={2} readOnly />
             <span className="ml-2 text-gray-600 text-sm">
@@ -165,11 +167,11 @@ export default function ArtistProfile() {
                   variant="outline"
                   leftSection={<IconFilter size={16} />}
                 >
-                  All filters
+                  {t('All filters')}
                 </Button>
 
                 <Select
-                  placeholder="Price"
+                  placeholder={t('Price')}
                   data={["Low to High", "High to Low"]}
                   value={selectedFilters.price}
                   onChange={(val) =>
@@ -181,7 +183,7 @@ export default function ArtistProfile() {
                   className="w-32"
                 />
                 <Select
-                  placeholder="Categories"
+                  placeholder={t('categories')}
                   data={metadata?.categories?.map((cat: any) => ({
                     value: cat.id,
                     label: cat.name,
@@ -196,7 +198,7 @@ export default function ArtistProfile() {
                   className="w-32"
                 />
                 <Select
-                  placeholder="Medium"
+                  placeholder={t('Medium')}
                   data={metadata?.media?.map((medium: any) => ({
                     value: medium.id,
                     label: medium.name,
@@ -211,7 +213,7 @@ export default function ArtistProfile() {
                   className="w-32"
                 />
                 <Select
-                  placeholder="Style"
+                  placeholder={t('Style')}
                   data={metadata?.styles?.map((style: any) => ({
                     value: style.id,
                     label: style.name,
@@ -227,7 +229,7 @@ export default function ArtistProfile() {
                 />
 
                 <Button variant="subtle" onClick={handleClear}>
-                  Clear all
+                  {t('ClearAll')}
                 </Button>
               </Group>
 
@@ -235,7 +237,7 @@ export default function ArtistProfile() {
                 <TextInput
                   value={search}
                   onChange={(e) => setSearch(e.currentTarget.value)}
-                  placeholder="Search"
+                  placeholder={t('Search')}
                   leftSection={<IconSearch size={16} />}
                   classNames={{
                     input:
@@ -253,7 +255,7 @@ export default function ArtistProfile() {
               <Card key={idx} className="relative">
                 <CardContent>
                   <Image
-                    src={art.images?.[0]?.url || "/images/placeholder.jpg"}
+                    src={art.images?.[0]?.url || "/images/placeholder.png"}
                     alt={art.title}
                     width={300}
                     height={300}
