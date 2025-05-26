@@ -409,7 +409,23 @@
       "Medium": "Medium",
       "Style": "Style",
       "ClearAll": "Clear All",
-      "Search": "Search"
+      "Search": "Search",
+      "ETB": "ETB",
+      "Followers": "Followers"
+    },
+    "Artist": {
+      "Discover Artist": "Discover Artist",
+      "description": "Immerse yourself in a world of artistic brilliance! Explore our curated selection of talented artists, each with a unique voice and style.",
+      "All filters": "All Filters",
+      "Medium": "Medium",
+      "Style": "Style",
+      "Subject": "Subject",
+      "ClearAll": "Clear All",
+      "Profile": "Profile",
+      "Bestselling Artists": "Bestselling Artists",
+      "BestsellingArtistsDesc": "Meet the creators behind our most-loved artworks. These artists have captured hearts with their exceptional talent and consistent quality.",
+      "Rising Artists": "Rising Artists",
+      "RisingArtistsDesc": "Discover fresh voices shaping the future of art. Support emerging talents before they become household names."
     }
   }
 }

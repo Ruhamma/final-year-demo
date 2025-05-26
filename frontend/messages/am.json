@@ -412,6 +412,20 @@
       "Style": "ቅጥ",
       "ClearAll": "ሁሉንም አጥፋ",
       "Search": "ፈልግ"
+    },
+    "Artist": {
+      "Discover Artist": "አርቲስቶችን ያግኙ",
+      "description": "በአርቲስቲክ እልባት ያለው ዓለም ውስጥ ይግቡ! ልዩ ድምፅ እና ዘይቤ ያላቸው ታላላቅ አርቲስቶችን �ለመፈተሽ ይችላሉ።",
+      "All filters": "ሁሉም ማጣሪያዎች",
+      "Medium": "መካከለኛ",
+      "Style": "ዘይቤ",
+      "Subject": "ርዕስ",
+      "ClearAll": "ሁሉንም አጽዳ",
+      "Profile": "መገለጫ",
+      "Bestselling Artists": "በብዛት የሚሸጡ አርቲስቶች",
+      "BestsellingArtistsDesc": "ከፍተኛ ብቃት እና ወጋጋ ጥራት ያላቸው አርቲስቶች። በህዝብ ዘንድ ተወዳጅ የሆኑ ሥራዎቻቸውን ያስተዋሉ።",
+      "Rising Artists": "እየገጠሙ ያሉ አርቲስቶች",
+      "RisingArtistsDesc": "የስነ ጥበብ ምዕራፍ የሚቀይሩ አዳዲስ ተሰጥኦዎች። ከሚታወቁ አርቲስቶች ከመሆናቸው በፊት ይደግፏቸው።"
     }
   }
 }
