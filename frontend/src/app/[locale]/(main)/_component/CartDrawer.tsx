@@ -24,8 +24,10 @@ import {
 import { notify } from "@/shared/components/notification/notification";
 import { useClearCartMutation } from "@/app/services/cart";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 const CartDrawer = () => {
+  const t = useTranslations("common.Cart");
   const router = useRouter();
   const [opened, { open, close }] = useDisclosure(false);
   const { data: cart, isLoading } = useGetCartQuery({});
@@ -39,9 +41,9 @@ const CartDrawer = () => {
     setRemovingItemId(id);
     try {
       await removeFromCart(id).unwrap();
-      notify("Success", "Item removed from cart");
+      notify("Success", t("itemRemoved"));
     } catch (error) {
-      notify("Error", "Failed to remove item from cart");
+      notify("Error", t("itemRemoveError"));
     } finally {
       setRemovingItemId(null);
     }
@@ -50,9 +52,9 @@ const CartDrawer = () => {
   const handleClearCart = async () => {
     try {
       await clearCart().unwrap();
-      notify("Success", "Cart cleared successfully");
+      notify("Success", t("cartCleared"));
     } catch (error) {
-      notify("Error", "Failed to clear cart");
+      notify("Error", t("cartClearError"));
     }
   };
 
@@ -81,7 +83,7 @@ const CartDrawer = () => {
         <LoadingOverlay visible={isLoading} />
         <ScrollArea h="70vh">
           <Text size="sm" c="dimmed" className="text-center">
-            Manage your Cart
+            {t("ManageCart")}
           </Text>
           <Divider my="sm" />
           {cart?.items?.map((item: any) => (
@@ -120,7 +122,7 @@ const CartDrawer = () => {
                   onClick={() => handleRemoveFromCart(item?.id)}
                   loading={removingItemId === item?.id}
                 >
-                  <Tooltip label="Remove from cart">
+                  <Tooltip label={t("removeItem")}>
                     {removingItemId === item?.id ? (
                       <Loader size="xs" />
                     ) : (
@@ -136,13 +138,13 @@ const CartDrawer = () => {
         <Divider className="my-4" />
 
         <Group justify="space-between" className="mt-4">
-          <Text>Total: ETB {cart?.total_price}</Text>
+          <Text>{t('Total')} {cart?.total_price}</Text>
           <Button
             color="dark"
             fullWidth
             onClick={() => router.push("/checkout-page")}
           >
-            Checkout
+           {t('Checkout')}
           </Button>
           <Button
             variant="outline"
@@ -151,7 +153,7 @@ const CartDrawer = () => {
             onClick={handleClearCart}
             loading={isClearing}
           >
-            Clear cart
+            {t('ClearCart')}
           </Button>
         </Group>
       </Drawer>
