@@ -28,6 +28,7 @@ import { useAddToCartMutation } from "@/app/services/cart";
 import { notify } from "@/shared/components/notification/notification";
 import { v4 as uuidv4 } from "uuid";
 import dynamic from "next/dynamic";
+import { RecommendedArtworks } from "../recommendation";
 
 const ARViewer = dynamic(() => import("../_components/_components/ARviewer"), {
   ssr: false,
@@ -51,6 +52,7 @@ const Page = () => {
     id: id as string,
     sessionKey,
   });
+  console.log("id", id)
   const [addToCart] = useAddToCartMutation();
 
   const handleAddToCart = async () => {
@@ -231,7 +233,8 @@ const Page = () => {
         </Flex>
       </Container>
       <Discover title="Other works by Bilen" />
-      <Testimonials title="Related Works" />
+      {/* <Testimonials title="Related Works" /> */}
+   <RecommendedArtworks artworkId={id as string} />
       <Modal
         opened={arOpened}
         onClose={() => setArOpened(false)}

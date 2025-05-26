@@ -32,6 +32,44 @@ function CardContent({
   return <div className={`flex flex-col ${className}`}>{children}</div>;
 }
 
+type ButtonProps = {
+  children: ReactNode;
+  variant?: "solid" | "outline" | "ghost" | "subtle";
+  className?: string;
+} & ButtonHTMLAttributes<HTMLButtonElement>;
+
+function Button({
+  children,
+  variant = "solid",
+  className = "",
+  ...props
+}: ButtonProps) {
+  const baseStyle = "px-4 py-2 rounded-2xl font-medium";
+  let variantStyle = "";
+
+  switch (variant) {
+    case "outline":
+      variantStyle =
+        "border border-gray-300 bg-transparent text-black hover:bg-gray-100";
+      break;
+    case "ghost":
+      variantStyle = "bg-transparent text-gray-500 hover:text-black";
+      break;
+    case "subtle":
+      variantStyle = "bg-transparent text-black hover:underline";
+      break;
+    default:
+      variantStyle = "bg-black text-white hover:bg-gray-800";
+      break;
+  }
+
+  return (
+    <button className={`${baseStyle} ${variantStyle} ${className}`} {...props}>
+      {children}
+    </button>
+  );
+}
+
 // Main Component
 export default function ArtistProfile() {
   const pathname = usePathname();
@@ -48,6 +86,44 @@ export default function ArtistProfile() {
     style: "",
     category: "",
   });
+
+  const [isFollowing, setIsFollowing] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    const checkFollowStatus = async () => {
+      try {
+        const response = await fetch(`/api/artwork/${artistId}/is-following`);
+        const data = await response.json();
+        setIsFollowing(data.isFollowing);
+      } catch (error) {
+        console.error("Error checking follow status:", error);
+      }
+    };
+
+    checkFollowStatus();
+  }, [artistId]);
+
+  const toggleFollow = async () => {
+    setIsLoading(true);
+    try {
+      const response = await fetch("{NEXT_PUBLIC_API}artist/follow", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ artistId }),
+      });
+
+      if (response.ok) {
+        setIsFollowing(!isFollowing);
+      }
+    } catch (error) {
+      console.error("Error toggling follow:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const { data: artistData, isLoading: isArtistLoading } =
     useGetArtistsByIdQuery(artistId || "");
@@ -74,6 +150,7 @@ export default function ArtistProfile() {
   const artworks = artworksData?.artworks || [];
   const total = artworksData?.total || 0;
   const totalPages = Math.ceil(total / limit);
+  const followers = 1;
 
   const handleClear = () => {
     setSelectedFilters({ price: "", medium: "", style: "", category: "" });
@@ -104,6 +181,14 @@ export default function ArtistProfile() {
               ({artist.rating || 0})
             </span>
           </div>
+          <div>Followers:{followers}</div>
+          <button
+            onClick={toggleFollow}
+            disabled={isLoading}
+            className={`follow-button ${isFollowing ? "following" : ""}`}
+          >
+            {isLoading ? "Processing..." : isFollowing ? "Following" : "Follow"}
+          </button>
           <p className="mt-2 text-sm text-gray-600">Joined May 2016</p>
           <p className="mt-4 text-sm">{artist.bio}</p>
         </div>
