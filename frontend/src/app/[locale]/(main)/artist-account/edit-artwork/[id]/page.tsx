@@ -96,7 +96,7 @@ const artworkSchema = z.object({
       return null;
     }),
 
-  is_published: z.boolean().default(false),
+  is_digital: z.boolean().default(false),
 });
 
 type ArtworkFormValues = z.infer<typeof artworkSchema>;
@@ -124,7 +124,7 @@ const UpdateArtworkPage = () => {
     resolver: zodResolver(artworkSchema),
     defaultValues: {
       tags: [],
-      is_published: false,
+      is_digital: false,
     },
   });
   const formattedSize =
@@ -146,10 +146,11 @@ const UpdateArtworkPage = () => {
         medium_id: artworkData.medium?.id,
         style_id: artworkData.style?.id,
         tags: artworkData.tags.map((tag: Tag) => tag.id),
+        is_digital: artworkData.is_digital || false,
       });
       setPreviewUrl(artworkData.images[0].url || null);
     }
-  }, [artworkData, reset]);
+  }, [artworkData, formattedSize, reset]);
   useEffect(() => {
     if (selectedFile) {
       const objectUrl = URL.createObjectURL(selectedFile);
@@ -172,7 +173,7 @@ const UpdateArtworkPage = () => {
       formData.append("artwork", JSON.stringify(artworkData));
 
       if (selectedFile) {
-        formData.append("image", selectedFile);
+        formData.append("images", selectedFile);
       }
       await updateArtwork({ id, formData }).unwrap();
       reset();
@@ -353,7 +354,6 @@ const UpdateArtworkPage = () => {
           />
 
           <Divider label="Publishing Options" labelPosition="center" />
-          <Checkbox label="Publish immediately" {...register("is_published")} />
 
           <Group justify="flex-end" mt="xl">
             <Button
@@ -368,7 +368,7 @@ const UpdateArtworkPage = () => {
               leftSection={<IconCheck size={16} />}
               loading={isLoading}
             >
-              Create Artwork
+              Update Artwork
             </Button>
           </Group>
         </Stack>

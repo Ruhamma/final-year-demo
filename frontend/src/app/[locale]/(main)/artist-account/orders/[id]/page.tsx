@@ -39,7 +39,6 @@ import {
 import { useDisclosure } from "@mantine/hooks";
 
 const statusIcons = {
-  PENDING: <IconClock size={16} />,
   PROCESSING: <IconPackage size={16} />,
   SHIPPED: <IconTruckDelivery size={16} />,
   COMPLETED: <IconCheck size={16} />,
@@ -47,20 +46,13 @@ const statusIcons = {
 };
 
 const statusColors = {
-  PENDING: "yellow",
   PROCESSING: "blue",
   SHIPPED: "orange",
   COMPLETED: "green",
   CANCELLED: "red",
 };
 
-const statusOptions = [
-  "PENDING",
-  "PROCESSING",
-  "SHIPPED",
-  "COMPLETED",
-  "CANCELLED",
-];
+const statusOptions = ["PROCESSING", "SHIPPED", "CANCELLED"];
 
 export default function OrderDetailPage() {
   const [opened, { open, close }] = useDisclosure(false);
@@ -94,7 +86,9 @@ export default function OrderDetailPage() {
           <Badge
             color={statusColors[order?.status as keyof typeof statusColors]}
           >
-            {order?.status}
+            {order?.status === "COMPLETED"
+              ? "Payment completed"
+              : order?.status}
           </Badge>
         </Stack>
         <Group>

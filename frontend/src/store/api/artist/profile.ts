@@ -4,8 +4,8 @@ import { AnyARecord } from "dns";
 export const artistProfileApi = createApi({
   reducerPath: "artistProfileApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: 'https://online-marketplace-for-local-artists.onrender.com/', //removed /api
-    // credentials: "include",  //removed for test
+    baseUrl: process.env.NEXT_PUBLIC_API || "http://localhost:8000/api", //removed /api
+    credentials: "include", //removed for test
   }),
   tagTypes: ["ArtistProfile", "dashboard"],
   endpoints: (builder) => ({
@@ -16,15 +16,15 @@ export const artistProfileApi = createApi({
 
     // test artists query
     //   getArtists: builder.query<any, void>({
-    //   query: () => "/artists", 
+    //   query: () => "/artists",
     // }),
 
-   getArtists: builder.query<any, void>({
+    getArtists: builder.query<any, void>({
       query: () => ({
         url: `/artist`,
         method: "GET",
       }),
-    providesTags: ["ArtistProfile"],
+      providesTags: ["ArtistProfile"],
     }),
 
     getArtistsById: builder.query<any, string>({
@@ -32,7 +32,7 @@ export const artistProfileApi = createApi({
         url: `/artist/${id}`,
         method: "GET",
       }),
-    providesTags: ["ArtistProfile"],
+      providesTags: ["ArtistProfile"],
     }),
 
     updateArtistProfile: builder.mutation({
@@ -101,7 +101,3 @@ export const {
   useGetArtistsByIdQuery,
   useReviewArtistMutation,
 } = artistProfileApi;
-
-
-
-

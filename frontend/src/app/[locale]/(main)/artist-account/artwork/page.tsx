@@ -100,7 +100,7 @@ const artworkSchema = z.object({
       return null;
     }),
 
-  is_published: z.boolean().default(false),
+  is_digital: z.boolean().default(false),
 });
 
 type ArtworkFormValues = z.infer<typeof artworkSchema>;
@@ -121,7 +121,7 @@ const CreateArtworkPage = () => {
     resolver: zodResolver(artworkSchema),
     defaultValues: {
       tags: [],
-      is_published: false,
+      is_digital: false,
     },
   });
 
@@ -321,7 +321,7 @@ const CreateArtworkPage = () => {
           />
 
           <Divider label="Publishing Options" labelPosition="center" />
-          <Checkbox label="Publish immediately" {...register("is_published")} />
+          <Checkbox label="Digital Art" {...register("is_digital")} />
 
           <Group justify="flex-end" mt="xl">
             <Button
