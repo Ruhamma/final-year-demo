@@ -1,231 +1,225 @@
 {
-  "common":{
-     "NavBar":{
+  "common": {
+    "NavBar": {
       "Home": "መነሻ",
-      "About":"ስለ እኛ",
-      "Contact":"አግኙን",
-      "Login":"ይግቡ",
-       "SignUp": "ይመዝገቡ",
+      "About": "ስለ እኛ",
+      "Contact": "አግኙን",
+      "Login": "ይግቡ",
+      "SignUp": "ይመዝገቡ",
       "Logout": "ውጣ",
       "Account": "መለያ",
       "Hi": "ሰላም",
-      "Admin":"አስተዳዳሪ",
-      "Artworks":"የስነ ጥበብ ስራዎች  ",
-      "Artists":"አርቲስቶች"
-   
+      "Admin": "አስተዳዳሪ",
+      "Artworks": "የስነ ጥበብ ስራዎች  ",
+      "Artists": "አርቲስቶች",
+      "Gallery": "ማዕከለ-ስዕላት"
     },
-     "Footer":{
-      
-      "Terms":"ደንብ እና ፖሊሲ",
-      "Subscribe to our newsletter":"ለጋዜጣችን ይመዝገቡ",
-      "Subscribe":"ሰብስክራይብ ያድርጉ",
-      "Copyright All rights reserved":"የቅጂ መብት ሁሉም መብቶች የተጠበቁ ናቸው ኩሩ",
-      "Enter your email":"ኢሜይልዎን ይግቡ"
-      
+    "Footer": {
+      "Terms": "ደንብ እና ፖሊሲ",
+      "Subscribe to our newsletter": "ለጋዜጣችን ይመዝገቡ",
+      "Subscribe": "ሰብስክራይብ ያድርጉ",
+      "Copyright All rights reserved": "የቅጂ መብት ሁሉም መብቶች የተጠበቁ ናቸው ኩሩ",
+      "Enter your email": "ኢሜይልዎን ይግቡ"
     },
-    "Landing":{
-      "Hero":{
-        "Title":"የጥበብ አለምን እወቅ",
-        "Subtitle":"ለሥነ ጥበብ ዋጋ የሚሰጠውን መንገድ ይለውጡ",
+    "Landing": {
+      "Hero": {
+        "Title": "የጥበብ አለምን እወቅ",
+        "Subtitle": "ለሥነ ጥበብ ዋጋ የሚሰጠውን መንገድ ይለውጡ",
         "Description": "ዓለምዎን በደመቁ የመጀመሪያ ሥዕሎች ስብስብ ይሳሉ። ማራኪ የመሬት አቀማመጦችን፣ የቅርብ የቁም ምስሎችን እና በመካከላቸው ያለውን ሁሉ ያስሱ። ችሎታ ያላቸው አርቲስቶችን ይደግፉ እና የታሪካቸው ቁራጭ ባለቤት ይሁኑ። የተለየ ዘይቤ፣ የሚማርክ የቀለም ቤተ-ስዕል ወይም ከእርስዎ ጋር የሚያስተጋባ ጭብጥ ቢፈልጉ ፍጹም የሆነው ሥዕል ለመገኘት ይጠብቃል።",
-        "ViewArtwork":"የጥበብ ስራን ይመልከቱ"
+        "ViewArtwork": "የጥበብ ስራን ይመልከቱ"
       },
-      "BestSellers":"ምርጥ ሽያጭዎች",
-"RecentlyViewed":"በቅርብ ጊዜ ታይቷል",
-"NewWorks":"አዳዲስ ስራዎች",
-   "FeaturedArtworks": "የታዋቂ ሥነ ጥበብ ስራዎች",
-   "Testimonials":"ምስክርነቶች",
+      "BestSellers": "ምርጥ ሽያጭዎች",
+      "RecentlyViewed": "በቅርብ ጊዜ ታይቷል",
+      "NewWorks": "አዳዲስ ስራዎች",
+      "FeaturedArtworks": "የታዋቂ ሥነ ጥበብ ስራዎች",
+      "Testimonials": "ምስክርነቶች",
       "Hear what our clients say about us": "ደንበኞቻችን ስለእኛ የሚሉትን ይስሙ",
       "testDescription": "በዚህ የጥበብ ድህረ ገጽ ላይ አስደናቂ ተሞክሮ ነበረኝ። በክምችት ውስጥ ያሉት እቃዎች ከፍተኛ ደረጃ ያላቸው ናቸው፣ እና በሌላ መልኩ የማላገኛቸውን አስገራሚ ስዕሎች አግኝቻለሁ።",
-      "johnDoe":"John Doe",
+      "johnDoe": "John Doe",
       "about": "ዓለምዎን በደመቁ የመጀመሪያ ሥዕሎች ስብስብ ይሳሉ። ማራኪ የመሬት አቀማመጦችን፣ የቅርብ የቁም ምስሎችን እና ሁሉንም ነገር ያስሱ መካከል። ተሰጥኦ ያላቸውን አርቲስቶች ይደግፉ እና የእነሱ ቁራጭ ባለቤት ይሁኑ ታሪክ. አንድ የተወሰነ ዘይቤ ይፈልጉ እንደሆነ ፣ የሚስብ ቀለም ቤተ-ስዕል፣ ወይም ከእርስዎ ጋር የሚያስተጋባ ጭብጥ፣ ትክክለኛው ስዕል ለማግኘት ይጠብቃል።",
       "AboutUs": "ስለ እኛ",
       "ReadMore": "በተጨማሪ",
-            "Arts by emerging artists": "በታዳጊ አርቲስቶች ሥዕሎች",
-                  "DiscoverArtworks":"ሥዕሎችን ያግኙ",
-      "CuratorsPicks":"የተቆጣጣሪዎች ምርጫ"
-
+      "Arts by emerging artists": "በታዳጊ አርቲስቶች ሥዕሎች",
+      "DiscoverArtworks": "ሥዕሎችን ያግኙ",
+      "CuratorsPicks": "የተቆጣጣሪዎች ምርጫ"
     },
-   "About":{
-      "Title":"እኛ ማን ነን?",
-      "Description":"የጥበብ አድናቂዎችን ከተለዩ ስራዎች ጋር ስለማገናኘት በጣም ጓጉተናል፣ ኩሩን እንደ ተመረጠ የመስመር ላይ የገበያ ቦታ ገንብተናል። እዚህ፣ ተሰጥኦ ያላቸው አርቲስቶች ፈጠራቸውን ማሳየት እና ስራቸውን የሚያደንቁ የወሰኑ ሰብሳቢዎችን ማግኘት ይችላሉ። ለገዢዎች እና ለሻጮች የአእምሮ ሰላምን በማረጋገጥ ለንግድ ልውውጥ አስተማማኝ መድረክ በማቅረብ ኩራት ይሰማናል። ከገበያ ቦታ በላይ፣ አርቲስቶች እና ሰብሳቢዎች በቀጥታ የሚገናኙበት ንቁ ማህበረሰብ እናሳድጋለን። ስለዚህ፣ ወደ ስብስብህ የምታክለውን ፍፁም ቁራጭ እየፈለግክም ሆንክ ወይም ጥበባዊ እይታህን ለአለም ለማካፈል ጓጉተህ፣ KURU ወደ ጥበባዊ ግኝት አለም መግቢያህ ነው።",
-     "Buy Products":"ምርቶችን ይግዙ",
-      "Contact Us":"ያግኙን",
-      "We connect artists with buyers":"አርቲስቶችን ከገዢዎች ጋር እናገናኛለን።",
-      "For Artists":"ለአርቲስቶች",
+    "About": {
+      "Title": "እኛ ማን ነን?",
+      "Description": "የጥበብ አድናቂዎችን ከተለዩ ስራዎች ጋር ስለማገናኘት በጣም ጓጉተናል፣ ኩሩን እንደ ተመረጠ የመስመር ላይ የገበያ ቦታ ገንብተናል። እዚህ፣ ተሰጥኦ ያላቸው አርቲስቶች ፈጠራቸውን ማሳየት እና ስራቸውን የሚያደንቁ የወሰኑ ሰብሳቢዎችን ማግኘት ይችላሉ። ለገዢዎች እና ለሻጮች የአእምሮ ሰላምን በማረጋገጥ ለንግድ ልውውጥ አስተማማኝ መድረክ በማቅረብ ኩራት ይሰማናል። ከገበያ ቦታ በላይ፣ አርቲስቶች እና ሰብሳቢዎች በቀጥታ የሚገናኙበት ንቁ ማህበረሰብ እናሳድጋለን። ስለዚህ፣ ወደ ስብስብህ የምታክለውን ፍፁም ቁራጭ እየፈለግክም ሆንክ ወይም ጥበባዊ እይታህን ለአለም ለማካፈል ጓጉተህ፣ KURU ወደ ጥበባዊ ግኝት አለም መግቢያህ ነው።",
+      "Buy Products": "ምርቶችን ይግዙ",
+      "Contact Us": "ያግኙን",
+      "We connect artists with buyers": "አርቲስቶችን ከገዢዎች ጋር እናገናኛለን።",
+      "For Artists": "ለአርቲስቶች",
       "ForArtistDescription": "ኩሩን ሲቀላቀሉ፣ ለወዳጃዊ፣ ፍትሃዊ ዓለም ለአርቲስቶች መላውን ማህበረሰባችን ይቀላቀላሉ። እንዲሁም አለምአቀፍ ተመልካቾችን በመድረስ፣ በእያንዳንዱ ደረጃ ላይ ልዩ ድጋፍ ያገኛሉ",
-      "Become a Seller":"ሻጭ ይሁኑ",
-      "For Buyers":"ለገዢዎች",
-      "ForBuyerDescription":"እርስዎ እንደሚወዱ ከምናውቀው ኦሪጅናል የስነጥበብ ስራ ጋር እናዛምዳለን - እና አርቲስቶችን በተመሳሳይ ጊዜ እንዲደግፉ እናግዝዎታለን። በቀጥታ ከአርቲስቶች ጋር ይገናኙ እና ለእርስዎ ጣዕም ወይም በጀት ምንም ቢሆን ትክክለኛውን ክፍል ያግኙ።",
-      "Shop Now":"አሁን ይግዙ",
-      "Where Artists Meet Collectors: Discover Your Perfect Piece":"አርቲስቶች ሰብሳቢዎችን የሚያገኙበት፡ የርስዎን ፍጹም ስዕል ያግኙ",
-      "Explore":"ይመልከቱ",
-      "Curated Selection":"የተመረጠ ምርጫ",
-      "Direct Connection":"የቀጥታ ግንኙነት",
-      "Secure Transactions":"ደህንነቱ የተጠበቀ ግብይቶች",
-      "FAQ":{
-        "FAQ Questions":"የሚጠየቁ ጥያቄዎች",
-        "Title":"በተደጋጋሚ የሚጠየቁ ጥያቄዎች",
-        "question1":"በኩሩ ላይ ያለው ጥበብ ትክክለኛ መሆኑን እንዴት አውቃለሁ?",
-        "answer1":"በኩሩ ለትክክለኛነት ቅድሚያ እንሰጣለን. እያንዳንዱ የተዘረዘረው የጥበብ ስራ እውነተኛ መሆኑን ለማረጋገጥ የማረጋገጫ ሂደት ያልፋል።",
-        "question2":"በኩሩ በኩል ሥዕል መግዛትና መሸጥ ደህንነቱ የተጠበቀ ነው?",
-        "answer2":"አዎን። በኩሩ የሚካሄደው የግብይት ሂደት ደህንነቱ የተጠበቀ ነው። እኛ የምንገናኝበት መረጃ ይገናኛል፣ የምንገናኝበት መረጃ ይገናኛል።",
-        "question3":"ከአርቲስቱ ጋር በቀጥታ መገናኘት እችላለሁ?",
-        "answer3":"በፍፁም! ኩሩ በአርቲስቶች እና ሰብሳቢዎች መካከል ቀጥተኛ ግንኙነትን ያበረታታል..."
+      "Become a Seller": "ሻጭ ይሁኑ",
+      "For Buyers": "ለገዢዎች",
+      "ForBuyerDescription": "እርስዎ እንደሚወዱ ከምናውቀው ኦሪጅናል የስነጥበብ ስራ ጋር እናዛምዳለን - እና አርቲስቶችን በተመሳሳይ ጊዜ እንዲደግፉ እናግዝዎታለን። በቀጥታ ከአርቲስቶች ጋር ይገናኙ እና ለእርስዎ ጣዕም ወይም በጀት ምንም ቢሆን ትክክለኛውን ክፍል ያግኙ።",
+      "Shop Now": "አሁን ይግዙ",
+      "Where Artists Meet Collectors: Discover Your Perfect Piece": "አርቲስቶች ሰብሳቢዎችን የሚያገኙበት፡ የርስዎን ፍጹም ስዕል ያግኙ",
+      "Explore": "ይመልከቱ",
+      "Curated Selection": "የተመረጠ ምርጫ",
+      "Direct Connection": "የቀጥታ ግንኙነት",
+      "Secure Transactions": "ደህንነቱ የተጠበቀ ግብይቶች",
+      "FAQ": {
+        "FAQ Questions": "የሚጠየቁ ጥያቄዎች",
+        "Title": "በተደጋጋሚ የሚጠየቁ ጥያቄዎች",
+        "question1": "በኩሩ ላይ ያለው ጥበብ ትክክለኛ መሆኑን እንዴት አውቃለሁ?",
+        "answer1": "በኩሩ ለትክክለኛነት ቅድሚያ እንሰጣለን. እያንዳንዱ የተዘረዘረው የጥበብ ስራ እውነተኛ መሆኑን ለማረጋገጥ የማረጋገጫ ሂደት ያልፋል።",
+        "question2": "በኩሩ በኩል ሥዕል መግዛትና መሸጥ ደህንነቱ የተጠበቀ ነው?",
+        "answer2": "አዎን። በኩሩ የሚካሄደው የግብይት ሂደት ደህንነቱ የተጠበቀ ነው። እኛ የምንገናኝበት መረጃ ይገናኛል፣ የምንገናኝበት መረጃ ይገናኛል።",
+        "question3": "ከአርቲስቱ ጋር በቀጥታ መገናኘት እችላለሁ?",
+        "answer3": "በፍፁም! ኩሩ በአርቲስቶች እና ሰብሳቢዎች መካከል ቀጥተኛ ግንኙነትን ያበረታታል..."
       }
     },
-    "Contact":{
-      "Title":"ከእኛ ጋር ይገናኙ",
-      "Description":"ስለ ምርታችን እና አገልግሎታችን ተጨማሪ መረጃ ለማግኘት ኢሜል ለመጣል ነፃነት ይሰማዎ።",
-      "Description2":"ሰራተኞቻችን እርስዎን ለመርዳት ሁል ጊዜ እዚያ ይገኛሉ። አያመንቱ!",
-      "Address":"አድራሻ",
-      "Address2":"236 5ኛ SE ጎዳና፣ አዲስ አበባ",
-      "City":" NY10000፣ ኢትዮጵያ",
-      "Phone":"ስልክ",
-      "Mobile":"ሞባይል",
-      "Hotline":"ሆታይን",
-      "Working Time":"የሥራ ሰዓት",
-      "Monday":"ሰኞ-ዓርብ",
-      "Saturday":"ቅዳሜ-እሑድ",
-      "Email":"ኢሜይል አድራሻ",
-      "Name":"የመጀመሪያ ስም",
-      "NamePlaceholder":"አበበ",
-      "Subject":"ርእስ",
-      "SubjectPlaceholder":"መልእክትህን እዚህ ጻፍ...",
-      "Submit":"ይላኩ",
-      "ContactUs":"አግኙን"
+    "Contact": {
+      "Title": "ከእኛ ጋር ይገናኙ",
+      "Description": "ስለ ምርታችን እና አገልግሎታችን ተጨማሪ መረጃ ለማግኘት ኢሜል ለመጣል ነፃነት ይሰማዎ።",
+      "Description2": "ሰራተኞቻችን እርስዎን ለመርዳት ሁል ጊዜ እዚያ ይገኛሉ። አያመንቱ!",
+      "Address": "አድራሻ",
+      "Address2": "236 5ኛ SE ጎዳና፣ አዲስ አበባ",
+      "City": " NY10000፣ ኢትዮጵያ",
+      "Phone": "ስልክ",
+      "Mobile": "ሞባይል",
+      "Hotline": "ሆታይን",
+      "Working Time": "የሥራ ሰዓት",
+      "Monday": "ሰኞ-ዓርብ",
+      "Saturday": "ቅዳሜ-እሑድ",
+      "Email": "ኢሜይል አድራሻ",
+      "Name": "የመጀመሪያ ስም",
+      "NamePlaceholder": "አበበ",
+      "Subject": "ርእስ",
+      "SubjectPlaceholder": "መልእክትህን እዚህ ጻፍ...",
+      "Submit": "ይላኩ",
+      "ContactUs": "አግኙን"
     },
-    "Auth":{
-      "Get started":"እንጀምር",
-      "Buyer":"ገዢ",
-      "Seller":"ሻጭ",
-      "Name":"ስም",
-      "NamePlaceholder":"የእርስዎን ስም ይጻፉ",
+    "Auth": {
+      "Get started": "እንጀምር",
+      "Buyer": "ገዢ",
+      "Seller": "ሻጭ",
+      "Name": "ስም",
+      "NamePlaceholder": "የእርስዎን ስም ይጻፉ",
       "Email": "ኢሜይል",
-      "EmailPlaceholder":"ኢሜልዎን ያስገቡ",
-      "Password":"የይለፍ ቃል",
-      "PasswordPlaceholder":"የይለፍ ቃልዎን ያስገቡ",
-      "ConfirmPassword":"የይለፍ ቃልን ይረጋግጡ",
-      "ConfirmPasswordPlaceholder":"የይለፍ ቃልዎን ይረጋግጡ",
-      "AlreadyHaveAnAccount":"የተመዘገበ መለያ አለዎት?",
-      "Login":"ይግቡ",
-      "SignUp":"ይመዝገቡ",
+      "EmailPlaceholder": "ኢሜልዎን ያስገቡ",
+      "Password": "የይለፍ ቃል",
+      "PasswordPlaceholder": "የይለፍ ቃልዎን ያስገቡ",
+      "ConfirmPassword": "የይለፍ ቃልን ይረጋግጡ",
+      "ConfirmPasswordPlaceholder": "የይለፍ ቃልዎን ይረጋግጡ",
+      "AlreadyHaveAnAccount": "የተመዘገበ መለያ አለዎት?",
+      "Login": "ይግቡ",
+      "SignUp": "ይመዝገቡ",
       "RegisteredSuccessfully": "በተሳካ ሁኔታ ተመዝግቧል",
       "Failed": "መመዝገብ አልተሳካም።",
-      "Welcome Back":"እንኳን ደህና መጣህ!",
-      "Continue with Google":"በGoogle ይቀጥሉ",
-      "Continue with Facebook":"በFacebook ይቀጥሉ",
-      "Continue with Apple":"በApple ይቀጥሉ",
-      "Don’t have an account?":"መለያ የለህም?",
-      "KURU":"ኩሩ"
+      "Welcome Back": "እንኳን ደህና መጣህ!",
+      "Continue with Google": "በGoogle ይቀጥሉ",
+      "Continue with Facebook": "በFacebook ይቀጥሉ",
+      "Continue with Apple": "በApple ይቀጥሉ",
+      "Don’t have an account?": "መለያ የለህም?",
+      "KURU": "ኩሩ"
     },
-     "UserAccount":{
-      "User":"ተጠቃሚ",
-      "Title":"የተጠቃሚ መለያ",
-      "Description":"የመለያዎን ቅንብሮች እና ምርጫዎች ያስተዳድሩ።",
-      "ProfileSummary":"የመገለጫ ማጠቃለያ",
-      "Messages":"መልዕክቶች",
-      "Notifications":"ማሳወቂያዎች",
-      "Orders":"ትዕዛዞች",
-      "Favorites":"የወደዱት",
-      "Logout":"ውጣ",
-      "Artists You Follow":"እርስዎ የሚከተሏቸው አርቲስቶች",
-      "Deactivate Account":"መለያ ሰርዝ",
-      "Are you sure you want to log out?":"እርግጠኛ ነህ ዘግተህ መውጣት ትፈልጋለህ?",
-      "This action cannot be undone":"ይህ እርምጃ ሊቀለበስ አይችልም።.",
-      "If you are sure, please click the button below to proceed":"እርግጠኛ ከሆኑ እባክዎ ለመቀጠል ከታች ያለውን ቁልፍ ይጫኑ።",
-      "Change Password":"የይለፍ ቃል ይለውጡ"
+    "UserAccount": {
+      "User": "ተጠቃሚ",
+      "Title": "የተጠቃሚ መለያ",
+      "Description": "የመለያዎን ቅንብሮች እና ምርጫዎች ያስተዳድሩ።",
+      "ProfileSummary": "የመገለጫ ማጠቃለያ",
+      "Messages": "መልዕክቶች",
+      "Notifications": "ማሳወቂያዎች",
+      "Orders": "ትዕዛዞች",
+      "Favorites": "የወደዱት",
+      "Logout": "ውጣ",
+      "Artists You Follow": "እርስዎ የሚከተሏቸው አርቲስቶች",
+      "Deactivate Account": "መለያ ሰርዝ",
+      "Are you sure you want to log out?": "እርግጠኛ ነህ ዘግተህ መውጣት ትፈልጋለህ?",
+      "This action cannot be undone": "ይህ እርምጃ ሊቀለበስ አይችልም።.",
+      "If you are sure, please click the button below to proceed": "እርግጠኛ ከሆኑ እባክዎ ለመቀጠል ከታች ያለውን ቁልፍ ይጫኑ።",
+      "Change Password": "የይለፍ ቃል ይለውጡ"
+    },
+    "ArtistAccount": {
+      "Deactivate Account": "መለያ ሰርዝ",
+      "Followers": "የተከተሉት",
+      "AddArtPiece": "የሥነ ጥበብ ክፍል ይጨምሩ",
+      "Orders": "ትዕዛዞች",
+      "Messages": "መልዕክቶች",
+      "EditProfile": "የመገለጫ መረጃ ይሻሽሉ",
+      "AllArtworks": "የሥነ ጥበብ ስራዎች",
+      "Dashboard": "ዳሽቦርድ",
+      "Logout": "ውጣ",
+      "Notifications": "ማሳወቂያዎች"
+    },
+    "Notifications": {
+      "title": "መልዕክቶች",
+      "Description": "በእርስዎ የቅርብ ጊዜ ትዕዛዞች እና ዝማኔዎች እንደተዘመኑ ይቆዩ።",
+      "Error": "ሁሉንም ማሳወቂያዎች እንደተነበቡ ምልክት ማድረግ አልተቻለም፡-",
+      "Error2": "መልዕክቶችን መጫን ላይ ስህተት",
+      "markAsReadError": "ማስታወቂያ እንደተነበበ ምልክት ማድረግ አልተሳካም፦",
+      "new": "አዲስ",
+      "markAllAsRead": "ሁሉንም አንብብ",
+      "noNotifications": "ምንም ማሳወቂያዎች የሉም",
+      "markAsRead": "አንብብ"
+    },
 
+    "review": {
+      "pageTitle": "አስተያየት ይጻፉ",
+      "backButton": "ወደ ትዕዛዝ ተመለስ",
+      "tabs": {
+        "artwork": "ስራን ደረጃ ይስጡ",
+        "artist": "አርቲስትን ደረጃ ይስጡ"
+      },
+      "artworkForm": {
+        "selectLabel": "ስራ ይምረጡ",
+        "selectPlaceholder": "ለግምገማ የሚፈልጉትን ስራ ይምረጡ",
+        "ratingLabel": "የእርስዎ ደረጃ",
+        "reviewLabel": "የእርስዎ አስተያየት",
+        "reviewPlaceholder": "ስለዚህ ስራ አስተያየትዎን ያጋሩ (ከፍተኛ 350 ፊደሎች)",
+        "submitButton": "አስተያየት አስገባ"
+      },
+      "artistForm": {
+        "selectLabel": "አርቲስት ይምረጡ",
+        "selectPlaceholder": "ለግምገማ የሚፈልጉትን አርቲስት ይምረጡ",
+        "ratingLabel": "የእርስዎ ደረጃ",
+        "reviewLabel": "የእርስዎ አስተያየት",
+        "reviewPlaceholder": "ስለዚህ አርቲስት አስተያየትዎን ያጋሩ (ከፍተኛ 350 ፊደሎች)",
+        "submitButton": "አስተያየት አስገባ"
+      },
+      "validation": {
+        "artworkRequired": "እባክዎ ስራ ይምረጡ",
+        "artistRequired": "እባክዎ አርቲስት ይምረጡ",
+        "ratingRequired": "ደረጃው ከ1 እስከ 5 መሆን አለበት",
+        "reviewRequired": "አስተያየት መስጠት አለብዎት",
+        "reviewMaxLength": "አስተያየቱ ከ350 ፊደሎች አይበልጥም",
+        "characters": "ፊደሎች"
+      },
+      "notifications": {
+        "artworkSuccess": "ስለ ስራው አስተያየትዎ በተሳካ ሁኔታ ቀርቧል",
+        "artworkError": "ስለ ስራው አስተያየት ማስገባት አልተሳካም",
+        "artistSuccess": "ስለ አርቲስቱ አስተያየትዎ በተሳካ ሁኔታ ቀርቧል",
+        "artistError": "ስለ አርቲስቱ አስተያየት ማስገባት አልተሳካም"
+      },
+      "loading": {
+        "text": "በመጫን ላይ..."
+      },
+      "errors": {
+        "orderNotFound": "ትዕዛዙ አልተገኘም"
+      }
     },
-    "ArtistAccount":{
-       "Deactivate Account":"መለያ ሰርዝ",
-       "Followers":"የተከተሉት",
-       "AddArtPiece":"የሥነ ጥበብ ክፍል ይጨምሩ",
-       "Orders":"ትዕዛዞች",
-       "Messages":"መልዕክቶች",
-       "EditProfile":"የመገለጫ መረጃ ይሻሽሉ",
-       "AllArtworks":"የሥነ ጥበብ ስራዎች",
-       "Dashboard":"ዳሽቦርድ",
-       "Logout":"ውጣ",
-       "Notifications":"ማሳወቂያዎች"
-    },
-    "Notifications":{
-      "title":"መልዕክቶች",
-      "Description":"በእርስዎ የቅርብ ጊዜ ትዕዛዞች እና ዝማኔዎች እንደተዘመኑ ይቆዩ።",
-      "Error":"ሁሉንም ማሳወቂያዎች እንደተነበቡ ምልክት ማድረግ አልተቻለም፡-",
-      "Error2":"መልዕክቶችን መጫን ላይ ስህተት",
-      "markAsReadError":"ማስታወቂያ እንደተነበበ ምልክት ማድረግ አልተሳካም፦",
-      "new":"አዲስ",
-      "markAllAsRead":"ሁሉንም አንብብ",
-      "noNotifications":"ምንም ማሳወቂያዎች የሉም",
-      "markAsRead":"አንብብ"
-    },
-    
-  "review": {
-    "pageTitle": "አስተያየት ይጻፉ",
-    "backButton": "ወደ ትዕዛዝ ተመለስ",
-    "tabs": {
-      "artwork": "ስራን ደረጃ ይስጡ",
-      "artist": "አርቲስትን ደረጃ ይስጡ"
-    },
-    "artworkForm": {
-      "selectLabel": "ስራ ይምረጡ",
-      "selectPlaceholder": "ለግምገማ የሚፈልጉትን ስራ ይምረጡ",
-      "ratingLabel": "የእርስዎ ደረጃ",
-      "reviewLabel": "የእርስዎ አስተያየት",
-      "reviewPlaceholder": "ስለዚህ ስራ አስተያየትዎን ያጋሩ (ከፍተኛ 350 ፊደሎች)",
-      "submitButton": "አስተያየት አስገባ"
-    },
-    "artistForm": {
-      "selectLabel": "አርቲስት ይምረጡ",
-      "selectPlaceholder": "ለግምገማ የሚፈልጉትን አርቲስት ይምረጡ",
-      "ratingLabel": "የእርስዎ ደረጃ",
-      "reviewLabel": "የእርስዎ አስተያየት",
-      "reviewPlaceholder": "ስለዚህ አርቲስት አስተያየትዎን ያጋሩ (ከፍተኛ 350 ፊደሎች)",
-      "submitButton": "አስተያየት አስገባ"
-    },
-    "validation": {
-      "artworkRequired": "እባክዎ ስራ ይምረጡ",
-      "artistRequired": "እባክዎ አርቲስት ይምረጡ",
-      "ratingRequired": "ደረጃው ከ1 እስከ 5 መሆን አለበት",
-      "reviewRequired": "አስተያየት መስጠት አለብዎት",
-      "reviewMaxLength": "አስተያየቱ ከ350 ፊደሎች አይበልጥም",
-      "characters": "ፊደሎች"
-    },
-    "notifications": {
-      "artworkSuccess": "ስለ ስራው አስተያየትዎ በተሳካ ሁኔታ ቀርቧል",
-      "artworkError": "ስለ ስራው አስተያየት ማስገባት አልተሳካም",
-      "artistSuccess": "ስለ አርቲስቱ አስተያየትዎ በተሳካ ሁኔታ ቀርቧል",
-      "artistError": "ስለ አርቲስቱ አስተያየት ማስገባት አልተሳካም"
-    },
-    "loading": {
-      "text": "በመጫን ላይ..."
-    },
-    "errors": {
-      "orderNotFound": "ትዕዛዙ አልተገኘም"
+    "accountDeactivation": {
+      "pageTitle": "መለያዎን ሰርዝ",
+      "immediateEffects": "ይህ ወዲያውኑ:",
+      "effectsList": [
+        "መለያዎን ያሰናክላል",
+        "መገለጫዎን ከህዝብ እይታ ያስወግዳል",
+        "መግቢያዎን ይከለክላል"
+      ],
+      "dataDeletion": "መለያዎን ከ10 ቀናት በኋላ ለዘላለም ይሰረዛል.",
+      "deleteButton": "መለያዬን ሰርዝ",
+      "confirmation": {
+        "title": "በእርግጠኝነት እርግጠኛ ነዎት?",
+        "confirmButton": "አዎ፣ መለያውን ሰርዝ",
+        "cancelButton": "ሰርዝ"
+      },
+      "notifications": {
+        "success": "መለያው ተሰናክሏል፣ መለያዎ ከ10 ቀናት በኋላ ለዘላለም ይሰረዛል።",
+        "error": "ማሰናከል አልተሳካም፣ መለያዎን ማሰናከል አልተቻለም።"
+      }
     }
-  },
-  "accountDeactivation": {
-    "pageTitle": "መለያዎን ሰርዝ",
-    "immediateEffects": "ይህ ወዲያውኑ:",
-    "effectsList": [
-      "መለያዎን ያሰናክላል",
-      "መገለጫዎን ከህዝብ እይታ ያስወግዳል",
-      "መግቢያዎን ይከለክላል"
-    ],
-    "dataDeletion": "መለያዎን ከ10 ቀናት በኋላ ለዘላለም ይሰረዛል.",
-    "deleteButton": "መለያዬን ሰርዝ",
-    "confirmation": {
-      "title": "በእርግጠኝነት እርግጠኛ ነዎት?",
-      "confirmButton": "አዎ፣ መለያውን ሰርዝ",
-      "cancelButton": "ሰርዝ"
-    },
-    "notifications": {
-      "success": "መለያው ተሰናክሏል፣ መለያዎ ከ10 ቀናት በኋላ ለዘላለም ይሰረዛል።",
-      "error": "ማሰናከል አልተሳካም፣ መለያዎን ማሰናከል አልተቻለም።"
-    }
-  }
-
-    
   }
 }

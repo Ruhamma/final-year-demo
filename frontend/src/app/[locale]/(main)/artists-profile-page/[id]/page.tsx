@@ -7,7 +7,7 @@ import {
   useGetMetadataQuery,
 } from "@/store/api/artwork/artwork";
 import { usePathname } from "next/navigation";
-import { Group, Rating, Select, TextInput } from "@mantine/core";
+import { Button, Group, Rating, Select, TextInput } from "@mantine/core";
 import { useDebouncedValue } from "@mantine/hooks";
 import { IconFilter, IconSearch } from "@tabler/icons-react";
 
@@ -32,48 +32,10 @@ function CardContent({
   return <div className={`flex flex-col ${className}`}>{children}</div>;
 }
 
-type ButtonProps = {
-  children: ReactNode;
-  variant?: "solid" | "outline" | "ghost" | "subtle";
-  className?: string;
-} & ButtonHTMLAttributes<HTMLButtonElement>;
-
-function Button({
-  children,
-  variant = "solid",
-  className = "",
-  ...props
-}: ButtonProps) {
-  const baseStyle = "px-4 py-2 rounded-2xl font-medium";
-  let variantStyle = "";
-
-  switch (variant) {
-    case "outline":
-      variantStyle =
-        "border border-gray-300 bg-transparent text-black hover:bg-gray-100";
-      break;
-    case "ghost":
-      variantStyle = "bg-transparent text-gray-500 hover:text-black";
-      break;
-    case "subtle":
-      variantStyle = "bg-transparent text-black hover:underline";
-      break;
-    default:
-      variantStyle = "bg-black text-white hover:bg-gray-800";
-      break;
-  }
-
-  return (
-    <button className={`${baseStyle} ${variantStyle} ${className}`} {...props}>
-      {children}
-    </button>
-  );
-}
-
 // Main Component
 export default function ArtistProfile() {
   const pathname = usePathname();
-    const [page, setPage] = useState(1);
+  const [page, setPage] = useState(1);
   const limit = 12;
   const skip = (page - 1) * limit;
   const artistId = pathname ? pathname.split("/").pop() : "";
@@ -87,7 +49,6 @@ export default function ArtistProfile() {
     category: "",
   });
 
-
   const { data: artistData, isLoading: isArtistLoading } =
     useGetArtistsByIdQuery(artistId || "");
 
@@ -96,8 +57,6 @@ export default function ArtistProfile() {
       search: debounced,
       ...selectedFilters,
     });
-
-  
   }, [debounced, selectedFilters]);
   const { data: artworksData, isLoading: isArtworksLoading } =
     useGetArtworksByArtistIdQuery({

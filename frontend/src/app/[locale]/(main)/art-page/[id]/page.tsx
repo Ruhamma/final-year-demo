@@ -16,6 +16,7 @@ import {
   Modal,
   NumberFormatter,
   Stack,
+  Text,
 } from "@mantine/core";
 import { Breadcrumbs, Anchor } from "@mantine/core";
 import React, { useMemo, useState } from "react";
@@ -240,9 +241,28 @@ const Page = () => {
         padding={0}
       >
         {data?.images[0]?.url && <ARViewer imageUrl={data.images[0].url} />}
-        <Box pos="absolute" bottom={20} left={0} right={0} ta="center">
+
+        {/* Info Message */}
+        <Box pos="absolute" top={12} left={0} right={0} ta="center">
+          <Text
+            size="sm"
+            c="white"
+            fw={500}
+            bg="rgba(0,0,0,0.6)"
+            px={12}
+            py={6}
+            mx="auto"
+            w="fit-content"
+            className="rounded-md"
+          >
+            Move to your phone to get full virtual experience
+          </Text>
+        </Box>
+
+        {/* Exit Button */}
+        <Box pos="absolute" top={60} left={0} right={0} ta="center">
           <Button onClick={() => setArOpened(false)} color="red" size="md">
-            Exit AR View
+            Exit View
           </Button>
         </Box>
       </Modal>
