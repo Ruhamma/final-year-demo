@@ -1,421 +1,451 @@
 {
-  "common":{
-    "NavBar":{
-      "Home":"Home",
-      "About":"About",
-      "Contact":"Contact",
-      "Login":"Login",
-      "Logout":"Logout",
-      "SignUp":"Sign Up",
+  "common": {
+    "NavBar": {
+      "Home": "Home",
+      "About": "About",
+      "Contact": "Contact",
+      "Login": "Login",
+      "Logout": "Logout",
+      "SignUp": "Sign Up",
       "Hi": "Hi",
-      "Account":"Account",
-      "Admin":"Admin",
-      "Artworks":"Artworks",
-      "Artists":"Artists"
-     
+      "Account": "Account",
+      "Admin": "Admin",
+      "Artworks": "Artworks",
+      "Artists": "Artists",
+      "Gallery": "Gallery"
     },
-    "Footer":{
-      
-      "Terms":"Terms of Service",
-      "Subscribe to our newsletter":"Subscribe to our newsletter",
-      "Subscribe":"Subscribe",
-      "Copyright All rights reserved":"Copyright All rights reserved KURU",
-            "Enter your email":"Enter your email"
-
-      
+    "Footer": {
+      "Terms": "Terms of Service",
+      "Subscribe to our newsletter": "Subscribe to our newsletter",
+      "Subscribe": "Subscribe",
+      "Copyright All rights reserved": "Copyright All rights reserved KURU",
+      "Enter your email": "Enter your email"
     },
-    "Landing":{
-      "Hero":{
-        "Title":"Discover the world of art",
-        "Subtitle":"Change the way art is valued",
+    "Landing": {
+      "Hero": {
+        "Title": "Discover the world of art",
+        "Subtitle": "Change the way art is valued",
         "Description": "Paint your world with a vibrant collection of original paintings. Explore captivating landscapes, intimate portraits, and everything in between. Support talented artists and own a piece of their story. Whether you seek a specific style, a captivating color palette, or a theme that resonates with you, the perfect painting awaits to be discovered.",
-        "ViewArtwork":"View Artwork"
-      },      
-"BestSellers":"Best Sellers",
-"RecentlyViewed":"Recently Viewed",
-"NewWorks":"New works",
-   "FeaturedArtworks": "Featured Artworks",
-   "Testimonials":"Testimonials",
-   "Hear what our clients say about us": "Hear what our clients say about us",
+        "ViewArtwork": "View Artwork"
+      },
+      "BestSellers": "Best Sellers",
+      "RecentlyViewed": "Recently Viewed",
+      "NewWorks": "New works",
+      "FeaturedArtworks": "Featured Artworks",
+      "Testimonials": "Testimonials",
+      "Hear what our clients say about us": "Hear what our clients say about us",
       "testDescription": "I had an amazing experience with this art platform. The curation is top-notch, and I found some incredible pieces that I never would have discovered otherwise.",
-      "johnDoe":"John Doe",
-       "about": " Paint your world with a vibrant collection of original paintings. Explore captivating landscapes, intimate portraits, and everything in between. Support talented artists and own a piece of their story. Whether you seek a specific style, a captivating color palette, or a theme that resonates with you, the perfect painting awaits to be discovered.",
+      "johnDoe": "John Doe",
+      "about": " Paint your world with a vibrant collection of original paintings. Explore captivating landscapes, intimate portraits, and everything in between. Support talented artists and own a piece of their story. Whether you seek a specific style, a captivating color palette, or a theme that resonates with you, the perfect painting awaits to be discovered.",
       "AboutUs": "About Us",
       "ReadMore": "Read more",
       "Arts by emerging artists": "Arts by emerging artists",
-      "DiscoverArtworks":"Discover Artworks",
-      "CuratorsPicks":"Curators Picks"
+      "DiscoverArtworks": "Discover Artworks",
+      "CuratorsPicks": "Curators Picks"
     },
-    "About":{
-      "Title":"Who are we?",
-      "Description":"Passionate about connecting art enthusiasts with exceptional works, we built Kuru as a curated online marketplace. Here, talented artists can showcase their creations and find dedicated collectors who appreciate their work. We take pride in offering a secure platform for transactions, ensuring peace of mind for both buyers and sellers. More than just a marketplace, we foster a vibrant community where artists and collectors can connect directly. So, whether you're searching for that perfect piece to add to your collection or eager to share your artistic vision with the world, KURU is your gateway to a world of artistic discovery.",
-     "Buy Products":"Buy Products",
-      "Contact Us":"Contact Us",
-      "We connect artists with buyers":"We connect artists with buyers",
-      "For Artists":"For Artists",
+    "About": {
+      "Title": "Who are we?",
+      "Description": "Passionate about connecting art enthusiasts with exceptional works, we built Kuru as a curated online marketplace. Here, talented artists can showcase their creations and find dedicated collectors who appreciate their work. We take pride in offering a secure platform for transactions, ensuring peace of mind for both buyers and sellers. More than just a marketplace, we foster a vibrant community where artists and collectors can connect directly. So, whether you're searching for that perfect piece to add to your collection or eager to share your artistic vision with the world, KURU is your gateway to a world of artistic discovery.",
+      "Buy Products": "Buy Products",
+      "Contact Us": "Contact Us",
+      "We connect artists with buyers": "We connect artists with buyers",
+      "For Artists": "For Artists",
       "ForArtistDescription": "When you join kuru, you join our entire community for a friendlier, fairer world for artists. As well as reaching a global audience, you receive dedicated support at every step of the way",
-      "Become a Seller":"Become a Seller",
-      "For Buyers":"For Buyers",
-      "ForBuyerDescription":"We match you with original artwork we know you’ll love – and help you support artists at the same time. Directly connect with artists and find the perfect piece for you, no matter your taste or budget.",
-      "Shop Now":"Shop Now",
-      "Where Artists Meet Collectors: Discover Your Perfect Piece":"Where Artists Meet Collectors: Discover Your Perfect Piece",
-      "Explore":"Explore",
-      "Curated Selection":"Curated Selection",
-      "Direct Connection":"Direct Connection",
-      "Secure Transactions":"Secure Transactions",
-      "FAQ":{
-        "FAQ Questions":"FAQ Question",
-        "Title":"Frequently Asked Questions",
-        "question1":"How do I know the art on Kuru is authentic?",
-        "answer1":"At Kuru, we prioritize authenticity. Every artwork listed undergoes a verification process to ensure it is genuine...",
-        "question2":"Is it safe to buy and sell art through Kuru?",
-        "answer2":"Yes! Kuru provides a secure platform for both buyers and sellers...",
-        "question3":"Can I connect with the artist directly?",
-        "answer3":"Absolutely! Kuru encourages direct communication between artists and collectors..."
+      "Become a Seller": "Become a Seller",
+      "For Buyers": "For Buyers",
+      "ForBuyerDescription": "We match you with original artwork we know you’ll love – and help you support artists at the same time. Directly connect with artists and find the perfect piece for you, no matter your taste or budget.",
+      "Shop Now": "Shop Now",
+      "Where Artists Meet Collectors: Discover Your Perfect Piece": "Where Artists Meet Collectors: Discover Your Perfect Piece",
+      "Explore": "Explore",
+      "Curated Selection": "Curated Selection",
+      "Direct Connection": "Direct Connection",
+      "Secure Transactions": "Secure Transactions",
+      "FAQ": {
+        "FAQ Questions": "FAQ Question",
+        "Title": "Frequently Asked Questions",
+        "question1": "How do I know the art on Kuru is authentic?",
+        "answer1": "At Kuru, we prioritize authenticity. Every artwork listed undergoes a verification process to ensure it is genuine...",
+        "question2": "Is it safe to buy and sell art through Kuru?",
+        "answer2": "Yes! Kuru provides a secure platform for both buyers and sellers...",
+        "question3": "Can I connect with the artist directly?",
+        "answer3": "Absolutely! Kuru encourages direct communication between artists and collectors..."
       }
     },
-    "Contact":{
-      "Title":"Get In Touch With Us",
-      "Description":"For more information about our product & services, feel free to drop us an email.",
-      "Description2":"Our staff will always be there to help you out. Don’t hesitate!",
-      "Address":"Address",
-      "Address2":"236 5th SE Avenue, Addis Ababa",
-      "City":"NY10000, Ethiopia",
-      "Phone":"Phone",
-      "Mobile":"Mobile",
-      "Hotline":"Hotline",
-      "Working Time":"Working Time",
-      "Monday":"Monday-Friday",
-      "Saturday":"Saturday-Sunday",
-      "Email":"Email Address",
-      "Name":"First Name",
-      "NamePlaceholder":"Jane",
-      "Subject":"Subject",
-      "SubjectPlaceholder":"Write your message here...",
-      "Submit":"Submit",
-      "ContactUs":"Contact Us"
+    "Contact": {
+      "Title": "Get In Touch With Us",
+      "Description": "For more information about our product & services, feel free to drop us an email.",
+      "Description2": "Our staff will always be there to help you out. Don’t hesitate!",
+      "Address": "Address",
+      "Address2": "236 5th SE Avenue, Addis Ababa",
+      "City": "NY10000, Ethiopia",
+      "Phone": "Phone",
+      "Mobile": "Mobile",
+      "Hotline": "Hotline",
+      "Working Time": "Working Time",
+      "Monday": "Monday-Friday",
+      "Saturday": "Saturday-Sunday",
+      "Email": "Email Address",
+      "Name": "First Name",
+      "NamePlaceholder": "Jane",
+      "Subject": "Subject",
+      "SubjectPlaceholder": "Write your message here...",
+      "Submit": "Submit",
+      "ContactUs": "Contact Us"
     },
-     "Auth":{
-      "Get started":"Get started",
-      "Buyer":"Buyer",
-      "Seller":"Seller",
-      "Name":"Name",
-      "NamePlaceholder":"Enter your name",
+    "Auth": {
+      "Get started": "Get started",
+      "Buyer": "Buyer",
+      "Seller": "Seller",
+      "Name": "Name",
+      "NamePlaceholder": "Enter your name",
       "Email": "Email",
-      "EmailPlaceholder":"Enter your email",
-      "Password":"Password",
-      "PasswordPlaceholder":"Enter your password",
-      "ConfirmPassword":"Confirm Password",
-      "ConfirmPasswordPlaceholder":"Confirm your password",
-      "AlreadyHaveAnAccount":"Already have an account?",
-      "Login":"Login",
-      "SignUp":"Sign Up",
+      "EmailPlaceholder": "Enter your email",
+      "Password": "Password",
+      "PasswordPlaceholder": "Enter your password",
+      "ConfirmPassword": "Confirm Password",
+      "ConfirmPasswordPlaceholder": "Confirm your password",
+      "AlreadyHaveAnAccount": "Already have an account?",
+      "Login": "Login",
+      "SignUp": "Sign Up",
       "RegisteredSuccessfully": "Registered Successfully",
       "Failed": "Failed to register",
-      "Welcome Back":"Welcome Back!",
-      "Continue with Google":"Continue with Google",
-      "Continue with Facebook":"Continue with Facebook",
-      "Continue with Apple":"Continue with Apple",
-      "Don’t have an account?":"Don’t have an account?",
-      "KURU":"KURU"
+      "Welcome Back": "Welcome Back!",
+      "Continue with Google": "Continue with Google",
+      "Continue with Facebook": "Continue with Facebook",
+      "Continue with Apple": "Continue with Apple",
+      "Don’t have an account?": "Don’t have an account?",
+      "KURU": "KURU",
+      "Forgot Password?": "Forgot Password?",
+      "Reset Password": "Reset Password"
     },
-    "UserAccount":{
-      "Title":"User Account",
-      "Description":"Manage your account settings and preferences.",
-      "ProfileSummary":"Profile Summary",
-      "Messages":"Messages",
-      "Notifications":"Notifications",
-      "Orders":"Orders",
-      "Favorites":"Favorites",
-      "Logout":"Logout",
-      "Artists You Follow":"Artists You Follow",
-      "Deactivate Account":"Deactivate Account",
-      "Are you sure you want to log out?":"Are you sure you want to log out?",
-      "This action cannot be undone":"This action cannot be undone.",
-      "If you are sure, please click the button below to proceed":"If you are sure, please click the button below to proceed.",
-      "Change Password":"Change Password"
-
+    "UserAccount": {
+      "Title": "User Account",
+      "Description": "Manage your account settings and preferences.",
+      "ProfileSummary": "Profile Summary",
+      "Messages": "Messages",
+      "Notifications": "Notifications",
+      "Orders": "Orders",
+      "Favorites": "Favorites",
+      "Logout": "Logout",
+      "Artists You Follow": "Artists You Follow",
+      "Deactivate Account": "Deactivate Account",
+      "Are you sure you want to log out?": "Are you sure you want to log out?",
+      "This action cannot be undone": "This action cannot be undone.",
+      "If you are sure, please click the button below to proceed": "If you are sure, please click the button below to proceed.",
+      "Change Password": "Change Password"
     },
-      "ArtistAccount":{
-       "Deactivate Account":"Deactivate Account",
-       "Followers":"Followers",
-       "AddArtPiece":"Add Art Piece",
-       "Orders":"Orders",
-       "Messages":"Messages",
-       "EditProfile":"Edit Profile",
-       "AllArtworks":"All Artworks",
-       "Dashboard":"Dashboard",
-       "Logout":"Logout",
-       "Notifications":"Notifications"
+    "ArtistAccount": {
+      "Deactivate Account": "Deactivate Account",
+      "Followers": "Followers",
+      "AddArtPiece": "Add Art Piece",
+      "Orders": "Orders",
+      "Messages": "Messages",
+      "EditProfile": "Edit Profile",
+      "AllArtworks": "All Artworks",
+      "Dashboard": "Dashboard",
+      "Logout": "Logout",
+      "Notifications": "Notifications"
     },
-    "Notifications":{
-      "title":"Notifications",
-      "Description":"Stay updated with your latest orders and updates.",
-      "Error":"Failed to mark all notifications as read:",
-      "Error2":"Error loading notifications",
-      "markAsReadError":"Failed to mark notification as read:",
-      "new":"New",
-      "markAllAsRead":"Mark all as read",
-      "noNotifications":"No notifications",
-      "markAsRead":"Mark as read"
+    "Notifications": {
+      "title": "Notifications",
+      "Description": "Stay updated with your latest orders and updates.",
+      "Error": "Failed to mark all notifications as read:",
+      "Error2": "Error loading notifications",
+      "markAsReadError": "Failed to mark notification as read:",
+      "new": "New",
+      "markAllAsRead": "Mark all as read",
+      "noNotifications": "No notifications",
+      "markAsRead": "Mark as read"
     },
-  "review": {
-    "pageTitle": "Write a Review",
-    "backButton": "Back to Order",
-    "tabs": {
-      "artwork": "Rate Artwork",
-      "artist": "Rate Artist"
-    },
-    "artworkForm": {
-      "selectLabel": "Select Artwork",
-      "selectPlaceholder": "Choose artwork to review",
-      "ratingLabel": "Your Rating",
-      "reviewLabel": "Your Review",
-      "reviewPlaceholder": "Share your thoughts about this artwork (max 350 characters)",
-      "submitButton": "Submit Review"
-    },
-    "artistForm": {
-      "selectLabel": "Select Artist",
-      "selectPlaceholder": "Choose artist to review",
-      "ratingLabel": "Your Rating",
-      "reviewLabel": "Your Review",
-      "reviewPlaceholder": "Share your experience with this artist (max 350 characters)",
-      "submitButton": "Submit Review"
-    },
-    "validation": {
-      "artworkRequired": "Please select an artwork",
-      "artistRequired": "Please select an artist",
-      "ratingRequired": "Rating must be between 1 and 5",
-      "reviewRequired": "Review is required",
-      "reviewMaxLength": "Review must be 350 characters or less",
-      "characters": "characters"
-    },
-    "notifications": {
-      "artworkSuccess": "Artwork review submitted successfully",
-      "artworkError": "Failed to submit artwork review",
-      "artistSuccess": "Artist review submitted successfully",
-      "artistError": "Failed to submit artist review"
-    },
-    "loading": {
-      "text": "Loading..."
-    },
-    "errors": {
-      "orderNotFound": "Order not found"
-    }
-},
-  "accountDeactivation": {
-    "pageTitle": "Delete Your Account",
-    "immediateEffects": "This will immediately:",
-    "effectsList": [
-      "Deactivate your account",
-      "Remove your profile from public view",
-      "Prevent you from logging in"
-    ],
-    "dataDeletion": "Your data will be permanently deleted after 10 days.",
-    "deleteButton": "Delete My Account",
-    "confirmation": {
-      "title": "Are you absolutely sure?",
-      "confirmButton": "Yes, Delete Account",
-      "cancelButton": "Cancel"
-    },
-    "notifications": {
-      "success": "Account deactivated, Your account will be permanently deleted after 10 days.",
-      "error": "Deactivation failed, Could not deactivate your account."
-    }
-  }, 
-  "Cart":{
-    "notifications":{
-      "itemAdded": "Item added to cart",
-      "itemAddError": "Failed to add item to cart",
-      "itemRemoved": "Item removed from cart",
-      "itemRemoveError": "Failed to remove item from cart",
-      "cartUpdated": "Cart updated successfully",
-      "cartCleared": "Cart cleared successfully",
-      "cartClearError": "Failed to clear cart"
-      
-    },
-    "ManageCart": "Manage Your Cart",
-    "removeItem": "Remove from cart",
-    "Total": "Total: ETB",
-    "Checkout": "Checkout",
-    "ClearCart": "Clear Cart",
-    "YourCart": "Your Cart",
-    "NotReadyToCheckout": "Not ready to checkout?",
-    "ContinueShopping": "Continue Shopping",
-    "Remove": "Remove",
-    "OrderSummary": "Order Summary",
-    "Subtotal": "Subtotal",
-    "Shipping": "Shipping",
-    "TotalAmount": "Total Amount",
-    "Calculated at the next step": "Calculated at the next step",
-    "Continue to checkout": "Continue to Checkout"
-  },
-   "Checkout": {
-    "billingDetails": "Billing details",
-    "firstName": "First Name",
-    "firstNamePlaceholder": "Enter your first name",
-    "lastName": "Last Name",
-    "lastNamePlaceholder": "Enter your last name",
-    "countryRegion": "Country / Region",
-    "countryPlaceholder": "Select your country",
-    "streetAddress": "Street Address",
-    "streetPlaceholder": "Enter your street address",
-    "townCity": "Town/City",
-    "townPlaceholder": "Enter your town or city",
-    "province": "Province",
-    "provincePlaceholder": "Enter your province",
-    "zipCode": "Zip code",
-    "zipPlaceholder": "Enter your zip code",
-    "phoneNumber": "Phone number",
-    "phonePlaceholder": "Enter your phone number",
-    "email": "Email",
-    "emailPlaceholder": "Enter your email",
-    "additionalInfo": "Additional Information",
-    "additionalInfoPlaceholder": "Write any additional information if there are any...",
-    "product": "Product",
-    "total": "Total",
-    "paymentMethod": "Select Payment Method",
-    "chapa": "Chapa",
-    "cashOnDelivery": "Cash on Delivery",
-    "privacyPolicy": "Your personal data will be used to support your experience throughout the website. Read our {privacyPolicy}.",
-    "privacyPolicyLink": "privacy policy",
-    "placeOrder": "Place Order",
-    "notifications": {
-      "orderPlaced": "Order placed successfully",
-      "orderFailed": "Failed to place order"
-    }
-  },
-  "Privacy": {
-    "meta": {
-      "title": "Privacy Policy | Kuru - Online Art Marketplace",
-      "description": "Read our privacy policy to understand how we collect, use, and protect your data on our online art marketplace."
-    },
-    "title": "Privacy Policy",
-    "lastUpdated": "Last updated: May 2025",
-    "introduction": {
-      "title": "Introduction",
-      "content1": "Welcome to Kuru, the online marketplace for Ethiopian artists. We are committed to protecting your privacy and ensuring the security of your personal information. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our platform.",
-      "content2": "By accessing or using our service, you agree to the collection and use of information in accordance with this policy."
-    },
-    "informationWeCollect": {
-      "title": "Information We Collect",
-      "personalInfo": {
-        "title": "Personal Information",
-        "description": "When you register an account, we may collect:",
-        "items": [
-          "Name, email address, and contact information",
-          "Profile information (bio, artist statement, etc.)",
-          "Payment and billing information (processed securely through our payment processor)"
-        ]
+    "review": {
+      "pageTitle": "Write a Review",
+      "backButton": "Back to Order",
+      "tabs": {
+        "artwork": "Rate Artwork",
+        "artist": "Rate Artist"
       },
-      "artworkData": {
-        "title": "Artwork and Transaction Data",
-        "description": "When you use our platform as an artist or buyer, we collect:",
-        "items": [
-          "Artwork details (images, descriptions, pricing)",
-          "Purchase history and transaction records",
-          "Communication between buyers and artists"
-        ]
+      "artworkForm": {
+        "selectLabel": "Select Artwork",
+        "selectPlaceholder": "Choose artwork to review",
+        "ratingLabel": "Your Rating",
+        "reviewLabel": "Your Review",
+        "reviewPlaceholder": "Share your thoughts about this artwork (max 350 characters)",
+        "submitButton": "Submit Review"
       },
-      "technicalData": {
-        "title": "Technical Data",
-        "description": "We automatically collect certain information when you visit our platform:",
-        "items": [
-          "IP address, browser type, and device information",
-          "Usage data (pages visited, time spent, etc.)",
-          "Cookies and similar tracking technologies"
-        ]
+      "artistForm": {
+        "selectLabel": "Select Artist",
+        "selectPlaceholder": "Choose artist to review",
+        "ratingLabel": "Your Rating",
+        "reviewLabel": "Your Review",
+        "reviewPlaceholder": "Share your experience with this artist (max 350 characters)",
+        "submitButton": "Submit Review"
+      },
+      "validation": {
+        "artworkRequired": "Please select an artwork",
+        "artistRequired": "Please select an artist",
+        "ratingRequired": "Rating must be between 1 and 5",
+        "reviewRequired": "Review is required",
+        "reviewMaxLength": "Review must be 350 characters or less",
+        "characters": "characters"
+      },
+      "notifications": {
+        "artworkSuccess": "Artwork review submitted successfully",
+        "artworkError": "Failed to submit artwork review",
+        "artistSuccess": "Artist review submitted successfully",
+        "artistError": "Failed to submit artist review"
+      },
+      "loading": {
+        "text": "Loading..."
+      },
+      "errors": {
+        "orderNotFound": "Order not found"
       }
     },
-    "howWeUseInfo": {
-      "title": "How We Use Your Information",
-      "platformOperation": {
-        "title": "Platform Operation",
-        "description": "To provide, maintain, and improve our services, process transactions, and communicate with you about your account."
+    "accountDeactivation": {
+      "pageTitle": "Delete Your Account",
+      "immediateEffects": "This will immediately:",
+      "effectsList": [
+        "Deactivate your account",
+        "Remove your profile from public view",
+        "Prevent you from logging in"
+      ],
+      "dataDeletion": "Your data will be permanently deleted after 10 days.",
+      "deleteButton": "Delete My Account",
+      "confirmation": {
+        "title": "Are you absolutely sure?",
+        "confirmButton": "Yes, Delete Account",
+        "cancelButton": "Cancel"
       },
-      "securityCompliance": {
-        "title": "Security & Compliance",
-        "description": "To protect against fraud, comply with legal obligations, and enforce our terms of service."
-      },
-      "personalization": {
-        "title": "Personalization",
-        "description": "To personalize your experience, recommend artworks, and improve our platform's functionality."
-      },
-      "marketing": {
-        "title": "Marketing",
-        "description": "With your consent, to send promotional communications about new features or artworks."
+      "notifications": {
+        "success": "Account deactivated, Your account will be permanently deleted after 10 days.",
+        "error": "Deactivation failed, Could not deactivate your account."
       }
     },
-    "dataSharing": {
-      "title": "Data Sharing and Disclosure",
-      "description": "We may share your information in the following circumstances:",
-      "items": [
-        {
-          "label": "With artists/buyers",
-          "detail": "Necessary information to complete transactions (e.g., shipping details)"
+    "Cart": {
+      "notifications": {
+        "itemAdded": "Item added to cart",
+        "itemAddError": "Failed to add item to cart",
+        "itemRemoved": "Item removed from cart",
+        "itemRemoveError": "Failed to remove item from cart",
+        "cartUpdated": "Cart updated successfully",
+        "cartCleared": "Cart cleared successfully",
+        "cartClearError": "Failed to clear cart"
+      },
+      "ManageCart": "Manage Your Cart",
+      "removeItem": "Remove from cart",
+      "Total": "Total: ETB",
+      "Checkout": "Checkout",
+      "ClearCart": "Clear Cart",
+      "YourCart": "Your Cart",
+      "NotReadyToCheckout": "Not ready to checkout?",
+      "ContinueShopping": "Continue Shopping",
+      "Remove": "Remove",
+      "OrderSummary": "Order Summary",
+      "Subtotal": "Subtotal",
+      "Shipping": "Shipping",
+      "TotalAmount": "Total Amount",
+      "Calculated at the next step": "Calculated at the next step",
+      "Continue to checkout": "Continue to Checkout"
+    },
+    "Checkout": {
+      "billingDetails": "Billing details",
+      "firstName": "First Name",
+      "firstNamePlaceholder": "Enter your first name",
+      "lastName": "Last Name",
+      "lastNamePlaceholder": "Enter your last name",
+      "countryRegion": "Country / Region",
+      "countryPlaceholder": "Select your country",
+      "streetAddress": "Street Address",
+      "streetPlaceholder": "Enter your street address",
+      "townCity": "Town/City",
+      "townPlaceholder": "Enter your town or city",
+      "province": "Province",
+      "provincePlaceholder": "Enter your province",
+      "zipCode": "Zip code",
+      "zipPlaceholder": "Enter your zip code",
+      "phoneNumber": "Phone number",
+      "phonePlaceholder": "Enter your phone number",
+      "email": "Email",
+      "emailPlaceholder": "Enter your email",
+      "additionalInfo": "Additional Information",
+      "additionalInfoPlaceholder": "Write any additional information if there are any...",
+      "product": "Product",
+      "total": "Total",
+      "paymentMethod": "Select Payment Method",
+      "chapa": "Chapa",
+      "cashOnDelivery": "Cash on Delivery",
+      "privacyPolicy": "Your personal data will be used to support your experience throughout the website. Read our {privacyPolicy}.",
+      "privacyPolicyLink": "privacy policy",
+      "placeOrder": "Place Order",
+      "notifications": {
+        "orderPlaced": "Order placed successfully",
+        "orderFailed": "Failed to place order"
+      }
+    },
+    "Privacy": {
+      "meta": {
+        "title": "Privacy Policy | Kuru - Online Art Marketplace",
+        "description": "Read our privacy policy to understand how we collect, use, and protect your data on our online art marketplace."
+      },
+      "title": "Privacy Policy",
+      "lastUpdated": "Last updated: May 2025",
+      "introduction": {
+        "title": "Introduction",
+        "content1": "Welcome to Kuru, the online marketplace for Ethiopian artists. We are committed to protecting your privacy and ensuring the security of your personal information. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our platform.",
+        "content2": "By accessing or using our service, you agree to the collection and use of information in accordance with this policy."
+      },
+      "informationWeCollect": {
+        "title": "Information We Collect",
+        "personalInfo": {
+          "title": "Personal Information",
+          "description": "When you register an account, we may collect:",
+          "items": [
+            "Name, email address, and contact information",
+            "Profile information (bio, artist statement, etc.)",
+            "Payment and billing information (processed securely through our payment processor)"
+          ]
         },
-        {
-          "label": "Service providers",
-          "detail": "Trusted third parties who assist in platform operation (payment processors, hosting services)"
+        "artworkData": {
+          "title": "Artwork and Transaction Data",
+          "description": "When you use our platform as an artist or buyer, we collect:",
+          "items": [
+            "Artwork details (images, descriptions, pricing)",
+            "Purchase history and transaction records",
+            "Communication between buyers and artists"
+          ]
         },
-        {
-          "label": "Legal requirements",
-          "detail": "When required by law or to protect our rights and safety"
-        },
-        {
-          "label": "Business transfers",
-          "detail": "In connection with a merger, acquisition, or sale of assets"
+        "technicalData": {
+          "title": "Technical Data",
+          "description": "We automatically collect certain information when you visit our platform:",
+          "items": [
+            "IP address, browser type, and device information",
+            "Usage data (pages visited, time spent, etc.)",
+            "Cookies and similar tracking technologies"
+          ]
         }
-      ],
-      "noSelling": "We never sell your personal information to third parties for marketing purposes."
+      },
+      "howWeUseInfo": {
+        "title": "How We Use Your Information",
+        "platformOperation": {
+          "title": "Platform Operation",
+          "description": "To provide, maintain, and improve our services, process transactions, and communicate with you about your account."
+        },
+        "securityCompliance": {
+          "title": "Security & Compliance",
+          "description": "To protect against fraud, comply with legal obligations, and enforce our terms of service."
+        },
+        "personalization": {
+          "title": "Personalization",
+          "description": "To personalize your experience, recommend artworks, and improve our platform's functionality."
+        },
+        "marketing": {
+          "title": "Marketing",
+          "description": "With your consent, to send promotional communications about new features or artworks."
+        }
+      },
+      "dataSharing": {
+        "title": "Data Sharing and Disclosure",
+        "description": "We may share your information in the following circumstances:",
+        "items": [
+          {
+            "label": "With artists/buyers",
+            "detail": "Necessary information to complete transactions (e.g., shipping details)"
+          },
+          {
+            "label": "Service providers",
+            "detail": "Trusted third parties who assist in platform operation (payment processors, hosting services)"
+          },
+          {
+            "label": "Legal requirements",
+            "detail": "When required by law or to protect our rights and safety"
+          },
+          {
+            "label": "Business transfers",
+            "detail": "In connection with a merger, acquisition, or sale of assets"
+          }
+        ],
+        "noSelling": "We never sell your personal information to third parties for marketing purposes."
+      },
+      "dataSecurity": {
+        "title": "Data Security",
+        "description": "We implement appropriate technical and organizational measures to protect your personal data:",
+        "measures": [
+          "Secure servers and encryption technologies",
+          "Regular security assessments",
+          "Access controls and authentication procedures",
+          "Secure payment processing through Chapa"
+        ],
+        "disclaimer": "While we strive to protect your data, no method of transmission over the Internet is 100% secure."
+      },
+      "yourRights": {
+        "title": "Your Rights and Choices",
+        "description": "You have certain rights regarding your personal information:",
+        "items": [
+          "Access and request a copy of your data",
+          "Correct or update inaccurate information",
+          "Request deletion of your data (subject to legal requirements)",
+          "Opt-out of marketing communications",
+          "Withdraw consent where processing is based on consent"
+        ],
+        "contact": "To exercise these rights, please contact us at privacy@kuru-art.com."
+      },
+      "policyChanges": {
+        "title": "Changes to This Policy",
+        "description1": "We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new policy on this page and updating the \"Last updated\" date.",
+        "description2": "Your continued use of our platform after any modification constitutes acceptance of the updated policy."
+      },
+      "contact": {
+        "title": "Contact Us",
+        "description": "If you have any questions about this Privacy Policy, please contact us at:",
+        "email": "privacy@kuru-art.com"
+      }
     },
-    "dataSecurity": {
-      "title": "Data Security",
-      "description": "We implement appropriate technical and organizational measures to protect your personal data:",
-      "measures": [
-        "Secure servers and encryption technologies",
-        "Regular security assessments",
-        "Access controls and authentication procedures",
-        "Secure payment processing through Chapa"
-      ],
-      "disclaimer": "While we strive to protect your data, no method of transmission over the Internet is 100% secure."
+    "Artworks": {
+      "Browse by Category": "Browse by Category",
+      "Explore": "Explore variety of art piece in all categories of your liking",
+      "All filters": "All filters",
+      "Price": "Price",
+      "Low to High": "Low to High",
+      "High to Low": "High to Low",
+      "categories": "Categories",
+      "Medium": "Medium",
+      "Style": "Style",
+      "Size": "Size",
+      "ClearAll": "Clear All",
+      "Search": "Search",
+      "ETB": "ETB",
+      "Followers": "Followers",
+      "Add to cart": "Add to Cart",
+      "Purchase Order": "Purchase Order",
+      "View in Your Room": "View in Your Room",
+      "About Artworks": "About Artworks",
+      "Details": "Details",
+      "Certificate of authenticity": "Certificate of Authenticity",
+      "View Profile": "View Profile",
+      "Move to your phone to get full virtual experience": "Move to your phone to get full virtual experience",
+      "Exit View": "Exit View",
+      "AddCartError": "Failed to add artwork to cart",
+      "AddCartSuccess": "Artwork added to cart successfully",
+      "About": "About",
+      "Shipping information": "Shipping Information",
+      "ShippingInfoDesc": "Enter your delivery address and preferred shipping method. Ensure your details are accurate for timely delivery. Track your order in real-time once shipped.",
+      "Ratings and reviews": "Ratings and Reviews",
+      "RatingsAndReviewsDesc": "Share your experience! Your feedback helps other buyers and supports our artists. Rate the product and leave a review to let others know what you loved.",
+      "No reviews yet": "No reviews yet"
     },
-    "yourRights": {
-      "title": "Your Rights and Choices",
-      "description": "You have certain rights regarding your personal information:",
-      "items": [
-        "Access and request a copy of your data",
-        "Correct or update inaccurate information",
-        "Request deletion of your data (subject to legal requirements)",
-        "Opt-out of marketing communications",
-        "Withdraw consent where processing is based on consent"
-      ],
-      "contact": "To exercise these rights, please contact us at privacy@kuru-art.com."
-    },
-    "policyChanges": {
-      "title": "Changes to This Policy",
-      "description1": "We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new policy on this page and updating the \"Last updated\" date.",
-      "description2": "Your continued use of our platform after any modification constitutes acceptance of the updated policy."
-    },
-    "contact": {
-      "title": "Contact Us",
-      "description": "If you have any questions about this Privacy Policy, please contact us at:",
-      "email": "privacy@kuru-art.com"
+    "Artist": {
+      "Discover Artist": "Discover Artist",
+      "description": "Immerse yourself in a world of artistic brilliance! Explore our curated selection of talented artists, each with a unique voice and style.",
+      "All filters": "All Filters",
+      "Medium": "Medium",
+      "Style": "Style",
+      "Subject": "Subject",
+      "ClearAll": "Clear All",
+      "Profile": "Profile",
+      "Bestselling Artists": "Bestselling Artists",
+      "BestsellingArtistsDesc": "Meet the creators behind our most-loved artworks. These artists have captured hearts with their exceptional talent and consistent quality.",
+      "Rising Artists": "Rising Artists",
+      "RisingArtistsDesc": "Discover fresh voices shaping the future of art. Support emerging talents before they become household names."
     }
-  },
-"Artworks": {
-  "Browse by Category": "Browse by Category",
-  "Explore": "Explore variety of art piece in all categories of your liking",
-  "All filters": "All filters",
-  "Price": "Price",
-  "Low to High": "Low to High",
-  "High to Low": "High to Low",
-  "categories": "Categories",
-  "Medium": "Medium",
-  "Style": "Style",
-  "ClearAll": "Clear All",
-  "Search": "Search"
-}
-
   }
 }

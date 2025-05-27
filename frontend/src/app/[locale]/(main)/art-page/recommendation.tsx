@@ -73,7 +73,7 @@ export const RecommendedArtworks = ({ artworkId }: RecommendedArtworksProps) => 
                         alt={artwork.title} 
                         src={artwork.images[0]?.url} 
                         height={200}
-                        withPlaceholder
+                        
                       />
                     </CardSection>
                     <Group className="py-2" justify="space-between" align="center">
@@ -128,7 +128,7 @@ export const RecommendedArtworks = ({ artworkId }: RecommendedArtworksProps) => 
                         alt={artwork.title} 
                         src={artwork.images[0]?.url} 
                         height={200}
-                        withPlaceholder
+                        
                         className="h-[250px]"
                       />
                     </CardSection>

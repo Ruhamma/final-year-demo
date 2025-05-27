@@ -17,7 +17,7 @@ import {
   Textarea,
   TextInput,
 } from "@mantine/core";
-import { useParams } from "next/navigation";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
 // import { useRouter } from "next/navigation";
 import React from "react";
 import { Controller, useForm } from "react-hook-form";
@@ -25,22 +25,26 @@ import { z } from "zod";
 
 const checkoutSchema = z.object({
   payment_method: z.string().min(1, "Payment method is required"),
-  shipping_address: z.object({
-    street: z.string().min(1, "Street address is required"),
-    city: z.string().min(1, "City is required"),
-    province: z.string().min(1, "Province is required"),
-    zip_code: z.string().min(1, "ZIP code is required"),
-    country: z.string().default("Ethiopia"),
-    email: z.string().nullable(),
-    phone_number: z.string().optional().nullable(),
-    additional_info: z.string().optional().nullable(),
-    first_name: z.string().optional().nullable(),
-    last_name: z.string().optional().nullable(),
-  }),
+  shipping_address: z
+    .object({
+      street: z.string().min(1, "Street address is required"),
+      city: z.string().min(1, "City is required"),
+      province: z.string().min(1, "Province is required"),
+      zip_code: z.string().min(1, "ZIP code is required"),
+      country: z.string().default("Ethiopia"),
+      email: z.string().nullable(),
+      phone_number: z.string().optional().nullable(),
+      additional_info: z.string().optional().nullable(),
+      first_name: z.string().optional().nullable(),
+      last_name: z.string().optional().nullable(),
+    })
+    .optional(),
 });
 export default function CheckoutPage() {
+  const router = useRouter();
   const { id } = useParams();
-  // const router = useRouter();
+  const searchParams = useSearchParams();
+  const isDigital = searchParams.get("is_digital") === "true";
   const { user } = useAuth();
   const { data: cart, isLoading } = useGetCartQuery({});
   const filteredItems = cart?.items?.filter(
@@ -77,9 +81,8 @@ export default function CheckoutPage() {
       notify("Error", "No items found for this artist in cart");
       return;
     }
-
-    const payload = {
-      ...data,
+    const payload: any = {
+      payment_method: data.payment_method,
       items: filteredItems.map((item: any) => ({
         artwork_id: item.artwork_id,
         quantity: item.quantity ?? 1,
@@ -87,9 +90,18 @@ export default function CheckoutPage() {
       })),
     };
 
+    if (!isDigital) {
+      payload.shipping_address = data.shipping_address;
+    }
+
     try {
-      await submitOrder(payload).unwrap();
+      const res = await submitOrder(payload).unwrap();
       notify("Success", "Order placed successfully");
+      if (data?.payment_method === "chapa") {
+        router.push(`/user-account/orders/${res[0]?.id}`);
+      } else {
+        router.push("/user-account/orders/");
+      }
     } catch (err) {
       notify("Error", `Failed to place order`);
     }

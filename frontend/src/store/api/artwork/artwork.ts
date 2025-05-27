@@ -123,6 +123,13 @@ export const artworkApi = createApi({
         method: "POST",
         body: body,
       }),
+      invalidatesTags: ["Artwork"],
+    }),
+     getArtworkReviews: builder.query({
+      query: ({id}) => ({
+        url: `artwork/${id}/ratings`,
+        method: "GET",
+      }),
     }),
     getRatings: builder.query({
       query: ({ id }) => ({
@@ -152,4 +159,5 @@ export const {
   useReviewArtworkMutation,
   useGetRecommendationQuery,
   useGetRatingsQuery,
+  useGetArtworkReviewsQuery,
 } = artworkApi;

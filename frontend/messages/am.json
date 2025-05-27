@@ -1,165 +1,163 @@
 {
-  "common":{
-     "NavBar":{
+  "common": {
+    "NavBar": {
       "Home": "መነሻ",
-      "About":"ስለ እኛ",
-      "Contact":"አግኙን",
-      "Login":"ይግቡ",
-       "SignUp": "ይመዝገቡ",
+      "About": "ስለ እኛ",
+      "Contact": "አግኙን",
+      "Login": "ይግቡ",
+      "SignUp": "ይመዝገቡ",
       "Logout": "ውጣ",
       "Account": "መለያ",
       "Hi": "ሰላም",
-      "Admin":"አስተዳዳሪ",
-      "Artworks":"የስነ ጥበብ ስራዎች  ",
-      "Artists":"አርቲስቶች"
-   
+      "Admin": "አስተዳዳሪ",
+      "Artworks": "የስነ ጥበብ ስራዎች  ",
+      "Artists": "አርቲስቶች",
+      "Gallery": "ማዕከለ-ስዕላት"
     },
-     "Footer":{
-      
-      "Terms":"ደንብ እና ፖሊሲ",
-      "Subscribe to our newsletter":"ለጋዜጣችን ይመዝገቡ",
-      "Subscribe":"ሰብስክራይብ ያድርጉ",
-      "Copyright All rights reserved":"የቅጂ መብት ሁሉም መብቶች የተጠበቁ ናቸው ኩሩ",
-      "Enter your email":"ኢሜይልዎን ይግቡ"
-      
+    "Footer": {
+      "Terms": "ደንብ እና ፖሊሲ",
+      "Subscribe to our newsletter": "ለጋዜጣችን ይመዝገቡ",
+      "Subscribe": "ሰብስክራይብ ያድርጉ",
+      "Copyright All rights reserved": "የቅጂ መብት ሁሉም መብቶች የተጠበቁ ናቸው ኩሩ",
+      "Enter your email": "ኢሜይልዎን ይግቡ"
     },
-    "Landing":{
-      "Hero":{
-        "Title":"የጥበብ አለምን እወቅ",
-        "Subtitle":"ለሥነ ጥበብ ዋጋ የሚሰጠውን መንገድ ይለውጡ",
+    "Landing": {
+      "Hero": {
+        "Title": "የጥበብ አለምን እወቅ",
+        "Subtitle": "ለሥነ ጥበብ ዋጋ የሚሰጠውን መንገድ ይለውጡ",
         "Description": "ዓለምዎን በደመቁ የመጀመሪያ ሥዕሎች ስብስብ ይሳሉ። ማራኪ የመሬት አቀማመጦችን፣ የቅርብ የቁም ምስሎችን እና በመካከላቸው ያለውን ሁሉ ያስሱ። ችሎታ ያላቸው አርቲስቶችን ይደግፉ እና የታሪካቸው ቁራጭ ባለቤት ይሁኑ። የተለየ ዘይቤ፣ የሚማርክ የቀለም ቤተ-ስዕል ወይም ከእርስዎ ጋር የሚያስተጋባ ጭብጥ ቢፈልጉ ፍጹም የሆነው ሥዕል ለመገኘት ይጠብቃል።",
-        "ViewArtwork":"የጥበብ ስራን ይመልከቱ"
+        "ViewArtwork": "የጥበብ ስራን ይመልከቱ"
       },
-      "BestSellers":"ምርጥ ሽያጭዎች",
-"RecentlyViewed":"በቅርብ ጊዜ ታይቷል",
-"NewWorks":"አዳዲስ ስራዎች",
-   "FeaturedArtworks": "የታዋቂ ሥነ ጥበብ ስራዎች",
-   "Testimonials":"ምስክርነቶች",
+      "BestSellers": "ምርጥ ሽያጭዎች",
+      "RecentlyViewed": "በቅርብ ጊዜ ታይቷል",
+      "NewWorks": "አዳዲስ ስራዎች",
+      "FeaturedArtworks": "የታዋቂ ሥነ ጥበብ ስራዎች",
+      "Testimonials": "ምስክርነቶች",
       "Hear what our clients say about us": "ደንበኞቻችን ስለእኛ የሚሉትን ይስሙ",
       "testDescription": "በዚህ የጥበብ ድህረ ገጽ ላይ አስደናቂ ተሞክሮ ነበረኝ። በክምችት ውስጥ ያሉት እቃዎች ከፍተኛ ደረጃ ያላቸው ናቸው፣ እና በሌላ መልኩ የማላገኛቸውን አስገራሚ ስዕሎች አግኝቻለሁ።",
-      "johnDoe":"John Doe",
+      "johnDoe": "John Doe",
       "about": "ዓለምዎን በደመቁ የመጀመሪያ ሥዕሎች ስብስብ ይሳሉ። ማራኪ የመሬት አቀማመጦችን፣ የቅርብ የቁም ምስሎችን እና ሁሉንም ነገር ያስሱ መካከል። ተሰጥኦ ያላቸውን አርቲስቶች ይደግፉ እና የእነሱ ቁራጭ ባለቤት ይሁኑ ታሪክ. አንድ የተወሰነ ዘይቤ ይፈልጉ እንደሆነ ፣ የሚስብ ቀለም ቤተ-ስዕል፣ ወይም ከእርስዎ ጋር የሚያስተጋባ ጭብጥ፣ ትክክለኛው ስዕል ለማግኘት ይጠብቃል።",
       "AboutUs": "ስለ እኛ",
       "ReadMore": "በተጨማሪ",
-            "Arts by emerging artists": "በታዳጊ አርቲስቶች ሥዕሎች",
-                  "DiscoverArtworks":"ሥዕሎችን ያግኙ",
-      "CuratorsPicks":"የተቆጣጣሪዎች ምርጫ"
-
+      "Arts by emerging artists": "በታዳጊ አርቲስቶች ሥዕሎች",
+      "DiscoverArtworks": "ሥዕሎችን ያግኙ",
+      "CuratorsPicks": "የተቆጣጣሪዎች ምርጫ"
     },
-   "About":{
-      "Title":"እኛ ማን ነን?",
-      "Description":"የጥበብ አድናቂዎችን ከተለዩ ስራዎች ጋር ስለማገናኘት በጣም ጓጉተናል፣ ኩሩን እንደ ተመረጠ የመስመር ላይ የገበያ ቦታ ገንብተናል። እዚህ፣ ተሰጥኦ ያላቸው አርቲስቶች ፈጠራቸውን ማሳየት እና ስራቸውን የሚያደንቁ የወሰኑ ሰብሳቢዎችን ማግኘት ይችላሉ። ለገዢዎች እና ለሻጮች የአእምሮ ሰላምን በማረጋገጥ ለንግድ ልውውጥ አስተማማኝ መድረክ በማቅረብ ኩራት ይሰማናል። ከገበያ ቦታ በላይ፣ አርቲስቶች እና ሰብሳቢዎች በቀጥታ የሚገናኙበት ንቁ ማህበረሰብ እናሳድጋለን። ስለዚህ፣ ወደ ስብስብህ የምታክለውን ፍፁም ቁራጭ እየፈለግክም ሆንክ ወይም ጥበባዊ እይታህን ለአለም ለማካፈል ጓጉተህ፣ KURU ወደ ጥበባዊ ግኝት አለም መግቢያህ ነው።",
-     "Buy Products":"ምርቶችን ይግዙ",
-      "Contact Us":"ያግኙን",
-      "We connect artists with buyers":"አርቲስቶችን ከገዢዎች ጋር እናገናኛለን።",
-      "For Artists":"ለአርቲስቶች",
+    "About": {
+      "Title": "እኛ ማን ነን?",
+      "Description": "የጥበብ አድናቂዎችን ከተለዩ ስራዎች ጋር ስለማገናኘት በጣም ጓጉተናል፣ ኩሩን እንደ ተመረጠ የመስመር ላይ የገበያ ቦታ ገንብተናል። እዚህ፣ ተሰጥኦ ያላቸው አርቲስቶች ፈጠራቸውን ማሳየት እና ስራቸውን የሚያደንቁ የወሰኑ ሰብሳቢዎችን ማግኘት ይችላሉ። ለገዢዎች እና ለሻጮች የአእምሮ ሰላምን በማረጋገጥ ለንግድ ልውውጥ አስተማማኝ መድረክ በማቅረብ ኩራት ይሰማናል። ከገበያ ቦታ በላይ፣ አርቲስቶች እና ሰብሳቢዎች በቀጥታ የሚገናኙበት ንቁ ማህበረሰብ እናሳድጋለን። ስለዚህ፣ ወደ ስብስብህ የምታክለውን ፍፁም ቁራጭ እየፈለግክም ሆንክ ወይም ጥበባዊ እይታህን ለአለም ለማካፈል ጓጉተህ፣ KURU ወደ ጥበባዊ ግኝት አለም መግቢያህ ነው።",
+      "Buy Products": "ምርቶችን ይግዙ",
+      "Contact Us": "ያግኙን",
+      "We connect artists with buyers": "አርቲስቶችን ከገዢዎች ጋር እናገናኛለን።",
+      "For Artists": "ለአርቲስቶች",
       "ForArtistDescription": "ኩሩን ሲቀላቀሉ፣ ለወዳጃዊ፣ ፍትሃዊ ዓለም ለአርቲስቶች መላውን ማህበረሰባችን ይቀላቀላሉ። እንዲሁም አለምአቀፍ ተመልካቾችን በመድረስ፣ በእያንዳንዱ ደረጃ ላይ ልዩ ድጋፍ ያገኛሉ",
-      "Become a Seller":"ሻጭ ይሁኑ",
-      "For Buyers":"ለገዢዎች",
-      "ForBuyerDescription":"እርስዎ እንደሚወዱ ከምናውቀው ኦሪጅናል የስነጥበብ ስራ ጋር እናዛምዳለን - እና አርቲስቶችን በተመሳሳይ ጊዜ እንዲደግፉ እናግዝዎታለን። በቀጥታ ከአርቲስቶች ጋር ይገናኙ እና ለእርስዎ ጣዕም ወይም በጀት ምንም ቢሆን ትክክለኛውን ክፍል ያግኙ።",
-      "Shop Now":"አሁን ይግዙ",
-      "Where Artists Meet Collectors: Discover Your Perfect Piece":"አርቲስቶች ሰብሳቢዎችን የሚያገኙበት፡ የርስዎን ፍጹም ስዕል ያግኙ",
-      "Explore":"ይመልከቱ",
-      "Curated Selection":"የተመረጠ ምርጫ",
-      "Direct Connection":"የቀጥታ ግንኙነት",
-      "Secure Transactions":"ደህንነቱ የተጠበቀ ግብይቶች",
-      "FAQ":{
-        "FAQ Questions":"የሚጠየቁ ጥያቄዎች",
-        "Title":"በተደጋጋሚ የሚጠየቁ ጥያቄዎች",
-        "question1":"በኩሩ ላይ ያለው ጥበብ ትክክለኛ መሆኑን እንዴት አውቃለሁ?",
-        "answer1":"በኩሩ ለትክክለኛነት ቅድሚያ እንሰጣለን. እያንዳንዱ የተዘረዘረው የጥበብ ስራ እውነተኛ መሆኑን ለማረጋገጥ የማረጋገጫ ሂደት ያልፋል።",
-        "question2":"በኩሩ በኩል ሥዕል መግዛትና መሸጥ ደህንነቱ የተጠበቀ ነው?",
-        "answer2":"አዎን። በኩሩ የሚካሄደው የግብይት ሂደት ደህንነቱ የተጠበቀ ነው። እኛ የምንገናኝበት መረጃ ይገናኛል፣ የምንገናኝበት መረጃ ይገናኛል።",
-        "question3":"ከአርቲስቱ ጋር በቀጥታ መገናኘት እችላለሁ?",
-        "answer3":"በፍፁም! ኩሩ በአርቲስቶች እና ሰብሳቢዎች መካከል ቀጥተኛ ግንኙነትን ያበረታታል..."
+      "Become a Seller": "ሻጭ ይሁኑ",
+      "For Buyers": "ለገዢዎች",
+      "ForBuyerDescription": "እርስዎ እንደሚወዱ ከምናውቀው ኦሪጅናል የስነጥበብ ስራ ጋር እናዛምዳለን - እና አርቲስቶችን በተመሳሳይ ጊዜ እንዲደግፉ እናግዝዎታለን። በቀጥታ ከአርቲስቶች ጋር ይገናኙ እና ለእርስዎ ጣዕም ወይም በጀት ምንም ቢሆን ትክክለኛውን ክፍል ያግኙ።",
+      "Shop Now": "አሁን ይግዙ",
+      "Where Artists Meet Collectors: Discover Your Perfect Piece": "አርቲስቶች ሰብሳቢዎችን የሚያገኙበት፡ የርስዎን ፍጹም ስዕል ያግኙ",
+      "Explore": "ይመልከቱ",
+      "Curated Selection": "የተመረጠ ምርጫ",
+      "Direct Connection": "የቀጥታ ግንኙነት",
+      "Secure Transactions": "ደህንነቱ የተጠበቀ ግብይቶች",
+      "FAQ": {
+        "FAQ Questions": "የሚጠየቁ ጥያቄዎች",
+        "Title": "በተደጋጋሚ የሚጠየቁ ጥያቄዎች",
+        "question1": "በኩሩ ላይ ያለው ጥበብ ትክክለኛ መሆኑን እንዴት አውቃለሁ?",
+        "answer1": "በኩሩ ለትክክለኛነት ቅድሚያ እንሰጣለን. እያንዳንዱ የተዘረዘረው የጥበብ ስራ እውነተኛ መሆኑን ለማረጋገጥ የማረጋገጫ ሂደት ያልፋል።",
+        "question2": "በኩሩ በኩል ሥዕል መግዛትና መሸጥ ደህንነቱ የተጠበቀ ነው?",
+        "answer2": "አዎን። በኩሩ የሚካሄደው የግብይት ሂደት ደህንነቱ የተጠበቀ ነው። እኛ የምንገናኝበት መረጃ ይገናኛል፣ የምንገናኝበት መረጃ ይገናኛል።",
+        "question3": "ከአርቲስቱ ጋር በቀጥታ መገናኘት እችላለሁ?",
+        "answer3": "በፍፁም! ኩሩ በአርቲስቶች እና ሰብሳቢዎች መካከል ቀጥተኛ ግንኙነትን ያበረታታል..."
       }
     },
-    "Contact":{
-      "Title":"ከእኛ ጋር ይገናኙ",
-      "Description":"ስለ ምርታችን እና አገልግሎታችን ተጨማሪ መረጃ ለማግኘት ኢሜል ለመጣል ነፃነት ይሰማዎ።",
-      "Description2":"ሰራተኞቻችን እርስዎን ለመርዳት ሁል ጊዜ እዚያ ይገኛሉ። አያመንቱ!",
-      "Address":"አድራሻ",
-      "Address2":"236 5ኛ SE ጎዳና፣ አዲስ አበባ",
-      "City":" NY10000፣ ኢትዮጵያ",
-      "Phone":"ስልክ",
-      "Mobile":"ሞባይል",
-      "Hotline":"ሆታይን",
-      "Working Time":"የሥራ ሰዓት",
-      "Monday":"ሰኞ-ዓርብ",
-      "Saturday":"ቅዳሜ-እሑድ",
-      "Email":"ኢሜይል አድራሻ",
-      "Name":"የመጀመሪያ ስም",
-      "NamePlaceholder":"አበበ",
-      "Subject":"ርእስ",
-      "SubjectPlaceholder":"መልእክትህን እዚህ ጻፍ...",
-      "Submit":"ይላኩ",
-      "ContactUs":"አግኙን"
+    "Contact": {
+      "Title": "ከእኛ ጋር ይገናኙ",
+      "Description": "ስለ ምርታችን እና አገልግሎታችን ተጨማሪ መረጃ ለማግኘት ኢሜል ለመጣል ነፃነት ይሰማዎ።",
+      "Description2": "ሰራተኞቻችን እርስዎን ለመርዳት ሁል ጊዜ እዚያ ይገኛሉ። አያመንቱ!",
+      "Address": "አድራሻ",
+      "Address2": "236 5ኛ SE ጎዳና፣ አዲስ አበባ",
+      "City": " NY10000፣ ኢትዮጵያ",
+      "Phone": "ስልክ",
+      "Mobile": "ሞባይል",
+      "Hotline": "ሆታይን",
+      "Working Time": "የሥራ ሰዓት",
+      "Monday": "ሰኞ-ዓርብ",
+      "Saturday": "ቅዳሜ-እሑድ",
+      "Email": "ኢሜይል አድራሻ",
+      "Name": "የመጀመሪያ ስም",
+      "NamePlaceholder": "አበበ",
+      "Subject": "ርእስ",
+      "SubjectPlaceholder": "መልእክትህን እዚህ ጻፍ...",
+      "Submit": "ይላኩ",
+      "ContactUs": "አግኙን"
     },
-    "Auth":{
-      "Get started":"እንጀምር",
-      "Buyer":"ገዢ",
-      "Seller":"ሻጭ",
-      "Name":"ስም",
-      "NamePlaceholder":"የእርስዎን ስም ይጻፉ",
+    "Auth": {
+      "Get started": "እንጀምር",
+      "Buyer": "ገዢ",
+      "Seller": "ሻጭ",
+      "Name": "ስም",
+      "NamePlaceholder": "የእርስዎን ስም ይጻፉ",
       "Email": "ኢሜይል",
-      "EmailPlaceholder":"ኢሜልዎን ያስገቡ",
-      "Password":"የይለፍ ቃል",
-      "PasswordPlaceholder":"የይለፍ ቃልዎን ያስገቡ",
-      "ConfirmPassword":"የይለፍ ቃልን ይረጋግጡ",
-      "ConfirmPasswordPlaceholder":"የይለፍ ቃልዎን ይረጋግጡ",
-      "AlreadyHaveAnAccount":"የተመዘገበ መለያ አለዎት?",
-      "Login":"ይግቡ",
-      "SignUp":"ይመዝገቡ",
+      "EmailPlaceholder": "ኢሜልዎን ያስገቡ",
+      "Password": "የይለፍ ቃል",
+      "PasswordPlaceholder": "የይለፍ ቃልዎን ያስገቡ",
+      "ConfirmPassword": "የይለፍ ቃልን ይረጋግጡ",
+      "ConfirmPasswordPlaceholder": "የይለፍ ቃልዎን ይረጋግጡ",
+      "AlreadyHaveAnAccount": "የተመዘገበ መለያ አለዎት?",
+      "Login": "ይግቡ",
+      "SignUp": "ይመዝገቡ",
       "RegisteredSuccessfully": "በተሳካ ሁኔታ ተመዝግቧል",
       "Failed": "መመዝገብ አልተሳካም።",
-      "Welcome Back":"እንኳን ደህና መጣህ!",
-      "Continue with Google":"በGoogle ይቀጥሉ",
-      "Continue with Facebook":"በFacebook ይቀጥሉ",
-      "Continue with Apple":"በApple ይቀጥሉ",
-      "Don’t have an account?":"መለያ የለህም?",
-      "KURU":"ኩሩ"
+      "Welcome Back": "እንኳን ደህና መጣህ!",
+      "Continue with Google": "በGoogle ይቀጥሉ",
+      "Continue with Facebook": "በFacebook ይቀጥሉ",
+      "Continue with Apple": "በApple ይቀጥሉ",
+      "Don’t have an account?": "መለያ የለህም?",
+      "KURU": "ኩሩ",
+      "Forgot Password?": "የይለፍ ቃልዎን ማረሚያ አለዎት?",
+      "Reset Password": "የይለፍ ቃል ይለውጡ"
     },
-    "UserAccount":{
-      "User":"ተጠቃሚ",
-      "Title":"የተጠቃሚ መለያ",
-      "Description":"የመለያዎን ቅንብሮች እና ምርጫዎች ያስተዳድሩ።",
-      "ProfileSummary":"የመገለጫ ማጠቃለያ",
-      "Messages":"መልዕክቶች",
-      "Notifications":"ማሳወቂያዎች",
-      "Orders":"ትዕዛዞች",
-      "Favorites":"የወደዱት",
-      "Logout":"ውጣ",
-      "Artists You Follow":"እርስዎ የሚከተሏቸው አርቲስቶች",
-      "Deactivate Account":"መለያ ሰርዝ",
-      "Are you sure you want to log out?":"እርግጠኛ ነህ ዘግተህ መውጣት ትፈልጋለህ?",
-      "This action cannot be undone":"ይህ እርምጃ ሊቀለበስ አይችልም።.",
-      "If you are sure, please click the button below to proceed":"እርግጠኛ ከሆኑ እባክዎ ለመቀጠል ከታች ያለውን ቁልፍ ይጫኑ።",
-      "Change Password":"የይለፍ ቃል ይለውጡ"
-
+    "UserAccount": {
+      "User": "ተጠቃሚ",
+      "Title": "የተጠቃሚ መለያ",
+      "Description": "የመለያዎን ቅንብሮች እና ምርጫዎች ያስተዳድሩ።",
+      "ProfileSummary": "የመገለጫ ማጠቃለያ",
+      "Messages": "መልዕክቶች",
+      "Notifications": "ማሳወቂያዎች",
+      "Orders": "ትዕዛዞች",
+      "Favorites": "የወደዱት",
+      "Logout": "ውጣ",
+      "Artists You Follow": "እርስዎ የሚከተሏቸው አርቲስቶች",
+      "Deactivate Account": "መለያ ሰርዝ",
+      "Are you sure you want to log out?": "እርግጠኛ ነህ ዘግተህ መውጣት ትፈልጋለህ?",
+      "This action cannot be undone": "ይህ እርምጃ ሊቀለበስ አይችልም።.",
+      "If you are sure, please click the button below to proceed": "እርግጠኛ ከሆኑ እባክዎ ለመቀጠል ከታች ያለውን ቁልፍ ይጫኑ።",
+      "Change Password": "የይለፍ ቃል ይለውጡ"
     },
-    "ArtistAccount":{
-       "Deactivate Account":"መለያ ሰርዝ",
-       "Followers":"የተከተሉት",
-       "AddArtPiece":"የሥነ ጥበብ ክፍል ይጨምሩ",
-       "Orders":"ትዕዛዞች",
-       "Messages":"መልዕክቶች",
-       "EditProfile":"የመገለጫ መረጃ ይሻሽሉ",
-       "AllArtworks":"የሥነ ጥበብ ስራዎች",
-       "Dashboard":"ዳሽቦርድ",
-       "Logout":"ውጣ",
-       "Notifications":"ማሳወቂያዎች"
+    "ArtistAccount": {
+      "Deactivate Account": "መለያ ሰርዝ",
+      "Followers": "የተከተሉት",
+      "AddArtPiece": "የሥነ ጥበብ ክፍል ይጨምሩ",
+      "Orders": "ትዕዛዞች",
+      "Messages": "መልዕክቶች",
+      "EditProfile": "የመገለጫ መረጃ ይሻሽሉ",
+      "AllArtworks": "የሥነ ጥበብ ስራዎች",
+      "Dashboard": "ዳሽቦርድ",
+      "Logout": "ውጣ",
+      "Notifications": "ማሳወቂያዎች"
     },
-    "Notifications":{
-      "title":"መልዕክቶች",
-      "Description":"በእርስዎ የቅርብ ጊዜ ትዕዛዞች እና ዝማኔዎች እንደተዘመኑ ይቆዩ።",
-      "Error":"ሁሉንም ማሳወቂያዎች እንደተነበቡ ምልክት ማድረግ አልተቻለም፡-",
-      "Error2":"መልዕክቶችን መጫን ላይ ስህተት",
-      "markAsReadError":"ማስታወቂያ እንደተነበበ ምልክት ማድረግ አልተሳካም፦",
-      "new":"አዲስ",
-      "markAllAsRead":"ሁሉንም አንብብ",
-      "noNotifications":"ምንም ማሳወቂያዎች የሉም",
-      "markAsRead":"አንብብ"
-    },  
+    "Notifications": {
+      "title": "መልዕክቶች",
+      "Description": "በእርስዎ የቅርብ ጊዜ ትዕዛዞች እና ዝማኔዎች እንደተዘመኑ ይቆዩ።",
+      "Error": "ሁሉንም ማሳወቂያዎች እንደተነበቡ ምልክት ማድረግ አልተቻለም፡-",
+      "Error2": "መልዕክቶችን መጫን ላይ ስህተት",
+      "markAsReadError": "ማስታወቂያ እንደተነበበ ምልክት ማድረግ አልተሳካም፦",
+      "new": "አዲስ",
+      "markAllAsRead": "ሁሉንም አንብብ",
+      "noNotifications": "ምንም ማሳወቂያዎች የሉም",
+      "markAsRead": "አንብብ"
+    },
     "review": {
       "pageTitle": "አስተያየት ይጻፉ",
       "backButton": "ወደ ትዕዛዝ ተመለስ",
@@ -250,175 +248,206 @@
       "Calculated at the next step": "በሚቀጥለው ደረጃ ይሰላል",
       "Continue to checkout": "ወደ መክፈል ቀጥል"
     },
-  "Checkout": {
-    "billingDetails": "የክፍያ ዝርዝሮች",
-    "firstName": "ስም",
-    "firstNamePlaceholder": "ስምዎን ያስገቡ",
-    "lastName": "የአባት ስም",
-    "lastNamePlaceholder": "የአባትዎን ስም ያስገቡ",
-    "countryRegion": "አገር / ክልል",
-    "countryPlaceholder": "አገርዎን �ርጥ",
-    "streetAddress": "የመኖሪያ አድራሻ",
-    "streetPlaceholder": "የመኖሪያ አድራሻዎን ያስገቡ",
-    "townCity": "ከተማ / ከተማ",
-    "townPlaceholder": "ከተማዎን ወይም ከተማዎን ያስገቡ",
-    "province": "ክልል",
-    "provincePlaceholder": "ክልልዎን ያስገቡ",
-    "zipCode": "የፖስታ ኮድ",
-    "zipPlaceholder": "የፖስታ ኮድዎን ያስገቡ",
-    "phoneNumber": "ስልክ ቁጥር",
-    "phonePlaceholder": "ስልክ ቁጥርዎን ያስገቡ",
-    "email": "ኢሜይል",
-    "emailPlaceholder": "ኢሜይልዎን ያስገቡ",
-    "additionalInfo": "ተጨማሪ መረጃ",
-    "additionalInfoPlaceholder": "ማንኛውም ተጨማሪ መረጃ ካለ ይጻፉ...",
-    "product": "ምርት",
-    "total": "ጠቅላላ",
-    "paymentMethod": "የክፍያ ዘዴ ይምረጡ",
-    "chapa": "ቻፓ",
-    "cashOnDelivery": "በማድረስ ክፍያ",
-    "privacyPolicy": "የግል ውሂብዎ በድረ-ገጹ ላይ ያለዎትን ልምድ ለማገዝ ያገለግላል። የእኛን {privacyPolicy} ያንብቡ።",
-    "privacyPolicyLink": "የግላዊነት ፖሊሲ",
-    "placeOrder": "ትእዛዝ ይጨምሩ",
-    "notifications": {
-      "orderPlaced": "ትእዛዝ በተሳካ ሁኔታ ቀርቧል",
-      "orderFailed": "ትእዛዝ ማስቀመጥ አልተቻለም"
-    }
-  },
- "Privacy": {
-    "meta": {
-      "title": "የግላዊነት ፖሊሲ | ኩሩ - የመስመር ላይ የኪነ-ጥበብ ገበያ",
-      "description": "የእኛን የግላዊነት ፖሊሲ ያንብቡ እና በመስመር ላይ የኪነ-ጥበብ ገበያችን ላይ የእርስዎን ውሂብ እንዴት እንሰበስባለን፣ እንጠቀማለን እና እንጠብቃለን ይረዱ።"
-    },
-    "title": "የግላዊነት ፖሊሲ",
-    "lastUpdated": "የመጨረሻ ዝመና፡ ግንቦት 2025",
-    "introduction": {
-      "title": "መግቢያ",
-      "content1": "ወደ ኩሩ እንኳን በደህና መጡ፣ ለኢትዮጵያውያን አርቲስቶች የተዘጋጀ የመስመር ላይ ገበያ። የእርስዎን ግላዊነት ለመጠበቅ እና የግል መረጃዎን ደህንነት ለማረጋገጥ ቁርጠኛ ነን። ይህ የግላዊነት ፖሊሲ የእርስዎን መረጃ እንዴት እንሰበስባለን፣ እንጠቀማለን፣ እናሳውቃለን እና እንጠብቃለን የሚለውን ያብራራል።",
-      "content2": "አገልግሎታችንን በመጠቀም ወይም በመድረስ ከዚህ ፖሊሲ ጋር በማስማማት መረጃውን ለመሰብሰብ እና መጠቀም እንደምትስማሙ ይቆጠራል።"
-    },
-    "informationWeCollect": {
-      "title": "የምንሰበስበው መረጃ",
-      "personalInfo": {
-        "title": "የግል መረጃ",
-        "description": "መለያ ሲፈጥሩ፣ የሚከተሉትን ልንሰበስብ እንችላለን፡",
-        "items": [
-          "ስም፣ ኢሜይል አድራሻ እና የእውቂያ መረጃ",
-          "የመገለጫ መረጃ (ባዮ፣ የአርቲስት መግለጫ፣ ወዘተ)",
-          "የክፍያ እና የቢሊንግ መረጃ (በክፍያ ሂደታችን በደህንነት የተካሄደ)"
-        ]
-      },
-      "artworkData": {
-        "title": "የኪነ-ጥበብ እና የግብይት ውሂብ",
-        "description": "እኛን ፕላትፎርም እንደ አርቲስት ወይም ገዢ ሲጠቀሙ፣ የሚከተሉትን እንሰበስባለን፡",
-        "items": [
-          "የኪነ-ጥበብ ዝርዝሮች (ምስሎች፣ መግለጫዎች፣ የዋጋ አሰጣጥ)",
-          "የግዢ ታሪክ እና የግብይት መዝገቦች",
-          "በገዢዎች እና አርቲስቶች መካከል የሚደረግ ውይይት"
-        ]
-      },
-      "technicalData": {
-        "title": "ቴክኒካል ውሂብ",
-        "description": "ፕላትፎርማችንን ሲጎበኙ የተወሰኑ መረጃዎችን በራስ-ሰር እንሰበስባለን፡",
-        "items": [
-          "የአይፒ አድራሻ፣ የተመራጭ አይነት እና የመሳሪያ መረጃ",
-          "የአጠቃቀም ውሂብ (የተጎበኙ ገጾች፣ የተሳለፈ ጊዜ፣ ወዘተ)",
-          "ኩኪዎች እና ተመሳሳይ የመከታተያ ቴክኖሎጂዎች"
-        ]
+    "Checkout": {
+      "billingDetails": "የክፍያ ዝርዝሮች",
+      "firstName": "ስም",
+      "firstNamePlaceholder": "ስምዎን ያስገቡ",
+      "lastName": "የአባት ስም",
+      "lastNamePlaceholder": "የአባትዎን ስም ያስገቡ",
+      "countryRegion": "አገር / ክልል",
+      "countryPlaceholder": "አገርዎን �ርጥ",
+      "streetAddress": "የመኖሪያ አድራሻ",
+      "streetPlaceholder": "የመኖሪያ አድራሻዎን ያስገቡ",
+      "townCity": "ከተማ / ከተማ",
+      "townPlaceholder": "ከተማዎን ወይም ከተማዎን ያስገቡ",
+      "province": "ክልል",
+      "provincePlaceholder": "ክልልዎን ያስገቡ",
+      "zipCode": "የፖስታ ኮድ",
+      "zipPlaceholder": "የፖስታ ኮድዎን ያስገቡ",
+      "phoneNumber": "ስልክ ቁጥር",
+      "phonePlaceholder": "ስልክ ቁጥርዎን ያስገቡ",
+      "email": "ኢሜይል",
+      "emailPlaceholder": "ኢሜይልዎን ያስገቡ",
+      "additionalInfo": "ተጨማሪ መረጃ",
+      "additionalInfoPlaceholder": "ማንኛውም ተጨማሪ መረጃ ካለ ይጻፉ...",
+      "product": "ምርት",
+      "total": "ጠቅላላ",
+      "paymentMethod": "የክፍያ ዘዴ ይምረጡ",
+      "chapa": "ቻፓ",
+      "cashOnDelivery": "በማድረስ ክፍያ",
+      "privacyPolicy": "የግል ውሂብዎ በድረ-ገጹ ላይ ያለዎትን ልምድ ለማገዝ ያገለግላል። የእኛን {privacyPolicy} ያንብቡ።",
+      "privacyPolicyLink": "የግላዊነት ፖሊሲ",
+      "placeOrder": "ትእዛዝ ይጨምሩ",
+      "notifications": {
+        "orderPlaced": "ትእዛዝ በተሳካ ሁኔታ ቀርቧል",
+        "orderFailed": "ትእዛዝ ማስቀመጥ አልተቻለም"
       }
     },
-    "howWeUseInfo": {
-      "title": "የእርስዎን መረጃ እንዴት እንጠቀማለን",
-      "platformOperation": {
-        "title": "የፕላትፎርም አሠራር",
-        "description": "አገልግሎታችንን ለመስጠት፣ ለማሻሻል እና ለመጠበቅ፣ ግብይቶችን ለማስኬድ እና ስለ መለያዎ ለመገናኘት።"
+    "Privacy": {
+      "meta": {
+        "title": "የግላዊነት ፖሊሲ | ኩሩ - የመስመር ላይ የኪነ-ጥበብ ገበያ",
+        "description": "የእኛን የግላዊነት ፖሊሲ ያንብቡ እና በመስመር ላይ የኪነ-ጥበብ ገበያችን ላይ የእርስዎን ውሂብ እንዴት እንሰበስባለን፣ እንጠቀማለን እና እንጠብቃለን ይረዱ።"
       },
-      "securityCompliance": {
-        "title": "ደህንነት እና ተገዢነት",
-        "description": "ለማጭበርበር ለመከላከል፣ በሕግ የተደነገጉ ግዴታዎችን ለመፈጸም እና የአገልግሎት ውሎቻችንን ለማስከበር።"
+      "title": "የግላዊነት ፖሊሲ",
+      "lastUpdated": "የመጨረሻ ዝመና፡ ግንቦት 2025",
+      "introduction": {
+        "title": "መግቢያ",
+        "content1": "ወደ ኩሩ እንኳን በደህና መጡ፣ ለኢትዮጵያውያን አርቲስቶች የተዘጋጀ የመስመር ላይ ገበያ። የእርስዎን ግላዊነት ለመጠበቅ እና የግል መረጃዎን ደህንነት ለማረጋገጥ ቁርጠኛ ነን። ይህ የግላዊነት ፖሊሲ የእርስዎን መረጃ እንዴት እንሰበስባለን፣ እንጠቀማለን፣ እናሳውቃለን እና እንጠብቃለን የሚለውን ያብራራል።",
+        "content2": "አገልግሎታችንን በመጠቀም ወይም በመድረስ ከዚህ ፖሊሲ ጋር በማስማማት መረጃውን ለመሰብሰብ እና መጠቀም እንደምትስማሙ ይቆጠራል።"
       },
-      "personalization": {
-        "title": "ግላዊነት",
-        "description": "የእርስዎን ልምድ ለግል ለማድረግ፣ ኪነ-ጥበቦችን ለማመከር እና የፕላትፎርማችንን ተግባራዊነት ለማሻሻል።"
-      },
-      "marketing": {
-        "title": "ግብይት",
-        "description": "በፈቃድዎ፣ ስለ አዳዲስ ባህሪያት ወይም ኪነ-ጥበቦች ማስተዋወቂያ መልዕክቶችን ለመላክ።"
-      }
-    },
-    "dataSharing": {
-      "title": "የውሂብ መጋራት እና ይፋ ማድረግ",
-      "description": "በሚከተሉት ሁኔታዎች ውስጥ የእርስዎን መረጃ ልናጋራ እንችላለን፡",
-      "items": [
-        {
-          "label": "ከአርቲስቶች/ገዢዎች ጋር",
-          "detail": "ግብይቶችን ለማጠናቀቅ አስፈላጊ መረጃ (ለምሳሌ፣ የመላኪያ ዝርዝሮች)"
+      "informationWeCollect": {
+        "title": "የምንሰበስበው መረጃ",
+        "personalInfo": {
+          "title": "የግል መረጃ",
+          "description": "መለያ ሲፈጥሩ፣ የሚከተሉትን ልንሰበስብ እንችላለን፡",
+          "items": [
+            "ስም፣ ኢሜይል አድራሻ እና የእውቂያ መረጃ",
+            "የመገለጫ መረጃ (ባዮ፣ የአርቲስት መግለጫ፣ ወዘተ)",
+            "የክፍያ እና የቢሊንግ መረጃ (በክፍያ ሂደታችን በደህንነት የተካሄደ)"
+          ]
         },
-        {
-          "label": "አገልግሎት አቅራቢዎች",
-          "detail": "በፕላትፎርም አሠራር የሚረዱ አስተማማኝ ሦስተኛ ወገኖች (የክፍያ ሂደት አስኪያጆች፣ የአስተናጋጅ አገልግሎቶች)"
+        "artworkData": {
+          "title": "የኪነ-ጥበብ እና የግብይት ውሂብ",
+          "description": "እኛን ፕላትፎርም እንደ አርቲስት ወይም ገዢ ሲጠቀሙ፣ የሚከተሉትን እንሰበስባለን፡",
+          "items": [
+            "የኪነ-ጥበብ ዝርዝሮች (ምስሎች፣ መግለጫዎች፣ የዋጋ አሰጣጥ)",
+            "የግዢ ታሪክ እና የግብይት መዝገቦች",
+            "በገዢዎች እና አርቲስቶች መካከል የሚደረግ ውይይት"
+          ]
         },
-        {
-          "label": "የሕግ መስፈርቶች",
-          "detail": "በሕግ የተደነገገ ወይም የእኛን መብቶች እና ደህንነት ለመጠበቅ"
-        },
-        {
-          "label": "የንግድ ሽግግሮች",
-          "detail": "በማዋሀድ፣ ግዢ ወይም የንብረት ሽያጭ ግንኙነት"
+        "technicalData": {
+          "title": "ቴክኒካል ውሂብ",
+          "description": "ፕላትፎርማችንን ሲጎበኙ የተወሰኑ መረጃዎችን በራስ-ሰር እንሰበስባለን፡",
+          "items": [
+            "የአይፒ አድራሻ፣ የተመራጭ አይነት እና የመሳሪያ መረጃ",
+            "የአጠቃቀም ውሂብ (የተጎበኙ ገጾች፣ የተሳለፈ ጊዜ፣ ወዘተ)",
+            "ኩኪዎች እና ተመሳሳይ የመከታተያ ቴክኖሎጂዎች"
+          ]
         }
-      ],
-      "noSelling": "የእርስዎን ግላዊ መረጃ ለግብይት ዓላማ ለሦስተኛ ወገኖች አንሸጥም።"
+      },
+      "howWeUseInfo": {
+        "title": "የእርስዎን መረጃ እንዴት እንጠቀማለን",
+        "platformOperation": {
+          "title": "የፕላትፎርም አሠራር",
+          "description": "አገልግሎታችንን ለመስጠት፣ ለማሻሻል እና ለመጠበቅ፣ ግብይቶችን ለማስኬድ እና ስለ መለያዎ ለመገናኘት።"
+        },
+        "securityCompliance": {
+          "title": "ደህንነት እና ተገዢነት",
+          "description": "ለማጭበርበር ለመከላከል፣ በሕግ የተደነገጉ ግዴታዎችን ለመፈጸም እና የአገልግሎት ውሎቻችንን ለማስከበር።"
+        },
+        "personalization": {
+          "title": "ግላዊነት",
+          "description": "የእርስዎን ልምድ ለግል ለማድረግ፣ ኪነ-ጥበቦችን ለማመከር እና የፕላትፎርማችንን ተግባራዊነት ለማሻሻል።"
+        },
+        "marketing": {
+          "title": "ግብይት",
+          "description": "በፈቃድዎ፣ ስለ አዳዲስ ባህሪያት ወይም ኪነ-ጥበቦች ማስተዋወቂያ መልዕክቶችን ለመላክ።"
+        }
+      },
+      "dataSharing": {
+        "title": "የውሂብ መጋራት እና ይፋ ማድረግ",
+        "description": "በሚከተሉት ሁኔታዎች ውስጥ የእርስዎን መረጃ ልናጋራ እንችላለን፡",
+        "items": [
+          {
+            "label": "ከአርቲስቶች/ገዢዎች ጋር",
+            "detail": "ግብይቶችን ለማጠናቀቅ አስፈላጊ መረጃ (ለምሳሌ፣ የመላኪያ ዝርዝሮች)"
+          },
+          {
+            "label": "አገልግሎት አቅራቢዎች",
+            "detail": "በፕላትፎርም አሠራር የሚረዱ አስተማማኝ ሦስተኛ ወገኖች (የክፍያ ሂደት አስኪያጆች፣ የአስተናጋጅ አገልግሎቶች)"
+          },
+          {
+            "label": "የሕግ መስፈርቶች",
+            "detail": "በሕግ የተደነገገ ወይም የእኛን መብቶች እና ደህንነት ለመጠበቅ"
+          },
+          {
+            "label": "የንግድ ሽግግሮች",
+            "detail": "በማዋሀድ፣ ግዢ ወይም የንብረት ሽያጭ ግንኙነት"
+          }
+        ],
+        "noSelling": "የእርስዎን ግላዊ መረጃ ለግብይት ዓላማ ለሦስተኛ ወገኖች አንሸጥም።"
+      },
+      "dataSecurity": {
+        "title": "የውሂብ ደህንነት",
+        "description": "የእርስዎን ግላዊ ውሂብ ለመጠበቅ ተገቢ የሆኑ ቴክኒካዊ እና ድርጅታዊ እርምጃዎችን እንተገብራለን፡",
+        "measures": [
+          "ደህንነታቸው የተጠበቀ አገልጋዮች እና የመቀየሪያ ቴክኖሎጂዎች",
+          "የደህንነት ግምገማዎች በየጊዜው",
+          "የመዳረሻ መቆጣጠሪያዎች እና የማረጋገጫ ሂደቶች",
+          "በቻፓ የተጠበቀ የክፍያ ሂደት"
+        ],
+        "disclaimer": "ውሂብዎን ለመጠበቅ ብንቸከልም፣ በኢንተርኔት ላይ የሚላክ ውሂብ 100% ደህንነቱ የተጠበቀ አይደለም።"
+      },
+      "yourRights": {
+        "title": "የእርስዎ መብቶች እና ምርጫዎች",
+        "description": "ስለ ግላዊ መረጃዎ የተወሰኑ መብቶች አሉዎት፡",
+        "items": [
+          "ውሂብዎን ለማየት እና ቅጂ ለመጠየቅ",
+          "ትክክል ያልሆነ መረጃ ለማስተካከል",
+          "ውሂብዎን ለማጥፋት ለመጠየቅ (በሕግ የተደነገጉ ገደቦች ቢኖሩም)",
+          "ከግብይት መልዕክቶች ለመውጣት",
+          "በፈቃድ ላይ የተመሰረተ ሂደት ካለ ፈቃድዎን ለመልቀቅ"
+        ],
+        "contact": "እነዚህን መብቶች ለመጠቀም፣ እባክዎን በ privacy@kuru-art.com ያግኙን።"
+      },
+      "policyChanges": {
+        "title": "በዚህ ፖሊሲ ላይ ለውጦች",
+        "description1": "ይህን የግላዊነት ፖሊሲ ከጊዜ ወደ ጊዜ ልንዘመን እንችላለን። ማንኛውንም ለውጥ በዚህ ገጽ ላይ አዲሱን ፖሊሲ በማስቀመጥ እና \"የመጨረሻ ዝመና\" ቀኑን በማዘመን እንገልጻለን።",
+        "description2": "ማንኛውንም ለውጥ ካደረግን በኋላ የእኛን ፕላትፎርም መጠቀምዎ የዘመነውን ፖሊሲ መቀበልዎን ያሳያል።"
+      },
+      "contact": {
+        "title": "አግኙን",
+        "description": "ስለዚህ የግላዊነት ፖሊሲ ማንኛውም ጥያቄ ካለዎት፣ እባክዎ ያግኙን፡",
+        "email": "privacy@kuru-art.com"
+      }
     },
-    "dataSecurity": {
-      "title": "የውሂብ ደህንነት",
-      "description": "የእርስዎን ግላዊ ውሂብ ለመጠበቅ ተገቢ የሆኑ ቴክኒካዊ እና ድርጅታዊ እርምጃዎችን እንተገብራለን፡",
-      "measures": [
-        "ደህንነታቸው የተጠበቀ አገልጋዮች እና የመቀየሪያ ቴክኖሎጂዎች",
-        "የደህንነት ግምገማዎች በየጊዜው",
-        "የመዳረሻ መቆጣጠሪያዎች እና የማረጋገጫ ሂደቶች",
-        "በቻፓ የተጠበቀ የክፍያ ሂደት"
-      ],
-      "disclaimer": "ውሂብዎን ለመጠበቅ ብንቸከልም፣ በኢንተርኔት ላይ የሚላክ ውሂብ 100% ደህንነቱ የተጠበቀ አይደለም።"
+
+    "Artworks": {
+      "Browse by Category": "በምድብ ውስጥ ያስሱ",
+      "Explore": "በሁሉም የሚወዱት ምድቦች ውስጥ የተለያዩ የኪነ-ጥበብ ስራዎችን ያስሱ",
+      "All filters": "ሁሉም ማጣሪያዎች",
+      "Price": "ዋጋ",
+      "Low to High": "ከዝቅተኛ ወደ ከፍተኛ",
+      "High to Low": "ከከፍተኛ ወደ ዝቅተኛ",
+      "categories": "ምድቦች",
+      "Medium": "መሣሪያ",
+      "Style": "ቅጥ",
+      "Size": "መጠን",
+      "ClearAll": "ሁሉንም አጥፋ",
+      "Search": "ፈልግ",
+      "ETB": "ብር",
+      "Followers": "ተከታዮች",
+      "Add to cart": "ወደ ጋሪ ጨምር",
+      "Purchase Order": "የግዢ ትእዛዝ",
+      "View in Your Room": "በክፍልዎ ውስጥ ይመልከቱ",
+      "About Artworks": "ስለ ስራዎቹ",
+      "Details": "ዝርዝሮች",
+      "Certificate of authenticity": "የእውነተኛነት �ረጃ",
+      "View Profile": "መገለጫ ይመልከቱ",
+      "Move to your phone to get full virtual experience": "ሙሉ ምናባዊ ልምድ ለማግኘት ስልክዎ ይጠቀሙ",
+      "Exit View": "እይታ ይዝጉ",
+      "AddCartError": "ስራውን ወደ ጋሪ ማክል አልተቻለም",
+      "AddCartSuccess": "ስራው በተሳካ ሁኔታ ወደ ጋሪ ታክሏል",
+      "About": "ስለ",
+      "Shipping information": "የመላኪያ መረጃ",
+      "ShippingInfoDesc": "የመላኪያ አድራሻዎን እና ተመራጭ የማጓጓዣ ዘዴን ያስገቡ። ዝርዝሮችዎ በጊዜ ለማድረስ ትክክለኛ መሆናቸውን ያረጋግጡ። አንዴ ከተላከ ወዲያውኑ ትዕዛዝዎን ይከታተሉ።",
+      "Ratings and reviews": "ደረጃዎች እና ግምገማዎች",
+      "RatingsAndReviewsDesc": "ተሞክሮዎን ያካፍሉ! የእርስዎ አስተያየት ሌሎች ገዥዎችን ይረዳል እና አርቲስቶቻችንን ይደግፋል። የሚወዱትን ለሌሎች ለማሳወቅ ምርቱን ደረጃ ይስጡ እና ግምገማ ይተዉ።",
+      "No reviews yet": "እስካሁን ግምገማ የለም"
     },
-    "yourRights": {
-      "title": "የእርስዎ መብቶች እና ምርጫዎች",
-      "description": "ስለ ግላዊ መረጃዎ የተወሰኑ መብቶች አሉዎት፡",
-      "items": [
-        "ውሂብዎን ለማየት እና ቅጂ ለመጠየቅ",
-        "ትክክል ያልሆነ መረጃ ለማስተካከል",
-        "ውሂብዎን ለማጥፋት ለመጠየቅ (በሕግ የተደነገጉ ገደቦች ቢኖሩም)",
-        "ከግብይት መልዕክቶች ለመውጣት",
-        "በፈቃድ ላይ የተመሰረተ ሂደት ካለ ፈቃድዎን ለመልቀቅ"
-      ],
-      "contact": "እነዚህን መብቶች ለመጠቀም፣ እባክዎን በ privacy@kuru-art.com ያግኙን።"
-    },
-    "policyChanges": {
-      "title": "በዚህ ፖሊሲ ላይ ለውጦች",
-      "description1": "ይህን የግላዊነት ፖሊሲ ከጊዜ ወደ ጊዜ ልንዘመን እንችላለን። ማንኛውንም ለውጥ በዚህ ገጽ ላይ አዲሱን ፖሊሲ በማስቀመጥ እና \"የመጨረሻ ዝመና\" ቀኑን በማዘመን እንገልጻለን።",
-      "description2": "ማንኛውንም ለውጥ ካደረግን በኋላ የእኛን ፕላትፎርም መጠቀምዎ የዘመነውን ፖሊሲ መቀበልዎን ያሳያል።"
-    },
-    "contact": {
-      "title": "አግኙን",
-      "description": "ስለዚህ የግላዊነት ፖሊሲ ማንኛውም ጥያቄ ካለዎት፣ እባክዎ ያግኙን፡",
-      "email": "privacy@kuru-art.com"
+    "Artist": {
+      "Discover Artist": "አርቲስቶችን ያግኙ",
+      "description": "በአርቲስቲክ እልባት ያለው ዓለም ውስጥ ይግቡ! ልዩ ድምፅ እና ዘይቤ ያላቸው ታላላቅ አርቲስቶችን �ለመፈተሽ ይችላሉ።",
+      "All filters": "ሁሉም ማጣሪያዎች",
+      "Medium": "መካከለኛ",
+      "Style": "ዘይቤ",
+      "Subject": "ርዕስ",
+      "ClearAll": "ሁሉንም አጽዳ",
+      "Profile": "መገለጫ",
+      "Bestselling Artists": "በብዛት የሚሸጡ አርቲስቶች",
+      "BestsellingArtistsDesc": "ከፍተኛ ብቃት እና ወጋጋ ጥራት ያላቸው አርቲስቶች። በህዝብ ዘንድ ተወዳጅ የሆኑ ሥራዎቻቸውን ያስተዋሉ።",
+      "Rising Artists": "እየገጠሙ ያሉ አርቲስቶች",
+      "RisingArtistsDesc": "የስነ ጥበብ ምዕራፍ የሚቀይሩ አዳዲስ ተሰጥኦዎች። ከሚታወቁ አርቲስቶች ከመሆናቸው በፊት ይደግፏቸው።"
     }
-  },
-
- "Artworks": {
-  "Browse by Category": "በምድብ ውስጥ ያስሱ",
-  "Explore": "በሁሉም የሚወዱት ምድቦች ውስጥ የተለያዩ የኪነ-ጥበብ ስራዎችን ያስሱ",
-  "All filters": "ሁሉም ማጣሪያዎች",
-  "Price": "ዋጋ",
-  "Low to High": "ከዝቅተኛ ወደ ከፍተኛ",
-  "High to Low": "ከከፍተኛ ወደ ዝቅተኛ",
-  "categories": "ምድቦች",
-  "Medium": "መሣሪያ",
-  "Style": "ቅጥ",
-  "ClearAll": "ሁሉንም አጥፋ",
-  "Search": "ፈልግ"
-}
- 
-
-    
   }
 }

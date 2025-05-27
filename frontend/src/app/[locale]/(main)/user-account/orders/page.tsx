@@ -12,8 +12,12 @@ import {
   Box,
   Stack,
   Divider,
+  Pagination,
 } from "@mantine/core";
-import { useGetUserOrdersQuery } from "@/store/api/order/order";
+import {
+  useGetUserOrdersQuery,
+  useMarkAsDeliveredMutation,
+} from "@/store/api/order/order";
 import {
   IconChevronDown,
   IconChevronUp,
@@ -22,10 +26,28 @@ import {
 } from "@tabler/icons-react";
 import { useState, Fragment } from "react";
 import { useRouter } from "next/navigation";
+import { notify } from "@/shared/components/notification/notification";
 
 const Page = () => {
   const router = useRouter();
-  const { data, isLoading } = useGetUserOrdersQuery({});
+  const [page, setPage] = useState(1);
+  const limit = 12;
+  const skip = (page - 1) * limit;
+  const { data, isLoading } = useGetUserOrdersQuery({
+    skip,
+    limit,
+  });
+  const [markAsDelivered] = useMarkAsDeliveredMutation();
+  const handleMarkAsDelivered = async (orderId: string) => {
+    try {
+      await markAsDelivered(orderId).unwrap();
+      notify("Success", "Order marked as delivered successfully!");
+      router.refresh();
+    } catch (error) {
+      notify("Error", "Failed to mark order as delivered. Please try again.");
+      console.error("Failed to mark order as delivered:", error);
+    }
+  };
   const [openedOrderId, setOpenedOrderId] = useState<string | null>(null);
 
   const toggleRow = (id: string) => {
@@ -39,7 +61,8 @@ const Page = () => {
       </Center>
     );
   }
-
+  const total = data?.total || 0;
+  const totalPages = Math.ceil(total / limit);
   if (!data || data.total === 0) {
     return (
       <Center h="100vh">
@@ -52,7 +75,6 @@ const Page = () => {
       </Center>
     );
   }
-
   return (
     <Box p="sm" maw="1000px" mx="auto">
       <Group mb="md">
@@ -85,115 +107,131 @@ const Page = () => {
         </Table.Thead>
 
         <Table.Tbody>
-          {data &&
-            data?.orders.map((order: any) => (
-              <Fragment key={order.id}>
-                <Table.Tr>
-                  <Table.Td>{order.id.slice(0, 8)}</Table.Td>
-                  <Table.Td>
-                    {new Date(order.created_at).toLocaleDateString()}
-                  </Table.Td>
-                  <Table.Td>ETB {order.total_amount.toFixed(2)}</Table.Td>
-                  <Table.Td>{order.payment_method.toUpperCase()}</Table.Td>
-                  <Table.Td>
-                    <Badge
-                      color={
-                        order.status === "PENDING"
-                          ? "yellow"
-                          : order.status === "PAID"
-                          ? "green"
-                          : "gray"
+          {data.orders.map((order: any) => (
+            <Fragment key={order.id}>
+              <Table.Tr>
+                <Table.Td>{order.id.slice(0, 8)}</Table.Td>
+                <Table.Td>
+                  {new Date(order.created_at).toLocaleDateString()}
+                </Table.Td>
+                <Table.Td>ETB {order.total_amount.toFixed(2)}</Table.Td>
+                <Table.Td>{order.payment_method.toUpperCase()}</Table.Td>
+                <Table.Td>
+                  <Badge
+                    color={
+                      order.status === "PENDING"
+                        ? "yellow"
+                        : order.status === "COMPLETED"
+                        ? "green"
+                        : "gray"
+                    }
+                  >
+                    {order.status}
+                  </Badge>
+                </Table.Td>
+                <Table.Td>
+                  <Group gap={4} mb={20}>
+                    <Button
+                      size="xs"
+                      variant="subtle"
+                      onClick={() => toggleRow(order.id)}
+                      leftSection={
+                        openedOrderId === order.id ? (
+                          <IconChevronUp size={16} />
+                        ) : (
+                          <IconChevronDown size={16} />
+                        )
                       }
                     >
-                      {order.status}
-                    </Badge>
-                  </Table.Td>
-                  <Table.Td>
+                      Items
+                    </Button>
+                    <Button
+                      size="xs"
+                      variant="subtle"
+                      onClick={() => router.push(`orders/${order.id}`)}
+                    >
+                      View
+                    </Button>
+                  </Group>
+                  {(order.status === "COMPLETED" ||
+                    order.status === "DELIVERED") && (
                     <Group gap={4}>
                       <Button
                         size="xs"
                         variant="subtle"
-                        onClick={() => toggleRow(order.id)}
-                        leftSection={
-                          openedOrderId === order.id ? (
-                            <IconChevronUp size={16} />
-                          ) : (
-                            <IconChevronDown size={16} />
-                          )
-                        }
+                        onClick={() => router.push(`orders/${order.id}/review`)}
                       >
-                        Items
+                        Review
                       </Button>
                       <Button
                         size="xs"
-                        variant="light"
-                        onClick={() => router.push(`orders/${order.id}`)}
+                        variant="subtle"
+                        onClick={() => handleMarkAsDelivered(order.id)}
                       >
-                        View
+                        Mark As Delivered
                       </Button>
-                      {order.status === "PAID" && (
-                        <Button
-                          size="xs"
-                          variant="light"
-                          onClick={() =>
-                            router.push(`orders/${order.id}/review`)
-                          }
-                        >
-                          Review
-                        </Button>
-                      )}
                     </Group>
-                  </Table.Td>
-                </Table.Tr>
+                  )}
+                </Table.Td>
+              </Table.Tr>
 
-                <Table.Tr>
-                  <Table.Td colSpan={6} style={{ padding: 0, border: "none" }}>
-                    <Collapse in={openedOrderId === order.id}>
-                      <Box p="md">
-                        <Text fw={500} mb="sm">
-                          Order Items
-                        </Text>
-                        <Table
-                          withColumnBorders
-                          striped
-                          verticalSpacing="sm"
-                          highlightOnHover
-                          withTableBorder
-                        >
-                          <Table.Thead>
-                            <Table.Tr>
-                              <Table.Th>Title</Table.Th>
-                              <Table.Th>Price</Table.Th>
-                              <Table.Th>Quantity</Table.Th>
-                              <Table.Th>Subtotal</Table.Th>
+              <Table.Tr>
+                <Table.Td colSpan={6} style={{ padding: 0, border: "none" }}>
+                  <Collapse in={openedOrderId === order.id}>
+                    <Box p="md">
+                      <Text fw={500} mb="sm">
+                        Order Items
+                      </Text>
+                      <Table
+                        withColumnBorders
+                        striped
+                        verticalSpacing="sm"
+                        highlightOnHover
+                        withTableBorder
+                      >
+                        <Table.Thead>
+                          <Table.Tr>
+                            <Table.Th>Title</Table.Th>
+                            <Table.Th>Price</Table.Th>
+                            <Table.Th>Quantity</Table.Th>
+                            <Table.Th>Subtotal</Table.Th>
+                          </Table.Tr>
+                        </Table.Thead>
+                        <Table.Tbody>
+                          {order.items.map((item: any) => (
+                            <Table.Tr key={item.id}>
+                              <Table.Td>{item.artwork_title}</Table.Td>
+                              <Table.Td>
+                                ETB {item.price_at_purchase.toFixed(2)}
+                              </Table.Td>
+                              <Table.Td>{item.quantity}</Table.Td>
+                              <Table.Td>
+                                ETB{" "}
+                                {(
+                                  item.price_at_purchase * item.quantity
+                                ).toFixed(2)}
+                              </Table.Td>
                             </Table.Tr>
-                          </Table.Thead>
-                          <Table.Tbody>
-                            {order.items.map((item: any) => (
-                              <Table.Tr key={item.id}>
-                                <Table.Td>{item.artwork_title}</Table.Td>
-                                <Table.Td>
-                                  ETB {item.price_at_purchase.toFixed(2)}
-                                </Table.Td>
-                                <Table.Td>{item.quantity}</Table.Td>
-                                <Table.Td>
-                                  ETB{" "}
-                                  {(
-                                    item.price_at_purchase * item.quantity
-                                  ).toFixed(2)}
-                                </Table.Td>
-                              </Table.Tr>
-                            ))}
-                          </Table.Tbody>
-                        </Table>
-                      </Box>
-                    </Collapse>
-                  </Table.Td>
-                </Table.Tr>
-              </Fragment>
-            ))}
+                          ))}
+                        </Table.Tbody>
+                      </Table>
+                    </Box>
+                  </Collapse>
+                </Table.Td>
+              </Table.Tr>
+            </Fragment>
+          ))}
         </Table.Tbody>
       </Table>
+      <Center mt="md">
+        <Pagination
+          value={page}
+          onChange={setPage}
+          total={totalPages}
+          siblings={1}
+          boundaries={1}
+        />
+      </Center>
     </Box>
   );
 };

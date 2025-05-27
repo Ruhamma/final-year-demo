@@ -116,7 +116,6 @@ export default function UserManagement() {
         </Flex>
       </Table.Td>
       <Table.Td>{user.email}</Table.Td>
-      <Table.Td>{user.bookingCount || 0}</Table.Td>
       <Table.Td>
         <Badge color={user.is_active ? "green" : "red"} variant="light">
           {user.is_active ? "Active" : "Inactive"}
@@ -215,7 +214,6 @@ export default function UserManagement() {
             <Table.Tr>
               <Table.Th>User</Table.Th>
               <Table.Th>Email</Table.Th>
-              <Table.Th>Bookings</Table.Th>
               <Table.Th>Status</Table.Th>
               <Table.Th>Actions</Table.Th>
             </Table.Tr>

@@ -69,9 +69,13 @@ export default function CheckoutPage() {
   const onSubmit = async (data: any) => {
     console.log("Form submitted", data);
     try {
-      await submitOrder(data).unwrap();
+     const res =  await submitOrder(data).unwrap();
       notify("Success", t("notifications.orderPlaced"));
-      router.push("/user-account/orders");
+      if (data?.payment_method === "chapa") {
+        router.push(`/user-account/orders/${res[0]?.id}`);
+      } else {
+        router.push("/user-account/orders/");
+      }
     } catch (err) {
       notify("Error", t("notifications.orderFailed"));
     }
