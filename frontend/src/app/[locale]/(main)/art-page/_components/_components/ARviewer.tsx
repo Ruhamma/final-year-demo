@@ -40,32 +40,19 @@ const ARViewer: React.FC<ARViewerProps> = ({ imageUrl }) => {
     let renderer: THREE.WebGLRenderer;
     let scene: THREE.Scene;
     let camera: THREE.PerspectiveCamera;
-    let hitTestSource: XRHitTestSource | undefined;
-    let reticle: THREE.Mesh;
-    let plane: THREE.Group;
-    let session: XRSession;
-    let scale = 1;
-    let lastTouchDistance = 0;
-    let isDragging = false;
-    let previousPosition = { x: 0, y: 0 };
 
-    const initScene = async () => {
+    const initAR = async () => {
       renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
       renderer.setSize(window.innerWidth, window.innerHeight);
-      renderer.shadowMap.enabled = true;
-
-      if (isSupported) {
-        renderer.xr.enabled = true;
-        document.body.appendChild(
-          ARButton.createButton(renderer, {
-            requiredFeatures: ["hit-test", "light-estimation"],
-          })
-        );
-      }
+      renderer.xr.enabled = true;
 
       if (containerRef.current) {
         containerRef.current.appendChild(renderer.domElement);
       }
+
+      document.body.appendChild(
+        ARButton.createButton(renderer, { requiredFeatures: ["hit-test"] })
+      );
 
       scene = new THREE.Scene();
       camera = new THREE.PerspectiveCamera(
@@ -75,242 +62,34 @@ const ARViewer: React.FC<ARViewerProps> = ({ imageUrl }) => {
         30
       );
 
-      // Improved lighting
-      const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
-      scene.add(ambientLight);
-
-      const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
-      directionalLight.position.set(1, 1, 1);
-      directionalLight.castShadow = true;
-      scene.add(directionalLight);
-
-      // Add reticle for placement
-      const reticleGeometry = new THREE.RingGeometry(0.15, 0.2, 32);
-      const reticleMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff });
-      reticle = new THREE.Mesh(reticleGeometry, reticleMaterial);
-      reticle.rotation.x = -Math.PI / 2;
-      reticle.visible = false;
-      scene.add(reticle);
+      const light = new THREE.HemisphereLight(0xffffff, 0xbbbbff, 1);
+      scene.add(light);
 
       const loader = new THREE.TextureLoader();
-
-      const createArtwork = (texture: THREE.Texture) => {
-        const frameWidth = 0.1;
-
-        // Main artwork
+      loader.load(imageUrl, (texture) => {
         const geometry = new THREE.PlaneGeometry(1, 0.75);
-        const material = new THREE.MeshStandardMaterial({
+        const material = new THREE.MeshBasicMaterial({
           map: texture,
-          roughness: 0.3,
-          metalness: 0.1,
           side: THREE.DoubleSide,
         });
-        const artwork = new THREE.Mesh(geometry, material);
-        artwork.castShadow = true;
-        artwork.receiveShadow = true;
+        const plane = new THREE.Mesh(geometry, material);
+        plane.position.set(0, 1, -2.5);
+        scene.add(plane);
+      });
 
-        // Frame
-        const frameGeometry = new THREE.BoxGeometry(
-          1 + frameWidth * 2,
-          0.75 + frameWidth * 2,
-          0.05
-        );
-        const frameMaterial = new THREE.MeshStandardMaterial({
-          color:
-            arFrameStyle === "classic"
-              ? 0x8b4513
-              : arFrameStyle === "modern"
-              ? 0x333333
-              : arFrameStyle === "ornate"
-              ? 0xd4af37
-              : 0xcccccc,
-          roughness: 0.5,
-          metalness: 0.5,
-        });
-        const frame = new THREE.Mesh(frameGeometry, frameMaterial);
-        frame.castShadow = true;
-        frame.receiveShadow = true;
-
-        const group = new THREE.Group();
-        group.add(frame);
-        group.add(artwork);
-        artwork.position.z = 0.026;
-
-        // Add measurement text
-        const textLoader = new THREE.TextureLoader();
-        const canvas = document.createElement("canvas");
-        canvas.width = 256;
-        canvas.height = 128;
-        const context = canvas.getContext("2d")!;
-        context.fillStyle = "white";
-        context.font = "24px Arial";
-        context.fillText("1m × 0.75m", 10, 30);
-
-        const textTexture = new THREE.CanvasTexture(canvas);
-        const textMaterial = new THREE.MeshBasicMaterial({
-          map: textTexture,
-          transparent: true,
-        });
-        const textGeometry = new THREE.PlaneGeometry(0.5, 0.25);
-        const textMesh = new THREE.Mesh(textGeometry, textMaterial);
-        textMesh.position.set(0, -0.6, 0.026);
-        group.add(textMesh);
-
-        return group;
-      };
-
-      let referenceSpace: XRReferenceSpace | null = null;
-      if (isSupported) {
-        session = renderer.xr.getSession() as XRSession;
-        if (!session) {
-          throw new Error("XRSession is not available.");
-        }
-
-        referenceSpace = await renderer.xr.getReferenceSpace();
-        const viewerSpace = await session.requestReferenceSpace("viewer");
-        if (typeof session.requestHitTestSource === "function") {
-          hitTestSource = await session.requestHitTestSource({
-            space: viewerSpace,
-          });
-        } else {
-          throw new Error(
-            "requestHitTestSource is not supported on this session."
-          );
-        }
-
-        session.addEventListener("end", () => {
-          reticle.visible = false;
-          setShowControls(false);
-        });
-
-        let placed = false;
-
-        const placeArtwork = () => {
-          if (!placed && reticle.visible) {
-            loader.load(imageUrl, (texture) => {
-              if (plane) scene.remove(plane);
-              plane = createArtwork(texture);
-              plane.position.copy(reticle.position);
-              plane.quaternion.copy(reticle.quaternion);
-              scene.add(plane);
-              placed = true;
-              reticle.visible = false;
-              setShowControls(true);
-            });
-          }
-        };
-
-        // Click handler for placement
-        containerRef.current?.addEventListener("click", placeArtwork, {
-          once: true,
-        });
-
-        // Touch handlers for scaling
-        const handleTouchMove = (e: TouchEvent) => {
-          if (e.touches.length === 2 && plane) {
-            const touch1 = e.touches[0];
-            const touch2 = e.touches[1];
-            const distance = Math.hypot(
-              touch2.clientX - touch1.clientX,
-              touch2.clientY - touch1.clientY
-            );
-
-            if (lastTouchDistance > 0) {
-              scale *= distance / lastTouchDistance;
-              plane.scale.set(scale, scale, scale);
-            }
-            lastTouchDistance = distance;
-          }
-        };
-
-        const handleTouchEnd = () => {
-          lastTouchDistance = 0;
-        };
-
-        containerRef.current?.addEventListener("touchmove", handleTouchMove);
-        containerRef.current?.addEventListener("touchend", handleTouchEnd);
-
-        // Mouse handlers for rotation
-        const handleMouseDown = (e: MouseEvent) => {
-          isDragging = true;
-          previousPosition = { x: e.clientX, y: e.clientY };
-        };
-
-        const handleMouseMove = (e: MouseEvent) => {
-          if (!isDragging || !plane) return;
-
-          const deltaX = e.clientX - previousPosition.x;
-          const deltaY = e.clientY - previousPosition.y;
-
-          plane.rotation.y += deltaX * 0.01;
-          plane.rotation.x += deltaY * 0.01;
-
-          previousPosition = { x: e.clientX, y: e.clientY };
-        };
-
-        const handleMouseUp = () => {
-          isDragging = false;
-        };
-
-        containerRef.current?.addEventListener("mousedown", handleMouseDown);
-        containerRef.current?.addEventListener("mousemove", handleMouseMove);
-        containerRef.current?.addEventListener("mouseup", handleMouseUp);
-
-        // Cleanup
-        return () => {
-          containerRef.current?.removeEventListener("click", placeArtwork);
-          containerRef.current?.removeEventListener(
-            "touchmove",
-            handleTouchMove
-          );
-          containerRef.current?.removeEventListener("touchend", handleTouchEnd);
-          containerRef.current?.removeEventListener(
-            "mousedown",
-            handleMouseDown
-          );
-          containerRef.current?.removeEventListener(
-            "mousemove",
-            handleMouseMove
-          );
-          containerRef.current?.removeEventListener("mouseup", handleMouseUp);
-        };
-      } else {
-        // Non-AR fallback
-        loader.load(imageUrl, (texture) => {
-          if (plane) scene.remove(plane);
-          plane = createArtwork(texture);
-          plane.position.set(0, 0, -2);
-          scene.add(plane);
-        });
-      }
-      renderer.setAnimationLoop((time: number, frame: XRFrame) => {
-        if (frame && hitTestSource !== undefined && !plane && referenceSpace) {
-          const hitTestResults = frame.getHitTestResults(hitTestSource);
-          if (hitTestResults.length > 0) {
-            const hit = hitTestResults[0];
-            const pose = hit.getPose(referenceSpace);
-            if (pose) {
-              reticle.visible = true;
-              reticle.position.setFromMatrixPosition(
-                new THREE.Matrix4().fromArray(pose.transform.matrix)
-              );
-            }
-          }
-        }
+      renderer.setAnimationLoop(() => {
         renderer.render(scene, camera);
       });
     };
 
-    if (isSupported !== null) {
-      initScene();
-    }
+    initAR();
 
     return () => {
       if (renderer) {
         renderer.dispose();
       }
     };
-  }, [imageUrl, isSupported, arFrameStyle]);
+  }, [imageUrl]);
 
   const captureScene = () => {
     const renderer = containerRef.current?.querySelector("canvas");
@@ -482,5 +261,3 @@ const DesktopArtView = ({ imageUrl }: { imageUrl: string }) => {
 };
 
 export default ARViewer;
-
-
