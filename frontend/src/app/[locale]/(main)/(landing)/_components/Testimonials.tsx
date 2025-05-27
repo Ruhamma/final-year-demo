@@ -47,7 +47,6 @@ const testimonials = [
           align="center"
           loop
           withIndicators
-          slideGap="md"
           onSlideChange={setActiveSlide}
           className="overflow-visible py-10"
         >

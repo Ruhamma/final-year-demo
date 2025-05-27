@@ -16,8 +16,8 @@ const Landing = () => {
       <FeaturedArtists />
       <About />
       <Discover title={t('DiscoverArtworks')}/>
-      <Testimonials title={t('CuratorsPicks')} />
-      <Curated />
+      <Testimonials  />
+      <Curated title={t('CuratorsPicks')}/>
     </>
   );
 };

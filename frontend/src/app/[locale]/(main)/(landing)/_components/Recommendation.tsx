@@ -66,7 +66,7 @@ export const UserRecommendations = ({ userId }: UserRecommendationsProps) => {
               </CarouselSlide>
             ))
           ) : (
-            recommendations.map((artwork) => (
+            recommendations.map((artwork: any) => (
               <CarouselSlide key={artwork.id}>
                 <Link href={`/artworks/${artwork.id}`}>
                   <Card shadow="sm" radius="md" withBorder className="h-full flex flex-col hover:shadow-md transition-shadow">
@@ -76,7 +76,6 @@ export const UserRecommendations = ({ userId }: UserRecommendationsProps) => {
                         src={artwork.images[0]?.url} 
                         height={200}
                         className="w-full object-cover"
-                        withPlaceholder
                       />
                     </CardSection>
                     <Box className="p-3 flex-grow">
@@ -126,7 +125,7 @@ export const UserRecommendations = ({ userId }: UserRecommendationsProps) => {
               </CarouselSlide>
             ))
           ) : (
-            recommendations.map((artwork) => (
+            recommendations.map((artwork: any) => (
               <CarouselSlide key={artwork.id}>
                 <Link href={`/artworks/${artwork.id}`}>
                   <Card shadow="sm" radius="md" withBorder className="h-full flex flex-col hover:shadow-md transition-shadow">
@@ -136,7 +135,6 @@ export const UserRecommendations = ({ userId }: UserRecommendationsProps) => {
                         src={artwork.images[0]?.url} 
                         height={200}
                         className="w-full object-cover"
-                        withPlaceholder
                       />
                     </CardSection>
                     <Box className="p-3 flex-grow">

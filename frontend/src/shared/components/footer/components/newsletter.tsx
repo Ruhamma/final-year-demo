@@ -36,7 +36,6 @@ export default function NewsletterSubscribe() {
       <div className="flex gap-2">
         <TextInput
           placeholder="Enter your email"
-          icon={<IconMail size={18} />}
           value={email}
           onChange={(e) => setEmail(e.currentTarget.value)}
           className="flex-1"

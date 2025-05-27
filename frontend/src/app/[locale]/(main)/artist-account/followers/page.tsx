@@ -8,7 +8,7 @@ import {
 import { useAuth } from "@/context/useAuth";
 import { skipToken } from "@reduxjs/toolkit/query";
 
-function page() {
+function Page() {
   const { data: profileData } = useGetArtistProfileQuery({});
 
   console.log("profiledata", profileData);
@@ -27,4 +27,4 @@ function page() {
   return <div>Followers list</div>;
 }
 
-export default page;
+export default Page;

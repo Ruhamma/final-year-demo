@@ -65,7 +65,7 @@ export default function Page() {
               color="green"
               radius="md"
             >
-               "Form submitted successfully!"
+              Form submitted successfully!
             </Alert>
           )}
           <TextInput

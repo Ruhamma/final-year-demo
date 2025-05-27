@@ -6,7 +6,7 @@ import {
 } from "@/store/api/users/page";
 import { useAuth } from "@/context/useAuth";
 
-function page() {
+function Page() {
   const { user } = useAuth();
   const userId = user?.id;
 
@@ -15,4 +15,4 @@ function page() {
   return <div>Artists I follow</div>;
 }
 
-export default page;
+export default Page;
