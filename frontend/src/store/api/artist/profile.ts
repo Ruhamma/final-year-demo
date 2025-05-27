@@ -4,8 +4,8 @@ import { AnyARecord } from "dns";
 export const artistProfileApi = createApi({
   reducerPath: "artistProfileApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: 'https://online-marketplace-for-local-artists.onrender.com/', //removed /api
-    // credentials: "include",  //removed for test
+    baseUrl: "https://online-marketplace-for-local-artists.onrender.com/",
+    credentials: "include",
   }),
   tagTypes: ["ArtistProfile", "dashboard"],
   endpoints: (builder) => ({
@@ -16,15 +16,29 @@ export const artistProfileApi = createApi({
 
     // test artists query
     //   getArtists: builder.query<any, void>({
-    //   query: () => "/artists", 
+    //   query: () => "/artists",
     // }),
 
-   getArtists: builder.query<any, void>({
+    getArtists: builder.query<any, void>({
       query: () => ({
         url: `/artist`,
         method: "GET",
       }),
-    providesTags: ["ArtistProfile"],
+      providesTags: ["ArtistProfile"],
+    }),
+    getRisingArtists: builder.query<any, void>({
+      query: () => ({
+        url: `/artist/rising`,
+        method: "GET",
+      }),
+      providesTags: ["ArtistProfile"],
+    }),
+    getBestsellingArtists: builder.query<any, void>({
+      query: () => ({
+        url: `/artist/bestselling`,
+        method: "GET",
+      }),
+      providesTags: ["ArtistProfile"],
     }),
 
     getArtistsById: builder.query<any, string>({
@@ -32,7 +46,7 @@ export const artistProfileApi = createApi({
         url: `/artist/${id}`,
         method: "GET",
       }),
-    providesTags: ["ArtistProfile"],
+      providesTags: ["ArtistProfile"],
     }),
 
     updateArtistProfile: builder.mutation({
@@ -85,6 +99,37 @@ export const artistProfileApi = createApi({
         body: reviewData,
       }),
     }),
+
+    followArtist: builder.mutation({
+      query: (artistId: string) => ({
+        url: `artist/follow`,
+        method: "POST",
+        body: { artist_id: artistId },
+      }),
+      invalidatesTags: ["ArtistProfile"],
+    }),
+    unfollowArtist: builder.mutation({
+      query: (artistId: string) => ({
+        url: `artist/unfollow`,
+        method: "POST",
+        body: { artist_id: artistId },
+      }),
+      invalidatesTags: ["ArtistProfile"],
+    }),
+    getArtistsFollowers: builder.query<any, string>({
+      query: (id) => ({
+        url: `/artist/${id}/followers`,
+        method: "GET",
+      }),
+      providesTags: ["ArtistProfile"],
+    }),
+    getArtistsRatings: builder.query<any, string>({
+      query: (id) => ({
+        url: `/artist/${id}/ratings`,
+        method: "GET",
+      }),
+      providesTags: ["ArtistProfile"],
+    }),
   }),
 });
 
@@ -100,8 +145,10 @@ export const {
   useGetArtistsQuery,
   useGetArtistsByIdQuery,
   useReviewArtistMutation,
+  useFollowArtistMutation,
+  useUnfollowArtistMutation,
+  useGetArtistsFollowersQuery,
+  useGetArtistsRatingsQuery,
+  useGetBestsellingArtistsQuery,
+  useGetRisingArtistsQuery,
 } = artistProfileApi;
-
-
-
-

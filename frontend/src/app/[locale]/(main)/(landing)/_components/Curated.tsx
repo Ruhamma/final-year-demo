@@ -1,72 +1,141 @@
-import { Carousel, CarouselSlide } from "@mantine/carousel";
-import { Box, Container, Flex, Image } from "@mantine/core";
-import { useTranslations } from "next-intl";
 import React from "react";
+import { Carousel, CarouselSlide } from "@mantine/carousel";
+import { Box, Card, CardSection, Group, Image, Text } from "@mantine/core";
+import { useTranslations } from "next-intl";
+const Curated = ({ title }: { title: string }) => {
+  const mockArtworks = [
+    {
+      id: 1,
+      artistName: "Vincent van Gogh",
+      title: "Starry Night",
+      price: "$1,000,000",
+      src: "/images/Product Image (2).png",
+    },
+    {
+      id: 2,
+      artistName: "Leonardo da Vinci",
+      title: "Mona Lisa",
+      price: "$850,000",
+      src: "/images/Product Image (3).png",
+    },
+    {
+      id: 3,
+      artistName: "Pablo Picasso",
+      title: "Les Demoiselles ",
+      price: "$750,000",
+      src: "/images/Product Image (4).png",
+    },
+    {
+      id: 4,
+      artistName: "Claude Monet",
+      title: "Water Lilies",
+      price: "$500,000",
+      src: "/images/Product Image (5).png",
+    },
+    {
+      id: 5,
+      artistName: "Salvador Dalí",
+      title: "The Persistence",
+      price: "$600,000",
+      src: "/images/Product Image (6).png",
+    },
+    {
+      id: 6,
+      artistName: "Edvard Munch",
+      title: "The Scream",
+      price: "$700,000",
+      src: "/images/Product Image.png",
+    },
+    {
+      id: 7,
+      artistName: "Vincent van Gogh",
+      title: "Starry Night",
+      price: "$1,000,000",
+      src: "/images/Product Image (2).png",
+    },
+    {
+      id: 8,
+      artistName: "Leonardo da Vinci",
+      title: "Mona Lisa",
+      price: "$850,000",
+      src: "/images/Product Image (3).png",
+    },
+  ];
 
-const Curated = () => {
   const t = useTranslations("common.Landing");
   return (
-    <div className="py-20">
-      <Box className="p-6 md:p-10 md:pl-24">
-        <p className="text-2xl md:text-4xl font-semibold text-center">
-          {t("Testimonials")}
-        </p>
-        <p className="text-sm text-gray-500 font-light text-center">
-          {t("Hear what our clients say about us")}
-        </p>
+    <div>
+      <Box className="px-4 sm:px-10 md:px-24 py-10">
+        <p className="text-lg sm:text-xl md:text-2xl font-semibold">{title}</p>
+        <p className="text-xs sm:text-sm font-light">{t('Arts by emerging artists')}</p>
       </Box>
-      <Container>
-        <Flex
-          justify={"center"}
-          align="center"
-          gap="4 md:gap-10"
-          className="mb-10 flex-col md:flex-row"
+      <Box className="px-4 sm:px-10">
+        <Carousel
+          withIndicators
+          slideSize="50%"
+          slideGap="md"
+          loop
+          align="start"
+          slidesToScroll={2}
+          className="flex md:hidden"
         >
-          <Image
-            alt="Curated Image"
-            src="/images/Rectangle 20.png"
-            className="mt-6 md:mt-20 w-4/5 md:w-full h-[100px] md:h-auto"
-          />
-          <Image
-            alt="Curated Image"
-            src="/images/Rectangle 20.png"
-            className="w-4/5 md:w-full md:h-auto"
-          />
-          <Image
-            alt="Curated Image"
-            src="/images/Rectangle 20.png"
-            className="mt-6 md:mt-20 w-4/5 md:w-full md:h-auto"
-          />
-        </Flex>
-        <Carousel slideSize="100%" slideGap="md" loop withIndicators>
-          <CarouselSlide>
-            <div className="flex flex-col items-center justify-center ">
-              <div className="w-1/2 p-5  rounded-lg shadow-md">
-                <div className="flex justify-center mb-4">
-                  {Array.from({ length: 5 }).map((_, index) => (
-                    <svg
-                      key={index}
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="currentColor"
-                      viewBox="0 0 24 24"
-                      className="w-5 h-5 text-yellow-500"
-                    >
-                      <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
-                    </svg>
-                  ))}
-                </div>
-                <p className="text-sm font-light text-center">
-                  {t("testDescription")}
-                </p>
-
-                <p className="mt-4 font-semibold text-center">{t("johnDoe")}</p>
-              </div>
-            </div>
-          </CarouselSlide>
+          {mockArtworks.map((item) => (
+            <CarouselSlide key={item.id}>
+              <Card
+                key={item.id}
+                shadow="sm"
+                radius="md"
+                withBorder
+                className="bg-red-900"
+              >
+                <CardSection>
+                  <Image alt="Product image" src={item?.src} />
+                </CardSection>
+                <Group className="py-2" justify="space-between" align="center">
+                  <p className="text-sm font-semibold">{item?.title}</p>
+                </Group>
+                <Text c="dimmed" className="text-xs font-semibold" size="xs">
+                  {item?.artistName}
+                </Text>
+              </Card>
+            </CarouselSlide>
+          ))}
         </Carousel>
-      </Container>
+         <Carousel
+          withIndicators
+          slideSize="25%"
+          slideGap="md"
+          loop
+          align="start"
+          slidesToScroll={4}
+          className="hidden md:flex"
+        >
+          {mockArtworks.map((item) => (
+            <CarouselSlide key={item.id}>
+              <Card
+                key={item.id}
+                shadow="sm"
+                radius="md"
+                withBorder
+                className="bg-red-900"
+              >
+                <CardSection>
+                  <Image alt="Product image" src={item?.src} />
+                </CardSection>
+                <Group className="py-2" justify="space-between" align="center">
+                  <p className="text-sm font-semibold">{item?.title}</p>
+                </Group>
+                <Text c="dimmed" className="text-xs font-semibold" size="xs">
+                  {item?.artistName}
+                </Text>
+              </Card>
+            </CarouselSlide>
+          ))}
+        </Carousel>
+      </Box>
     </div>
   );
 };
 
 export default Curated;
+

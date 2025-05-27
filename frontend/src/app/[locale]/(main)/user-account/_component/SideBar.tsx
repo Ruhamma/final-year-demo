@@ -66,7 +66,7 @@ const SideBar = () => {
             label: t("Orders"),
           },
           {
-            href: "/logout",
+            href: "/user-account/artists-you-follow",
             icon: <IconUsers size={18} />,
             label: t("Artists You Follow"),
           },

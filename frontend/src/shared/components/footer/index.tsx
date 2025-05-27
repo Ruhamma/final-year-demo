@@ -15,6 +15,7 @@ import {
 } from "@tabler/icons-react";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
+import NewsletterSubscribe from "./components/newsletter";
 
 export function Footer() {
   const t = useTranslations("common.Footer");
@@ -42,6 +43,7 @@ export function Footer() {
           </Text>
 
           {/* Email input and button */}
+          <NewsletterSubscribe />
           <Flex
             direction={{ base: "column", sm: "row" }}
             w={{ base: "100%", sm: "60%" }}

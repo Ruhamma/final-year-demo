@@ -1,15 +1,25 @@
 "use client";
 import Image from "next/image";
 import { ButtonHTMLAttributes, ReactNode, useEffect, useState } from "react";
-import { useGetArtistsByIdQuery } from "@/store/api/artist/profile";
+import {
+  useGetArtistsByIdQuery,
+  useGetArtistsFollowersQuery,
+  useGetArtistsRatingsQuery,
+} from "@/store/api/artist/profile";
 import {
   useGetArtworksByArtistIdQuery,
   useGetMetadataQuery,
+  useGetRatingsQuery,
 } from "@/store/api/artwork/artwork";
+import {
+  useFollowArtistMutation,
+  useUnfollowArtistMutation,
+} from "@/store/api/artist/profile";
 import { usePathname } from "next/navigation";
 import { Group, Rating, Select, TextInput } from "@mantine/core";
 import { useDebouncedValue } from "@mantine/hooks";
 import { IconFilter, IconSearch } from "@tabler/icons-react";
+import { useAuth } from "@/context/useAuth";
 
 // Utility components
 function Card({
@@ -70,12 +80,12 @@ function Button({
   );
 }
 
-
-
 // Main Component
 export default function ArtistProfile() {
+  const { user } = useAuth();
+  console.log("user", user);
   const pathname = usePathname();
-    const [page, setPage] = useState(1);
+  const [page, setPage] = useState(1);
   const limit = 12;
   const skip = (page - 1) * limit;
   const artistId = pathname ? pathname.split("/").pop() : "";
@@ -88,55 +98,81 @@ export default function ArtistProfile() {
     style: "",
     category: "",
   });
+  const [
+    followArtist,
+    {
+      isLoading: isFollowLoading,
+      isSuccess: isFollowSuccess,
+      isError: isFollowError,
+    },
+  ] = useFollowArtistMutation();
 
- const [isFollowing, setIsFollowing] = useState(false);
-const [isLoading, setIsLoading] = useState(false);
+  const [
+    unfollowArtist,
+    {
+      isLoading: isUnfollowLoading,
+      isSuccess: isUnfollowSuccess,
+      isError: isUnfollowError,
+    },
+  ] = useUnfollowArtistMutation();
+
+  const [isFollowing, setIsFollowing] = useState(false);
+  // const [isLoading, setIsLoading] = useState(false);
+
+  const { data } = useGetArtistsFollowersQuery(artistId);
+  const [followersCount, setFollowersCount] = useState(0);
+
+  const { data: artistRatings } = useGetArtistsRatingsQuery(artistId);
+  console.log("artistRATE", artistRatings);
 
   useEffect(() => {
-    const checkFollowStatus = async () => {
-      try {
-        const response = await fetch(`/api/artwork/${artistId}/is-following`);
-        const data = await response.json();
-        setIsFollowing(data.isFollowing);
-      } catch (error) {
-        console.error('Error checking follow status:', error);
-      }
-    };
-    
-    checkFollowStatus();
-  }, [artistId]);
+    if (data && Array.isArray(data)) {
+      setFollowersCount(data.length);
+    }
+  }, [data]);
 
-   const toggleFollow = async () => {
-    setIsLoading(true);
+  // if (isLoading) return <p>Loading followers...</p>;
+  // if (isError) return <p>Failed to load followers.</p>;
+
+  console.log("follolwers", data);
+
+  // useEffect(() => {
+  //   const checkFollowStatus = async () => {
+  //     try {
+  //       const response = await fetch(`/api/artwork/${artistId}/is-following`);
+  //       const data = await response.json();
+  //       setIsFollowing(data.isFollowing);
+  //     } catch (error) {
+  //       console.error("Error checking follow status:", error);
+  //     }
+  //   };
+
+  //   checkFollowStatus();
+  // }, [artistId]);
+
+  const handleFollow = async () => {
     try {
-      const response = await fetch('{NEXT_PUBLIC_API}artist/follow', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ artistId }),
-      });
-      
-      if (response.ok) {
-        setIsFollowing(!isFollowing);
-      }
-    } catch (error) {
-      console.error('Error toggling follow:', error);
-    } finally {
-      setIsLoading(false);
+      await followArtist(artistId).unwrap();
+      console.log("You are now following the artist!");
+    } catch (err) {
+      console.error("Failed to follow artist:", err);
     }
   };
 
   const { data: artistData, isLoading: isArtistLoading } =
     useGetArtistsByIdQuery(artistId || "");
 
+  const { data: ratingsData, isLoading: isRatesLoading } = useGetRatingsQuery(
+    artistId || ""
+  );
+
+  console.log("Ratings Data", ratingsData);
+
   useEffect(() => {
     console.log("Filters changed:", {
       search: debounced,
       ...selectedFilters,
     });
-
-  
   }, [debounced, selectedFilters]);
   const { data: artworksData, isLoading: isArtworksLoading } =
     useGetArtworksByArtistIdQuery({
@@ -150,11 +186,12 @@ const [isLoading, setIsLoading] = useState(false);
       style: selectedFilters.style,
     });
 
+  console.log("artwork of the artist", artworksData);
+
   const artist = artistData || {};
   const artworks = artworksData?.artworks || [];
   const total = artworksData?.total || 0;
   const totalPages = Math.ceil(total / limit);
-  const followers = 1
 
   const handleClear = () => {
     setSelectedFilters({ price: "", medium: "", style: "", category: "" });
@@ -171,29 +208,67 @@ const [isLoading, setIsLoading] = useState(false);
       <div className="container mx-auto px-4 py-10 grid md:grid-cols-4 gap-10">
         {/* Left Column - Artist Info */}
         <div className="md:col-span-1 flex flex-col items-center text-center mt-[-150px] z-10">
-          <Image
-            src={artist.profile_picture || "/images/placeholder.jpg"}
-            alt={artist.first_name || "Artist"}
-            width={200}
-            height={200}
-            className="rounded-full h-[170px] w-[170px] object-cover"
-          />
+          <div className="relative">
+            <Image
+              src={artist.profile_picture || "/images/placeholder.jpg"}
+              alt={artist.first_name || "Artist"}
+              width={200}
+              height={200}
+              className="rounded-full h-[170px] w-[170px] object-cover"
+            />
+            {artist.is_verified && (
+              <div className="absolute top-[5%] right-1 bg-blue-500 p-1 rounded-full">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-6 w-6 text-white"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.707a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </div>
+            )}
+          </div>
           <h2 className="mt-4 text-xl font-semibold">{artist.first_name}</h2>
           <div className="text-yellow-500 flex items-center">
-            
             <Rating value={artist.rating || 0} fractions={2} readOnly />
             <span className="ml-2 text-gray-600 text-sm">
               ({artist.rating || 0})
             </span>
           </div>
-          <div>Followers:{followers}</div>
-           <button 
-      onClick={toggleFollow} 
-      disabled={isLoading}
-      className={`follow-button ${isFollowing ? 'following' : ''}`}
-    >
-      {isLoading ? 'Processing...' : isFollowing ? 'Following' : 'Follow'}
-    </button>
+          <div>Followers:{followersCount}</div>
+          <div>
+            <button
+              onClick={async () => {
+                try {
+                  if (isFollowing) {
+                    await unfollowArtist(artistId).unwrap();
+                    setIsFollowing(false);
+                    setFollowersCount((prev) => Math.max(prev - 1, 0));
+                  } else {
+                    await followArtist(artistId).unwrap();
+                    setIsFollowing(true);
+                    setFollowersCount((prev) => prev + 1);
+                  }
+                } catch (err) {
+                  console.error("Follow/Unfollow error:", err);
+                }
+              }}
+              className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 disabled:opacity-50"
+              disabled={isFollowLoading || isUnfollowLoading}
+            >
+              {isFollowLoading || isUnfollowLoading
+                ? "Processing..."
+                : isFollowing
+                ? "Unfollow"
+                : "Follow"}
+            </button>
+          </div>
+
           <p className="mt-2 text-sm text-gray-600">Joined May 2016</p>
           <p className="mt-4 text-sm">{artist.bio}</p>
         </div>
@@ -313,6 +388,16 @@ const [isLoading, setIsLoading] = useState(false);
                     <p className="text-sm font-medium text-black">
                       ETB {art.price}
                     </p>
+                    <div className="text-yellow-500 flex items-center">
+                      <Rating
+                        value={art.average_rating || 0}
+                        fractions={2}
+                        readOnly
+                      />
+                      <span className="ml-2 text-gray-600 text-sm">
+                        ({art.average_rating || 0})
+                      </span>
+                    </div>
                   </div>
                 </CardContent>
               </Card>

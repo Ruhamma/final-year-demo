@@ -51,6 +51,7 @@ const Page = () => {
     category: "",
   });
   const { user } = useAuth();
+ 
   const { data, isLoading } = useGetMyArtworksQuery({
     skip,
     limit,
