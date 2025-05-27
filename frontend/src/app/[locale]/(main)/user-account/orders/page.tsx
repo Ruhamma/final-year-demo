@@ -75,8 +75,6 @@ const Page = () => {
       </Center>
     );
   }
-  const total = data?.total || 0;
-  const totalPages = Math.ceil(total / limit);
   return (
     <Box p="sm" maw="1000px" mx="auto">
       <Group mb="md">

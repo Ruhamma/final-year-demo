@@ -17,7 +17,7 @@ import {
   Textarea,
   TextInput,
 } from "@mantine/core";
-import { useParams, useSearchParams } from "next/navigation";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
 // import { useRouter } from "next/navigation";
 import React from "react";
 import { Controller, useForm } from "react-hook-form";
@@ -41,6 +41,7 @@ const checkoutSchema = z.object({
     .optional(),
 });
 export default function CheckoutPage() {
+  const router = useRouter();
   const { id } = useParams();
   const searchParams = useSearchParams();
   const isDigital = searchParams.get("is_digital") === "true";
