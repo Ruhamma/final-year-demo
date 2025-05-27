@@ -34,16 +34,16 @@ const CartDrawer = () => {
   const [removeFromCart] = useRemoveCartItemMutation();
   const [clearCart, { isLoading: isClearing }] = useClearCartMutation();
   const [removingItemId, setRemovingItemId] = useState<string | null>(null);
-  
+
   const cartCount = cart?.items?.length || 0;
 
   const handleRemoveFromCart = async (id: string) => {
     setRemovingItemId(id);
     try {
       await removeFromCart(id).unwrap();
-      notify("Success", t("itemRemoved"));
+      notify("Success", t("notifications.itemRemoved"));
     } catch (error) {
-      notify("Error", t("itemRemoveError"));
+      notify("Error", t("notifications.itemRemoveError"));
     } finally {
       setRemovingItemId(null);
     }
@@ -52,9 +52,9 @@ const CartDrawer = () => {
   const handleClearCart = async () => {
     try {
       await clearCart().unwrap();
-      notify("Success", t("cartCleared"));
+      notify("Success", t("notifications.cartCleared"));
     } catch (error) {
-      notify("Error", t("cartClearError"));
+      notify("Error", t("notifications.cartClearError"));
     }
   };
 
@@ -138,13 +138,18 @@ const CartDrawer = () => {
         <Divider className="my-4" />
 
         <Group justify="space-between" className="mt-4">
-          <Text>{t('Total')} {cart?.total_price}</Text>
+          <Text>
+            {t("Total")} {cart?.total_price}
+          </Text>
           <Button
             color="dark"
             fullWidth
-            onClick={() => router.push("/checkout-page")}
+            onClick={() => {
+              router.push("/checkout-page");
+              close();
+            }}
           >
-           {t('Checkout')}
+            {t("Checkout")}
           </Button>
           <Button
             variant="outline"
@@ -153,7 +158,7 @@ const CartDrawer = () => {
             onClick={handleClearCart}
             loading={isClearing}
           >
-            {t('ClearCart')}
+            {t("ClearCart")}
           </Button>
         </Group>
       </Drawer>

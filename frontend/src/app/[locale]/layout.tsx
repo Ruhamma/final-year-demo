@@ -35,12 +35,12 @@ export default async function RootLayout({
   children: React.ReactNode;
  params: { locale: string };
 }>) {
-    const locale = params.locale; // ✅ Access safely inside function
+    const locale = await params.locale; // 
   if (!routing.locales.includes(locale as any)) {
     notFound();
   }
 
-  setRequestLocale(locale);
+  await setRequestLocale(locale);
 
   const messages = await getMessages({ locale });
   return (

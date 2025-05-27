@@ -14,9 +14,9 @@ const AddtoCart = ({ id }: { id: string }) => {
     try {
       await addToCart({ artwork_id: id }).unwrap();
       setIsInCart(true)
-      notify("Success", t("itemAdded"));
+      notify("Success", t("notifications.itemAdded"));
     } catch (error) {
-      notify("Error", t("itemAddError"));
+      notify("Error", t("notifications.itemAddError"));
       console.log(error);
     }
   };

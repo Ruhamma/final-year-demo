@@ -51,6 +51,13 @@ export const orderApi = createApi({
       }),
       invalidatesTags: ["order"],
     }),
+    markAsDelivered: builder.mutation({
+      query: (orderId) => ({
+        url: `user/orders/${orderId}/mark-delivered`,
+        method: "POST",
+      }),
+      invalidatesTags: ["order"],
+    }),
   }),
 });
 
@@ -62,4 +69,5 @@ export const {
   useGetOrderByIdQuery,
   useGetArtistOrdersQuery,
   useUpdateOrderStatusMutation,
+  useMarkAsDeliveredMutation,
 } = orderApi;

@@ -114,7 +114,9 @@
       "Continue with Facebook": "በFacebook ይቀጥሉ",
       "Continue with Apple": "በApple ይቀጥሉ",
       "Don’t have an account?": "መለያ የለህም?",
-      "KURU": "ኩሩ"
+      "KURU": "ኩሩ",
+      "Forgot Password?": "የይለፍ ቃልዎን ማረሚያ አለዎት?",
+      "Reset Password": "የይለፍ ቃል ይለውጡ"
     },
     "UserAccount": {
       "User": "ተጠቃሚ",
@@ -410,8 +412,28 @@
       "categories": "ምድቦች",
       "Medium": "መሣሪያ",
       "Style": "ቅጥ",
+      "Size": "መጠን",
       "ClearAll": "ሁሉንም አጥፋ",
-      "Search": "ፈልግ"
+      "Search": "ፈልግ",
+      "ETB": "ብር",
+      "Followers": "ተከታዮች",
+      "Add to cart": "ወደ ጋሪ ጨምር",
+      "Purchase Order": "የግዢ ትእዛዝ",
+      "View in Your Room": "በክፍልዎ ውስጥ ይመልከቱ",
+      "About Artworks": "ስለ ስራዎቹ",
+      "Details": "ዝርዝሮች",
+      "Certificate of authenticity": "የእውነተኛነት �ረጃ",
+      "View Profile": "መገለጫ ይመልከቱ",
+      "Move to your phone to get full virtual experience": "ሙሉ ምናባዊ ልምድ ለማግኘት ስልክዎ ይጠቀሙ",
+      "Exit View": "እይታ ይዝጉ",
+      "AddCartError": "ስራውን ወደ ጋሪ ማክል አልተቻለም",
+      "AddCartSuccess": "ስራው በተሳካ ሁኔታ ወደ ጋሪ ታክሏል",
+      "About": "ስለ",
+      "Shipping information": "የመላኪያ መረጃ",
+      "ShippingInfoDesc": "የመላኪያ አድራሻዎን እና ተመራጭ የማጓጓዣ ዘዴን ያስገቡ። ዝርዝሮችዎ በጊዜ ለማድረስ ትክክለኛ መሆናቸውን ያረጋግጡ። አንዴ ከተላከ ወዲያውኑ ትዕዛዝዎን ይከታተሉ።",
+      "Ratings and reviews": "ደረጃዎች እና ግምገማዎች",
+      "RatingsAndReviewsDesc": "ተሞክሮዎን ያካፍሉ! የእርስዎ አስተያየት ሌሎች ገዥዎችን ይረዳል እና አርቲስቶቻችንን ይደግፋል። የሚወዱትን ለሌሎች ለማሳወቅ ምርቱን ደረጃ ይስጡ እና ግምገማ ይተዉ።",
+      "No reviews yet": "እስካሁን ግምገማ የለም"
     },
     "Artist": {
       "Discover Artist": "አርቲስቶችን ያግኙ",

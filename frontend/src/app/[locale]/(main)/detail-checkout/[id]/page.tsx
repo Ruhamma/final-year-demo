@@ -18,7 +18,7 @@ import {
   TextInput,
 } from "@mantine/core";
 import { useParams } from "next/navigation";
-// import { useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import React from "react";
 import { Controller, useForm } from "react-hook-form";
 import { z } from "zod";
@@ -40,7 +40,7 @@ const checkoutSchema = z.object({
 });
 export default function CheckoutPage() {
   const { id } = useParams();
-  // const router = useRouter();
+  const router = useRouter();
   const { user } = useAuth();
   const { data: cart, isLoading } = useGetCartQuery({});
   const filteredItems = cart?.items?.filter(
@@ -88,8 +88,13 @@ export default function CheckoutPage() {
     };
 
     try {
-      await submitOrder(payload).unwrap();
+     const res = await submitOrder(payload).unwrap();
       notify("Success", "Order placed successfully");
+      if (data?.payment_method === "chapa") {
+        router.push(`/user-account/orders/${res[0]?.id}`);
+      } else {
+        router.push("/user-account/orders/");
+      }
     } catch (err) {
       notify("Error", `Failed to place order`);
     }

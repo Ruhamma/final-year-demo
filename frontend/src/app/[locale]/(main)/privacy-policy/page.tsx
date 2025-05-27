@@ -20,8 +20,8 @@ import { useTranslations } from "next-intl";
 
 export default function PrivacyPolicy() {
   const t = useTranslations("common.Privacy");
-  const renderListWithIcons = (items) => {
-    return items.map((item, index) => (
+  const renderListWithIcons = (items: any) => {
+    return items.map((item: any, index: any) => (
       <List.Item
         key={index}
         icon={
@@ -35,8 +35,8 @@ export default function PrivacyPolicy() {
     ));
   };
 
-  const renderObjectListItems = (items) => {
-    return items.map((item, index) => (
+  const renderObjectListItems = (items: any) => {
+    return items.map((item: any, index : any) => (
       <List.Item key={index}>
         <Text className="font-medium">{item.label}:</Text> {item.detail}
       </List.Item>

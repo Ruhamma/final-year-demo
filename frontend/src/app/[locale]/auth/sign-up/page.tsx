@@ -91,7 +91,7 @@ const Login = () => {
         role: data.role,
       }).unwrap();
       notify("Success", t('RegisteredSuccessfully'));
-      route.push("/");
+       route.push(`/auth/verify-email${data.email ? `?email=${data.email}` : ""}`);
     } catch (error) {
       const errorMessage =
         typeof error === "object" && error !== null && "detail" in error
@@ -110,7 +110,7 @@ const Login = () => {
         role: data.role,
       }).unwrap();
       notify("Success", t('RegisteredSuccessfully'));
-      route.push("/");
+      route.push(`/auth/verify-email/${data.email ? `?email=${data.email}` : ""}`);
     } catch (error: any) {
       notify("Error",t('Failed'));
     }

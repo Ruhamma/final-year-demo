@@ -24,6 +24,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
 import { notify } from "@/shared/components/notification/notification";
+import { Link } from "@/i18n/routing";
 
 const loginSchema = z.object({
   email: z.string().email("Invalid email address").min(1, "Email is required"),
@@ -101,30 +102,13 @@ const Login = () => {
             </Flex>
           </form>
 
-          {/* OAuth Buttons */}
-          <Flex direction="column" gap="sm" mt="lg">
-            <Button
-              variant="outline"
-              leftSection={<IconBrandGoogle size={16} />}
-              fullWidth
-            >
-              {t("Continue with Google")}
-            </Button>
-            <Button
-              variant="outline"
-              leftSection={<IconBrandFacebook size={16} />}
-              fullWidth
-            >
-              {t("Continue with Facebook")}
-            </Button>
-            <Button
-              variant="outline"
-              leftSection={<IconApple size={16} />}
-              fullWidth
-            >
-              {t("Continue with Apple")}
-            </Button>
-          </Flex>
+          <Link
+               
+                href="/auth/forgot-password"
+                className="flex justify-end mt-4 text-sm"
+              >
+                {t("Forgot Password?")}
+              </Link> 
 
           {/* Sign Up Link */}
           <Flex justify="center" mt="md">
