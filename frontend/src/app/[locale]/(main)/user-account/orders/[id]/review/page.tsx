@@ -81,19 +81,23 @@ const ReviewPage = () => {
     useReviewArtistMutation();
 
   // Get unique artists from order items
-  const uniqueArtists = Array.from(
-    new Set(
-      order?.items.map((item: any) => ({
-        id: item.artist_id,
-        name: item.artist_name,
-      })) || []
-    )
-  ).reduce((acc: { id: string; name: string }[], current: any) => {
-    if (!acc.some((artist) => artist.id === current.id)) {
-      acc.push(current);
+ const uniqueArtists: { id: string; name: string }[] = [];
+
+if (order?.items && Array.isArray(order.items)) {
+  const seenArtistIds = new Set<string>();
+
+  for (const item of order.items) {
+    const id = item?.artist_id;
+
+    if (id && !seenArtistIds.has(id)) {
+      uniqueArtists.push({
+        id,
+        name: "Artist", // fallback name
+      });
+      seenArtistIds.add(id);
     }
-    return acc;
-  }, [] as { id: string; name: string }[]);
+  }
+}
 
   // React Hook Form setup
   const artworkForm = useForm<ArtworkReviewFormData>({
@@ -305,7 +309,7 @@ const ReviewPage = () => {
                   placeholder={t("artistForm.selectPlaceholder")}
                   data={uniqueArtists.map((artist) => ({
                     value: artist.id ?? "",
-                    label: artist.name,
+                    label: artist.name ?? '',
                   }))}
                   error={artistForm.formState.errors.artistId?.message}
                   {...artistForm.register("artistId")}

@@ -114,7 +114,9 @@
       "Continue with Facebook": "Continue with Facebook",
       "Continue with Apple": "Continue with Apple",
       "Don’t have an account?": "Don’t have an account?",
-      "KURU": "KURU"
+      "KURU": "KURU",
+      "Forgot Password?": "Forgot Password?",
+      "Reset Password": "Reset Password"
     },
     "UserAccount": {
       "Title": "User Account",
@@ -408,10 +410,28 @@
       "categories": "Categories",
       "Medium": "Medium",
       "Style": "Style",
+      "Size": "Size",
       "ClearAll": "Clear All",
       "Search": "Search",
       "ETB": "ETB",
-      "Followers": "Followers"
+      "Followers": "Followers",
+      "Add to cart": "Add to Cart",
+      "Purchase Order": "Purchase Order",
+      "View in Your Room": "View in Your Room",
+      "About Artworks": "About Artworks",
+      "Details": "Details",
+      "Certificate of authenticity": "Certificate of Authenticity",
+      "View Profile": "View Profile",
+      "Move to your phone to get full virtual experience": "Move to your phone to get full virtual experience",
+      "Exit View": "Exit View",
+      "AddCartError": "Failed to add artwork to cart",
+      "AddCartSuccess": "Artwork added to cart successfully",
+      "About": "About",
+      "Shipping information": "Shipping Information",
+      "ShippingInfoDesc": "Enter your delivery address and preferred shipping method. Ensure your details are accurate for timely delivery. Track your order in real-time once shipped.",
+      "Ratings and reviews": "Ratings and Reviews",
+      "RatingsAndReviewsDesc": "Share your experience! Your feedback helps other buyers and supports our artists. Rate the product and leave a review to let others know what you loved.",
+      "No reviews yet": "No reviews yet"
     },
     "Artist": {
       "Discover Artist": "Discover Artist",

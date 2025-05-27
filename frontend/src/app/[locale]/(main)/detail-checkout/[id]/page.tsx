@@ -94,8 +94,13 @@ export default function CheckoutPage() {
     }
 
     try {
-      await submitOrder(payload).unwrap();
+      const res = await submitOrder(payload).unwrap();
       notify("Success", "Order placed successfully");
+      if (data?.payment_method === "chapa") {
+        router.push(`/user-account/orders/${res[0]?.id}`);
+      } else {
+        router.push("/user-account/orders/");
+      }
     } catch (err) {
       notify("Error", `Failed to place order`);
     }

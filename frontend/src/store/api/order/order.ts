@@ -54,6 +54,13 @@ export const orderApi = createApi({
       }),
       invalidatesTags: ["order"],
     }),
+    markAsDelivered: builder.mutation({
+      query: (orderId) => ({
+        url: `user/orders/${orderId}/mark-delivered`,
+        method: "POST",
+      }),
+      invalidatesTags: ["order"],
+    }),
     getDownloadableUrls: builder.query({
       query: (orderId: string) => ({
         url: `orders/${orderId}/downloadable-urls`,
@@ -71,5 +78,6 @@ export const {
   useGetOrderByIdQuery,
   useGetArtistOrdersQuery,
   useUpdateOrderStatusMutation,
+  useMarkAsDeliveredMutation,
   useLazyGetDownloadableUrlsQuery,
 } = orderApi;

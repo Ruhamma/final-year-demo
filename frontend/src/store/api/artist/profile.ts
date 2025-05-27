@@ -1,11 +1,10 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { AnyARecord } from "dns";
 
 export const artistProfileApi = createApi({
   reducerPath: "artistProfileApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: process.env.NEXT_PUBLIC_API || "http://localhost:8000/api", //removed /api
-    credentials: "include", //removed for test
+    baseUrl: process.env.NEXT_PUBLIC_API || "http://localhost:8000/api", 
+    credentials: "include", 
   }),
   tagTypes: ["ArtistProfile", "dashboard"],
   endpoints: (builder) => ({
@@ -13,11 +12,6 @@ export const artistProfileApi = createApi({
       query: () => "artist/profile",
       providesTags: ["ArtistProfile"],
     }),
-
-    // test artists query
-    //   getArtists: builder.query<any, void>({
-    //   query: () => "/artists",
-    // }),
 
     getArtists: builder.query<any, void>({
       query: () => ({
@@ -79,10 +73,10 @@ export const artistProfileApi = createApi({
       providesTags: ["dashboard"],
     }),
     reviewArtist: builder.mutation({
-      query: ({ id, reviewData }) => ({
+      query: ({ id, body }) => ({
         url: `artist/${id}/rate`,
         method: "POST",
-        body: reviewData,
+        body: body,
       }),
     }),
   }),

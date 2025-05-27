@@ -193,9 +193,11 @@ const OrderDetailPage = () => {
 
           <Divider variant="dotted" mt="md" />
           <Center mt="md">
-            <Button onClick={handlePayment} loading={isLoadingPayment}>
-              Process payment
-            </Button>
+            {order.payment_method === "chapa" && (
+              <Button onClick={handlePayment} loading={isLoadingPayment}>
+                Process payment
+              </Button>
+            )}
           </Center>
           <Center mt="md">
             {order.status === "COMPLETED" && (

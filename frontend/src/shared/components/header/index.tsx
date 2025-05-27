@@ -157,7 +157,7 @@ export function Header() {
                             } else if (isSeller) {
                               router.push("/artist-account");
                             } else {
-                              router.push("/user-account");
+                              router.push("/user-account/profile-summary");
                             }
                           }}
                         >
@@ -354,7 +354,7 @@ export function Header() {
                             } else if (isSeller) {
                               router.push("/artist-account");
                             } else {
-                              router.push("/user-account");
+                              router.push("/user-account/profile-summary");
                             }
                           }}
                         >
