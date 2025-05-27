@@ -52,7 +52,6 @@ const Page = () => {
     id: id as string,
     sessionKey,
   });
-  console.log("id", id)
   const [addToCart] = useAddToCartMutation();
 
   const handleAddToCart = async () => {
@@ -72,7 +71,7 @@ const Page = () => {
       notify("Error", "Failed to add to cart");
       console.log(error);
     }
-    router.push(`/detail-checkout/${id}`);
+    router.push(`/detail-checkout/${id}?is_digital=${data?.is_digital}`);
   };
   const items = [
     { title: "Art page", href: "/artworks" },
@@ -234,7 +233,7 @@ const Page = () => {
       </Container>
       <Discover title="Other works by Bilen" />
       {/* <Testimonials title="Related Works" /> */}
-   <RecommendedArtworks artworkId={id as string} />
+      <RecommendedArtworks artworkId={id as string} />
       <Modal
         opened={arOpened}
         onClose={() => setArOpened(false)}

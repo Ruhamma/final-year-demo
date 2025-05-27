@@ -17,6 +17,7 @@ import {
 } from "@mantine/core";
 import {
   useCreatePaymentMutation,
+  useLazyGetDownloadableUrlsQuery,
   useGetOrderByIdQuery,
 } from "@/store/api/order/order";
 import { useParams } from "next/navigation";
@@ -32,6 +33,8 @@ const OrderDetailPage = () => {
   const [modalImageSrc, setModalImageSrc] = useState<string | null>(null);
   const [startPayment, { isLoading: isLoadingPayment }] =
     useCreatePaymentMutation();
+  const [triggerDownloadUrls, { isFetching: isDownloading }] =
+    useLazyGetDownloadableUrlsQuery();
   if (isLoading || !order) {
     return (
       <Center h="100vh">
@@ -51,6 +54,26 @@ const OrderDetailPage = () => {
       window.location.href = response.checkout_url;
     } catch {
       notify("Error", "Failed to start payment");
+    }
+  };
+
+  const handleDownload = async () => {
+    try {
+      const { data } = await triggerDownloadUrls(order.id);
+      if (data?.downloadable_urls?.length) {
+        data.downloadable_urls.forEach((url: string) => {
+          const link = document.createElement("a");
+          link.href = url;
+          link.download = "";
+          document.body.appendChild(link);
+          link.click();
+          link.remove();
+        });
+      } else {
+        notify("Success", "No downloadable content found for this order.");
+      }
+    } catch (err) {
+      notify("Error", "Failed to download artworks.");
     }
   };
   return (
@@ -173,6 +196,18 @@ const OrderDetailPage = () => {
             <Button onClick={handlePayment} loading={isLoadingPayment}>
               Process payment
             </Button>
+          </Center>
+          <Center mt="md">
+            {order.status === "COMPLETED" && (
+              <Button
+                variant="outline"
+                color="teal"
+                onClick={handleDownload}
+                loading={isDownloading}
+              >
+                Download Artworks
+              </Button>
+            )}
           </Center>
           <Center mt="lg" style={{ opacity: 0.5 }}>
             <Group gap="xs">

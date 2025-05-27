@@ -12,6 +12,7 @@ import {
   Box,
   Stack,
   Divider,
+  Pagination,
 } from "@mantine/core";
 import { useGetUserOrdersQuery } from "@/store/api/order/order";
 import {
@@ -25,7 +26,13 @@ import { useRouter } from "next/navigation";
 
 const Page = () => {
   const router = useRouter();
-  const { data, isLoading } = useGetUserOrdersQuery({});
+  const [page, setPage] = useState(1);
+  const limit = 12;
+  const skip = (page - 1) * limit;
+  const { data, isLoading } = useGetUserOrdersQuery({
+    skip,
+    limit,
+  });
   const [openedOrderId, setOpenedOrderId] = useState<string | null>(null);
 
   const toggleRow = (id: string) => {
@@ -39,7 +46,8 @@ const Page = () => {
       </Center>
     );
   }
-
+  const total = data?.total || 0;
+  const totalPages = Math.ceil(total / limit);
   if (!data || data.total === 0) {
     return (
       <Center h="100vh">
@@ -194,6 +202,15 @@ const Page = () => {
             ))}
         </Table.Tbody>
       </Table>
+      <Center mt="md">
+        <Pagination
+          value={page}
+          onChange={setPage}
+          total={totalPages}
+          siblings={1}
+          boundaries={1}
+        />
+      </Center>
     </Box>
   );
 };

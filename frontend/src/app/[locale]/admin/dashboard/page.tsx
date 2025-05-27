@@ -30,7 +30,6 @@ import {
   IconCurrency,
   IconCalendar,
 } from "@tabler/icons-react";
-import { useTheme } from "@emotion/react";
 
 export default function AnalyticsDashboard() {
   const { data, isLoading, isError } = useGetAdminAnalyticsQuery();
