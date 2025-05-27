@@ -170,7 +170,17 @@ export const adminApi = createApi({
       query: (model_name) => ({
         url: `/admin/metadata/${model_name}/usage/export`,
         method: "GET",
-        responseHandler: (response) => response.blob(),
+        responseHandler: (response: any) => response.blob(),
+        headers: {
+          Accept: "text/csv",
+        },
+      }),
+    }),
+    exportOrdersCSV: build.mutation({
+      query: () => ({
+        url: "/admin/orders/actions/export",
+        method: "GET",
+        responseHandler: (response: any) => response.blob(),
         headers: {
           Accept: "text/csv",
         },
@@ -256,6 +266,7 @@ export const {
   useListOrdersQuery,
   useGetOrderSummaryQuery,
   useGetOrderByIdQuery,
+  useExportOrdersCSVMutation,
 
   useGetAdminAnalyticsQuery,
 } = adminApi;

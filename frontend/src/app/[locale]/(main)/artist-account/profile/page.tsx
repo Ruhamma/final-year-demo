@@ -36,6 +36,7 @@ import {
   IconEye,
   IconPassword,
   IconMessage,
+  IconPhoto,
 } from "@tabler/icons-react";
 import { useAuth } from "@/context/useAuth";
 import {
@@ -67,6 +68,7 @@ const profileSchema = z.object({
   facebook: urlOrEmpty,
   youtube: urlOrEmpty,
   location: z.string().optional().nullable(),
+  thumbnail: z.string().optional().nullable(),
 });
 
 const changeEmailSchema = z.object({
@@ -132,6 +134,15 @@ const ProfileForm = () => {
     useUpdateEmailMutation();
   const [updatePassword, { isLoading: isUpdatingPassword }] =
     useChangePasswordMutation();
+  const [selectedThumbnailFile, setSelectedThumbnailFile] =
+    React.useState<File | null>(null);
+  const [thumbnailPreviewUrl, setThumbnailPreviewUrl] = React.useState<
+    string | null
+  >(null);
+  const [
+    thumbnailModalOpened,
+    { open: openThumbnailModal, close: closeThumbnailModal },
+  ] = useDisclosure(false);
 
   const {
     register,
@@ -181,6 +192,15 @@ const ProfileForm = () => {
   }, [profileData, reset]);
 
   React.useEffect(() => {
+    if (selectedThumbnailFile) {
+      const objectUrl = URL.createObjectURL(selectedThumbnailFile);
+      setThumbnailPreviewUrl(objectUrl);
+
+      return () => URL.revokeObjectURL(objectUrl);
+    }
+  }, [selectedThumbnailFile]);
+
+  React.useEffect(() => {
     if (selectedFile) {
       const objectUrl = URL.createObjectURL(selectedFile);
       setPreviewUrl(objectUrl);
@@ -191,17 +211,30 @@ const ProfileForm = () => {
 
   const onSubmit = async (data: ProfileFormValues) => {
     const formData = new FormData();
-    const userData = Object.entries(data).reduce((acc, [key, value]) => {
-      if (value !== undefined && value !== null) {
-        acc[key] = value;
-      }
-      return acc;
-    }, {} as Record<string, any>);
+
+    // Prepare the profile data - only include fields that exist in the form
+    const userData = {
+      first_name: data.first_name || "",
+      last_name: data.last_name || "",
+      bio: data.bio || "",
+      contact_email: data.contact_email || null,
+      phone_number: data.phone_number || null,
+      location: data.location || null,
+      website: data.website || null,
+      instagram: data.instagram || null,
+      twitter: data.twitter || null,
+      tiktok: data.tiktok || null,
+      facebook: data.facebook || null,
+      youtube: data.youtube || null,
+    };
 
     formData.append("profile_data", JSON.stringify(userData));
 
     if (selectedFile) {
       formData.append("file", selectedFile);
+    }
+    if (selectedThumbnailFile) {
+      formData.append("thumbnail_file", selectedThumbnailFile);
     }
 
     try {
@@ -274,6 +307,10 @@ const ProfileForm = () => {
   const handleCancel = () => {
     if (profileData) {
       reset(profileData);
+      setPreviewUrl(profileData.profile_picture || null);
+      setThumbnailPreviewUrl(profileData.thumbnail || null);
+      setSelectedFile(null);
+      setSelectedThumbnailFile(null);
     }
   };
 
@@ -337,7 +374,7 @@ const ProfileForm = () => {
                   radius="md"
                   leftSection={
                     <IconEye
-                      onClick={open}
+                      onClick={() => open()}
                       size={20}
                       className="cursor-pointer flex-grow"
                     />
@@ -348,6 +385,37 @@ const ProfileForm = () => {
                 <Modal opened={opened} onClose={close}>
                   {previewUrl && (
                     <Image radius="md" src={previewUrl} alt="Preview" />
+                  )}
+                </Modal>
+              </Box>
+              <Box className="flex-grow">
+                <FileInput
+                  label="Thumbnail Image"
+                  placeholder="Upload thumbnail"
+                  value={selectedThumbnailFile}
+                  onChange={setSelectedThumbnailFile}
+                  accept="image/*"
+                  clearable
+                  radius="md"
+                  leftSection={
+                    <IconPhoto
+                      onClick={() => openThumbnailModal()}
+                      size={20}
+                      className="cursor-pointer flex-grow"
+                    />
+                  }
+                  className="flex-grow"
+                />
+                <Modal
+                  opened={thumbnailModalOpened}
+                  onClose={closeThumbnailModal}
+                >
+                  {thumbnailPreviewUrl && (
+                    <Image
+                      radius="md"
+                      src={thumbnailPreviewUrl}
+                      alt="Thumbnail Preview"
+                    />
                   )}
                 </Modal>
               </Box>

@@ -196,7 +196,9 @@ const Page = () => {
                 <Table.Td>ETB {order.total_amount.toFixed(2)}</Table.Td>
                 <Table.Td>
                   <Badge color={statusColors[order.status as Status]}>
-                    {order.status}
+                    {order.status === "COMPLETED"
+                      ? "Payment completed"
+                      : order.status}
                   </Badge>
                 </Table.Td>
                 <Table.Td>

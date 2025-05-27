@@ -3,7 +3,8 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const artistProfileApi = createApi({
   reducerPath: "artistProfileApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: 'https://online-marketplace-for-local-artists.onrender.com/',  credentials: "include", 
+    baseUrl: process.env.NEXT_PUBLIC_API || "http://localhost:8000/api", 
+    credentials: "include", 
   }),
   tagTypes: ["ArtistProfile", "dashboard"],
   endpoints: (builder) => ({
@@ -12,17 +13,12 @@ export const artistProfileApi = createApi({
       providesTags: ["ArtistProfile"],
     }),
 
-    // test artists query
-    //   getArtists: builder.query<any, void>({
-    //   query: () => "/artists", 
-    // }),
-
-   getArtists: builder.query<any, void>({
+    getArtists: builder.query<any, void>({
       query: () => ({
         url: `/artist/`,
         method: "GET",
       }),
-    providesTags: ["ArtistProfile"],
+      providesTags: ["ArtistProfile"],
     }),
 
     getArtistsById: builder.query<any, string>({
@@ -30,7 +26,7 @@ export const artistProfileApi = createApi({
         url: `/artist/${id}`,
         method: "GET",
       }),
-    providesTags: ["ArtistProfile"],
+      providesTags: ["ArtistProfile"],
     }),
 
     updateArtistProfile: builder.mutation({
@@ -99,7 +95,3 @@ export const {
   useGetArtistsByIdQuery,
   useReviewArtistMutation,
 } = artistProfileApi;
-
-
-
-

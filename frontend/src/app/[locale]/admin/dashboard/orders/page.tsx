@@ -21,9 +21,11 @@ import {
 import { IconDownload, IconSearch } from "@tabler/icons-react";
 import { useForm } from "react-hook-form";
 import {
+  useExportOrdersCSVMutation,
   useGetOrderSummaryQuery,
   useListOrdersQuery,
 } from "@/store/api/admin/admin";
+import { notifications } from "@mantine/notifications";
 
 export default function OrderAnalyticsPage() {
   const [page, setPage] = useState(1);
@@ -51,9 +53,35 @@ export default function OrderAnalyticsPage() {
     limit,
   });
 
+  const [exportCSV, { isLoading: isExporting }] = useExportOrdersCSVMutation();
   const handleSubmit = form.handleSubmit(() => {
     setPage(1);
   });
+
+  const handleExportCSV = async () => {
+    try {
+      const blob = await exportCSV({}).unwrap();
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `orders.csv`;
+      document.body.appendChild(a);
+      a.click();
+      window.URL.revokeObjectURL(url);
+      document.body.removeChild(a);
+
+      notifications.show({
+        title: "Export successful",
+        message: "Your data has been downloaded",
+      });
+    } catch (error) {
+      notifications.show({
+        title: "Export failed",
+        message: "Could not download data",
+        color: "red",
+      });
+    }
+  };
 
   const statusColors: Record<
     "PENDING" | "COMPLETED" | "CANCELLED" | "SHIPPED",
@@ -132,7 +160,8 @@ export default function OrderAnalyticsPage() {
                   radius="md"
                   leftSection={<IconDownload size={16} />}
                   component="a"
-                  href="/api/orders/export"
+                  onClick={handleExportCSV}
+                  loading={isExporting}
                 >
                   Export CSV
                 </Button>
