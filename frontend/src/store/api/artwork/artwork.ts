@@ -30,6 +30,7 @@ export const artworkApi = createApi({
       }),
       providesTags: ["Artwork"],
     }),
+
     getArtworkById: builder.query({
       query: ({ id, sessionKey }) => ({
         url: `artwork/${id}`,
@@ -130,6 +131,12 @@ export const artworkApi = createApi({
         method: "GET",
       }),
     }),
+    getRatings: builder.query({
+      query: ({ id }) => ({
+        url: `artwork/${id}/ratings`,
+        method: "GET",
+      }),
+    }),
   }),
 });
 
@@ -151,5 +158,6 @@ export const {
   useGetArtworksByArtistIdQuery,
   useReviewArtworkMutation,
   useGetRecommendationQuery,
+  useGetRatingsQuery,
   useGetArtworkReviewsQuery,
 } = artworkApi;

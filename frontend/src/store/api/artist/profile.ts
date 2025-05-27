@@ -13,9 +13,28 @@ export const artistProfileApi = createApi({
       providesTags: ["ArtistProfile"],
     }),
 
+    // test artists query
+    //   getArtists: builder.query<any, void>({
+    //   query: () => "/artists",
+    // }),
+
     getArtists: builder.query<any, void>({
       query: () => ({
         url: `/artist/`,
+        method: "GET",
+      }),
+      providesTags: ["ArtistProfile"],
+    }),
+    getRisingArtists: builder.query<any, void>({
+      query: () => ({
+        url: `/artist/rising`,
+        method: "GET",
+      }),
+      providesTags: ["ArtistProfile"],
+    }),
+    getBestsellingArtists: builder.query<any, void>({
+      query: () => ({
+        url: `/artist/bestselling`,
         method: "GET",
       }),
       providesTags: ["ArtistProfile"],
@@ -79,6 +98,37 @@ export const artistProfileApi = createApi({
         body: body,
       }),
     }),
+
+    followArtist: builder.mutation({
+      query: (artistId: string) => ({
+        url: `artist/follow`,
+        method: "POST",
+        body: { artist_id: artistId },
+      }),
+      invalidatesTags: ["ArtistProfile"],
+    }),
+    unfollowArtist: builder.mutation({
+      query: (artistId: string) => ({
+        url: `artist/unfollow`,
+        method: "POST",
+        body: { artist_id: artistId },
+      }),
+      invalidatesTags: ["ArtistProfile"],
+    }),
+    getArtistsFollowers: builder.query<any, string>({
+      query: (id) => ({
+        url: `/artist/${id}/followers`,
+        method: "GET",
+      }),
+      providesTags: ["ArtistProfile"],
+    }),
+    getArtistsRatings: builder.query<any, string>({
+      query: (id) => ({
+        url: `/artist/${id}/ratings`,
+        method: "GET",
+      }),
+      providesTags: ["ArtistProfile"],
+    }),
   }),
 });
 
@@ -94,4 +144,10 @@ export const {
   useGetArtistsQuery,
   useGetArtistsByIdQuery,
   useReviewArtistMutation,
+  useFollowArtistMutation,
+  useUnfollowArtistMutation,
+  useGetArtistsFollowersQuery,
+  useGetArtistsRatingsQuery,
+  useGetBestsellingArtistsQuery,
+  useGetRisingArtistsQuery,
 } = artistProfileApi;

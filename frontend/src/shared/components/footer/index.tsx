@@ -15,6 +15,7 @@ import {
 } from "@tabler/icons-react";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
+import NewsletterSubscribe from "./components/newsletter";
 
 export function Footer() {
   const t = useTranslations("common.Footer");

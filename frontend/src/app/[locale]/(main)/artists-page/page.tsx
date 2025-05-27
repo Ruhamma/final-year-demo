@@ -3,7 +3,11 @@ import Image from "next/image";
 import {
   useState,
 } from "react";
-import { useGetArtistsQuery } from "@/store/api/artist/profile";
+import {
+  useGetArtistsQuery,
+  useGetBestsellingArtistsQuery,
+  useGetRisingArtistsQuery,
+} from "@/store/api/artist/profile";
 import { Button } from "@mantine/core";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
@@ -12,8 +16,20 @@ export default function ArtistsPage() {
   const t = useTranslations("common.Artist");
   const [page, setPage] = useState(1);
   const { data, isLoading, error } = useGetArtistsQuery();
+  const {
+    data: risingData,
+    isLoading: risingIsLoading,
+    error: risingError,
+  } = useGetRisingArtistsQuery();
+  const {
+    data: bestsellingData,
+    isLoading: bestsellingIsLoading,
+    error: bestsellingError,
+  } = useGetBestsellingArtistsQuery();
 
   const artists = data?.artists || [];
+  const risingArtists = risingData?.artists || [];
+  const bestsellingArtists = bestsellingData?.artists || []; // Adjust this according to your API response structure
   console.log("artists hello", data);
 
   if (isLoading) return <p>Loading...</p>;
@@ -43,7 +59,7 @@ export default function ArtistsPage() {
          {t("BestsellingArtistsDesc")}
         </p>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-          {artists.map((artist: any) => (
+          {bestsellingArtists.map((artist: any) => (
             <div key={artist.id} className="shadow overflow-hidden">
               <Image
                 src={artist?.thumbnail || '/images/placeholder.png'}
@@ -77,6 +93,7 @@ export default function ArtistsPage() {
             className="border px-3 py-1 rounded-md"
           />
         </div>
+
         <div className="flex flex-wrap gap-3 mb-6">
           <button className="border px-4 py-1 rounded-full">{t('All filters')}</button>
           <button className="border px-4 py-1 rounded-full">{t("Style")}</button>
@@ -95,16 +112,16 @@ export default function ArtistsPage() {
                 className="w-full h-48 object-cover"
               />
               <div className="flex flex-row justify-between items-center p-3">
-              <div>
-                <h3 className="font-semibold">{artist.first_name}</h3>
-                <p className="text-xs text-gray-500">{artist.location}</p>
-              </div>
-              <Button>
+                <div>
+                  <h3 className="font-semibold">{artist.first_name}</h3>
+                  <p className="text-xs text-gray-500">{artist.location}</p>
+                </div>
+                <Button>
                   <Link href={`/artists-profile-page/${artist.id}`} passHref>
                     {t("Profile")}
                   </Link>
                 </Button>
-                </div>
+              </div>
             </div>
           ))}
         </div>
@@ -161,7 +178,7 @@ export default function ArtistsPage() {
           {/* Column 1 */}
 
           <div className="flex flex-col gap-6 mb-6 md:mb-0">
-            {artists.slice(0, 2).map((artist : any) => (
+            {risingArtists.slice(0, 2).map((artist: any) => (
               <div
                 key={artist.id}
                 className="relative w-[90vw] max-w-[250px] h-[350px]"
@@ -194,7 +211,7 @@ export default function ArtistsPage() {
           </div>
           {/* Column 2 */}
           <div className="flex flex-col gap-6 mb-6 md:mb-0 md:-mt-10">
-            {artists.slice(0, 2).map((artist : any) => (
+            {risingArtists.slice(0, 2).map((artist: any) => (
               <div
                 key={artist.id}
                 className="relative w-[90vw] max-w-[250px] h-[350px]"
@@ -228,7 +245,7 @@ export default function ArtistsPage() {
 
           {/* Column 3 */}
           <div className="flex flex-col gap-6">
-            {artists.slice(0, 2).map((artist : any) => (
+            {risingArtists.slice(0, 2).map((artist: any) => (
               <div
                 key={artist.id}
                 className="relative w-[90vw] max-w-[250px] h-[350px]"

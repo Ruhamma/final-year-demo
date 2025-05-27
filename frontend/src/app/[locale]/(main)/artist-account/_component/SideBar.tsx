@@ -65,7 +65,7 @@ const SideBar = () => {
     {
       label: t("Followers"),
       icon: <IconUsers size={18} />,
-      href: "/artist-account/Followers",
+      href: "/artist-account/followers",
     },
     {
       label: t("Deactivate Account"),
